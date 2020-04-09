@@ -1,6 +1,31 @@
 apiVersion: v1
 entries:
   netbox:
+  - apiVersion: v2
+    appVersion: 2.7.12
+    created: "2020-04-09T17:21:43.736967526Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: '>=8.7.3'
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: '>=10.6.3'
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
+    digest: d1bcd68b3ba094193ce687b829a83b90b80ed83a452cfc7111d4fe03948fa72f
+    home: https://netbox.readthedocs.io/en/stable/
+    icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
+    name: netbox
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/netbox
+    - https://github.com/netbox-community/netbox
+    - https://github.com/netbox-community/netbox-docker
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/netbox-1.0.0/netbox-1.0.0.tgz
+    version: 1.0.0
   - apiVersion: v1
     appVersion: 2.5.2
     created: "2020-04-09T11:05:20.636992301Z"
