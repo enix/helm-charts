@@ -114,6 +114,7 @@ nginx:
 postgresql:
   enabled: true
   host:
+  postgresqlPassword: netbox
   postgresqlUsername: netbox
   postgresqlDatabase: netbox
 
