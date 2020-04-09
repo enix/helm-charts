@@ -88,8 +88,6 @@ persistence:
   # persistence.enabled -- Enable persistency (Deployment mode)
   enabled: true
 
-proxyBodySize:
-
 # livenessProbe -- livenessProbe configuration on Netbox Pod
 livenessProbe:
   httpGet:
