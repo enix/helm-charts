@@ -1,0 +1,22 @@
+apiVersion: v1
+entries:
+  netbox:
+  - apiVersion: v1
+    appVersion: 2.5.2
+    created: "2020-04-09T11:05:20.636992301Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://kubernetes-charts.storage.googleapis.com/
+      version: '>=3.9.1'
+    - condition: redis.enabled
+      name: redis
+      repository: https://kubernetes-charts.storage.googleapis.com/
+      version: '>=9.1.2'
+    description: A Helm chart for Netbox
+    digest: d8d0c4ec2eb2819c320ee3b96bb75d39345c946ff8305973e4a43a376173d421
+    name: netbox
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/netbox-0.1.1/netbox-0.1.1.tgz
+    version: 0.1.1
+generated: "2020-04-09T11:05:20.531459729Z"
