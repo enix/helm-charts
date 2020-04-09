@@ -1,6 +1,15 @@
 ---
-apiVersion: v1
+apiVersion: v2
 appVersion: "2.5.2"
 description: A Helm chart for Netbox
 name: netbox
 version: 0.1.1
+dependencies:
+  - name: postgresql
+    version: '>=3.9.1'
+    repository: https://kubernetes-charts.storage.googleapis.com/
+    condition: postgresql.enabled
+  - name: redis
+    version: '>=9.1.2'
+    repository: https://kubernetes-charts.storage.googleapis.com/
+    condition: redis.enabled
