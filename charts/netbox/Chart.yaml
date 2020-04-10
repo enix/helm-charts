@@ -19,3 +19,7 @@ dependencies:
     version: '>=10.6.3'
     repository: https://charts.bitnami.com/bitnami
     condition: redis.enabled
+maintainers:
+  - name: Antoine Millet
+    email: antoine@inaps.org
+    url: https://github.com/NaPs
