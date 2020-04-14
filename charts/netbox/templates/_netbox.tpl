@@ -33,14 +33,22 @@ template:
         - configMapRef:
             name: {{ include "netbox.env.configMapName" . | quote }}
         - secretRef:
+          {{- if .Values.existingEnvSecret }}
+            name: {{ .Values.existingEnvSecret | quote }}
+          {{- else }}
             name: {{ include "netbox.env.secretName" . | quote }}
+          {{- end }}
 {{- if or (or .Values.postgresql.enabled .Values.redis.enabled) .Values.redis.existingSecret }}
         env:
-{{- if .Values.postgresql.enabled }}
+{{- if or .Values.postgresql.enabled .Values.postgresql.existingSecret}}
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: "{{ include "postgresql.fullname" $postgresql }}"
+{{- if .Values.postgresql.existingSecret }}
+              name: {{ .Values.postgresql.existingSecret | quote }}
+{{- else }}
+              name: {{ include "call-nested" (list . "postgresql" "postgresql.fullname") | quote }}
+{{- end }}
               key: "postgresql-password"
 {{- end }}
 {{- if or .Values.redis.enabled .Values.redis.existingSecret }}
