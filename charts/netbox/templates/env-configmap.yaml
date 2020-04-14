@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "netbox.env.configMapName" . }}
+  labels:
+    {{- include "netbox.labels" . | nindent 4 }}
+data:
+{{- if or .Values.postgresql.host (not .Values.postgresql.enabled) }}
+  DB_HOST: {{ required "If you disable built-in postgres, you must provide \"postgresql.host\"" .Values.postgresql.host | quote }}
+{{- else }}
+  DB_HOST: {{ include "call-nested" (list . "postgresql" "postgresql.fullname") |quote }}
+{{- end }}
+{{- if or .Values.redis.host (not .Values.redis.enabled) }}
+  REDIS_HOST: {{ required "If you disable built-in redis, you must provide \"redis.host\"" .Values.redis.host | quote }}
+{{- else }}
+  REDIS_HOST: '{{ include "call-nested" (list . "redis" "redis.fullname") }}-master'
+{{- end }}
+  DB_NAME: '{{ .Values.postgresql.postgresqlDatabase }}'
+  ALLOWED_HOSTS: '{{ .Values.allowedHosts }}'
+  EMAIL_FROM: '{{ .Values.emailFrom }}'
+  EMAIL_PORT: '{{ .Values.emailPort }}'
+  EMAIL_SERVER: '{{ .Values.emailServer }}'
+  EMAIL_TIMEOUT: '{{ .Values.emailTimeout }}'
+  SUPERUSER_NAME: '{{ .Values.superuser.name }}'
+  SUPERUSER_EMAIL: '{{ .Values.superuser.email }}'
+{{- range $key, $value := .Values.extraEnvs }}
+  {{ $key }}: '{{ $value }}'
+{{- end }}

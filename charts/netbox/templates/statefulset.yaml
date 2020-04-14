@@ -4,48 +4,38 @@ kind: StatefulSet
 metadata:
   name: {{ include "netbox.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "netbox.name" . }}
-    helm.sh/chart: {{ include "netbox.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- include "netbox.labels" . | nindent 4 }}
     {{- with .Values.extraLabels }}
     {{ . | toYaml | trim | nindent 4 }}
     {{- end }}
 spec:
   replicas: {{ .Values.statefulSet.replicaCount }}
-{{- with .Values.statefulSet.updateStrategy }}
-  updateStrategy:
-  {{ . | toYaml | trim |indent 2 }}
-{{- end }}
   serviceName: 'netbox'
 {{ include "netbox.common" . | indent 2 }}
-{{- if .Values.statefulSet.persistence.enabled }}
-{{- if .Values.statefulSet.persistence.customClaim }}
-    {{ .Values.statefulSet.persistence.customClaim | toYaml | nindent 4 }}
-{{- else }}
+{{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
+{{- if .Values.persistence.customClaims }}
+  {{ .Values.persistence.customClaims | toYaml | nindent 2 }}
+{{- else }}
   - spec:
       accessModes:
-      {{- range .Values.statefulSet.persistence.accessModes }}
+      {{- range .Values.persistence.accessModes }}
         - {{ . | quote }}
       {{- end }}
       resources:
         requests:
-          storage: "{{.Values.statefulSet.persistence.size }}"
-    {{- if .Values.statefulSet.persistence.storageClass }}
-    {{- if (eq "-" .Values.statefulSet.persistence.storageClass) }}
+          storage: "{{.Values.persistence.size }}"
+    {{- if .Values.persistence.storageClass }}
+    {{- if (eq "-" .Values.persistence.storageClass) }}
       storageClassName: ""
     {{- else }}
-      storageClassName: "{{ .Values.statefulSet.persistence.storageClass }}"
+      storageClassName: "{{ .Values.persistence.storageClass }}"
     {{- end }}
     {{- end }}
     metadata:
       name: netbox-media-files
       labels:
-        app.kubernetes.io/name: {{ include "netbox.name" . }}
-        helm.sh/chart: {{ include "netbox.chart" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
-        app.kubernetes.io/managed-by: {{ .Release.Service }}
+        {{- include "netbox.labels" . | nindent 8 }}
 {{- end }}
 {{- end }}
 {{- end }}
