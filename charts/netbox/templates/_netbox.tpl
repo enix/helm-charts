@@ -1,20 +1,28 @@
 {{- define "netbox.common" -}}
-{{- $postgresql := (dict "Release" (dict "Name" .Release.Name) "Chart" (dict "Name" "postgresql") "Values" (index .Values.postgresql)) }}
-{{- $netboxEnv := include (print $.Template.BasePath "/netbox-env.yaml") . }}
-{{- $netboxSecretEnv := include (print $.Template.BasePath "/netbox-secret-env.yaml") . }}
-{{- $nginxConfig := include (print $.Template.BasePath "/nginx-config.yaml") . }}
+{{- $netboxEnv := include (print $.Template.BasePath "/env-configmap.yaml") . }}
+{{- $netboxSecretEnv := include (print $.Template.BasePath "/env-secret.yaml") . }}
+{{- $nginxConfig := include (print $.Template.BasePath "/nginx-configmap.yaml") . }}
 selector:
   matchLabels:
-    app.kubernetes.io/name: {{ include "netbox.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- include "netbox.selectorLabels" . | nindent 4 }}
+{{- with .Values.statefulSet.updateStrategy }}
+updateStrategy:
+  {{- toYaml . | nindent 2 }}
+{{- end }}
 template:
   metadata:
     labels:
-      app.kubernetes.io/name: {{ include "netbox.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      {{- include "netbox.selectorLabels" . | nindent 8 }}
     annotations:
       checksum/config: {{ print "%s%s%s" $netboxEnv $netboxSecretEnv $nginxConfig | sha256sum }}
   spec:
+  {{- with .Values.imagePullSecrets }}
+    imagePullSecrets:
+      {{- toYaml . | nindent 6 }}
+  {{- end }}
+    serviceAccountName: {{ include "netbox.serviceAccountName" . }}
+    securityContext:
+      {{- toYaml .Values.podSecurityContext | nindent 6 }}
     containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -23,16 +31,24 @@ template:
           {{- toYaml .Values.resources | indent 12 }}
         envFrom:
         - configMapRef:
-            name: "{{ include "netbox.fullname" . }}-env"
+            name: {{ include "netbox.env.configMapName" . | quote }}
         - secretRef:
-            name: "{{ include "netbox.fullname" . }}-env"
+          {{- if .Values.existingEnvSecret }}
+            name: {{ .Values.existingEnvSecret | quote }}
+          {{- else }}
+            name: {{ include "netbox.env.secretName" . | quote }}
+          {{- end }}
 {{- if or (or .Values.postgresql.enabled .Values.redis.enabled) .Values.redis.existingSecret }}
         env:
-{{- if .Values.postgresql.enabled }}
+{{- if or .Values.postgresql.enabled .Values.postgresql.existingSecret}}
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: "{{ include "postgresql.fullname" $postgresql }}"
+{{- if .Values.postgresql.existingSecret }}
+              name: {{ .Values.postgresql.existingSecret | quote }}
+{{- else }}
+              name: {{ include "call-nested" (list . "postgresql" "postgresql.fullname") | quote }}
+{{- end }}
               key: "postgresql-password"
 {{- end }}
 {{- if or .Values.redis.enabled .Values.redis.existingSecret }}
@@ -42,7 +58,7 @@ template:
 {{- if .Values.redis.existingSecret }}
               name: {{ .Values.redis.existingSecret | quote}}
 {{- else }}
-              name: {{ include "redis.child.fullname" . | trim | quote }}
+              name: {{ include "call-nested" (list . "redis" "redis.fullname") | quote }}
 {{- end }}
               key: 'redis-password'
 {{- end }}
@@ -108,14 +124,11 @@ template:
     {{- if .Values.initializers }}
     - name: netbox-initializers
       configMap:
-        name: {{ include "netbox.fullname" . }}-initializers
+        name: {{ include "netbox.initializersConfigName" . | quote }}
     {{- end }}
     - name: nginx-config
       configMap:
-        name: {{ include "netbox.fullname" . }}-nginx
-    - name: netbox-config-file
-      configMap:
-        name: {{ include "netbox.fullname" . }}-nginx
+        name: {{ include "netbox.nginxConfigName" . |quote }}
     - name: netbox-static-files
       emptyDir: {}
 {{- if not .Values.persistence.enabled }}

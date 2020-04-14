@@ -11,23 +11,23 @@ statefulSet:
   # statefulSet.replicaCount -- Number of Netbox Pods to run (StatefulSet mode)
   replicaCount: 1
 
-  # statefulSet.updateStrategy -- Update strategy policy
-  updateStrategy:
-    type: RollingUpdate
-  persistence:
-    # statefulSet.persistence.enabled -- Enable statefulSet persistency
-    enabled: true
-    # statefulSet.persistence.accessModes -- Persistent Volume Access Modes
-    accessModes:
-     - 'ReadWriteOnce'
-    # statefulSet.persistence.size -- Size of data volume
-    size: "5G"
-    # statefulSet.persistence.storageClassName -- Storage class of backing PVC
-    storageClassName:
-
 deployment:
   # deployment.replicaCount -- Number of Netbox Pods to run (Deployment mode)
   replicaCount: 1
+
+# updateStrategy -- Update strategy policy
+updateStrategy:
+  type: RollingUpdate
+
+serviceAccount:
+  # serviceAccount.create -- Specifies whether a service account should be created
+  create: true
+  # serviceAccount.annotations -- Annotations to add to the service account
+  annotations: {}
+  # serviceAccount.name -- Name of the service account to use. Default is derived from fullname template
+  name:
+
+
 
 # extraLabels -- Extra labels to add on chart resources
 extraLabels: {}
@@ -85,8 +85,17 @@ ingress:
   #      - netbox.local
 
 persistence:
-  # persistence.enabled -- Enable persistency (Deployment mode)
+  # persistence.enabled -- Enable statefulSet persistency
   enabled: true
+  # persistence.accessModes -- Persistent Volume Access Modes. Only for statefulSet Mode
+  accessModes:
+   - 'ReadWriteOnce'
+  # persistence.size -- Size of data volume. Only for statefulSet Mode
+  size: "5G"
+  # persistence.storageClassName -- Storage class of backing PVC. Only for statefulSet Mode
+  storageClassName:
+  # persistence.customVolumeClaims -- Entirely customize VolumeClaims. Only for statefulSet Mode
+  customVolumeClaims:
 
 # livenessProbe -- livenessProbe configuration on Netbox Pod
 livenessProbe:
@@ -139,6 +148,9 @@ superuser:
   password:
   # superuser.token -- API access token of the Netbox superuser to create on first launch
   token:
+
+# existingEnvSecret -- Provide secret environment variable. Should contain all netbox's expected secret env vars
+existingEnvSecret:
 
 extraEnvs: {}
 extraSecretEnvs: {}

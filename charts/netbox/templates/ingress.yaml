@@ -6,10 +6,7 @@ kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    app.kubernetes.io/name: {{ include "netbox.name" . }}
-    helm.sh/chart: {{ include "netbox.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- include "netbox.labels" . | nindent 4 }}
   {{- if or .Values.ingress.annotations (and .Values.ingress.isNginx .Values.nginx.proxyBodySize) }}
   annotations:
   {{- if and .Values.ingress.isNginx .Values.nginx.proxyBodySize }}
