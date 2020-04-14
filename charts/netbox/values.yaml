@@ -36,7 +36,7 @@ image:
   # image.repository -- Netbox image
   repository: netboxcommunity/netbox
   # image.tag -- Netbox image version
-  tag: v2.7.12
+  tag:
   # image.pullPolicy -- Netbox image pull policy
   pullPolicy: IfNotPresent
 
