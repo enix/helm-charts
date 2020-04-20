@@ -71,6 +71,10 @@ Create the name of the service account to use
 {{ include "netbox.fullname" . }}-env
 {{- end -}}
 
+{{- define "netbox.superuser.secretName" -}}
+{{ include "netbox.fullname" . }}-superuser
+{{- end -}}
+
 {{- define "netbox.nginxConfigName" -}}
 {{ include "netbox.fullname" . }}-nginx
 {{- end -}}

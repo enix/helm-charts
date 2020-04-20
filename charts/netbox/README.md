@@ -61,6 +61,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | emailServer | string | `nil` | Email server used by Netbox |
 | emailTimeout | int | `10` | Timeout in email communications |
 | emailUsername | string | `""` | Username to use on email server |
+| existingEnvSecret | string | `nil` | Provide secret environment variable. Should contain all netbox's expected secret env vars |
 | extraContainers | list | `[]` |  |
 | extraEnvs | object | `{}` |  |
 | extraInitContainers | list | `[]` |  |
@@ -73,7 +74,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | fullnameOverride | string | `""` | String to fully override netbox.fullname template with a string |
 | image.pullPolicy | string | `"IfNotPresent"` | Netbox image pull policy |
 | image.repository | string | `"netboxcommunity/netbox"` | Netbox image |
-| image.tag | string | `"v2.7.12"` | Netbox image version |
+| image.tag | string | `nil` | Netbox image version |
 | ingress.annotations | object | `{}` | Ingress annotations |
 | ingress.enabled | bool | `false` | Enable ingress controller resource |
 | ingress.hosts | list | `["netbox.local"]` | Ingress Hosts |
@@ -91,7 +92,11 @@ The command removes all the Kubernetes components associated with the chart and 
 | nginxImage.repository | string | `"nginx"` | Nginx image |
 | nginxImage.tag | string | `"1.17.9-alpine"` | Nginx image version |
 | nodeSelector | object | `{}` | nodeSelector configuration on Netbox Pod |
-| persistence.enabled | bool | `true` | Enable persistency (Deployment mode) |
+| persistence.accessModes | list | `["ReadWriteOnce"]` | Persistent Volume Access Modes. Only for statefulSet Mode |
+| persistence.customVolumeClaims | string | `nil` | Entirely customize VolumeClaims. Only for statefulSet Mode |
+| persistence.enabled | bool | `true` | Enable statefulSet persistency |
+| persistence.size | string | `"5G"` | Size of data volume. Only for statefulSet Mode |
+| persistence.storageClassName | string | `nil` | Storage class of backing PVC. Only for statefulSet Mode |
 | postgresql.enabled | bool | `true` | Enable the postgresql sub-chart |
 | postgresql.host | string | `nil` | Host of the postgresql server to use |
 | postgresql.postgresqlDatabase | string | `"netbox"` | Postgresql database name |
@@ -106,17 +111,18 @@ The command removes all the Kubernetes components associated with the chart and 
 | secretKey | string | `nil` | Netbox django secret key (use long random string) |
 | service.port | int | `80` | Port to use to access Netbox |
 | service.type | string | `"ClusterIP"` | Kubernetes Service type |
-| statefulSet.persistence.accessModes | list | `["ReadWriteOnce"]` | Persistent Volume Access Modes |
-| statefulSet.persistence.enabled | bool | `true` | Enable statefulSet persistency |
-| statefulSet.persistence.size | string | `"5G"` | Size of data volume |
-| statefulSet.persistence.storageClassName | string | `nil` | Storage class of backing PVC |
+| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
+| serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
+| serviceAccount.name | string | `nil` | Name of the service account to use. Default is derived from fullname template |
 | statefulSet.replicaCount | int | `1` | Number of Netbox Pods to run (StatefulSet mode) |
-| statefulSet.updateStrategy | object | `{"type":"RollingUpdate"}` | Update strategy policy |
+| superuser.apiToken | string | `nil` | API access token of the Netbox superuser to create on first launch |
 | superuser.email | string | `"admin@example.com"` | Email of the Netbox superuser to create on first launch |
 | superuser.name | string | `"admin"` | Username of the Netbox superuser to create on first launch |
 | superuser.password | string | `nil` | Password of the Netbox superuser to create on first launch |
-| superuser.token | string | `nil` | API access token of the Netbox superuser to create on first launch |
+| superuserExistingSecret | string | `nil` | Use custom secret for initial superuser credentials. Should contain appropriate environment variable name (eg: SUPERUSER_PASSWORD) |
+| superuserSkip | bool | `false` | Don't create superuser on startup. |
 | tolerations | list | `[]` | tolerations to add on Netbox Pod |
+| updateStrategy | object | `{"type":"RollingUpdate"}` | Update strategy policy |
 
 ## License
 

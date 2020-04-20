@@ -38,6 +38,15 @@ template:
           {{- else }}
             name: {{ include "netbox.env.secretName" . | quote }}
           {{- end }}
+        {{- if not .Values.superuserSkip }}
+        - secretRef:
+          {{- if .Values.superuserExistingSecret }}
+            name: {{ .Values.superuserExistingSecret |quote }}
+          {{- else }}
+            name: {{ include "netbox.superuser.secretName" . | quote }}
+          {{- end }}
+            optional: true
+        {{- end }}
 {{- if or (or .Values.postgresql.enabled .Values.redis.enabled) .Values.redis.existingSecret }}
         env:
 {{- if or .Values.postgresql.enabled .Values.postgresql.existingSecret}}

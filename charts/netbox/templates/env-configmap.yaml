@@ -21,8 +21,7 @@ data:
   EMAIL_PORT: '{{ .Values.emailPort }}'
   EMAIL_SERVER: '{{ .Values.emailServer }}'
   EMAIL_TIMEOUT: '{{ .Values.emailTimeout }}'
-  SUPERUSER_NAME: '{{ .Values.superuser.name }}'
-  SUPERUSER_EMAIL: '{{ .Values.superuser.email }}'
+  SKIP_SUPERUSER: {{ .Values.superuserSkip | ternary "true" "false"  | quote }}
 {{- range $key, $value := .Values.extraEnvs }}
   {{ $key }}: '{{ $value }}'
 {{- end }}
