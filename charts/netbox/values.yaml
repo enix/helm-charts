@@ -139,6 +139,13 @@ emailPassword: ""
 # secretKey -- Netbox django secret key (use long random string)
 secretKey:
 
+# superuserSkip -- Don't create superuser on startup.
+superuserSkip: false
+
+# superuserExistingSecret -- Use custom secret for initial superuser credentials.
+# Should contain appropriate environment variable name (eg: SUPERUSER_PASSWORD)
+superuserExistingSecret:
+
 superuser:
   # superuser.email -- Email of the Netbox superuser to create on first launch
   email: admin@example.com
@@ -146,8 +153,8 @@ superuser:
   name: admin
   # superuser.password -- Password of the Netbox superuser to create on first launch
   password:
-  # superuser.token -- API access token of the Netbox superuser to create on first launch
-  token:
+  # superuser.apiToken -- API access token of the Netbox superuser to create on first launch
+  apiToken:
 
 # existingEnvSecret -- Provide secret environment variable. Should contain all netbox's expected secret env vars
 existingEnvSecret:
@@ -189,3 +196,7 @@ redis:
   enabled: true
   # redis.host -- Host of the redis server
   host:
+  master:
+    persistence:
+      # redis.master.persistence.enable -- Persistence for redis, not really needed for netbox
+      enabled: false

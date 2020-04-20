@@ -19,3 +19,14 @@
   echo "Visit http://127.0.0.1:8080 to use your application"
   kubectl port-forward --namespace {{ .Release.Namespace }} $POD_NAME 8080:80
 {{- end }}
+
+--------------------------------
+To get the admin password, run the following command:
+```
+# Username (default: admin)
+kubectl -n {{ .Release.Namespace }} get secret {{ include "netbox.superuser.secretName" . }} -o jsonpath='{ .data.SUPERUSER_NAME }' | base64 -d; echo
+# Password (default: <random>)
+kubectl -n {{ .Release.Namespace }} get secret {{ include "netbox.superuser.secretName" . }} -o jsonpath='{ .data.SUPERUSER_PASSWORD }' | base64 -d; echo
+```
+WARNING:
+If you want to change the superuser's password: use the WebUI, reset it via helm-values won't work.
