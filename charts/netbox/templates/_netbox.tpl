@@ -106,6 +106,9 @@ template:
           mountPath: /etc/netbox-nginx/
         - name: netbox-static-files
           mountPath: /opt/netbox/netbox/static
+        {{- with .Values.extraVolumeMounts }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
       {{- range $container := .Values.extraContainers }}
       - {{ $container | toYaml | indent 8 | trim }}
       {{- end }}
