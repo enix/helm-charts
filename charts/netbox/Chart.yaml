@@ -3,7 +3,7 @@ apiVersion: v2
 appVersion: "v2.8.0"
 description: NetBox is an open source web application designed to help manage and document computer networks.
 name: netbox
-version: 1.1.0
+version: 1.2.0
 icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
 home: https://netbox.readthedocs.io/en/stable/
 sources:
