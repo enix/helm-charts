@@ -196,3 +196,7 @@ redis:
   enabled: true
   # redis.host -- Host of the redis server
   host:
+  master:
+    persistence:
+      # redis.master.persistence.enable -- Persistence for redis, not really needed for netbox
+      enabled: false

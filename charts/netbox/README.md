@@ -106,6 +106,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | redis.cluster.enabled | bool | `false` | Enable the redis sub-chart cluster-mode |
 | redis.enabled | bool | `true` | Enable the redis sub-chart |
 | redis.host | string | `nil` | Host of the redis server |
+| redis.master.persistence.enabled | bool | `false` |  |
 | resources | object | `{}` | resources configuration on Netbox Pod |
 | restartPolicy | string | `"Always"` | Pods restart policy |
 | secretKey | string | `nil` | Netbox django secret key (use long random string) |
