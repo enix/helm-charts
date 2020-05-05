@@ -39,6 +39,8 @@ image:
   tag:
   # image.pullPolicy -- Netbox image pull policy
   pullPolicy: IfNotPresent
+  # image.ldap -- Switch docker image tag to the ldap flavor
+  ldap: false
 
 nginxImage:
   # nginxImage.repository -- Nginx image

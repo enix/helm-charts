@@ -83,6 +83,15 @@ Create the name of the service account to use
 {{ include "netbox.fullname" . }}-initializers
 {{- end -}}
 
+{{- define "netbox.imageTag" -}}
+{{- $tag := .Chart.AppVersion -}}
+{{- if .Values.image.ldap -}}
+{{/* use "=" instead of ":=" to affect variable outside the if scope */}}
+{{- $tag = printf "%s-ldap" $tag -}}
+{{- end }}
+{{- default $tag .Values.image.tag -}}
+{{- end -}}
+
 {{/*
   https://github.com/helm/helm/issues/4535#issuecomment-416022809
 */}}
