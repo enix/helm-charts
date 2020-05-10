@@ -72,6 +72,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | extraVolumeMounts | list | `[]` |  |
 | extraVolumes | list | `[]` |  |
 | fullnameOverride | string | `""` | String to fully override netbox.fullname template with a string |
+| image.ldap | bool | `false` | Switch docker image tag to the ldap flavor |
 | image.pullPolicy | string | `"IfNotPresent"` | Netbox image pull policy |
 | image.repository | string | `"netboxcommunity/netbox"` | Netbox image |
 | image.tag | string | `nil` | Netbox image version |
@@ -124,6 +125,14 @@ The command removes all the Kubernetes components associated with the chart and 
 | superuserSkip | bool | `false` | Don't create superuser on startup. |
 | tolerations | list | `[]` | tolerations to add on Netbox Pod |
 | updateStrategy | object | `{"type":"RollingUpdate"}` | Update strategy policy |
+
+## LDAP
+
+You can use the boolean `image.ldap` to switch to ldap image (tag)[https://hub.docker.com/r/netboxcommunity/netbox/tags].
+Then use `extraEnvs` for environment configuration and `extraSecretEnvs` for password following the netbox documentation:
+
+ - https://github.com/netbox-community/netbox-docker/wiki/LDAP
+ - https://netbox.readthedocs.io/en/stable/installation/5-ldap/
 
 ## License
 
