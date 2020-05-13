@@ -1,0 +1,206 @@
+# Default values for kube-router.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  # image.repository -- Kube-Router image
+  repository: docker.io/cloudnativelabs/kube-router
+  # image.pullPolicy -- Kube-Router image pull policy
+  pullPolicy: IfNotPresent
+
+# imagePullSecrets -- Docker-registry secret names as an array
+imagePullSecrets: []
+
+# nameOverride -- String to partially override kube-router.fullname template with a string (will prepend the release name)
+nameOverride: ""
+
+# fullnameOverride --  String to fully override mosquitto.fullname template with a string
+fullnameOverride: ""
+
+# livenessProbe -- Liveness probe for the kube-router workload
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 20244
+  initialDelaySeconds: 10
+  periodSeconds: 3
+
+# readinessProbe -- Readiness probe for the kube-router workload
+readinessProbe:
+  exec:
+    command:
+    - sh
+    - -c
+    - "neighbors=\"$(/usr/local/bin/gobgp neighbor 2>/dev/null | tail -n +2)\"; test $(echo \"$neighbors\" | wc -l) -ge 1; test $(echo \"$neighbors\" | grep -v ' Establ ' | wc -l) -eq 0"
+  initialDelaySeconds: 5
+  periodSeconds: 3
+
+# updateStrategy -- Update strategy to use when upgrading workload
+updateStrategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 1
+
+kubeRouter:
+  # kubeRouter.apiServerUrl -- URL of the API server. If you use Kube-Router as service-proxy, use a reliable way to contact your masters
+  apiServerUrl:
+
+  # kubeRouter.enablePprof -- Enables pprof for debugging performance and memory leak issues
+  enablePprof:
+
+  # kubeRouter.cacheSyncTimeout -- The timeout for cache synchronization (e.g. '5s', '1m'). Must be greater than 0
+  cacheSyncTimeout:
+
+  # kubeRouter.healthPort -- Health check port, 0 = Disabled
+  healthPort:
+
+  # kubeRouter.extraArgs -- Extra arguments to pass to kube-router
+  extraArgs: []
+
+  cni:
+    # cni.install -- Install the CNI plugins tools
+    install: false
+
+    # cni.version -- Version of the CNI plugins tools to install
+    version: v0.7.5
+
+    # cni.installPath -- Path to install the CNI plugins tools
+    installPath: /opt/cni/bin
+
+    # cni.downloadUrl -- CNI plugins tools download URL
+    downloadUrl: https://github.com/containernetworking/plugins/releases/download/${CNI_VERSION}/cni-plugins-amd64-${CNI_VERSION}.tgz
+
+  metrics:
+    # kubeRouter.metrics.path -- Prometheus metrics path
+    path:
+    # kubeRouter.metrics.port -- Prometheus metrics port (set 0 to disable)
+    port:
+
+  router:
+    # kubeRouter.router.enabled -- Enables Pod Networking, Advertises and learns the routes to Pods via iBGP
+    enabled: true
+
+    # kubeRouter.router.bgpRouterId -- BGP router-id. Must be specified in a ipv6 only cluster
+    bgpRouterId:
+
+    # kubeRouter.router.routesSyncPeriod -- The delay between route updates and advertisements (e.g. '5s', '1m', '2h22m'). Must be greater than 0
+    routesSyncPeriod:
+
+    # kubeRouter.router.peers -- List of external BGP peers, see values.yaml for example
+    peers: []
+    # - ip: "1.2.3.4"
+    #    asn: 65000
+    #    password: ""
+    #    bgpPort: 179
+
+    # kubeRouter.router.peerRouterMultihopTtl -- Enable eBGP multihop supports (Relevant only if ttl >= 2)
+    peerRouterMultihopTtl:
+
+    # kubeRouter.router.overrideNexthop -- Override the next-hop in bgp routes sent to peers with the local ip
+    overrideNexthop:
+
+    # kubeRouter.router.overlayType -- Topology of overlay network. Possible values: subnet or full.
+    overlayType:
+
+    # kubeRouter.router.nodesFullMesh -- Each node in the cluster will setup BGP peering with rest of the nodes (true or false)
+    nodesFullMesh:
+
+    # kubeRouter.router.enablePodEgress -- SNAT traffic from Pods to destinations outside the cluster (true or false)
+    enablePodEgress:
+
+    # kubeRouter.router.enableOverlay -- Enable IP-in-IP tunneling for pod-to-pod networking across nodes in different subnets (true or false)
+    enableOverlay:
+
+    # kubeRouter.router.enableIbgp -- Enables peering with nodes with the same ASN, if disabled will only peer with external BGP peers (true or false)
+    enableIbgp:
+
+    # kubeRouter.router.enableCni -- Enable CNI plugin. Disable if you want to use kube-router features alongside another CNI plugin (true or false)
+    enableCni:
+
+    # kubeRouter.router.disableSourceDestCheck -- Disable the source-dest-check attribute for AWS EC2 instances. When this option is false, it must be set some other way (true or false)
+    disableSourceDestCheck:
+
+    # kubeRouter.router.clusterAsn -- ASN number under which cluster nodes will run iBGP
+    clusterAsn:
+
+    # kubeRouter.router.bgpPort -- The port open for incoming BGP connections and to use for connecting with other BGP peers
+    bgpPort:
+
+    # kubeRouter.router.bgpGracefulRestartDeferralTime -- BGP Graceful restart deferral time according to RFC4724 4.1, maximum 18h
+    bgpGracefulRestartDeferralTime:
+
+    # kubeRouter.router.bgpGracefulRestart -- Enables the BGP Graceful Restart capability so that routes are preserved on unexpected restarts
+    bgpGracefulRestart:
+
+    # kubeRouter.router.advertisePodCidr -- Add Node's POD cidr to the RIB so that it gets advertised to the BGP peers (true or false)
+    advertisePodCidr:
+
+    # kubeRouter.router.advertiseLoadbalancerIp -- Add LoadbBalancer IP of service status as set by the LB provider to the RIB so that it gets advertised to the BGP peers (true or false)
+    advertiseLoadbalancerIp:
+
+    # kubeRouter.router.advertiseExternalIp -- Add External IP of service to the RIB so that it gets advertised to the BGP peers (true or false)
+    advertiseExternalIp:
+
+    # kubeRouter.router.advertiseClusterIp -- Add Cluster IP of the service to the RIB so that it gets advertises to the BGP peers (true or false)
+    advertiseClusterIp:
+
+  firewall:
+    # kubeRouter.firewall.enabled -- Enables Network Policy, sets up iptables to provide ingress firewall for pods
+    enabled: true
+
+    # kubeRouter.firewall.iptablesSyncPeriod -- The delay between iptables rule synchronizations (e.g. '5s', '1m'). Must be greater than 0
+    iptablesSyncPeriod:
+
+  serviceProxy:
+    # kubeRouter.serviceProxy.enabled -- Enables Service Proxy, sets up IPVS for Kubernetes Services
+    enabled: false
+
+    # kubeRouter.serviceProxy.nodeportBindonAllIp -- For service of NodePort type create IPVS service that listens on all IP's of the node (true or false)
+    nodeportBindonAllIp:
+
+    # kubeRouter.serviceProxy.masqueradeAll -- SNAT all traffic to cluster IP/node port (true or false)
+    masqueradeAll:
+
+    # kubeRouter.serviceProxy.ipvsSyncPeriod -- The delay between ipvs config synchronizations (e.g. '5s', '1m', '2h22m'). Must be greater than 0
+    ipvsSyncPeriod:
+
+    # kubeRouter.serviceProxy.ipvsPermitAll -- Enables rule to accept all incoming traffic to service VIP's on the node (true or false)
+    ipvsPermitAll:
+
+    # kubeRouter.serviceProxy.ipvsGracefulTermination -- Enables the experimental IPVS graceful terminaton capability (true or false)
+    ipvsGracefulTermination:
+
+    # kubeRouter.serviceProxy.ipvsGracefulPeriod -- The graceful period before removing destinations from IPVS services (e.g. '5s', '1m', '2h22m'). Must be greater than 0
+    ipvsGracefulPeriod:
+
+    # kubeRouter.serviceProxy.hairpinMode -- Add iptables rules for every Service Endpoint to support hairpin traffic (true or false)
+    hairpinMode:
+
+    # kubeRouter.serviceProxy.excludedCidrs -- Excluded CIDRs are used to exclude IPVS rules from deletion
+    excludedCidrs:
+
+# resources -- CPU/Memory resource requests/limits
+resources:
+  requests:
+    cpu: 250m
+    memory: 250Mi
+
+# nodeSelector -- Kube-Router labels for pod assignment
+nodeSelector: {}
+
+# tolerations -- Kube-Router labels for tolerations pod assignment
+tolerations:
+- key: CriticalAddonsOnly
+  operator: Exists
+- effect: NoSchedule
+  key: node-role.kubernetes.io/master
+  operator: Exists
+- effect: NoSchedule
+  key: node.kubernetes.io/not-ready
+  operator: Exists
+- effect: NoSchedule
+  key: node-role.kubernetes.io/controlplane
+  operator: Exists
+- effect: NoExecute
+  key: node-role.kubernetes.io/etcd
+  operator: Exists

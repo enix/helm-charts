@@ -1,0 +1,248 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "kube-router.fullname" . }}
+  labels:
+    {{- include "kube-router.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "kube-router.selectorLabels" . | nindent 6 }}
+  updateStrategy:
+    {{- toYaml .Values.updateStrategy | nindent 4 }}
+  template:
+    metadata:
+      labels:
+        {{- include "kube-router.labels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      priorityClassName: system-node-critical
+      serviceAccountName: {{ include "kube-router.fullname" . }}
+      containers:
+      - name: kube-router
+        image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        args:
+        {{- if .Values.kubeRouter.apiServerUrl }}
+        - "--master={{ .Values.kubeRouter.apiServerUrl }}"
+        {{- end }}
+        {{- if .Values.kubeRouter.enablePprof }}
+        - "--enable-pprof={{ .Values.kubeRouter.enablePprof }}"
+        {{- end }}
+        {{- if .Values.kubeRouter.cacheSyncTimeout }}
+        - "--cache-sync-timeout={{ .Values.kubeRouter.cacheSyncTimeout }}"
+        {{- end }}
+        {{- if .Values.kubeRouter.healthPort }}
+        - "--health-port={{ .Values.kubeRouter.healthPort }}"
+        {{- end }}
+        {{- with .Values.kubeRouter.router }}
+        {{- if .enabled }}
+        - "--run-router=true"
+        {{- if .bgpRouterId }}
+        - "--router-id={{ .bgpRouterId }}"
+        {{- end }}
+        {{- if .peers }}
+        - "--peer-router-ips={{ range $i, $peer := .peers }}{{ if not (eq $i 0) }},{{ end }}{{ $peer.ip }}{{ end }}"
+        - "--peer-router-asns={{ range $i, $peer := .peers }}{{ if not (eq $i 0) }},{{ end }}{{ $peer.asn }}{{ end }}"
+        - "--peer-router-passwords={{ range $i, $peer := .peers }}{{ if not (eq $i 0) }},{{ end }}{{ $peer.password }}{{ end }}"
+        - "--peer-router-ports={{ range $i, $peer := .peers }}{{ if not (eq $i 0) }},{{ end }}{{ $peer.port }}{{ end }}"
+        {{- end }}
+        {{- if .bgpRouterId }}
+        - "--peer-router-multihop-ttl={{ .peerRouterMultihopTtl }}"
+        {{- end }}
+        {{- if .overrideNexthop }}
+        - "--override-nexthop={{ .overrideNexthop }}"
+        {{- end }}
+        {{- if .overlayType }}
+        - "--overlay-type={{ .overlayType }}"
+        {{- end }}
+        {{- if .nodesFullMesh }}
+        - "--nodes-full-mesh={{ .nodesFullMesh }}"
+        {{- end }}
+        {{- if .enablePodEgress }}
+        - "--enable-pod-egress={{ .enablePodEgress }}"
+        {{- end }}
+        {{- if .enableOverlay }}
+        - "--enable-overlay={{ .enableOverlay }}"
+        {{- end }}
+        {{- if .enableIbgp }}
+        - "--enable-ibgp={{ .enableIbgp }}"
+        {{- end }}
+        {{- if .enableCni }}
+        - "--enable-cni={{ .enableCni }}"
+        {{- end }}
+        {{- if .disableSourceDestCheck }}
+        - "--disable-source-dest-check={{ .disableSourceDestCheck }}"
+        {{- end }}
+        {{- if .clusterAsn }}
+        - "--cluster-asn={{ .clusterAsn }}"
+        {{- end }}
+        {{- if .bgpPort }}
+        - "--bgp-port={{ .bgpPort }}"
+        {{- end }}
+        {{- if .bgpGracefulRestartDeferralTime }}
+        - "--bgp-graceful-restart-deferral-time={{ .bgpGracefulRestartDeferralTime }}"
+        {{- end }}
+        {{- if .bgpGracefulRestartDeferralTime }}
+        - "--bgp-graceful-restart={{ .bgpGracefulRestart }}"
+        {{- end }}
+        {{- if .advertisePodCidr }}
+        - "--advertise-pod-cidr={{ .advertisePodCidr }}"
+        {{- end }}
+        {{- if .advertiseLoadbalancerIp }}
+        - "--advertise-loadbalancer-ip={{ .advertiseLoadbalancerIp }}"
+        {{- end }}
+        {{- if .advertiseExternalIp }}
+        - "--advertise-external-ip={{ .advertiseExternalIp }}"
+        {{- end }}
+        {{- if .advertiseClusterIp }}
+        - "--advertise-cluster-ip={{ .advertiseClusterIp }}"
+        {{- end }}
+        {{- end }}
+        {{- end }}
+
+        {{- with .Values.kubeRouter.firewall }}
+        {{- if .enabled }}
+        - "--run-firewall=true"
+        {{- if .iptablesSyncPeriod }}
+        - "--iptables-sync-period={{ .iptablesSyncPeriod }}"
+        {{- end }}
+        {{- end }}
+        {{- end }}
+
+        {{- with .Values.kubeRouter.serviceProxy }}
+        {{- if .enabled }}
+        - "--run-service-proxy=true"
+        {{- if .nodeportBindonAllIp }}
+        - "--nodeport-bindon-all-ip={{ .nodeportBindonAllIp }}"
+        {{- end }}
+        {{- if .masqueradeAll }}
+        - "--masquerade-all={{ .masqueradeAll }}"
+        {{- end }}
+        {{- if .ipvsSyncPeriod }}
+        - "--ipvs-sync-period={{ .ipvsSyncPeriod }}"
+        {{- end }}
+        {{- if .ipvsPermitAll }}
+        - "--ipvs-permit-all={{ .ipvsPermitAll }}"
+        {{- end }}
+        {{- if .ipvsGracefulTermination }}
+        - "--ipvs-graceful-termination={{ .ipvsGracefulTermination }}"
+        {{- end }}
+        {{- if .ipvsGracefulPeriod }}
+        - "--ipvs-graceful-period={{ .ipvsGracefulPeriod }}"
+        {{- end }}
+        {{- if .hairpinMode }}
+        - "--hairpin-mode={{ .hairpinMode }}"
+        {{- end }}
+        {{- if .excludedCidrs }}
+        - "--excluded-cidrs={{ .excludedCidrs }}"
+        {{- end }}
+        {{- end }}
+        {{- end }}
+        {{- range $item := .Values.kubeRouter.extraArgs }}
+        - {{ $item|quote }}
+        {{- end }}
+        env:
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: KUBE_ROUTER_CNI_CONF_FILE
+          value: /etc/cni/net.d/10-kuberouter.conflist
+        {{- with .Values.livenessProbe }}
+        livenessProbe:
+          {{ . | toYaml | indent 10 | trim }}
+        {{- end }}
+        {{- with .Values.readinessProbe }}
+        readinessProbe:
+          {{ . | toYaml | indent 10 | trim }}
+        {{- end }}
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: lib-modules
+          mountPath: /lib/modules
+          readOnly: true
+        - name: cni-conf-dir
+          mountPath: /etc/cni/net.d
+        - name: xtables-lock
+          mountPath: /run/xtables.lock
+          readOnly: false
+      initContainers:
+      {{- if .Values.kubeRouter.cni.install }}
+      - name: install-cni
+        image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+        imagePullPolicy: Always
+        command:
+        - /bin/sh
+        - -c
+        - set -e -x;
+          download_url=$(eval echo $CNI_DOWNLOAD_URL);
+          echo $download_url;
+          current_version="/cni-bin/.version";
+          if ! [ $(cat $current_version) = "$download_url" ]; then
+            wget "$download_url" -O - | tar zxf - -C "/cni-bin/";
+            echo -n $download_url > $current_version;
+          fi;
+        env:
+        - name: CNI_DOWNLOAD_URL
+          value: {{ .Values.kubeRouter.cni.downloadUrl }}
+        - name: CNI_VERSION
+          value: {{ .Values.kubeRouter.cni.version }}
+        volumeMounts:
+        - name: cni-bin-dir
+          mountPath: /cni-bin
+      {{- end }}
+      - name: configure-cni
+        image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+        imagePullPolicy: Always
+        command:
+        - /bin/sh
+        - -c
+        - set -e -x;
+          if [ ! -f /etc/cni/net.d/10-kuberouter.conflist ]; then
+            if [ -f /etc/cni/net.d/*.conf ]; then
+              rm -f /etc/cni/net.d/*.conf;
+            fi;
+            TMP=/etc/cni/net.d/.tmp-kuberouter-cfg;
+            cp /etc/kube-router/cni-conf.json ${TMP};
+            mv ${TMP} /etc/cni/net.d/10-kuberouter.conflist;
+          fi;
+        volumeMounts:
+        - mountPath: /etc/cni/net.d
+          name: cni-conf-dir
+        - mountPath: /etc/kube-router
+          name: kube-router-cfg
+      hostNetwork: true
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+      - name: lib-modules
+        hostPath:
+          path: /lib/modules
+      - name: cni-conf-dir
+        hostPath:
+          path: /etc/cni/net.d
+      - name: kube-router-cfg
+        configMap:
+          name: kube-router-cfg
+      - name: xtables-lock
+        hostPath:
+          path: /run/xtables.lock
+          type: FileOrCreate
+      {{- if .Values.kubeRouter.cni.install }}
+      - name: cni-bin-dir
+        hostPath:
+          path: {{ .Values.kubeRouter.cni.installPath }}
+      {{- end }}
