@@ -297,4 +297,23 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/netbox-0.1.1/netbox-0.1.1.tgz
     version: 0.1.1
+  x509-exporter:
+  - apiVersion: v2
+    appVersion: 1.5.2
+    created: "2020-05-27T14:27:35.079123486Z"
+    description: Prometheus exporter for X.509 certificates enabling expiration monitoring
+    digest: 5084cf3a61658978950fff364e70a30681caf8108b81d3b38cd216eea312cbe7
+    home: https://github.com/enix/x509-exporter
+    maintainers:
+    - email: root@paraneko.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    name: x509-exporter
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/x509-exporter
+    - https://github.com/enix/x509-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
+    version: 0.1.0
 generated: "2020-04-09T11:05:20.531459729Z"
