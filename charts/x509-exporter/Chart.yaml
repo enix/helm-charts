@@ -1,0 +1,14 @@
+apiVersion: v2
+name: x509-exporter
+description: Prometheus exporter for X.509 certificates enabling expiration monitoring
+type: application
+version: 0.1.0
+appVersion: 1.5.2
+home: https://github.com/enix/x509-exporter
+sources:
+  - https://github.com/enix/helm-charts/tree/master/charts/x509-exporter
+  - https://github.com/enix/x509-exporter
+maintainers:
+  - name: Thibault Vincent
+    email: root@paraneko.org
+    url: https://github.com/npdgm
