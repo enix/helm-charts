@@ -84,7 +84,8 @@ spec:
             containerPort: {{ .Values.servicePort }}
     {{- else }}
         - name: kube-rbac-proxy
-          image: "{{ .Values.rbacProxy.repository }}:{{ .Values.rbacProxy.version }}"
+          image: "{{ .Values.rbacProxy.imageRepository }}:{{ .Values.rbacProxy.imageTag }}"
+          imagePullPolicy: {{ .Values.rbacProxy.imagePullPolicy }}
           args:
           - --logtostderr
           - -v=99
