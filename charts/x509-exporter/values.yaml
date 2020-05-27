@@ -1,0 +1,92 @@
+---
+# Default values for x509-exporter.
+#
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# extraLabels -- Extra labels to add on chart resources
+extraLabels: {}
+
+# nameOverride -- String to partially override x509-exporter.fullname template with a string (will prepend the release name)
+nameOverride: ""
+
+# fullnameOverride -- String to fully override x509-exporter.fullname template with a string
+fullnameOverride: ""
+
+imagePullSecrets: []
+image:
+  # image.repository -- x509-exporter image repository
+  repository: enix/x509-exporter
+  # image.tag -- x509-exporter image version
+  tag:
+  # image.pullPolicy -- x509-exporter image pull policy
+  pullPolicy: IfNotPresent
+
+# restartPolicy -- Pods restart policy
+restartPolicy: Always
+
+# podSecurityContext -- securityContext configuration on Pods
+podSecurityContext: {}
+
+# securityContext -- securityContext configuration on x509-exporter containers
+securityContext:
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
+
+# resources -- resources configuration on Pods
+resources: {}
+
+# nodeSelector -- nodeSelector configuration on Pods
+nodeSelector: {}
+
+# tolerations -- tolerations configuration on Pods
+tolerations: []
+
+# affinity -- affinity configuration on Pods
+affinity: {}
+
+# updateStrategy -- updateStrategy configuration on Pods
+updateStrategy: {}
+
+# service.port -- TCP port to expose the exporter on (whether kube-rbac-proxy is enabled or not)
+servicePort: 9090
+
+exporter:
+  # exporter.watchFiles -- Certificate files to watch and export metrics about (PEM encoded X.509)
+  watchFiles: []
+  # exporter.watchDirectories -- Directories to scan for certificates to be watched and exported
+  watchDirectories: []
+  # exporter.watchKubeconfFiles -- Kubeconf files scanned for embedded certificates to export metrics about
+  watchKubeconfFiles: []
+
+rbacProxy:
+  # rbacProxy.enable -- Use kube-rbac-proxy to expose exporters
+  enable: false
+  # rbacProxy.imageRepository -- kube-rbac-proxy image repository
+  imageRepository: quay.io/coreos/kube-rbac-proxy
+  # rbacProxy.imageTag -- kube-rbac-proxy image version
+  imageTag: v0.4.1
+  # rbacProxy.imagePullPolicy -- kube-rbac-proxy image pull policy
+  imagePullPolicy: IfNotPresent
+  # rbacProxy.exporterListenPort -- Listen port for the exporter inside kube-rbac-proxy exposed Pods
+  exporterListenPort: 9091
+
+prometheusServiceMonitor:
+  # prometheusServiceMonitor.create -- Install a ServiceMonitor ressource to scrape this exporter (for prometheus-operator users)
+  create: false
+  # prometheusServiceMonitor.scrapeInterval -- Target scrape interval to be set in the ServiceMonitor
+  scrapeInterval: 60s
+  # prometheusServiceMonitor.extraLabels -- Extra labels to add on ServiceMonitor ressources
+  extraLabels: {}
+
+prometheusRules:
+  # prometheusRules.create -- Install a PrometheusRule ressource to alert on certificate expiration (for prometheus-operator users)
+  create: false
+  # prometheusRules.warningDaysLeft -- Raise a warning alert when this little days are left before a certificate expiration
+  warningDaysLeft: 90
+  # prometheusRules.criticalDaysLeft -- Raise a critical alert when this little days are left before a certificate expiration
+  criticalDaysLeft: 30
+  # prometheusRules.extraLabels -- Extra labels to add on PrometheusRule ressources
+  extraLabels: {}

@@ -1,0 +1,125 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "x509-exporter.fullname" . }}
+  labels:
+    {{- include "x509-exporter.labels" . | nindent 4 }}
+    {{- with .Values.extraLabels }}
+    {{ . | toYaml | trim | nindent 4 }}
+    {{- end }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "x509-exporter.selectorLabels" . | nindent 6 }}
+{{- with .Values.updateStrategy }}
+  updateStrategy:
+    {{- toYaml . | trim | nindent 4 }}
+{{- end }}
+  template:
+    metadata:
+      labels:
+        {{- include "x509-exporter.selectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | trim | nindent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | trim | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | trim | nindent 8 }}
+    {{- end }}
+    {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | trim | nindent 8 }}
+    {{- end }}
+      restartPolicy: {{ .Values.restartPolicy }}
+      containers:
+        - name: {{ .Chart.Name }}
+        {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | trim | nindent 12 }}
+        {{- end }}
+          image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+        {{- if not .Values.rbacProxy.enable }}
+          - --port={{ .Values.servicePort }}
+        {{- else }}
+          - --port={{ .Values.rbacProxy.exporterListenPort }}
+        {{- end }}
+        {{- range .Values.exporter.watchDirectories }}
+          - --watch-dir=/mnt/watch/dir-{{ . | clean | sha1sum }}
+        {{- end }}
+        {{- range .Values.exporter.watchFiles }}
+          - --watch-file=/mnt/watch/file-{{ . | clean | sha1sum }}
+        {{- end }}
+        {{- range .Values.exporter.watchKubeconfFiles }}
+          - --watch-kubeconf=/mnt/watch/kube-{{ . | clean | sha1sum }}
+        {{- end }}
+          volumeMounts:
+        {{- range .Values.exporter.watchDirectories }}
+          - name: dir-{{ . | clean | sha1sum }}
+            mountPath: /mnt/watch/dir-{{ . | clean | sha1sum }}
+            readOnly: true
+        {{- end }}
+        {{- range .Values.exporter.watchFiles }}
+          - name: file-{{ . | clean | sha1sum }}
+            mountPath: /mnt/watch/file-{{ . | clean | sha1sum }}
+            subPath: {{ . | base }}
+            readOnly: true
+        {{- end }}
+        {{- range .Values.exporter.watchKubeconfFiles }}
+          - name: kube-{{ . | clean | sha1sum }}
+            mountPath: /mnt/watch/kube-{{ . | clean | sha1sum }}
+            subPath: {{ . | base }}
+            readOnly: true
+        {{- end }}
+    {{- if not .Values.rbacProxy.enable }}
+          ports:
+          - name: metrics
+            containerPort: {{ .Values.servicePort }}
+    {{- else }}
+        - name: kube-rbac-proxy
+          image: "{{ .Values.rbacProxy.repository }}:{{ .Values.rbacProxy.version }}"
+          args:
+          - --logtostderr
+          - -v=99
+          - --upstream=http://[127.0.0.1]:{{ .Values.rbacProxy.exporterListenPort }}
+          - --secure-listen-address=[$(IP)]:{{ .Values.servicePort }}
+          env:
+          - name: IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+          ports:
+          - name: metrics
+            containerPort: {{ .Values.servicePort }}
+          resources:
+            limits:
+              cpu: 20m
+              memory: 40Mi
+            requests:
+              cpu: 10m
+              memory: 20Mi
+      serviceAccountName: {{ include "x509-exporter.fullname" . }}
+    {{- end }}
+      volumes:
+    {{- range .Values.exporter.watchDirectories }}
+      - name: dir-{{ . | clean | sha1sum }}
+        hostPath:
+          path: {{ . | clean }}
+    {{- end }}
+    {{- range .Values.exporter.watchFiles }}
+      - name: file-{{ . | clean | sha1sum }}
+        hostPath:
+          path: {{ . | clean | dir }}
+    {{- end }}
+    {{- range .Values.exporter.watchKubeconfFiles }}
+      - name: kube-{{ . | clean | sha1sum }}
+        hostPath:
+          path: {{ . | clean | dir }}
+    {{- end }}

@@ -1,0 +1,34 @@
+{{- if .Values.prometheusRules.create }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "x509-exporter.fullname" . }}
+  labels:
+    {{- include "x509-exporter.labels" . | nindent 4 }}
+    {{- with .Values.extraLabels }}
+    {{ . | toYaml | trim | nindent 4 }}
+    {{- end }}
+    {{- with .Values.prometheusRules.extraLabels }}
+    {{- . | toYaml | trim | nindent 4 }}
+    {{- end }}
+spec:
+  groups:
+  - name: kubernetes-certificates.rules
+    rules:
+    - alert: KubernetesCertificateRenewal
+      expr: ((x509_cert_not_after - time()) / 86400) < {{ .Values.prometheusRules.warningDaysLeft }}
+      for: 15m
+      labels:
+        severity: warning
+      annotations:
+        summary: A Kubernetes certificate should be renewed
+        description: Kubernetes certificate "{{ "{{" }} $labels.subject_CN {{ "}}" }}" should be renewed
+    - alert: KubernetesCertificateExpiration
+      expr: ((x509_cert_not_after - time()) / 86400) < {{ .Values.prometheusRules.criticalDaysLeft }}
+      for: 15m
+      labels:
+        severity: critical
+      annotations:
+        summary: A Kubernetes certificate is about to expire
+        description: Kubernetes certificate "{{ "{{" }} $labels.subject_CN {{ "}}" }}" is about to expire
+{{- end }}
