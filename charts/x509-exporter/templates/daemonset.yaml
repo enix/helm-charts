@@ -36,6 +36,10 @@ spec:
       securityContext:
         {{- toYaml . | trim | nindent 8 }}
     {{- end }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | trim | nindent 8 }}
+    {{- end }}
       restartPolicy: {{ .Values.restartPolicy }}
       containers:
         - name: {{ .Chart.Name }}
