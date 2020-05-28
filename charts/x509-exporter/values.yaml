@@ -64,6 +64,12 @@ updateStrategy: {}
 
 # service.port -- TCP port to expose the exporter on (whether kube-rbac-proxy is enabled or not)
 servicePort: 9090
+# podExtraLabels -- extra labels to add on Pods
+podExtraLabels: {}
+
+# podAnnotations -- annotations to add on Pods
+podAnnotations: {}
+
 
 exporter:
   # exporter.watchFiles -- Certificate files to watch and export metrics about (PEM encoded X.509)

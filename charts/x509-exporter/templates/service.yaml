@@ -7,6 +7,13 @@ metadata:
     {{- with .Values.extraLabels }}
     {{ . | toYaml | trim | nindent 4 }}
     {{- end }}
+    {{- with .Values.service.extraLabels }}
+    {{- . | toYaml | trim | nindent 4 }}
+    {{- end }}
+{{- with .Values.service.annotations }}
+  annotations:
+    {{- . | toYaml | trim | nindent 4 }}
+{{- end }}
 spec:
   clusterIP: None
   ports:
