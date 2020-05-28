@@ -134,6 +134,9 @@ deletes the release.
 | imagePullSecrets | list | `[]` |  |
 | nameOverride | string | `""` | String to partially override x509-exporter.fullname template with a string (will prepend the release name) |
 | nodeSelector | object | `{}` | nodeSelector configuration on Pods |
+| podAnnotations | object | `{}` | annotations to add on Pods |
+| podExtraLabels | object | `{}` | extra labels to add on Pods |
+| podListenPort | int | `9090` | TCP port to expose Pods on (whether kube-rbac-proxy is enabled or not) |
 | podSecurityContext | object | `{}` | securityContext configuration on Pods |
 | prometheusRules.create | bool | `false` | Install a PrometheusRule ressource to alert on certificate expiration (for prometheus-operator users) |
 | prometheusRules.criticalDaysLeft | int | `30` | Raise a critical alert when this little days are left before a certificate expiration |
@@ -142,15 +145,22 @@ deletes the release.
 | prometheusServiceMonitor.create | bool | `false` | Install a ServiceMonitor ressource to scrape this exporter (for prometheus-operator users) |
 | prometheusServiceMonitor.extraLabels | object | `{}` | Extra labels to add on ServiceMonitor ressources |
 | prometheusServiceMonitor.scrapeInterval | string | `"60s"` | Target scrape interval to be set in the ServiceMonitor |
+| rbac.create | bool | `true` | specifies whether RBAC resources should be created |
 | rbacProxy.enable | bool | `false` | Use kube-rbac-proxy to expose exporters |
-| rbacProxy.exporterListenPort | int | `9091` | Listen port for the exporter inside kube-rbac-proxy exposed Pods |
 | rbacProxy.imagePullPolicy | string | `"IfNotPresent"` | kube-rbac-proxy image pull policy |
 | rbacProxy.imageRepository | string | `"quay.io/coreos/kube-rbac-proxy"` | kube-rbac-proxy image repository |
 | rbacProxy.imageTag | string | `"v0.4.1"` | kube-rbac-proxy image version |
+| rbacProxy.upstreamListenPort | int | `9091` | Listen port for the exporter inside kube-rbac-proxy exposed Pods |
 | resources | object | `{}` | resources configuration on Pods |
 | restartPolicy | string | `"Always"` | Pods restart policy |
 | securityContext | object | `{"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}` | securityContext configuration on x509-exporter containers |
-| servicePort | int | `9090` |  |
+| service.annotations | object | `{}` | annotations to add to the service |
+| service.create | bool | `true` | Install a headless service (required for ServiceMonitor) |
+| service.extraLabels | object | `{}` | extra labels to add to the service |
+| service.port | int | `9090` | TCP port to expose the service on |
+| serviceAccount.annotations | object | `{}` | annotations added to the ServiceAccount |
+| serviceAccount.create | bool | `true` | specifies whether a ServiceAccount should be created |
+| serviceAccount.name | string | `nil` | name of the ServiceAccount to use (defaults to a name generated using the fullname template) |
 | tolerations | list | `[]` | tolerations configuration on Pods |
 | updateStrategy | object | `{}` | updateStrategy configuration on Pods |
 
