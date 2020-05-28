@@ -35,6 +35,18 @@ securityContext:
     drop:
       - ALL
 
+rbac:
+  # rbac.create -- specifies whether RBAC resources should be created
+  create: true
+
+serviceAccount:
+  # serviceAccount.create -- specifies whether a ServiceAccount should be created
+  create: true
+  # serviceAccount.name -- name of the ServiceAccount to use (defaults to a name generated using the fullname template)
+  name:
+  # serviceAccount.annotations -- annotations added to the ServiceAccount
+  annotations: {}
+
 # resources -- resources configuration on Pods
 resources: {}
 

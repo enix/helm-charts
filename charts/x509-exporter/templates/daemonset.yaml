@@ -110,8 +110,8 @@ spec:
             requests:
               cpu: 10m
               memory: 20Mi
-      serviceAccountName: {{ include "x509-exporter.fullname" . }}
     {{- end }}
+      serviceAccountName: {{ include "x509-exporter.serviceAccountName" . }}
       volumes:
     {{- range .Values.exporter.watchDirectories }}
       - name: dir-{{ . | clean | sha1sum }}

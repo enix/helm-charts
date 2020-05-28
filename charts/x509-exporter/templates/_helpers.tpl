@@ -50,3 +50,14 @@ Selector labels
 app.kubernetes.io/name: {{ include "x509-exporter.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
+
+{{/*
+Create the name of the service account to use
+*/}}
+{{- define "x509-exporter.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create -}}
+{{ default (include "x509-exporter.fullname" .) .Values.serviceAccount.name }}
+{{- else -}}
+{{ default "default" .Values.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
