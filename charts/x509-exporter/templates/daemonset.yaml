@@ -58,9 +58,9 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
         {{- if not .Values.rbacProxy.enable }}
-          - --port={{ .Values.servicePort }}
+          - --port={{ .Values.podListenPort }}
         {{- else }}
-          - --port={{ .Values.rbacProxy.exporterListenPort }}
+          - --port={{ .Values.rbacProxy.upstreamListenPort }}
         {{- end }}
         {{- range .Values.exporter.watchDirectories }}
           - --watch-dir=/mnt/watch/dir-{{ . | clean | sha1sum }}
@@ -92,7 +92,7 @@ spec:
     {{- if not .Values.rbacProxy.enable }}
           ports:
           - name: metrics
-            containerPort: {{ .Values.servicePort }}
+            containerPort: {{ .Values.podListenPort }}
     {{- else }}
         - name: kube-rbac-proxy
           image: "{{ .Values.rbacProxy.imageRepository }}:{{ .Values.rbacProxy.imageTag }}"
@@ -100,8 +100,8 @@ spec:
           args:
           - --logtostderr
           - -v=99
-          - --upstream=http://[127.0.0.1]:{{ .Values.rbacProxy.exporterListenPort }}
-          - --secure-listen-address=[$(IP)]:{{ .Values.servicePort }}
+          - --upstream=http://[127.0.0.1]:{{ .Values.rbacProxy.upstreamListenPort }}
+          - --secure-listen-address=[$(IP)]:{{ .Values.podListenPort }}
           env:
           - name: IP
             valueFrom:
@@ -109,7 +109,7 @@ spec:
                 fieldPath: status.podIP
           ports:
           - name: metrics
-            containerPort: {{ .Values.servicePort }}
+            containerPort: {{ .Values.podListenPort }}
           resources:
             limits:
               cpu: 20m
