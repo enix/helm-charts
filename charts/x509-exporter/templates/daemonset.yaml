@@ -124,14 +124,17 @@ spec:
       - name: dir-{{ . | clean | sha1sum }}
         hostPath:
           path: {{ . | clean }}
+          type: Directory
     {{- end }}
     {{- range .Values.exporter.watchFiles }}
       - name: file-{{ . | clean | sha1sum }}
         hostPath:
           path: {{ . | clean | dir }}
+          type: File
     {{- end }}
     {{- range .Values.exporter.watchKubeconfFiles }}
       - name: kube-{{ . | clean | sha1sum }}
         hostPath:
           path: {{ . | clean | dir }}
+          type: File
     {{- end }}
