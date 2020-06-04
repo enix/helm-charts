@@ -22,6 +22,8 @@ $ cat values.yaml
 exporter:
   watchFiles:
     - /var/lib/kubelet/pki/kubelet-client-current.pem
+    - /var/lib/kubelet/pki/kubelet.crt
+  watchDirectories:
   watchDirectories:
     - /etc/kubernetes/pki/
     - /etc/kubernetes/pki/etcd/
@@ -61,6 +63,7 @@ Kubernetes deployment :
 exporter:
   watchFiles:
     - /var/lib/kubelet/pki/kubelet-client-current.pem
+    - /var/lib/kubelet/pki/kubelet.crt
   watchDirectories:
     - /etc/kubernetes/pki/
     - /etc/kubernetes/pki/etcd/
