@@ -130,11 +130,11 @@ spec:
       - name: file-{{ . | clean | sha1sum }}
         hostPath:
           path: {{ . | clean | dir }}
-          type: File
+          type: Directory
     {{- end }}
     {{- range .Values.exporter.watchKubeconfFiles }}
       - name: kube-{{ . | clean | sha1sum }}
         hostPath:
           path: {{ . | clean | dir }}
-          type: File
+          type: Directory
     {{- end }}
