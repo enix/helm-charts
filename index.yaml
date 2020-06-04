@@ -332,6 +332,24 @@ entries:
   x509-exporter:
   - apiVersion: v2
     appVersion: 1.5.2
+    created: "2020-06-04T12:56:57.692473165Z"
+    description: Prometheus exporter for X.509 certificates enabling expiration monitoring
+    digest: 2c698b351f2b6a7922dce7cae7908685cb725594a9e67301b5721a28652abc32
+    home: https://github.com/enix/x509-exporter
+    maintainers:
+    - email: root@paraneko.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    name: x509-exporter
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/x509-exporter
+    - https://github.com/enix/x509-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.5/x509-exporter-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
+    appVersion: 1.5.2
     created: "2020-06-04T12:39:42.088359734Z"
     description: Prometheus exporter for X.509 certificates enabling expiration monitoring
     digest: 588edd6d236b0cdc1e48573d6a2f05e6f04358c6c05516e078c2f303179b895d
