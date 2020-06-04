@@ -20,10 +20,10 @@ For a typical kubeadm deployed cluster with prometheus-operator :
 $ cat values.yaml
 exporter:
   watchFiles:
-    - /var/lib/kubelet/pki/kubelet.crt
     - /var/lib/kubelet/pki/kubelet-client-current.pem
   watchDirectories:
     - /etc/kubernetes/pki/
+    - /etc/kubernetes/pki/etcd/
   watchKubeconfFiles:
     - /etc/kubernetes/kubelet.conf
     - /etc/kubernetes/admin.conf
@@ -59,14 +59,20 @@ Kubernetes deployment :
 ```yaml
 exporter:
   watchFiles:
-    - /var/lib/kubelet/pki/kubelet.crt
     - /var/lib/kubelet/pki/kubelet-client-current.pem
   watchDirectories:
     - /etc/kubernetes/pki/
+    - /etc/kubernetes/pki/etcd/
   watchKubeconfFiles:
     - /etc/kubernetes/kubelet.conf
     - /etc/kubernetes/admin.conf
 ```
+
+**Note :** because all nodes may not hold the same sets of certificate
+files, it is recommended to install as many releases of this chart as
+you have node kinds. That way each one gets a targetted configuration,
+the exporter won't try openning missing files or kubernetes mount
+empty directories.
 
 When watching cluster certificates, you would also want the x509-exporter
 DaemonSet to be running on master nodes and other control-plane nodes.
