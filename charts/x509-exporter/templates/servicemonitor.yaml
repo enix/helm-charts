@@ -15,7 +15,7 @@ spec:
   selector:
     matchLabels:
       labels:
-        {{- include "x509-exporter.selectorLabels" . | nindent 4 }}
+        {{- include "x509-exporter.selectorLabels" . | nindent 8 }}
   jobLabel: app.kubernetes.io/name
   endpoints:
   - port: metrics
