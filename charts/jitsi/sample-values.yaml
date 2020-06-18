@@ -1,0 +1,19 @@
+fullnameOverride: jitsi
+web:
+  ingress:
+    enabled: true
+    tls:
+    - hosts:
+      - jitsi.ligi.fr
+      secretName: jitsi-tls-certificate
+
+    hosts:
+    - jitsi.test
+jicofo:
+  xmpp:
+    password: "passw0rd"
+    componentSecret: "s3cr37"
+
+jvb:
+  xmpp:
+    password: "passw0rd"

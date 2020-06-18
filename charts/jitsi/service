@@ -1,0 +1,526 @@
+---
+# Source: jitsi-meet/charts/prosody/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: RELEASE-NAME-prosody
+  labels:
+    helm.sh/chart: prosody-0.1.0
+    app.kubernetes.io/name: prosody
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: jitsi-meet/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: RELEASE-NAME-jitsi-meet
+  labels:
+    helm.sh/chart: jitsi-meet-0.1.1
+    app.kubernetes.io/name: jitsi-meet
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "4416"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: jitsi-meet/charts/prosody/templates/envs-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: RELEASE-NAME-prosody
+  labels:
+    helm.sh/chart: prosody-0.1.0
+    app.kubernetes.io/name: prosody
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+type: Opaque
+data:
+---
+# Source: jitsi-meet/templates/jicofo/xmpp-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: RELEASE-NAME-prosody-jicofo
+  labels:
+    helm.sh/chart: jitsi-meet-0.1.1
+    app.kubernetes.io/name: jitsi-meet
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "4416"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: jicofo
+type: Opaque
+data:
+  JICOFO_AUTH_USER: 'Zm9jdXM='
+  JICOFO_AUTH_PASSWORD: 'VHlmSXEyVzdqYg=='
+  JICOFO_COMPONENT_SECRET: 'TnJmQURLM1ZRYg=='
+---
+# Source: jitsi-meet/templates/jvb/xmpp-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: RELEASE-NAME-prosody-jvb
+  labels:
+    helm.sh/chart: jitsi-meet-0.1.1
+    app.kubernetes.io/name: jitsi-meet
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "4416"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: jvb
+type: Opaque
+data:
+  JVB_AUTH_USER: 'anZi'
+  JVB_AUTH_PASSWORD: 'NVhkV056eUdsYg=='
+---
+# Source: jitsi-meet/charts/prosody/templates/envs-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: RELEASE-NAME-prosody
+  labels:
+    helm.sh/chart: prosody-0.1.0
+    app.kubernetes.io/name: prosody
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+data:
+---
+# Source: jitsi-meet/templates/common-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: RELEASE-NAME-prosody-common
+  labels:
+    helm.sh/chart: jitsi-meet-0.1.1
+    app.kubernetes.io/name: jitsi-meet
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "4416"
+    app.kubernetes.io/managed-by: Helm
+data:
+  ENABLE_AUTH: "0"
+  ENABLE_GUESTS: "1"
+  XMPP_DOMAIN: rook-ceph.svc
+  XMPP_MUC_DOMAIN: muc.rook-ceph.svc
+  XMPP_AUTH_DOMAIN: auth.rook-ceph.svc
+  XMPP_GUEST_DOMAIN: guest.rook-ceph.svc
+  XMPP_RECORDER_DOMAIN: recorder.rook-ceph.svc
+  XMPP_INTERNAL_MUC_DOMAIN: internal-muc.rook-ceph.svc
+  TZ: 'Europe/Amsterdam'
+---
+# Source: jitsi-meet/templates/jicofo/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: RELEASE-NAME-jitsi-meet-jicofo
+  labels:
+    helm.sh/chart: jitsi-meet-0.1.1
+    app.kubernetes.io/name: jitsi-meet
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "4416"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: jicofo
+data:
+  JVB_BREWERY_MUC: 'jvbbrewery'
+  XMPP_SERVER: 'RELEASE-NAME-prosody.rook-ceph.svc'
+---
+# Source: jitsi-meet/templates/jvb/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: RELEASE-NAME-jitsi-meet-jvb
+  labels:
+    helm.sh/chart: jitsi-meet-0.1.1
+    app.kubernetes.io/name: jitsi-meet
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "4416"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: jvb
+data:
+  JVB_BREWERY_MUC: 'jvbbrewery'
+  JVB_PORT: '10000'
+  JVB_TCP_HARVESTER_DISABLED: '1'
+  XMPP_SERVER: 'RELEASE-NAME-prosody.rook-ceph.svc'
+---
+# Source: jitsi-meet/templates/web/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: RELEASE-NAME-jitsi-meet-web
+  labels:
+    helm.sh/chart: jitsi-meet-0.1.1
+    app.kubernetes.io/name: jitsi-meet
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "4416"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: web
+data:
+  DISABLE_HTTPS: "1"
+  ENABLE_HTTP_REDIRECT: "0"
+  JICOFO_AUTH_USER: 'focus'
+  XMPP_BOSH_URL_BASE: 'http://RELEASE-NAME-prosody.rook-ceph.svc:5280'
+---
+# Source: jitsi-meet/charts/prosody/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: RELEASE-NAME-prosody
+  labels:
+    helm.sh/chart: prosody-0.1.0
+    app.kubernetes.io/name: prosody
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5280
+      targetPort: bosh-insecure
+      protocol: TCP
+      name: bosh-insecure
+    - port: 5347
+      targetPort: xmpp-component
+      protocol: TCP
+      name: xmpp-component
+    - port: 5222
+      targetPort: xmpp-c2s
+      protocol: TCP
+      name: xmpp-c2
+  selector:
+    app.kubernetes.io/name: prosody
+    app.kubernetes.io/instance: RELEASE-NAME
+---
+# Source: jitsi-meet/templates/web/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: RELEASE-NAME-jitsi-meet-web
+  labels:
+    helm.sh/chart: jitsi-meet-0.1.1
+    app.kubernetes.io/name: jitsi-meet
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "4416"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: web
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: jitsi-meet
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/component: web
+---
+# Source: jitsi-meet/templates/jicofo/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: RELEASE-NAME-jitsi-meet-jicofo
+  labels:
+    helm.sh/chart: jitsi-meet-0.1.1
+    app.kubernetes.io/name: jitsi-meet
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "4416"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: jicofo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: jitsi-meet
+      app.kubernetes.io/instance: RELEASE-NAME
+      app.kubernetes.io/component: jicofo
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: jitsi-meet
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/component: jicofo
+      annotations:
+        checksum/config: 4739ff6d45febac559a3a7b0d01da5e1ba3b6a6bb83fc775e8de6b110c68a9e9
+        checksum/secret: a0eaf5619e05ac1a5378a37f1e86109215c900060f4f89627b807b364f9967b9
+    spec:
+      serviceAccountName: RELEASE-NAME-jitsi-meet
+      securityContext:
+        {}
+      containers:
+        - name: jitsi-meet
+          securityContext:
+            {}
+          image: "jitsi/jicofo:4416"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+          - secretRef:
+              name: RELEASE-NAME-prosody-jicofo
+          - configMapRef:
+              name: RELEASE-NAME-prosody-common
+          - configMapRef:
+              name: RELEASE-NAME-jitsi-meet-jicofo
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: 8888
+          readinessProbe:
+            tcpSocket:
+              port: 8888
+          resources:
+            {}
+---
+# Source: jitsi-meet/templates/jvb/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: RELEASE-NAME-jitsi-meet-jvb
+  labels:
+    helm.sh/chart: jitsi-meet-0.1.1
+    app.kubernetes.io/name: jitsi-meet
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "4416"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: jvb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: jitsi-meet
+      app.kubernetes.io/instance: RELEASE-NAME
+      app.kubernetes.io/component: jvb
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: jitsi-meet
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/component: jvb
+      annotations:
+        checksum/config: 39bba26d060b8d96ce83c350ff99d9b307e1d435fb98a22e5c84c2fa5c545ab7
+        checksum/secret: 80a7902d9ee7468d92ea3ac29ab8bc3f2a37b57cd4087e2db75cb03e5a7ec82d
+    spec:
+      serviceAccountName: RELEASE-NAME-jitsi-meet
+      securityContext:
+        {}
+      containers:
+        - name: jitsi-meet
+          securityContext:
+            {}
+          image: "jitsi/jvb:4416"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+          - secretRef:
+              name: RELEASE-NAME-prosody-jvb
+          - configMapRef:
+              name: RELEASE-NAME-prosody-common
+          - configMapRef:
+              name: RELEASE-NAME-jitsi-meet-jvb
+          env:
+          ports:
+            - name: rtp-udp
+              containerPort: 10000
+              protocol: UDP
+          livenessProbe:
+            exec:
+              command:
+              - pgrep
+              - java
+          readinessProbe:
+            exec:
+              command:
+              - pgrep
+              - java
+          resources:
+            {}
+---
+# Source: jitsi-meet/templates/web/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: RELEASE-NAME-jitsi-meet-web
+  labels:
+    helm.sh/chart: jitsi-meet-0.1.1
+    app.kubernetes.io/name: jitsi-meet
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "4416"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: jitsi-meet
+      app.kubernetes.io/instance: RELEASE-NAME
+      app.kubernetes.io/component: web
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: jitsi-meet
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/component: web
+      annotations:
+        checksum/config: eac5c46b3705599dc3e3b5258b3979615c657eb972217328eb7a26dfe7387496
+    spec:
+      serviceAccountName: RELEASE-NAME-jitsi-meet
+      securityContext:
+        {}
+      containers:
+        - name: jitsi-meet
+          securityContext:
+            {}
+          image: "jitsi/web:4416"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+          - configMapRef:
+              name: RELEASE-NAME-jitsi-meet-web
+          - configMapRef:
+              name: RELEASE-NAME-prosody-common
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: https
+              containerPort: 443
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {}
+---
+# Source: jitsi-meet/charts/prosody/templates/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: RELEASE-NAME-prosody
+  labels:
+    helm.sh/chart: prosody-0.1.0
+    app.kubernetes.io/name: prosody
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  serviceName: "prosody"
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: prosody
+      app.kubernetes.io/instance: RELEASE-NAME
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: prosody
+        app.kubernetes.io/instance: RELEASE-NAME
+    spec:
+      serviceAccountName: RELEASE-NAME-prosody
+      securityContext:
+        {}
+      containers:
+        - name: prosody
+          securityContext:
+            {}
+          image: "jitsi/prosody:4416"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+          - configMapRef:
+              name: RELEASE-NAME-prosody
+          - secretRef:
+              name: RELEASE-NAME-prosody
+          - secretRef:
+              name: 'RELEASE-NAME-prosody-jicofo'
+          - secretRef:
+              name: 'RELEASE-NAME-prosody-jvb'
+          - configMapRef:
+              name: 'RELEASE-NAME-prosody-common'
+          ports:
+            - name: xmpp-c2s
+              containerPort: 5222
+              protocol: TCP
+            - name: xmpp-s2s
+              containerPort: 5269
+              protocol: TCP
+            - name: xmpp-component
+              containerPort: 5347
+              protocol: TCP
+            - name: bosh-insecure
+              containerPort: 5280
+              protocol: TCP
+            - name: bosh-secure
+              containerPort: 5281
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /http-bind
+              port: bosh-insecure
+          readinessProbe:
+            httpGet:
+              path: /http-bind
+              port: bosh-insecure
+          resources:
+            {}
+          volumeMounts:
+          - name: prosody-data
+            mountPath: /config/data
+      volumes:
+      - name: prosody-data
+        persistentVolumeClaim:
+          claimName: prosody-data
+  volumeClaimTemplates:
+  - metadata:
+      name: prosody-data
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      volumeMode: Filesystem
+      resources:
+        requests:
+          storage: 3G
+---
+# Source: jitsi-meet/charts/prosody/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "RELEASE-NAME-prosody-test-connection"
+  labels:
+    helm.sh/chart: prosody-0.1.0
+    app.kubernetes.io/name: prosody
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['RELEASE-NAME-prosody:']
+  restartPolicy: Never
+---
+# Source: jitsi-meet/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "RELEASE-NAME-jitsi-meet-web-test-connection"
+  labels:
+    helm.sh/chart: jitsi-meet-0.1.1
+    app.kubernetes.io/name: jitsi-meet
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "4416"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: web
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['RELEASE-NAME-jitsi-meet-web:80']
+  restartPolicy: Never

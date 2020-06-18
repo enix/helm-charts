@@ -1,0 +1,25 @@
+fullnameOverride: jitsi
+web:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    tls:
+      - hosts:
+        - fetes.ligi.fr
+        secretName: jitsi-tls-certificate
+    hosts:
+    - host: fetes.ligi.fr
+      paths: ['/']
+
+jvb:
+  useHostPort: true
+  useNodeIP: true
+  enableTCP: true
+
+prosody:
+  persistence:
+    storageClassName: local
+
+#xmpp:
+#  domain: meet.jitsi
