@@ -15,6 +15,7 @@ data:
 {{- else }}
   REDIS_HOST: '{{ include "call-nested" (list . "redis" "redis.fullname") }}-master'
 {{- end }}
+  REDIS_PORT: '{{ .Values.redis.master.service.port }}'
   DB_NAME: '{{ .Values.postgresql.postgresqlDatabase }}'
   ALLOWED_HOSTS: '{{ .Values.allowedHosts }}'
   EMAIL_FROM: '{{ .Values.emailFrom }}'
