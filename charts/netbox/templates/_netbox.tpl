@@ -28,7 +28,7 @@ template:
         image: "{{ .Values.image.repository }}:{{ include "netbox.imageTag" . }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         resources:
-          {{- toYaml .Values.resources | indent 12 }}
+          {{- toYaml .Values.resources | nindent 10 }}
         envFrom:
         - configMapRef:
             name: {{ include "netbox.env.configMapName" . | quote }}
@@ -119,15 +119,15 @@ template:
     restartPolicy: {{ .Values.restartPolicy }}
     {{- with .Values.nodeSelector }}
     nodeSelector:
-    {{- toYaml . | indent 4  }}
+    {{- toYaml . | nindent 6  }}
     {{- end }}
     {{- with .Values.affinity }}
     affinity:
-    {{- toYaml . | indent 4 }}
+    {{- toYaml . | nindent 6 }}
     {{- end }}
     {{- with .Values.tolerations }}
     tolerations:
-    {{- toYaml . | indent 4 }}
+    {{- toYaml . | nindent 6 }}
     {{- end }}
     volumes:
     {{- range $volume := .Values.extraVolumes }}
