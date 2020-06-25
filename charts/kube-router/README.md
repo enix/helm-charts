@@ -60,6 +60,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | imagePullSecrets | list | `[]` | Docker-registry secret names as an array |
 | kubeRouter.apiServerUrl | string | `nil` | URL of the API server. If you use Kube-Router as service-proxy, use a reliable way to contact your masters |
 | kubeRouter.cacheSyncTimeout | string | `nil` | The timeout for cache synchronization (e.g. '5s', '1m'). Must be greater than 0 |
+| kubeRouter.cni.config | string | `"{\n  \"cniVersion\":\"0.3.0\",\n  \"name\":\"mynet\",\n  \"plugins\":[\n      {\n        \"name\":\"kubernetes\",\n        \"type\":\"bridge\",\n        \"bridge\":\"kube-bridge\",\n        \"isDefaultGateway\":true,\n        \"hairpinMode\":true,\n        \"ipam\":{\n            \"type\":\"host-local\"\n        }\n      },\n      {\n        \"type\":\"portmap\",\n        \"capabilities\":{\n            \"snat\":true,\n            \"portMappings\":true\n        }\n      }\n  ]\n}\n"` |  |
 | kubeRouter.cni.downloadUrl | string | `"https://github.com/containernetworking/plugins/releases/download/${CNI_VERSION}/cni-plugins-amd64-${CNI_VERSION}.tgz"` |  |
 | kubeRouter.cni.install | bool | `false` |  |
 | kubeRouter.cni.installPath | string | `"/opt/cni/bin"` |  |
