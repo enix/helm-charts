@@ -50,7 +50,7 @@ spec:
         - "--peer-router-passwords={{ range $i, $peer := .peers }}{{ if not (eq $i 0) }},{{ end }}{{ $peer.password }}{{ end }}"
         - "--peer-router-ports={{ range $i, $peer := .peers }}{{ if not (eq $i 0) }},{{ end }}{{ $peer.port }}{{ end }}"
         {{- end }}
-        {{- if .bgpRouterId }}
+        {{- if .peerRouterMultihopTtl }}
         - "--peer-router-multihop-ttl={{ .peerRouterMultihopTtl }}"
         {{- end }}
         {{- if .overrideNexthop }}
