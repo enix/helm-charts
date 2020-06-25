@@ -1,6 +1,59 @@
 apiVersion: v1
 entries:
+  kube-router:
+  - apiVersion: v2
+    appVersion: v1.0.0-rc6
+    created: "2020-06-25T10:07:58.292544877Z"
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
+    digest: 6e0afc5de9d06973690ed3b43a729149a494daec497b9659d9fff4f817ae95cf
+    home: https://www.kube-router.io/
+    icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
+    maintainers:
+    - email: antoine@inaps.org
+      name: Antoine Millet
+      url: https://github.com/NaPs
+    name: kube-router
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/kube-router
+    - https://github.com/cloudnativelabs/kube-router
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-router-0.0.2/kube-router-0.0.2.tgz
+    version: 0.0.2
   netbox:
+  - apiVersion: v2
+    appVersion: v2.8.6
+    created: "2020-06-25T10:07:58.397686958Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: '>=8.7.3'
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: '>=10.6.3'
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
+    digest: 35b337c3bf34ed178cc3419a5fb5b5c9e21982ddaab05ee1b208b0596d7d3cd9
+    home: https://netbox.readthedocs.io/en/stable/
+    icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
+    maintainers:
+    - email: antoine@inaps.org
+      name: Antoine Millet
+      url: https://github.com/NaPs
+    - email: julien.girardin@enix.fr
+      name: Zempashi
+      url: https//github.com/Zempashi
+    name: netbox
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/netbox
+    - https://github.com/netbox-community/netbox
+    - https://github.com/netbox-community/netbox-docker
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/netbox-1.2.7/netbox-1.2.7.tgz
+    version: 1.2.7
   - apiVersion: v2
     appVersion: v2.8.6
     created: "2020-06-16T14:40:16.974046601Z"
