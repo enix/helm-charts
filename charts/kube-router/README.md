@@ -57,6 +57,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | fullnameOverride | string | `""` |  String to fully override mosquitto.fullname template with a string |
 | image.pullPolicy | string | `"IfNotPresent"` | Kube-Router image pull policy |
 | image.repository | string | `"docker.io/cloudnativelabs/kube-router"` | Kube-Router image |
+| image.tag | string | `nil` | Override the kube-router image tag |
 | imagePullSecrets | list | `[]` | Docker-registry secret names as an array |
 | kubeRouter.apiServerUrl | string | `nil` | URL of the API server. If you use Kube-Router as service-proxy, use a reliable way to contact your masters |
 | kubeRouter.cacheSyncTimeout | string | `nil` | The timeout for cache synchronization (e.g. '5s', '1m'). Must be greater than 0 |
