@@ -26,28 +26,28 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         args:
-        {{- if .Values.kubeRouter.apiServerUrl }}
+        {{- if not (kindIs "invalid" .Values.kubeRouter.apiServerUrl) }}
         - "--master={{ .Values.kubeRouter.apiServerUrl }}"
         {{- end }}
-        {{- if .Values.kubeRouter.enablePprof }}
+        {{- if not (kindIs "invalid" .Values.kubeRouter.enablePprof) }}
         - "--enable-pprof={{ .Values.kubeRouter.enablePprof }}"
         {{- end }}
-        {{- if .Values.kubeRouter.cacheSyncTimeout }}
+        {{- if not (kindIs "invalid" .Values.kubeRouter.cacheSyncTimeout) }}
         - "--cache-sync-timeout={{ .Values.kubeRouter.cacheSyncTimeout }}"
         {{- end }}
-        {{- if .Values.kubeRouter.healthPort }}
+        {{- if not (kindIs "invalid" .Values.kubeRouter.healthPort) }}
         - "--health-port={{ .Values.kubeRouter.healthPort }}"
         {{- end }}
-        {{- if .Values.kubeRouter.metrics.path }}
+        {{- if not (kindIs "invalid" .Values.kubeRouter.metrics.path) }}
         - "--metrics-path={{ .Values.kubeRouter.metrics.path }}"
         {{- end }}
-        {{- if .Values.kubeRouter.metrics.port }}
+        {{- if not (kindIs "invalid" .Values.kubeRouter.metrics.port) }}
         - "--metrics-port={{ .Values.kubeRouter.metrics.port }}"
         {{- end }}
         {{- with .Values.kubeRouter.router }}
         {{- if .enabled }}
         - "--run-router=true"
-        {{- if .bgpRouterId }}
+        {{- if not (kindIs "invalid" .bgpRouterId) }}
         - "--router-id={{ .bgpRouterId }}"
         {{- end }}
         {{- if .peers }}
@@ -56,58 +56,58 @@ spec:
         - "--peer-router-passwords={{ range $i, $peer := .peers }}{{ if not (eq $i 0) }},{{ end }}{{ $peer.password }}{{ end }}"
         - "--peer-router-ports={{ range $i, $peer := .peers }}{{ if not (eq $i 0) }},{{ end }}{{ $peer.port }}{{ end }}"
         {{- end }}
-        {{- if .peerRouterMultihopTtl }}
+        {{- if not (kindIs "invalid" .peerRouterMultihopTtl) }}
         - "--peer-router-multihop-ttl={{ .peerRouterMultihopTtl }}"
         {{- end }}
-        {{- if .overrideNexthop }}
+        {{- if not (kindIs "invalid" .overrideNexthop) }}
         - "--override-nexthop={{ .overrideNexthop }}"
         {{- end }}
-        {{- if .overlayType }}
+        {{- if not (kindIs "invalid" .overlayType) }}
         - "--overlay-type={{ .overlayType }}"
         {{- end }}
-        {{- if .nodesFullMesh }}
+        {{- if not (kindIs "invalid" .nodesFullMesh) }}
         - "--nodes-full-mesh={{ .nodesFullMesh }}"
         {{- end }}
-        {{- if .enablePodEgress }}
+        {{- if not (kindIs "invalid" .enablePodEgress) }}
         - "--enable-pod-egress={{ .enablePodEgress }}"
         {{- end }}
-        {{- if .enableOverlay }}
+        {{- if not (kindIs "invalid" .enableOverlay) }}
         - "--enable-overlay={{ .enableOverlay }}"
         {{- end }}
-        {{- if .enableIbgp }}
+        {{- if not (kindIs "invalid" .enableIbgp) }}
         - "--enable-ibgp={{ .enableIbgp }}"
         {{- end }}
-        {{- if .enableCni }}
+        {{- if not (kindIs "invalid" .enableCni) }}
         - "--enable-cni={{ .enableCni }}"
         {{- end }}
-        {{- if .disableSourceDestCheck }}
+        {{- if not (kindIs "invalid" .disableSourceDestCheck) }}
         - "--disable-source-dest-check={{ .disableSourceDestCheck }}"
         {{- end }}
-        {{- if .clusterAsn }}
+        {{- if not (kindIs "invalid" .clusterAsn) }}
         - "--cluster-asn={{ .clusterAsn }}"
         {{- end }}
-        {{- if .bgpPort }}
+        {{- if not (kindIs "invalid" .bgpPort) }}
         - "--bgp-port={{ .bgpPort }}"
         {{- end }}
-        {{- if .bgpGracefulRestartDeferralTime }}
+        {{- if not (kindIs "invalid" .bgpGracefulRestartDeferralTime) }}
         - "--bgp-graceful-restart-deferral-time={{ .bgpGracefulRestartDeferralTime }}"
         {{- end }}
-        {{- if .bgpGracefulRestart }}
+        {{- if not (kindIs "invalid" .bgpGracefulRestart) }}
         - "--bgp-graceful-restart={{ .bgpGracefulRestart }}"
         {{- end }}
-        {{- if .advertisePodCidr }}
+        {{- if not (kindIs "invalid" .advertisePodCidr) }}
         - "--advertise-pod-cidr={{ .advertisePodCidr }}"
         {{- end }}
-        {{- if .advertiseLoadbalancerIp }}
+        {{- if not (kindIs "invalid" .advertiseLoadbalancerIp) }}
         - "--advertise-loadbalancer-ip={{ .advertiseLoadbalancerIp }}"
         {{- end }}
-        {{- if .advertiseExternalIp }}
+        {{- if not (kindIs "invalid" .advertiseExternalIp) }}
         - "--advertise-external-ip={{ .advertiseExternalIp }}"
         {{- end }}
-        {{- if .advertiseClusterIp }}
+        {{- if not (kindIs "invalid" .advertiseClusterIp) }}
         - "--advertise-cluster-ip={{ .advertiseClusterIp }}"
         {{- end }}
-        {{- if .routesSyncPeriod }}
+        {{- if not (kindIs "invalid" .routesSyncPeriod) }}
         - "--routes-sync-period={{ .routesSyncPeriod }}"
         {{- end }}
         {{- end }}
@@ -116,7 +116,7 @@ spec:
         {{- with .Values.kubeRouter.firewall }}
         {{- if .enabled }}
         - "--run-firewall=true"
-        {{- if .iptablesSyncPeriod }}
+        {{- if not (kindIs "invalid" .iptablesSyncPeriod) }}
         - "--iptables-sync-period={{ .iptablesSyncPeriod }}"
         {{- end }}
         {{- end }}
@@ -125,28 +125,28 @@ spec:
         {{- with .Values.kubeRouter.serviceProxy }}
         {{- if .enabled }}
         - "--run-service-proxy=true"
-        {{- if .nodeportBindonAllIp }}
+        {{- if not (kindIs "invalid" .nodeportBindonAllIp) }}
         - "--nodeport-bindon-all-ip={{ .nodeportBindonAllIp }}"
         {{- end }}
-        {{- if .masqueradeAll }}
+        {{- if not (kindIs "invalid" .masqueradeAll) }}
         - "--masquerade-all={{ .masqueradeAll }}"
         {{- end }}
-        {{- if .ipvsSyncPeriod }}
+        {{- if not (kindIs "invalid" .ipvsSyncPeriod) }}
         - "--ipvs-sync-period={{ .ipvsSyncPeriod }}"
         {{- end }}
-        {{- if .ipvsPermitAll }}
+        {{- if not (kindIs "invalid" .ipvsPermitAll) }}
         - "--ipvs-permit-all={{ .ipvsPermitAll }}"
         {{- end }}
-        {{- if .ipvsGracefulTermination }}
+        {{- if not (kindIs "invalid" .ipvsGracefulTermination) }}
         - "--ipvs-graceful-termination={{ .ipvsGracefulTermination }}"
         {{- end }}
-        {{- if .ipvsGracefulPeriod }}
+        {{- if not (kindIs "invalid" .ipvsGracefulPeriod) }}
         - "--ipvs-graceful-period={{ .ipvsGracefulPeriod }}"
         {{- end }}
-        {{- if .hairpinMode }}
+        {{- if not (kindIs "invalid" .hairpinMode) }}
         - "--hairpin-mode={{ .hairpinMode }}"
         {{- end }}
-        {{- if .excludedCidrs }}
+        {{- if not (kindIs "invalid" .excludedCidrs) }}
         - "--excluded-cidrs={{ .excludedCidrs }}"
         {{- end }}
         {{- end }}
