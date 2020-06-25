@@ -101,6 +101,9 @@ spec:
         {{- if .advertiseClusterIp }}
         - "--advertise-cluster-ip={{ .advertiseClusterIp }}"
         {{- end }}
+        {{- if .routesSyncPeriod }}
+        - "--routes-sync-period={{ .routesSyncPeriod }}"
+        {{- end }}
         {{- end }}
         {{- end }}
 
