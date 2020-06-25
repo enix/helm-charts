@@ -19,6 +19,15 @@ $ helm search repo enix
 $ helm install my-release enix/<chart>
 ```
 
+## Charts collection
+
+The following helm charts are maintained :
+* [netbox](charts/netbox)
+* [x509-exporter](charts/x509-exporter)
+* [kube-router](charts/kube-router)
+
+Please refer to each individual documentation !
+
 # License
 
 Copyright (c) 2020 ENIX
