@@ -38,6 +38,12 @@ spec:
         {{- if .Values.kubeRouter.healthPort }}
         - "--health-port={{ .Values.kubeRouter.healthPort }}"
         {{- end }}
+        {{- if .Values.kubeRouter.metrics.path }}
+        - "--metrics-path={{ .Values.kubeRouter.metrics.path }}"
+        {{- end }}
+        {{- if .Values.kubeRouter.metrics.port }}
+        - "--metrics-port={{ .Values.kubeRouter.metrics.port }}"
+        {{- end }}
         {{- with .Values.kubeRouter.router }}
         {{- if .enabled }}
         - "--run-router=true"
