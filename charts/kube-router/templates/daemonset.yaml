@@ -110,6 +110,8 @@ spec:
         {{- if not (kindIs "invalid" .routesSyncPeriod) }}
         - "--routes-sync-period={{ .routesSyncPeriod }}"
         {{- end }}
+        {{- else}}
+        - "--run-router=false"
         {{- end }}
         {{- end }}
 
@@ -119,6 +121,8 @@ spec:
         {{- if not (kindIs "invalid" .iptablesSyncPeriod) }}
         - "--iptables-sync-period={{ .iptablesSyncPeriod }}"
         {{- end }}
+        {{- else}}
+        - "--run-firewall=false"
         {{- end }}
         {{- end }}
 
@@ -149,6 +153,8 @@ spec:
         {{- if not (kindIs "invalid" .excludedCidrs) }}
         - "--excluded-cidrs={{ .excludedCidrs }}"
         {{- end }}
+        {{- else}}
+        - "--run-service-proxy=false"
         {{- end }}
         {{- end }}
         {{- range $item := .Values.kubeRouter.extraArgs }}
