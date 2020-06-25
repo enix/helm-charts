@@ -11,9 +11,9 @@ kube-router
 A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
 
 <p align="center>
-![Warning Warning](https://media.giphy.com/media/gLcUG7QiR0jpMzoNUu/giphy.gif)
-
-**This chart is currently released as an alpha quality version. We encourage you to test it but please, do not put it in production. Please No.**
+<img src="https://media.giphy.com/media/gLcUG7QiR0jpMzoNUu/giphy.gif" alt="Warning Warning" />
+<br />
+<strong>This chart is currently released as an alpha quality version. We encourage you to test it but please, do not put it in production. Please No.</strong>
 </p>
 
 
