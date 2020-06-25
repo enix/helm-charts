@@ -22,9 +22,9 @@ $ helm install my-release enix/<chart>
 ## Charts collection
 
 The following helm charts are maintained :
-* [netbox](charts/netbox)
-* [x509-exporter](charts/x509-exporter)
-* [kube-router](charts/kube-router)
+* [netbox](https://github.com/enix/helm-charts/tree/master/charts/netbox)
+* [x509-exporter](https://github.com/enix/helm-charts/tree/master/charts/x509-exporter)
+* [kube-router](https://github.com/enix/helm-charts/tree/master/charts/kube-router)
 
 Please refer to each individual documentation !
 
