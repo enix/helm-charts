@@ -86,7 +86,7 @@ spec:
         {{- if .bgpGracefulRestartDeferralTime }}
         - "--bgp-graceful-restart-deferral-time={{ .bgpGracefulRestartDeferralTime }}"
         {{- end }}
-        {{- if .bgpGracefulRestartDeferralTime }}
+        {{- if .bgpGracefulRestart }}
         - "--bgp-graceful-restart={{ .bgpGracefulRestart }}"
         {{- end }}
         {{- if .advertisePodCidr }}
