@@ -70,6 +70,32 @@ kubeRouter:
     # cni.downloadUrl -- CNI plugins tools download URL
     downloadUrl: https://github.com/containernetworking/plugins/releases/download/${CNI_VERSION}/cni-plugins-amd64-${CNI_VERSION}.tgz
 
+    # cni.config -- Set CNI configuration
+    config: |
+      {
+        "cniVersion":"0.3.0",
+        "name":"mynet",
+        "plugins":[
+            {
+              "name":"kubernetes",
+              "type":"bridge",
+              "bridge":"kube-bridge",
+              "isDefaultGateway":true,
+              "hairpinMode":true,
+              "ipam":{
+                  "type":"host-local"
+              }
+            },
+            {
+              "type":"portmap",
+              "capabilities":{
+                  "snat":true,
+                  "portMappings":true
+              }
+            }
+        ]
+      }
+
   metrics:
     # kubeRouter.metrics.path -- Prometheus metrics path
     path:

@@ -6,18 +6,4 @@ metadata:
     {{- include "kube-router.labels" . | nindent 4 }}
 data:
   cni-conf.json: |
-    {
-       "cniVersion":"0.3.0",
-       "name":"mynet",
-       "plugins":[
-          {
-             "name":"kubernetes",
-             "type":"bridge",
-             "bridge":"kube-bridge",
-             "isDefaultGateway":true,
-             "ipam":{
-                "type":"host-local"
-             }
-          }
-       ]
-    }
+    {{- .Values.kubeRouter.cni.config | nindent 4 }}
