@@ -23,7 +23,7 @@ spec:
       serviceAccountName: {{ include "kube-router.fullname" . }}
       containers:
       - name: kube-router
-        image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         args:
         {{- if not (kindIs "invalid" .Values.kubeRouter.apiServerUrl) }}
@@ -191,7 +191,7 @@ spec:
       initContainers:
       {{- if .Values.kubeRouter.cni.install }}
       - name: install-cni
-        image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: Always
         command:
         - /bin/sh
@@ -214,7 +214,7 @@ spec:
           mountPath: /cni-bin
       {{- end }}
       - name: configure-cni
-        image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: Always
         command:
         - /bin/sh

@@ -8,6 +8,9 @@ image:
   # image.pullPolicy -- Kube-Router image pull policy
   pullPolicy: IfNotPresent
 
+  # image.tag -- Override the kube-router image tag
+  tag:
+
 # imagePullSecrets -- Docker-registry secret names as an array
 imagePullSecrets: []
 
