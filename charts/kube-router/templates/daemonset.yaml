@@ -251,7 +251,7 @@ spec:
           path: /etc/cni/net.d
       - name: kube-router-cfg
         configMap:
-          name: kube-router-cfg
+          name: {{ include "kube-router.fullname" . }}-cfg
       - name: xtables-lock
         hostPath:
           path: /run/xtables.lock
