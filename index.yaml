@@ -569,6 +569,16 @@ entries:
   rancher-monitoring-proxy:
   - apiVersion: v2
     appVersion: 1.19.1-alpine
+    created: "2020-07-22T13:07:32.151116348Z"
+    description: Access to your Rancher monitoring from the outside
+    digest: 595cc5913b0ac73e270359f875f46d3c18be90890e69fe4ed49f036abcc4d5f7
+    name: rancher-monitoring-proxy
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/rancher-monitoring-proxy-0.1.1/rancher-monitoring-proxy-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.19.1-alpine
     created: "2020-07-15T08:54:40.383012447Z"
     description: Access to your Rancher monitoring from the outside
     digest: 205f159ae48c4d20aa1c5ac56037845205d34095c27d5e3f3eed556bc9a9228c
