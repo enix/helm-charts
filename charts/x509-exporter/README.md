@@ -153,6 +153,7 @@ deletes the release.
 | prometheusRules.warningDaysLeft | int | `90` | Raise a warning alert when this little days are left before a certificate expiration |
 | prometheusServiceMonitor.create | bool | `false` | Install a ServiceMonitor ressource to scrape this exporter (for prometheus-operator users) |
 | prometheusServiceMonitor.extraLabels | object | `{}` | Extra labels to add on ServiceMonitor ressources |
+| prometheusServiceMonitor.relabelings | object | `{}` | relabel config for the ServiceMonitor, see: https://coreos.com/operators/prometheus/docs/latest/api.html#relabelconfig |
 | prometheusServiceMonitor.scrapeInterval | string | `"60s"` | Target scrape interval to be set in the ServiceMonitor |
 | rbac.create | bool | `true` | specifies whether RBAC resources should be created |
 | rbacProxy.enable | bool | `false` | Use kube-rbac-proxy to expose exporters |

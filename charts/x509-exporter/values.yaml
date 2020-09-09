@@ -108,6 +108,8 @@ prometheusServiceMonitor:
   scrapeInterval: 60s
   # prometheusServiceMonitor.extraLabels -- Extra labels to add on ServiceMonitor ressources
   extraLabels: {}
+  # add relabel configuration for scrape config
+  relabelings: {}
 
 prometheusRules:
   # prometheusRules.create -- Install a PrometheusRule ressource to alert on certificate expiration (for prometheus-operator users)
