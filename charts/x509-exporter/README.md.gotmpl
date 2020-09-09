@@ -9,8 +9,11 @@
 
 {{ template "chart.description" . }}
 
-Currently, it will only target files and directories on cluster nodes using
-`hostPath`.
+Currently, it will only target files and directories on cluster nodes using `hostPath`.
+
+{{ template "chart.homepageLine" . }}
+
+{{ template "chart.requirementsSection" . }}
 
 ## TL;DR;
 
@@ -41,10 +44,6 @@ tolerations:
 $ helm repo add enix https://charts.enix.io
 $ helm install my-release enix/x509-exporter -f values.yaml
 ```
-
-{{ template "chart.sourceLinkLine" . }}
-
-{{ template "chart.requirementsSection" . }}
 
 ## Installing the Chart
 

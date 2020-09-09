@@ -1,5 +1,4 @@
-x509-exporter
-=============
+# x509-exporter
 
 <p align="center">
     <a href="https://opensource.org/licenses/Apache-2.0" alt="Apache 2.0 License">
@@ -10,8 +9,9 @@ x509-exporter
 
 Prometheus exporter for X.509 certificates enabling expiration monitoring
 
-Currently, it will only target files and directories on cluster nodes using
-`hostPath`.
+Currently, it will only target files and directories on cluster nodes using `hostPath`.
+
+**Homepage:** <https://github.com/enix/x509-exporter>
 
 ## TL;DR;
 
@@ -42,10 +42,6 @@ tolerations:
 $ helm repo add enix https://charts.enix.io
 $ helm install my-release enix/x509-exporter -f values.yaml
 ```
-
-Source code can be found [here](https://github.com/enix/x509-exporter)
-
-
 
 ## Installing the Chart
 
@@ -127,7 +123,7 @@ $ helm delete my-release
 The command removes all the Kubernetes components associated with the chart and
 deletes the release.
 
-## Chart Values
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -153,6 +149,7 @@ deletes the release.
 | prometheusRules.warningDaysLeft | int | `90` | Raise a warning alert when this little days are left before a certificate expiration |
 | prometheusServiceMonitor.create | bool | `false` | Install a ServiceMonitor ressource to scrape this exporter (for prometheus-operator users) |
 | prometheusServiceMonitor.extraLabels | object | `{}` | Extra labels to add on ServiceMonitor ressources |
+| prometheusServiceMonitor.relabelings | object | `{}` | Relabel config for the ServiceMonitor, see: https://coreos.com/operators/prometheus/docs/latest/api.html#relabelconfig |
 | prometheusServiceMonitor.scrapeInterval | string | `"60s"` | Target scrape interval to be set in the ServiceMonitor |
 | rbac.create | bool | `true` | specifies whether RBAC resources should be created |
 | rbacProxy.enable | bool | `false` | Use kube-rbac-proxy to expose exporters |

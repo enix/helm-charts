@@ -2,7 +2,7 @@ apiVersion: v2
 name: x509-exporter
 description: Prometheus exporter for X.509 certificates enabling expiration monitoring
 type: application
-version: 0.1.7
+version: 0.1.8
 appVersion: 1.5.2
 home: https://github.com/enix/x509-exporter
 sources:
