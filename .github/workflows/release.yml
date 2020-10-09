@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Configure Git
         run: |
@@ -18,7 +18,7 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.0.0-rc.2
+        uses: helm/chart-releaser-action@v1.0.0
         env:
           CR_TOKEN: "${{ secrets.CR_TOKEN }}"
         with:
