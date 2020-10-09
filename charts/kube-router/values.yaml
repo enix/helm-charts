@@ -213,6 +213,9 @@ resources:
   requests:
     cpu: 250m
     memory: 250Mi
+  limits:
+    cpu: 250m
+    memory: 250Mi
 
 # nodeSelector -- Kube-Router labels for pod assignment
 nodeSelector: {}
