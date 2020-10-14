@@ -63,31 +63,29 @@ spec:
           - --port={{ .Values.rbacProxy.upstreamListenPort }}
         {{- end }}
         {{- range .Values.exporter.watchDirectories }}
-          - --watch-dir=/mnt/watch/{{ . | clean }}
+          - --watch-dir=/mnt/watch/dir-{{ . | clean | sha1sum }}/{{ . | clean }}
         {{- end }}
         {{- range .Values.exporter.watchFiles }}
-          - --watch-file=/mnt/watch/{{ . | clean }}
+          - --watch-file=/mnt/watch/file-{{ . | clean | sha1sum }}/{{ . | clean }}
         {{- end }}
         {{- range .Values.exporter.watchKubeconfFiles }}
-          - --watch-kubeconf=/mnt/watch/{{ . | clean }}
+          - --watch-kubeconf=/mnt/watch/kube-{{ . | clean | sha1sum }}/{{ . | clean }}
         {{- end }}
-          - --trim-path=/mnt/watch
+          - --trim-path-components=3
           volumeMounts:
         {{- range .Values.exporter.watchDirectories }}
           - name: dir-{{ . | clean | sha1sum }}
-            mountPath: {{ (printf "%s%s" "/mnt/watch/" .) | clean }}
+            mountPath: {{ printf "/mnt/watch/dir-%s/%s" (. | clean | sha1sum) (. | clean) }}
             readOnly: true
         {{- end }}
         {{- range .Values.exporter.watchFiles }}
           - name: file-{{ . | clean | sha1sum }}
-            mountPath: {{ (printf "%s%s" "/mnt/watch/" .) | clean }}
-            subPath: {{ (printf "%s%s" "/mnt/watch/" .) | clean | base }}
+            mountPath: {{ printf "/mnt/watch/file-%s/%s" (. | clean | sha1sum) (. | clean) }}
             readOnly: true
         {{- end }}
         {{- range .Values.exporter.watchKubeconfFiles }}
           - name: kube-{{ . | clean | sha1sum }}
-            mountPath: {{ (printf "%s%s" "/mnt/watch/" .) | clean }}
-            subPath: {{ (printf "%s%s" "/mnt/watch/" .) | clean | base }}
+            mountPath: {{ printf "/mnt/watch/kube-%s/%s" (. | clean | sha1sum) (. | clean) }}
             readOnly: true
         {{- end }}
     {{- if not .Values.rbacProxy.enable }}
