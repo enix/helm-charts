@@ -25,6 +25,7 @@ The following helm charts are maintained :
 * [netbox](https://github.com/enix/helm-charts/tree/master/charts/netbox)
 * [x509-exporter](https://github.com/enix/helm-charts/tree/master/charts/x509-exporter)
 * [kube-router](https://github.com/enix/helm-charts/tree/master/charts/kube-router)
+* [dothill-provisioner](https://github.com/enix/helm-charts/tree/master/charts/dothill-provisioner)
 
 Please refer to each individual documentation !
 
