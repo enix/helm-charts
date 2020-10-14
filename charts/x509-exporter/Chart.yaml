@@ -3,7 +3,7 @@ name: x509-exporter
 description: Prometheus exporter for X.509 certificates enabling expiration monitoring
 type: application
 version: 0.1.8
-appVersion: 1.5.2
+appVersion: 2.0.0
 home: https://github.com/enix/x509-exporter
 sources:
   - https://github.com/enix/helm-charts/tree/master/charts/x509-exporter
