@@ -80,12 +80,12 @@ spec:
         {{- end }}
         {{- range .Values.exporter.watchFiles }}
           - name: file-{{ . | clean | sha1sum }}
-            mountPath: {{ printf "/mnt/watch/file-%s/%s" (. | clean | sha1sum) (. | clean) }}
+            mountPath: {{ printf "/mnt/watch/file-%s/%s" (. | clean | sha1sum) (. | clean | dir) }}
             readOnly: true
         {{- end }}
         {{- range .Values.exporter.watchKubeconfFiles }}
           - name: kube-{{ . | clean | sha1sum }}
-            mountPath: {{ printf "/mnt/watch/kube-%s/%s" (. | clean | sha1sum) (. | clean) }}
+            mountPath: {{ printf "/mnt/watch/kube-%s/%s" (. | clean | sha1sum) (. | clean | dir) }}
             readOnly: true
         {{- end }}
     {{- if not .Values.rbacProxy.enable }}
