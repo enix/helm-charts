@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ .Release.Name }}-node-server
+  labels:
+    app.kubernetes.io/version: {{ .Chart.Version }}
+{{ include "dothill.labels" . | indent 4 }}
+
+spec:
+  selector:
+    matchLabels:
+      name: {{ .Release.Name }}-node-server
+{{ include "dothill.labels" . | indent 6 }}
+  template:
+    metadata:
+      labels:
+        name: {{ .Release.Name }}-node-server
+{{ include "dothill.labels" . | indent 8 }}
+    spec:
+      {{ if .Values.pspAdmissionControllerEnabled }}serviceAccount: csi-node-registrar{{ end }}
+      hostNetwork: true
+      containers:
+        - name: {{ .Release.Name }}-node
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          command:
+            - dothill-node
+            - -kubeletpath={{ .Values.kubeletPath }}
+            - -bind=unix://{{ .Values.kubeletPath }}/plugins/dothill.csi.enix.io/csi.sock
+{{- include "dothill.extraArgs" .Values.node | indent 10 }}
+          securityContext:
+            privileged: true
+          volumeMounts:
+            # mounting the full host fs is required for iscsiadm commands to work properly
+            # see https://www.docker.com/blog/road-to-containing-iscsi/
+            - name: iscsiadm
+              mountPath: /sbin/iscsiadm
+            - name: iscsid
+              mountPath: /sbin/iscsid            
+            - name: device-dir
+              mountPath: /dev
+            - name: iscsi-dir
+              mountPath: /etc/iscsi
+            - name: plugin-dir
+              mountPath: {{ .Values.kubeletPath }}/plugins/dothill.csi.enix.io
+            - name: mountpoint-dir
+              mountPath: {{ .Values.kubeletPath }}/pods
+              mountPropagation: Bidirectional
+        - name: driver-registrar
+          image: {{ .Values.csiNodeRegistrar.image.repository }}:{{ .Values.csiNodeRegistrar.image.tag }}
+          args:
+            - --csi-address=/csi/csi.sock
+            - --kubelet-registration-path={{ .Values.kubeletPath }}/plugins/dothill.csi.enix.io/csi.sock
+{{- include "dothill.extraArgs" .Values.csiNodeRegistrar | indent 10 }}
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "rm -rf /registration/dothill.csi.enix.io /registration/dothill.csi.enix.io-reg.sock"]
+          volumeMounts:
+            - name: plugin-dir
+              mountPath: /csi
+            - name: registration-dir
+              mountPath: /registration
+      volumes:
+        - name: iscsiadm
+          hostPath:
+            path: /sbin/iscsiadm
+        - name: iscsid
+          hostPath:
+            path: /sbin/iscsid
+        - name: device-dir
+          hostPath:
+            path: /dev
+        - name: registration-dir
+          hostPath:
+            path: {{ .Values.kubeletPath }}/plugins_registry/
+        - name: iscsi-dir
+          hostPath:
+            path: /etc/iscsi
+        - name: mountpoint-dir
+          hostPath:
+            path: {{ .Values.kubeletPath }}/pods
+        - name: plugin-dir
+          hostPath:
+            path: {{ .Values.kubeletPath }}/plugins/dothill.csi.enix.io
+            type: DirectoryOrCreate
