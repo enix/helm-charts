@@ -75,17 +75,17 @@ spec:
           volumeMounts:
         {{- range .Values.exporter.watchDirectories }}
           - name: dir-{{ . | clean | sha1sum }}
-            mountPath: {{ printf "/mnt/watch/dir-%s/%s" (. | clean | sha1sum) (. | clean) }}
+            mountPath: /mnt/watch/dir-{{ . | clean | sha1sum }}/{{ . | clean }}
             readOnly: true
         {{- end }}
         {{- range .Values.exporter.watchFiles }}
           - name: file-{{ . | clean | sha1sum }}
-            mountPath: {{ printf "/mnt/watch/file-%s/%s" (. | clean | sha1sum) (. | clean | dir) }}
+            mountPath: /mnt/watch/file-{{ . | clean | sha1sum }}/{{ . | clean }}
             readOnly: true
         {{- end }}
         {{- range .Values.exporter.watchKubeconfFiles }}
           - name: kube-{{ . | clean | sha1sum }}
-            mountPath: {{ printf "/mnt/watch/kube-%s/%s" (. | clean | sha1sum) (. | clean | dir) }}
+            mountPath: /mnt/watch/kube-{{ . | clean | sha1sum }}/{{ . | clean }}
             readOnly: true
         {{- end }}
     {{- if not .Values.rbacProxy.enable }}
