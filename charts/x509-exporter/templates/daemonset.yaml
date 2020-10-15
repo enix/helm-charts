@@ -71,6 +71,21 @@ spec:
         {{- range .Values.exporter.watchKubeconfFiles }}
           - --watch-kubeconf=/mnt/watch/kube-{{ . | clean | sha1sum }}/{{ . | clean }}
         {{- end }}
+        {{- if .Values.exporter.watchKubeSecrets.enabled }}
+          - --watch-kube-secrets
+        {{- end }}
+        {{- range .Values.exporter.watchKubeSecrets.includeNamespaces }}
+          - --include-namespace={{ . }}
+        {{- end }}
+        {{- range .Values.exporter.watchKubeSecrets.excludeNamespaces }}
+          - --exclude-namespace={{ . }}
+        {{- end }}
+        {{- range .Values.exporter.watchKubeSecrets.includeLabels }}
+          - --include-label={{ . }}
+        {{- end }}
+        {{- range .Values.exporter.watchKubeSecrets.excludeLabels }}
+          - --exclude-label={{ . }}
+        {{- end }}
           - --trim-path-components=3
           volumeMounts:
         {{- range .Values.exporter.watchDirectories }}
