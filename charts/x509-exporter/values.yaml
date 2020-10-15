@@ -88,6 +88,13 @@ exporter:
   watchDirectories: []
   # exporter.watchKubeconfFiles -- Kubeconf files scanned for embedded certificates to export metrics about
   watchKubeconfFiles: []
+  # exporter.watchKubeSecrets -- Fetch secrets from k8s api and monitor them
+  watchKubeSecrets:
+    enabled: false
+    includeNamespaces: []
+    excludeNamespaces: []
+    includeLabels: []
+    excludeLabels: []
 
 rbacProxy:
   # rbacProxy.enable -- Use kube-rbac-proxy to expose exporters
