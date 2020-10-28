@@ -19,6 +19,23 @@ spec:
     spec:
       {{ if .Values.pspAdmissionControllerEnabled }}serviceAccount: csi-node-registrar{{ end }}
       hostNetwork: true
+      initContainers:
+        - name: init-iscsi
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          command:
+            - /usr/local/bin/init-node.sh
+          securityContext:
+            capabilities:
+              add:
+                - SYS_MODULE
+          volumeMounts:
+            - name: iscsi-dir
+              mountPath: /host/iscsi
+            - name: kernel-modules
+              mountPath: /lib/modules
+            - name: init-node
+              mountPath: /usr/local/bin/init-node.sh
+              subPath: init-node.sh
       containers:
         - name: {{ .Release.Name }}-node
           image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
@@ -30,12 +47,6 @@ spec:
           securityContext:
             privileged: true
           volumeMounts:
-            # mounting the full host fs is required for iscsiadm commands to work properly
-            # see https://www.docker.com/blog/road-to-containing-iscsi/
-            - name: iscsiadm
-              mountPath: /sbin/iscsiadm
-            - name: iscsid
-              mountPath: /sbin/iscsid            
             - name: device-dir
               mountPath: /dev
             - name: iscsi-dir
@@ -45,6 +56,39 @@ spec:
             - name: mountpoint-dir
               mountPath: {{ .Values.kubeletPath }}/pods
               mountPropagation: Bidirectional
+          ports:
+          - containerPort: 9808
+            name: healthz
+            protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: healthz
+        - name: iscsid
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          command:
+            - iscsid
+            - --foreground
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: device-dir
+              mountPath: /dev
+            - name: iscsi-dir
+              mountPath: /etc/iscsi
+            - name: plugin-dir
+              mountPath: {{ .Values.kubeletPath }}/plugins/dothill.csi.enix.io
+            - name: mountpoint-dir
+              mountPath: {{ .Values.kubeletPath }}/pods
+              mountPropagation: Bidirectional
+        - name: liveness-probe
+          image: quay.io/k8scsi/livenessprobe:v1.1.0
+          args:
+            - --csi-address=/csi/csi.sock
+{{- include "dothill.extraArgs" .Values.nodeLivenessProbe | indent 10 }}
+          volumeMounts:
+            - name: plugin-dir
+              mountPath: /csi
         - name: driver-registrar
           image: {{ .Values.csiNodeRegistrar.image.repository }}:{{ .Values.csiNodeRegistrar.image.tag }}
           args:
@@ -61,12 +105,6 @@ spec:
             - name: registration-dir
               mountPath: /registration
       volumes:
-        - name: iscsiadm
-          hostPath:
-            path: /sbin/iscsiadm
-        - name: iscsid
-          hostPath:
-            path: /sbin/iscsid
         - name: device-dir
           hostPath:
             path: /dev
@@ -83,3 +121,10 @@ spec:
           hostPath:
             path: {{ .Values.kubeletPath }}/plugins/dothill.csi.enix.io
             type: DirectoryOrCreate
+        - name: kernel-modules
+          hostPath:
+            path: /lib/modules
+        - name: init-node
+          configMap:
+            name: init-node
+            defaultMode: 0700
