@@ -2,8 +2,8 @@
 
 set -ex
 
-# enable kernel mod iscsi_tcp
-modprobe iscsi_tcp
+# enable required kernel modules
+modprobe -a iscsi_tcp dm_multipath
 
 # generate a unique IQN for the node
 if [ ! -f /host/iscsi/initiatorname.iscsi ]; then

@@ -81,6 +81,21 @@ spec:
             - name: mountpoint-dir
               mountPath: {{ .Values.kubeletPath }}/pods
               mountPropagation: Bidirectional
+        - name: multipathd
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          command:
+            - multipathd
+            - -d
+            - -s
+{{- include "dothill.extraArgs" .Values.multipathd | indent 10 }}
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: device-dir
+              mountPath: /dev
+            - name: init-node
+              mountPath: /etc/multipath.conf
+              subPath: multipath.conf
         - name: liveness-probe
           image: quay.io/k8scsi/livenessprobe:v1.1.0
           args:
