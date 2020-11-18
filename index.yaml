@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  configmap2http:
+  - apiVersion: v2
+    appVersion: "3737"
+    created: "2020-11-18T16:19:02.622306962Z"
+    description: expose a configmap through an ingress
+    digest: 5fe2bd735f08beccae553841f2df201be8328ee9e1faece2cf1f9512e4ffc0c6
+    name: configmap2http
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/configmap2http-3737/configmap2http-3737.tgz
+    version: "3737"
   dothill-provisioner:
   - apiVersion: v2
     appVersion: v2.2.0
