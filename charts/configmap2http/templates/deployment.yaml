@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configmap2httpd
+  labels:
+    app.kubernetes.io/name: "{{ .Chart.Name }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/component: httpd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "{{ .Chart.Name }}"
+      app.kubernetes.io/instance: "{{ .Release.Name }}"
+      app.kubernetes.io/component: httpd
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: "{{ .Chart.Name }}"
+        app.kubernetes.io/instance: "{{ .Release.Name }}"
+        app.kubernetes.io/version: "{{ .Chart.AppVersion }}"
+        app.kubernetes.io/component: httpd
+    spec:
+      containers:
+      - name: httpd
+        image: nginxinc/nginx-unprivileged:1.18
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: public-data
+          readOnly: yes
+      volumes:
+      - name: public-data
+        configMap:
+          name: "{{ .Values.configMap }}"

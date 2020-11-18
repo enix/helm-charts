@@ -1,0 +1,4 @@
+ingress:
+  class:
+  hostname:
+configMap: public
