@@ -13,6 +13,28 @@ entries:
     version: "3737"
   dothill-provisioner:
   - apiVersion: v2
+    appVersion: v2.2.1
+    created: "2020-11-26T18:09:30.322681555Z"
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
+      plugin)
+    digest: a4f9cd4077055a0df7eb7ee85f8ea708e0656d46228bb788b78196589b588d25
+    keywords:
+    - storage
+    - iscsi
+    - plugin
+    - csi
+    maintainers:
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+      url: https://blog.paullaffitte.com
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: dothill-provisioner
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/dothill-provisioner-2.2.1/dothill-provisioner-2.2.1.tgz
+    version: 2.2.1
+  - apiVersion: v2
     appVersion: v2.2.0
     created: "2020-11-09T17:37:42.096977689Z"
     description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
