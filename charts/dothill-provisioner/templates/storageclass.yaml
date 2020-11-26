@@ -5,6 +5,7 @@ metadata:
   name: {{ .name }}
 
 provisioner: dothill.csi.enix.io
+volumeBindingMode: WaitForFirstConsumer
 parameters:
   pool: {{ .pool }}
   fsType: {{ .fsType }}

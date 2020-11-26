@@ -35,7 +35,8 @@ spec:
           image: {{ .Values.csiProvisioner.image.repository }}:{{ .Values.csiProvisioner.image.tag }}
           args:
             - --csi-address=/csi/csi.sock
-            - --enable-leader-election
+            - --worker-threads=1
+            - --timeout={{ .Values.csiProvisioner.timeout }}
 {{- include "dothill.extraArgs" .Values.csiProvisioner | indent 10 }}
           imagePullPolicy: IfNotPresent
           volumeMounts:
@@ -45,7 +46,8 @@ spec:
           image: {{ .Values.csiAttacher.image.repository }}:{{ .Values.csiAttacher.image.tag }}
           args:
             - --csi-address=/csi/csi.sock
-            - --leader-election
+            - --worker-threads=1
+            - --timeout={{ .Values.csiAttacher.timeout }}
 {{- include "dothill.extraArgs" .Values.csiAttacher | indent 10 }}
           imagePullPolicy: IfNotPresent
           volumeMounts:
@@ -54,3 +56,4 @@ spec:
       volumes:
         - name: socket-dir
           emptyDir:
+            medium: Memory

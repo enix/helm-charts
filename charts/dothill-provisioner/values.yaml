@@ -9,13 +9,15 @@ image:
 
 csiProvisioner:
   image:
-    repository: quay.io/k8scsi/csi-provisioner
-    tag: v1.6.0
+    repository: k8s.gcr.io/sig-storage/csi-provisioner
+    tag: v1.6.1
+  timeout: 30s
 
 csiAttacher:
   image:
-    repository: quay.io/k8scsi/csi-attacher
-    tag: v2.2.0
+    repository: k8s.gcr.io/sig-storage/csi-attacher
+    tag: v2.2.1
+  timeout: 30s
 
 csiNodeRegistrar:
   extraArgs:

@@ -96,6 +96,8 @@ spec:
             - name: init-node
               mountPath: /etc/multipath.conf
               subPath: multipath.conf
+            - name: multipath-dir
+              mountPath: /etc/multipath
         - name: liveness-probe
           image: quay.io/k8scsi/livenessprobe:v1.1.0
           args:
@@ -129,6 +131,9 @@ spec:
         - name: iscsi-dir
           hostPath:
             path: /etc/iscsi
+        - name: multipath-dir
+          hostPath:
+            path: /etc/multipath
         - name: mountpoint-dir
           hostPath:
             path: {{ .Values.kubeletPath }}/pods
