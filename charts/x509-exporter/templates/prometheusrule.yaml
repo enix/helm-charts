@@ -13,22 +13,32 @@ metadata:
     {{- end }}
 spec:
   groups:
-  - name: kubernetes-certificates.rules
+  - name: x509-exporter.rules
     rules:
-    - alert: KubernetesCertificateRenewal
+  {{- if .Values.prometheusRules.alertOnReadErrors }}
+    - alert: X509ExporterReadErrors
+      expr: delta(x509_read_errors[15m]) > 0
+      for: 5m
+      labels:
+        severity: {{ .Values.prometheusRules.readErrorsSeverity }}
+      annotations:
+        summary: Increasing read errors for x509-exporter
+        description: Over the last 15 minutes, this x509-exporter instance has experienced errors reading certificate files or querying the Kubernetes API. This could be caused by a misconfiguration if triggered when the exporter starts.
+  {{- end }}
+    - alert: CertificateRenewal
       expr: ((x509_cert_not_after - time()) / 86400) < {{ .Values.prometheusRules.warningDaysLeft }}
       for: 15m
       labels:
         severity: warning
       annotations:
-        summary: A Kubernetes certificate should be renewed
-        description: Kubernetes certificate "{{ "{{" }} $labels.subject_CN {{ "}}" }}" should be renewed
-    - alert: KubernetesCertificateExpiration
+        summary: Certificate should be renewed
+        description: Certificate "{{ "{{" }} $labels.subject_CN {{ "}}" }}" should be renewed at location "{{ "{{" }} $labels.filename {{ "}}" }}"
+    - alert: CertificateExpiration
       expr: ((x509_cert_not_after - time()) / 86400) < {{ .Values.prometheusRules.criticalDaysLeft }}
       for: 15m
       labels:
         severity: critical
       annotations:
-        summary: A Kubernetes certificate is about to expire
-        description: Kubernetes certificate "{{ "{{" }} $labels.subject_CN {{ "}}" }}" is about to expire
+        summary: Certificate is about to expire
+        description: Certificate "{{ "{{" }} $labels.subject_CN {{ "}}" }}" is about to expire at location "{{ "{{" }} $labels.filename {{ "}}" }}"
 {{- end }}

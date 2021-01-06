@@ -25,8 +25,8 @@ spec:
     tlsConfig:
       insecureSkipVerify: true
   {{- end }}
-  {{- if .Values.prometheusServiceMonitor.relabelings }}
+  {{- with .Values.prometheusServiceMonitor.relabelings }}
     relabelings:
-{{ toYaml .Values.prometheusServiceMonitor.relabelings | indent 6 }}
+      {{ . | toYaml | indent 6 }}
   {{- end }}
 {{- end }}
