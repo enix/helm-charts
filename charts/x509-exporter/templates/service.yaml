@@ -16,11 +16,10 @@ metadata:
     {{- . | toYaml | trim | nindent 4 }}
 {{- end }}
 spec:
-  clusterIP: None
   ports:
-    - name: metrics
-      port: {{ .Values.service.port }}
-      targetPort: metrics
+  - name: metrics
+    port: {{ .Values.service.port }}
+    targetPort: metrics
   selector:
     {{- include "x509-exporter.selectorLabels" . | nindent 4 }}
 {{- end }}

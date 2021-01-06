@@ -1,129 +1,219 @@
 ---
 # Default values for x509-exporter.
-#
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
 
-# extraLabels -- Extra labels to add on chart resources
+# -- Extra labels to add on chart resources
 extraLabels: {}
 
-# nameOverride -- String to partially override x509-exporter.fullname template with a string (will prepend the release name)
+# -- String to partially override x509-exporter.fullname template with a string (will prepend the release name)
 nameOverride: ""
 
-# fullnameOverride -- String to fully override x509-exporter.fullname template with a string
+# -- String to fully override x509-exporter.fullname template with a string
 fullnameOverride: ""
 
+# -- Specify docker-registry secret names as an array
 imagePullSecrets: []
+
 image:
-  # image.repository -- x509-exporter image repository
+  # -- x509-exporter image registry
+  registry: docker.io
+  # -- x509-exporter image repository
   repository: enix/x509-exporter
-  # image.tag -- x509-exporter image version
+  # -- x509-exporter image tag (defaults to Chart appVersion)
   tag:
-  # image.pullPolicy -- x509-exporter image pull policy
+  # -- x509-exporter image pull policy
   pullPolicy: IfNotPresent
 
-# restartPolicy -- Pods restart policy
-restartPolicy: Always
-
-# podSecurityContext -- securityContext configuration on Pods
-podSecurityContext: {}
-
-# securityContext -- securityContext configuration on x509-exporter containers
-securityContext:
-  readOnlyRootFilesystem: true
-  capabilities:
-    drop:
-      - ALL
 
 rbac:
-  # rbac.create -- specifies whether RBAC resources should be created
+  # -- Should RBAC resources be created
   create: true
 
-serviceAccount:
-  # serviceAccount.create -- specifies whether a ServiceAccount should be created
-  create: true
-  # serviceAccount.name -- name of the ServiceAccount to use (defaults to a name generated using the fullname template)
-  name:
-  # serviceAccount.annotations -- annotations added to the ServiceAccount
-  annotations: {}
+  secretsExporter:
+    # -- Name of the ServiceAccount for the Secrets exporter (required if `rbac.create=false`)
+    serviceAccountName:
+    # -- Annotations added to the ServiceAccount for the Secrets exporter
+    serviceAccountAnnotations: {}
+    # -- Annotations added to the ClusterRole for the Secrets exporter
+    clusterRoleAnnotations: {}
+    # -- Annotations added to the ClusterRoleBinding for the Secrets exporter
+    clusterRoleBindingAnnotations: {}
 
-# resources -- resources configuration on Pods
-resources: {}
+  hostPathsExporter:
+    # -- Name of the ServiceAccount for hostPath exporters (required if `rbac.create=false`)
+    serviceAccountName:
+    # -- Annotations added to the ServiceAccount for the hostPath exporters
+    serviceAccountAnnotations: {}
+    # -- Annotations added to the ClusterRole for the hostPath exporters
+    clusterRoleAnnotations: {}
+    # -- Annotations added to the ClusterRoleBinding for the hostPath exporters
+    clusterRoleBindingAnnotations: {}
 
-# nodeSelector -- nodeSelector configuration on Pods
-nodeSelector: {}
 
-# tolerations -- tolerations configuration on Pods
-tolerations: []
-
-# affinity -- affinity configuration on Pods
-affinity: {}
-
-# updateStrategy -- updateStrategy configuration on Pods
-updateStrategy: {}
-
-# podExtraLabels -- extra labels to add on Pods
+# -- Extra labels added to all Pods
 podExtraLabels: {}
 
-# podAnnotations -- annotations to add on Pods
-podAnnotations: {}
 
-# podListenPort -- TCP port to expose Pods on (whether kube-rbac-proxy is enabled or not)
+# -- Annotations added to all Pods
+podAnnotations: {}
+#  prometheus.io/port: "9090"
+#  prometheus.io/scrape: "true"
+
+
+secretsExporter:
+  # -- Should the TLS Secrets exporter be running
+  enabled: true
+  # -- Should debug messages be produced by the TLS Secrets exporter
+  debugMode: false
+  # -- Desired number of TLS Secrets exporter Pod
+  replicas: 1
+  # -- restartPolicy for Pods of the TLS Secrets exporter
+  restartPolicy: Always
+  # -- DeploymentStrategy for the TLS Secrets exporter
+  strategy: {}
+  # -- ResourceRequirements for containers of the TLS Secrets exporter
+  # @default -- see values.yaml
+  resources:
+    limits:
+      cpu: 200m
+      memory: 40Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
+  # -- Node selector for Pods of the TLS Secrets exporter
+  nodeSelector: {}
+  # -- Toleration for Pods of the TLS Secrets exporter
+  tolerations: []
+  # -- Affinity for Pods of the TLS Secrets exporter
+  affinity: {}
+  # -- Extra labels added to Pods of the TLS Secrets exporter
+  podExtraLabels: {}
+  # -- Annotations added to Pods of the TLS Secrets exporter
+  podAnnotations: {}
+  # -- PodSecurityContext for Pods of the TLS Secrets exporter
+  podSecurityContext: {}
+  # -- SecurityContext for containers of the TLS Secrets exporter
+  # @default -- see values.yaml
+  securityContext:
+    runAsUser: 65534
+    runAsGroup: 65534
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+      - ALL
+
+hostPathsExporter:
+  # -- Should debug messages be produced by hostPath exporters (default for all hostPathsExporter.daemonSets)
+  debugMode: false
+  # -- restartPolicy for Pods of hostPath exporters (default for all hostPathsExporter.daemonSets)
+  restartPolicy: Always
+  # -- updateStrategy for DaemonSet of hostPath exporters (default for all hostPathsExporter.daemonSets)
+  updateStrategy: {}
+  # -- ResourceRequirements for containers of hostPath exporters (default for all hostPathsExporter.daemonSets)
+  # @default -- see values.yaml
+  resources:
+    limits:
+      cpu: 100m
+      memory: 40Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
+  # -- Node selector for Pods of hostPath exporters (default for all hostPathsExporter.daemonSets)
+  nodeSelector: {}
+  # -- Toleration for Pods of hostPath exporters (default for all hostPathsExporter.daemonSets)
+  tolerations: []
+  # -- Affinity for Pods of hostPath exporters (default for all hostPathsExporter.daemonSets)
+  affinity: {}
+  # -- Extra labels added to Pods of hostPath exporters (default for all hostPathsExporter.daemonSets)
+  podExtraLabels: {}
+  # -- Annotations added to Pods of hostPath exporters (default for all hostPathsExporter.daemonSets)
+  podAnnotations: {}
+  # -- PodSecurityContext for Pods of hostPath exporters (default for all hostPathsExporter.daemonSets)
+  podSecurityContext: {}
+  # -- SecurityContext for containers of hostPath exporters (default for all hostPathsExporter.daemonSets)
+  # @default -- see values.yaml
+  securityContext:
+    runAsUser: 0
+    runAsGroup: 0
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+      - ALL
+  # -- [SEE README] List of directory paths of the host to scan for PEM encoded certificate files to be watched and exported as metrics (one level deep)
+  watchDirectories: []
+  # -- [SEE README] List of file paths of the host for PEM encoded certificates to be watched and exported as metrics (one level deep)
+  watchFiles: []
+  # -- [SEE README] List of Kubeconf file paths of the host to scan for embedded certificates to export metrics about
+  watchKubeconfFiles: []
+
+  # -- [SEE README] Map to define one or many DaemonSets running hostPath exporters. Key is used as a name ; value is a map to override all default settings set by `hostPathsExporter.*`.
+  daemonSets: {}
+
+# -- TCP port to expose Pods on (whether kube-rbac-proxy is enabled or not)
 podListenPort: 9090
 
-service:
-  # service.create -- Install a headless service (required for ServiceMonitor)
-  create: true
-  # service.port -- TCP port to expose the service on
-  port: 9090
-  # service.annotations -- annotations to add to the service
-  annotations: {}
-  # service.extraLabels -- extra labels to add to the service
-  extraLabels: {}
-
-exporter:
-  # exporter.watchFiles -- Certificate files to watch and export metrics about (PEM encoded X.509)
-  watchFiles: []
-  # exporter.watchDirectories -- Directories to scan for certificates to be watched and exported
-  watchDirectories: []
-  # exporter.watchKubeconfFiles -- Kubeconf files scanned for embedded certificates to export metrics about
-  watchKubeconfFiles: []
-  # exporter.watchKubeSecrets -- Fetch secrets from k8s api and monitor them
-  watchKubeSecrets:
-    enabled: false
-    includeNamespaces: []
-    excludeNamespaces: []
-    includeLabels: []
-    excludeLabels: []
-
 rbacProxy:
-  # rbacProxy.enable -- Use kube-rbac-proxy to expose exporters
-  enable: false
-  # rbacProxy.imageRepository -- kube-rbac-proxy image repository
-  imageRepository: quay.io/coreos/kube-rbac-proxy
-  # rbacProxy.imageTag -- kube-rbac-proxy image version
-  imageTag: v0.4.1
-  # rbacProxy.imagePullPolicy -- kube-rbac-proxy image pull policy
-  imagePullPolicy: IfNotPresent
-  # rbacProxy.upstreamListenPort -- Listen port for the exporter inside kube-rbac-proxy exposed Pods
+  # -- Should kube-rbac-proxy be used to expose exporters
+  enabled: false
+  image:
+    # -- kube-rbac-proxy image registry
+    registry: quay.io
+    # -- kube-rbac-proxy image repository
+    repository: coreos/kube-rbac-proxy
+    # -- kube-rbac-proxy image version
+    tag: v0.5.0
+    # -- kube-rbac-proxy image pull policy
+    pullPolicy: IfNotPresent
+  # -- Listen port for the exporter running inside kube-rbac-proxy exposed Pods
   upstreamListenPort: 9091
+  # -- ResourceRequirements for all containers of kube-rbac-proxy
+  # @default -- see values.yaml
+  resources:
+    limits:
+      cpu: 20m
+      memory: 40Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
+  # -- SecurityContext for all containers of kube-rbac-proxy
+  # @default -- see values.yaml
+  securityContext:
+    runAsUser: 65534
+    runAsGroup: 65534
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+      - ALL
+
+service:
+  # service.create -- Should a headless Service be installed (required for ServiceMonitor)
+  create: true
+  # service.port -- TCP port to expose the Service on
+  port: 9090
+  # service.annotations -- Annotations to add to the Service
+  annotations: {}
+  # service.extraLabels -- Extra labels to add to the Service
+  extraLabels: {}
 
 prometheusServiceMonitor:
-  # prometheusServiceMonitor.create -- Install a ServiceMonitor ressource to scrape this exporter (for prometheus-operator users)
-  create: false
-  # prometheusServiceMonitor.scrapeInterval -- Target scrape interval to be set in the ServiceMonitor
+  # -- Should a ServiceMonitor ressource be installed to scrape this exporter. For prometheus-operator (kube-prometheus) users.
+  create: true
+  # -- Target scrape interval set in the ServiceMonitor
   scrapeInterval: 60s
-  # prometheusServiceMonitor.extraLabels -- Extra labels to add on ServiceMonitor ressources
+  # -- Extra labels to add on ServiceMonitor ressources
   extraLabels: {}
-  # prometheusServiceMonitor.relabelings -- Relabel config for the ServiceMonitor, see: https://coreos.com/operators/prometheus/docs/latest/api.html#relabelconfig
+  # -- Relabel config for the ServiceMonitor, see: https://coreos.com/operators/prometheus/docs/latest/api.html#relabelconfig
   relabelings: {}
 
 prometheusRules:
-  # prometheusRules.create -- Install a PrometheusRule ressource to alert on certificate expiration (for prometheus-operator users)
-  create: false
-  # prometheusRules.warningDaysLeft -- Raise a warning alert when this little days are left before a certificate expiration
-  warningDaysLeft: 90
-  # prometheusRules.criticalDaysLeft -- Raise a critical alert when this little days are left before a certificate expiration
-  criticalDaysLeft: 30
-  # prometheusRules.extraLabels -- Extra labels to add on PrometheusRule ressources
+  # -- Should a PrometheusRule ressource be installed to alert on certificate expiration. For prometheus-operator (kube-prometheus) users.
+  create: true
+  # -- Should the X509ExporterReadErrors alerting rule be created to notify when the exporter can't read files or authenticate with the Kubernetes API. It aims at preventing undetected misconfigurations and monitoring regressions.
+  alertOnReadErrors: true
+  # -- Severity for the X509ExporterReadErrors alerting rule
+  readErrorsSeverity: warning
+  # -- Raise a warning alert when this little days are left before a certificate expiration (cert-manager would renew Let's Encrypt certs before day 29)
+  warningDaysLeft: 28
+  # -- Raise a critical alert when this little days are left before a certificate expiration (two weeks to deal with ACME rate limiting should this be an issue)
+  criticalDaysLeft: 14
+  # -- Extra labels to add on PrometheusRule ressources
   extraLabels: {}
