@@ -23,7 +23,6 @@ image:
   # -- x509-exporter image pull policy
   pullPolicy: IfNotPresent
 
-
 rbac:
   # -- Should RBAC resources be created
   create: true
@@ -48,16 +47,13 @@ rbac:
     # -- Annotations added to the ClusterRoleBinding for the hostPath exporters
     clusterRoleBindingAnnotations: {}
 
-
 # -- Extra labels added to all Pods
 podExtraLabels: {}
-
 
 # -- Annotations added to all Pods
 podAnnotations: {}
 #  prometheus.io/port: "9090"
 #  prometheus.io/scrape: "true"
-
 
 secretsExporter:
   # -- Should the TLS Secrets exporter be running
