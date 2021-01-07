@@ -312,6 +312,10 @@ $ helm upgrade x509-exporter enix/x509-exporter
 | secretsExporter.affinity | object | `{}` | Affinity for Pods of the TLS Secrets exporter |
 | secretsExporter.debugMode | bool | `false` | Should debug messages be produced by the TLS Secrets exporter |
 | secretsExporter.enabled | bool | `true` | Should the TLS Secrets exporter be running |
+| secretsExporter.excludeLabels | list | `[]` | Exclude TLS Secrets having these labels. Items can be keys such as `my-label` or also require a value with syntax `my-label=my-value`.  |
+| secretsExporter.excludeNamespaces | list | `[]` | Exclude namespaces from being scanned by the TLS Secrets exporter (evaluated after `includeNamespaces`) |
+| secretsExporter.includeLabels | list | `[]` | Only watch TLS Secrets having these labels (all secrets if empty). Items can be keys such as `my-label` or also require a value with syntax `my-label=my-value`. |
+| secretsExporter.includeNamespaces | list | `[]` | Restrict the list of namespaces the TLS Secrets exporter should scan for certificates to watch (all namespaces if empty) |
 | secretsExporter.nodeSelector | object | `{}` | Node selector for Pods of the TLS Secrets exporter |
 | secretsExporter.podAnnotations | object | `{}` | Annotations added to Pods of the TLS Secrets exporter |
 | secretsExporter.podExtraLabels | object | `{}` | Extra labels added to Pods of the TLS Secrets exporter |
