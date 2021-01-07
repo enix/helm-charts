@@ -96,6 +96,15 @@ secretsExporter:
     capabilities:
       drop:
       - ALL
+  
+  # -- Restrict the list of namespaces the TLS Secrets exporter should scan for certificates to watch (all namespaces if empty)
+  includeNamespaces: []
+  # -- Exclude namespaces from being scanned by the TLS Secrets exporter (evaluated after `includeNamespaces`)
+  excludeNamespaces: []
+  # -- Only watch TLS Secrets having these labels (all secrets if empty). Items can be keys such as `my-label` or also require a value with syntax `my-label=my-value`.
+  includeLabels: []
+  # -- Exclude TLS Secrets having these labels. Items can be keys such as `my-label` or also require a value with syntax `my-label=my-value`. 
+  excludeLabels: []
 
 hostPathsExporter:
   # -- Should debug messages be produced by hostPath exporters (default for all hostPathsExporter.daemonSets)
@@ -134,6 +143,7 @@ hostPathsExporter:
     capabilities:
       drop:
       - ALL
+
   # -- [SEE README] List of directory paths of the host to scan for PEM encoded certificate files to be watched and exported as metrics (one level deep)
   watchDirectories: []
   # -- [SEE README] List of file paths of the host for PEM encoded certificates to be watched and exported as metrics (one level deep)

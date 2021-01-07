@@ -74,10 +74,22 @@ spec:
         image: {{ include "x509-exporter.image" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         args:
-        - --watch-kube-secrets
-        {{- if .Values.secretsExporter.debugMode }}
+      {{- if .Values.secretsExporter.debugMode }}
         - --debug
-        {{- end }}
+      {{- end }}
+        - --watch-kube-secrets
+      {{- range .Values.secretsExporter.includeNamespaces }}
+        - --include-namespace={{ . | trim }}
+      {{- end }}
+      {{- range .Values.secretsExporter.excludeNamespaces }}
+        - --exclude-namespace={{ . | trim }}
+      {{- end }}
+      {{- range .Values.secretsExporter.includeLabels }}
+        - --include-label={{ . | trim }}
+      {{- end }}
+      {{- range .Values.secretsExporter.excludeLabels }}
+        - --exclude-label={{ . | trim }}
+      {{- end }}
       {{- if not .Values.rbacProxy.enabled }}
         - --port={{ .Values.podListenPort }}
         ports:
