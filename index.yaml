@@ -14,7 +14,7 @@ entries:
   dothill-provisioner:
   - apiVersion: v2
     appVersion: v2.2.2
-    created: "2020-11-07T15:33:00.000000000Z"
+    created: "2020-11-07T15:33:00Z"
     description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
       plugin)
     digest: b83f1bd855a8914eb720735bf0a9f45dab383bb9f9a1048c4e28a199d0947c7d
@@ -804,6 +804,32 @@ entries:
     - https://github.com/enix/helm-charts/releases/download/rancher-monitoring-proxy-0.1.0/rancher-monitoring-proxy-0.1.0.tgz
     version: 0.1.0
   x509-exporter:
+  - apiVersion: v2
+    appVersion: 2.0.1
+    created: "2021-01-07T16:58:25.850084612Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 8adaed161dfcf4286d2749795c72d2060af802e59cd0cfaa1f86812f7fde8eac
+    home: https://github.com/enix/helm-charts/tree/master/charts/x509-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: root@paraneko.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-exporter
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/x509-exporter
+    - https://github.com/enix/x509-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-exporter-1.1.2/x509-exporter-1.1.2.tgz
+    version: 1.1.2
   - apiVersion: v2
     appVersion: 2.0.1
     created: "2021-01-07T15:24:17.305568173Z"
