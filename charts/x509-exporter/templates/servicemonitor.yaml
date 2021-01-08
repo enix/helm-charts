@@ -27,6 +27,6 @@ spec:
   {{- end }}
   {{- with .Values.prometheusServiceMonitor.relabelings }}
     relabelings:
-      {{ . | toYaml | indent 6 }}
+      {{ . | toYaml | nindent 6 }}
   {{- end }}
 {{- end }}
