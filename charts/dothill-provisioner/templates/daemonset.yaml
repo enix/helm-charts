@@ -4,6 +4,7 @@ metadata:
   name: {{ .Release.Name }}-node-server
   labels:
     app.kubernetes.io/version: {{ .Chart.Version }}
+    app.kubernetes.io/component: dynamic-provisionning-node
 {{ include "dothill.labels" . | indent 4 }}
 
 spec:
@@ -64,6 +65,7 @@ spec:
             httpGet:
               path: /healthz
               port: healthz
+            periodSeconds: 60
         - name: iscsid
           image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
           command:
