@@ -20,6 +20,15 @@ spec:
     spec:
       {{ if .Values.pspAdmissionControllerEnabled }}serviceAccount: csi-node-registrar{{ end }}
       hostNetwork: true
+      {{- if .Values.daemonNodeAffinity }}
+      affinity:
+        nodeAffinity:
+{{ toYaml .Values.daemonNodeAffinity | indent 10 }}
+      {{- end }}
+      {{- if .Values.daemonNodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.daemonNodeSelector | indent 8 }}
+      {{- end }}
       initContainers:
         - name: init-iscsi
           image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}

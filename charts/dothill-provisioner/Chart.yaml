@@ -1,6 +1,6 @@
 apiVersion: v2
 name: dothill-provisioner
-version: 2.2.3
+version: 2.3.0
 description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin)
 type: application
 keywords:
@@ -14,5 +14,5 @@ maintainers:
     url: https://blog.paullaffitte.com
   - name: Arthur Chaloin
     email: arthur.chaloin@enix.fr
-appVersion: v2.2.3
+appVersion: v2.3.0
 deprecated: false
