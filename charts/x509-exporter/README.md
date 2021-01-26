@@ -97,7 +97,7 @@ and as a result hold different sets of certificate files requiring targeted x509
 For example, with the help of node selectors and tolerations, we can have nodes of the control plane run their own
 exporter targeting API and etcd certificates, while regular nodes would have a simpler configuration for Kubelet alone.
 
-Deployment of hostPath exporters is controlled under the `hostPathsExporter` key of [Chart Values](#chart-values).
+Deployment of hostPath exporters is controlled under the `hostPathsExporter` key of [Chart Values](#values).
 All values are defaults that would apply to any number of DaemonSet you wish to run, unless overridden individually.
 Then you'll need to create at least one DaemonSet in `hostPathsExporter.daemonSets`.
 
@@ -210,7 +210,7 @@ service:
   create: false
 ```
 
-> ℹ️ [Chart Values](#chart-values) provide a few knobs to control Prometheus rules, such as numbers of days before
+> ℹ️ [Chart Values](#values) provide a few knobs to control Prometheus rules, such as numbers of days before
 certificate expiration for warning and critical alerts are triggered.
 
 > ⚠️ Special alert `X509ExporterReadErrors` is meant to report anomalies with the exporter, such as API authorization
@@ -223,7 +223,7 @@ working with files that can change path over time and on cluster upgrades.
 ### Installing the Chart
 
 Create a file named `x509-exporter.values.yaml` with your values, as discussed previously and with the help of
-[Chart Values](#chart-values).
+[Chart Values](#values).
 
 Add our Charts repository :
 ```
