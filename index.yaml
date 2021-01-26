@@ -870,6 +870,25 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/netbox-0.1.1/netbox-0.1.1.tgz
     version: 0.1.1
+  qcow-provisioner:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2021-01-26T16:10:14.595138403Z"
+    description: QCOW-powered relocatable local path provisioner for Kubernetes
+    digest: 91fd509e0d789ff379448e72ecd8012cf856c9df24b088058e96c67b2c0d0590
+    keywords:
+    - storage
+    - plugin
+    - iscsi
+    - csi
+    maintainers:
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: qcow-provisioner
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/qcow-provisioner-1.0.0/qcow-provisioner-1.0.0.tgz
+    version: 1.0.0
   rancher-monitoring-proxy:
   - apiVersion: v2
     appVersion: 1.19.1-alpine
