@@ -34,6 +34,14 @@ csiAttacher:
   # -- Extra arguments for csi-attacher controller sidecar
   extraArgs: []
 
+# -- Controller sidecar for volume expansion
+csiResizer:
+  image:
+    repository: gcr.io/k8s-staging-sig-storage/csi-resizer
+    tag: v1.1.0
+  # -- Extra arguments for csi-resizer controller sidecar
+  extraArgs: []
+
 # -- Node sidecar for plugin registration
 csiNodeRegistrar:
   image:

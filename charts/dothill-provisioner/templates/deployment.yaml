@@ -54,6 +54,14 @@ spec:
           volumeMounts:
             - name: socket-dir
               mountPath: /csi
+        - name: csi-resizer
+          image: {{ .Values.csiResizer.image.repository }}:{{ .Values.csiResizer.image.tag }}
+          args:
+            - --csi-address=/csi/csi.sock
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
       volumes:
         - name: socket-dir
           emptyDir:
