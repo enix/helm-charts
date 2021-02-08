@@ -10,9 +10,8 @@ ports:
   ssh: 22421
 
 image:
-  repository: docker-registry.enix.io/products/qcow-provisioner
-  tag: master
-  pullSecret: regcred
+  repository: enix/qcow-provisioner
+  # tag: 0.1.0
 
 csiProvisioner:
   image:
