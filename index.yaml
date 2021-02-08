@@ -911,6 +911,24 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/qcow-provisioner-1.0.0/qcow-provisioner-1.0.0.tgz
     version: 1.0.0
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2021-02-08T18:54:45.168553785Z"
+    description: QCOW-powered relocatable local path provisioner for Kubernetes
+    digest: 20b138974c01cf50a47be2ae9b9baad7df0f15309f8bf44e9432d28fa52e00f1
+    keywords:
+    - storage
+    - plugin
+    - iscsi
+    - csi
+    maintainers:
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: qcow-provisioner
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/qcow-provisioner-0.1.0/qcow-provisioner-0.1.0.tgz
+    version: 0.1.0
   rancher-monitoring-proxy:
   - apiVersion: v2
     appVersion: 1.19.1-alpine
