@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+data:
+  init-sshd.sh: |- {{ range .Files.Lines "init-sshd.sh" }}
+    {{ . }}{{ end }}
+  init-node.sh: |- {{ range .Files.Lines "init-node.sh" }}
+    {{ . }}{{ end }}
+  copy-volume.sh: |- {{ range .Files.Lines "copy-volume.sh" }}
+    {{ . }}{{ end }}
