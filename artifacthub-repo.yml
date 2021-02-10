@@ -1,0 +1,8 @@
+# Artifact Hub repository metadata file
+repositoryID: f14bae82-5d5a-4e7b-8a57-f289343ff1c0
+owners:
+  - name: Enix
+    email: enix@enix.fr
+ignore:
+  - rancher-monitoring-proxy
+  - configmap2http
