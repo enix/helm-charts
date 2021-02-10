@@ -22,16 +22,16 @@ $ helm install my-release enix/<chart>
 ## Charts collection
 
 The following helm charts are maintained :
-* [netbox](https://github.com/enix/helm-charts/tree/master/charts/netbox)
+* [dothill-csi](https://github.com/enix/helm-charts/tree/master/charts/dothill-csi)
 * [x509-exporter](https://github.com/enix/helm-charts/tree/master/charts/x509-exporter)
 * [kube-router](https://github.com/enix/helm-charts/tree/master/charts/kube-router)
-* [dothill-provisioner](https://github.com/enix/helm-charts/tree/master/charts/dothill-provisioner)
+* [netbox](https://github.com/enix/helm-charts/tree/master/charts/netbox)
 
 Please refer to each individual documentation !
 
 # License
 
-Copyright (c) 2020 ENIX
+Copyright (c) 2021 ENIX
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
