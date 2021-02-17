@@ -32,7 +32,7 @@ spec:
         severity: warning
       annotations:
         summary: Certificate should be renewed
-        description: Certificate "{{ "{{" }} $labels.subject_CN {{ "}}" }}" should be renewed at location "{{ "{{" }} $labels.filename {{ "}}" }}"
+        description: Certificate for "{{ "{{" }} $labels.subject_CN {{ "}}" }}" should be renewed {{ "{{if" }} $labels.secret_name {{ "}}" }}in Kubernets secret "{{ "{{" }} $labels.secret_namespace {{ "}}" }}/{{ "{{" }} $labels.secret_name {{ "}}" }}"{{ "{{else}}" }}at location "{{ "{{" }} $labels.filepath {{ "}}" }}"{{ "{{end}}" }}
     - alert: CertificateExpiration
       expr: ((x509_cert_not_after - time()) / 86400) < {{ .Values.prometheusRules.criticalDaysLeft }}
       for: 15m
@@ -40,5 +40,5 @@ spec:
         severity: critical
       annotations:
         summary: Certificate is about to expire
-        description: Certificate "{{ "{{" }} $labels.subject_CN {{ "}}" }}" is about to expire at location "{{ "{{" }} $labels.filename {{ "}}" }}"
+        description: Certificate for "{{ "{{" }} $labels.subject_CN {{ "}}" }}" is about to expire {{ "{{if" }} $labels.secret_name {{ "}}" }}in Kubernets secret "{{ "{{" }} $labels.secret_namespace {{ "}}" }}/{{ "{{" }} $labels.secret_name {{ "}}" }}"{{ "{{else}}" }}at location "{{ "{{" }} $labels.filepath {{ "}}" }}"{{ "{{end}}" }}
 {{- end }}
