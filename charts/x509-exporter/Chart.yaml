@@ -1,7 +1,7 @@
 apiVersion: v2
 name: x509-exporter
-version: 1.2.0
-appVersion: 2.2.0
+version: 1.2.1
+appVersion: 2.2.1
 type: application
 description: A Prometheus exporter for certificates focusing on expiration monitoring
 keywords:
