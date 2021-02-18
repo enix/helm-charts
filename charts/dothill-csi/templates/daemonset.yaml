@@ -109,6 +109,8 @@ spec:
               subPath: multipath.conf
             - name: multipath-dir
               mountPath: /etc/multipath
+            - name: udev-dir
+              mountPath: /run/udev
         - name: liveness-probe
           image: {{.Values.nodeLivenessProbe.image.repository }}:{{ .Values.nodeLivenessProbe.image.tag }}
           args:
@@ -151,6 +153,9 @@ spec:
         - name: kernel-modules
           hostPath:
             path: /lib/modules
+        - name: udev-dir
+          hostPath:
+            path: /run/udev
         - name: init-node
           configMap:
             name: init-node
