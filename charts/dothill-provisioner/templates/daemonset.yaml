@@ -1,0 +1,162 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: dothill-node-server
+  labels:
+    app.kubernetes.io/version: {{ .Chart.Version }}
+    app.kubernetes.io/component: dynamic-provisionning-node
+{{ include "dothill.labels" . | indent 4 }}
+
+spec:
+  selector:
+    matchLabels:
+      name: dothill-node-server
+{{ include "dothill.labels" . | indent 6 }}
+  template:
+    metadata:
+      labels:
+        name: dothill-node-server
+{{ include "dothill.labels" . | indent 8 }}
+    spec:
+      {{ if .Values.pspAdmissionControllerEnabled }}serviceAccount: csi-node-registrar{{ end }}
+      hostNetwork: true
+      {{- if .Values.nodeServer.nodeAffinity }}
+      affinity:
+        nodeAffinity:
+{{ toYaml .Values.nodeServer.nodeAffinity | indent 10 }}
+      {{- end }}
+      {{- if .Values.nodeServer.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeServer.nodeSelector | indent 8 }}
+      {{- end }}
+      initContainers:
+        - name: init-iscsi
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          command:
+            - /usr/local/bin/init-node.sh
+          securityContext:
+            capabilities:
+              add:
+                - SYS_MODULE
+          volumeMounts:
+            - name: iscsi-dir
+              mountPath: /host/iscsi
+            - name: kernel-modules
+              mountPath: /lib/modules
+            - name: init-node
+              mountPath: /usr/local/bin/init-node.sh
+              subPath: init-node.sh
+      containers:
+        - name: dothill-node
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          command:
+            - dothill-node
+            - -kubeletpath={{ .Values.kubeletPath }}
+            - -bind=unix://{{ .Values.kubeletPath }}/plugins/dothill.csi.enix.io/csi.sock
+{{- include "dothill.extraArgs" .Values.node | indent 10 }}
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: device-dir
+              mountPath: /dev
+            - name: iscsi-dir
+              mountPath: /etc/iscsi
+            - name: plugin-dir
+              mountPath: {{ .Values.kubeletPath }}/plugins/dothill.csi.enix.io
+            - name: mountpoint-dir
+              mountPath: {{ .Values.kubeletPath }}/pods
+              mountPropagation: Bidirectional
+          ports:
+          - containerPort: 9808
+            name: healthz
+            protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: healthz
+            periodSeconds: 60
+        - name: iscsid
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          command:
+            - iscsid
+            - --foreground
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: device-dir
+              mountPath: /dev
+            - name: iscsi-dir
+              mountPath: /etc/iscsi
+            - name: plugin-dir
+              mountPath: {{ .Values.kubeletPath }}/plugins/dothill.csi.enix.io
+            - name: mountpoint-dir
+              mountPath: {{ .Values.kubeletPath }}/pods
+              mountPropagation: Bidirectional
+        - name: multipathd
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          command:
+            - multipathd
+            - -d
+            - -s
+{{- include "dothill.extraArgs" .Values.multipathd | indent 10 }}
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: device-dir
+              mountPath: /dev
+            - name: init-node
+              mountPath: /etc/multipath.conf
+              subPath: multipath.conf
+            - name: multipath-dir
+              mountPath: /etc/multipath
+            - name: udev-dir
+              mountPath: /run/udev
+        - name: liveness-probe
+          image: {{.Values.nodeLivenessProbe.image.repository }}:{{ .Values.nodeLivenessProbe.image.tag }}
+          args:
+            - --csi-address=/csi/csi.sock
+{{- include "dothill.extraArgs" .Values.nodeLivenessProbe | indent 10 }}
+          volumeMounts:
+            - name: plugin-dir
+              mountPath: /csi
+        - name: driver-registrar
+          image: {{ .Values.csiNodeRegistrar.image.repository }}:{{ .Values.csiNodeRegistrar.image.tag }}
+          args:
+            - --csi-address=/csi/csi.sock
+            - --kubelet-registration-path={{ .Values.kubeletPath }}/plugins/dothill.csi.enix.io/csi.sock
+{{- include "dothill.extraArgs" .Values.csiNodeRegistrar | indent 10 }}
+          volumeMounts:
+            - name: plugin-dir
+              mountPath: /csi
+            - name: registration-dir
+              mountPath: /registration
+      volumes:
+        - name: device-dir
+          hostPath:
+            path: /dev
+        - name: registration-dir
+          hostPath:
+            path: {{ .Values.kubeletPath }}/plugins_registry/
+        - name: iscsi-dir
+          hostPath:
+            path: /etc/iscsi
+        - name: multipath-dir
+          hostPath:
+            path: /etc/multipath
+        - name: mountpoint-dir
+          hostPath:
+            path: {{ .Values.kubeletPath }}/pods
+        - name: plugin-dir
+          hostPath:
+            path: {{ .Values.kubeletPath }}/plugins/dothill.csi.enix.io
+            type: DirectoryOrCreate
+        - name: kernel-modules
+          hostPath:
+            path: /lib/modules
+        - name: udev-dir
+          hostPath:
+            path: /run/udev
+        - name: init-node
+          configMap:
+            name: init-node
+            defaultMode: 0700
