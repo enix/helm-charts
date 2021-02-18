@@ -20,6 +20,10 @@ The following metrics are available:
 * `x509_cert_expired`
 * `x509_read_errors`
 
+Best when used with the [Grafana Dashboard](https://raw.githubusercontent.com/enix/x509-exporter/master/docs/grafana-dashboard.json):
+
+![Grafana Dashboard](https://raw.githubusercontent.com/enix/x509-exporter/master/docs/grafana-dashboard.jpg)
+
 ## 🏃 TL;DR
 
 It only takes two commands to install x509-exporter, however you should read the instructions in the next section to
