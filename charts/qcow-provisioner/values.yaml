@@ -9,6 +9,10 @@ ports:
   node: 22420
   ssh: 22421
 
+nbdArgs:
+  # WARNING: removing this flag will make the provisioner unstable
+  - --nocache
+
 image:
   repository: enix/qcow-provisioner
   # tag: master

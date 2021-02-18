@@ -35,6 +35,7 @@ spec:
             - -v={{ .Values.verbosity }}
             - -port={{ .Values.ports.node }}
             - -ssh-port={{ .Values.ports.ssh }}
+            - -nbd-args={{- join "," .Values.nbdArgs }}
           imagePullPolicy: Always
           securityContext:
             privileged: true
