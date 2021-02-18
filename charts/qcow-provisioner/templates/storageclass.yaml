@@ -1,9 +1,0 @@
-{{- range .Values.storageClasses -}}
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: {{ .name }}
-
-provisioner: qcow.csi.enix.io
----
-{{- end -}}
