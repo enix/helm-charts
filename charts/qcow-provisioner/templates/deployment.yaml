@@ -1,0 +1,75 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ .Release.Name }}-controller-server
+  labels:
+    enix.io/qcow-provisioner-role: controller
+    app.kubernetes.io/version: {{ .Chart.Version }}
+{{ include "qcow.labels" . | indent 4 }}
+
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-controller-server
+{{ include "qcow.labels" . | indent 6 }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-controller-server
+{{ include "qcow.labels" . | indent 8 }}
+    spec:
+      {{ if .Values.dev }}
+      nodeName: qcow-dev-1
+      {{ end }}
+      serviceAccount: {{ .Release.Name }}
+      {{ if .Values.image.pullSecret }}
+      imagePullSecrets:
+        - name: {{ .Values.image.pullSecret }}
+      {{ end }}
+      containers:
+        {{ if not .Values.dev }}
+        - name: {{ .Release.Name }}-controller
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          command:
+            - controller
+            - -bind=unix:///csi/csi.sock
+            - -kubelet-path={{ .Values.kubeletPath }}
+            - -v={{ .Values.verbosity }}
+            - -port={{ .Values.ports.node }}
+            - -ssh-port={{ .Values.ports.ssh }}
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+        {{ end }}
+        - name: csi-provisioner
+          image: {{ .Values.csiProvisioner.image.repository }}:{{ .Values.csiProvisioner.image.tag }}
+          args:
+            - --csi-address=/csi/csi.sock
+            - --leader-election
+            # - --worker-threads=1
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+        - name: csi-attacher
+          image: {{ .Values.csiAttacher.image.repository }}:{{ .Values.csiAttacher.image.tag }}
+          args:
+            - --csi-address=/csi/csi.sock
+            - --leader-election
+            # - --worker-threads=1
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+      volumes:
+        - name: socket-dir
+          {{ if .Values.dev }}
+          hostPath:
+            path: /home/ubuntu/controller-csi-socket
+          {{ else }}
+          emptyDir:
+          {{ end }}

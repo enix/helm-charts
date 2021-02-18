@@ -1,0 +1,15 @@
+apiVersion: v2
+name: qcow-provisioner
+version: 1.0.0-beta.1
+description: QCOW-powered relocatable local path provisioner for Kubernetes
+type: application
+keywords:
+  - storage
+  - plugin
+  - iscsi
+  - csi
+maintainers:
+  - name: Arthur Chaloin
+    email: arthur.chaloin@enix.fr
+appVersion: 1.0.0-beta.1
+deprecated: false
