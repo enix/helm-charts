@@ -1,6 +1,7 @@
 kube-router
 ===========
 
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/enix)](https://artifacthub.io/packages/search?repo=enix)
 <p align="center">
     <a href="https://opensource.org/licenses/Apache-2.0" alt="Apache 2.0 License">
         <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a>
@@ -106,7 +107,7 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## License
 
-Copyright (c) 2020 ENIX
+Copyright (c) 2021 ENIX
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
