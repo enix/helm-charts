@@ -244,6 +244,42 @@ entries:
     - https://github.com/enix/helm-charts/releases/download/dothill-provisioner-2.0.1/dothill-provisioner-2.0.1.tgz
     version: 2.0.1
   kube-router:
+  - annotations:
+      artifacthub.io/changes: |-
+        - fix(nrc): multiple services with the same VIP
+        - remove deprecated netpol beta API support
+        - Update golang.org/x/net dependency
+        - Update to golang 1.15 and alpine-3.12
+        - Update bgp.md
+        - Cleanup non-DSR externalIPs
+      artifacthub.io/images: |
+        - name: img1
+          image: cloudnativelabs/kube-router:v1.1.1
+    apiVersion: v2
+    appVersion: v1.1.1
+    created: "2021-02-18T10:30:07.777320666Z"
+    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    digest: 7ce67e72f3cf5bc914db8628005f4de1b5b621acb5d34a43347ab94fb114ff4c
+    home: https://www.kube-router.io/
+    icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: antoine@inaps.org
+      name: Antoine Millet
+      url: https://github.com/NaPs
+    - email: alexandre.buisine@enix.fr
+      name: Alexandre Buisine
+      url: https://github.com/abuisine
+    name: kube-router
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/kube-router
+    - https://github.com/cloudnativelabs/kube-router
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-router-1.2.0/kube-router-1.2.0.tgz
+    version: 1.2.0
   - apiVersion: v2
     appVersion: v1.1.0
     created: "2020-10-09T15:25:15.421602223Z"
