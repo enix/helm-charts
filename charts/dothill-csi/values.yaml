@@ -1,4 +1,4 @@
-# Default values for kube-router.
+# Default values for dothill-csi.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -9,7 +9,7 @@ pspAdmissionControllerEnabled: false
 
 image:
   # -- Docker repository to use for nodes and controller
-  repository: docker.io/enix/dothill-provisioner
+  repository: docker.io/enix/dothill-csi
   # -- Tag to use for nodes and controller
   # @default -- The chart will use the appVersion value by default if not given.
   tag: ""
@@ -37,7 +37,7 @@ csiAttacher:
 # -- Controller sidecar for volume expansion
 csiResizer:
   image:
-    repository: gcr.io/k8s-staging-sig-storage/csi-resizer
+    repository: k8s.gcr.io/sig-storage/csi-resizer
     tag: v1.1.0
   # -- Extra arguments for csi-resizer controller sidecar
   extraArgs: []

@@ -1,28 +1,30 @@
-# dothill-provisioner
+# dothill-csi
 
-![Version: 2.4.1](https://img.shields.io/badge/Version-2.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.4.1](https://img.shields.io/badge/AppVersion-v2.4.1-informational?style=flat-square)
+![Version: 3.0.0](https://img.shields.io/badge/Version-3.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v3.0.0](https://img.shields.io/badge/AppVersion-v3.0.0-informational?style=flat-square)
 
 Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin).
+
+**Homepage:** <https://charts.enix.io/>
 
 ## 📜 Using the Chart
 
 ### Installing the Chart
 
-Create a file named `dothill-provisioner.values.yaml` with your values, with the help of [Chart Values](#values).
+Create a file named `dothill-csi.values.yaml` with your values, with the help of [Chart Values](#values).
 
 Add our Charts repository:
 ```
 $ helm repo add enix https://charts.enix.io
 ```
 
-Install the dothill-provisioner with release name `dothill-provisioner` in the `dothill-system` namespace:
+Install the dothill-csi with release name `dothill-csi` in the `dothill-system` namespace:
 ```
-$ helm install -n dothill-system dothill-provisioner enix/dothill-provisioner --values dothill-provisioner.values.yaml
+$ helm install -n dothill-system dothill-csi enix/dothill-csi --values dothill-csi.values.yaml
 ```
 
 The `upgrade` command is used to change configuration when values are modified:
 ```
-$ helm upgrade -n dothill-system dothill-provisioner enix/dothill-provisioner --values dothill-provisioner.values.yaml
+$ helm upgrade -n dothill-system dothill-csi enix/dothill-csi --values dothill-csi.values.yaml
 ```
 
 ### Upgrading the Chart
@@ -32,57 +34,25 @@ Update Helm repositories:
 $ helm repo update
 ```
 
-Upgrade release names `dothill-provisioner` to the latest version:
+Upgrade release names `dothill-csi` to the latest version:
 ```
-$ helm upgrade dothill-provisioner enix/dothill-provisioner
+$ helm upgrade dothill-csi enix/dothill-csi
 ```
 
 ### Creating a storage class
 
-In order to dynamically provision persistants volumes, you first need to create a storage class:
-
-```yaml
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-provisioner: dothill.csi.enix.io # Required for the plugin to recognize this storage class as handled by itself.
-volumeBindingMode: WaitForFirstConsumer # Prefer this value to avoid unschedulable pods (https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode)
-metadata:
-  name: my-marvelous-storage # Choose the name that fits the best with your StorageClass.
-parameters:
-  # Secrets name and namespace, they can be the same for provisioner, controller-publish and controller-expand sections.
-  csi.storage.k8s.io/provisioner-secret-name: dothill-api
-  csi.storage.k8s.io/provisioner-secret-namespace: dothill-system
-  csi.storage.k8s.io/controller-publish-secret-name: dothill-api
-  csi.storage.k8s.io/controller-publish-secret-namespace: dothill-system
-  csi.storage.k8s.io/controller-expand-secret-name: dothill-api
-  csi.storage.k8s.io/controller-expand-secret-namespace: dothill-system
-  fsType: ext4 # Desired filesystem
-  iqn: iqn.2015-11.com.hpe:storage.msa2050.2002518b4c # Appliance IQN
-  pool: A # Pool to use on the IQN to provision volumes
-  portals: 10.0.0.24,10.0.0.25 # Comma separated list of portal ips. (One per controller should be enough).
-```
-
-And the associated secret:
-
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: dothill-api
-  namespace: dothill-system
-type: Opaque
-data:
-  apiAddress: aHR0cHM6Ly8xMC4wLjAuNDI= # base64 encoded api address
-  username: am9obi5kb2U= # base64 encoded username
-  password: bXktU0BmZStwYXNzdzByZCE= # base64 encoded password
-```
+In order to dynamically provision persistants volumes, you first need to create a storage class. To do so, please refer to the project [documentation](https://github.com/enix/dothill-csi).
 
 ## Maintainers
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Paul Laffitte | paul.laffitte@enix.fr | https://blog.paullaffitte.com |
+| Paul Laffitte | paul.laffitte@enix.fr | https://blog.plaffitt.com |
 | Arthur Chaloin | arthur.chaloin@enix.fr |  |
+
+## Source Code
+
+* <https://github.com/enix/dothill-csi>
 
 ## Values
 
@@ -97,9 +67,9 @@ data:
 | csiProvisioner | object | `{"extraArgs":[],"image":{"repository":"k8s.gcr.io/sig-storage/csi-provisioner","tag":"v2.1.0"},"timeout":"30s"}` | Controller sidecar for provisionning |
 | csiProvisioner.extraArgs | list | `[]` | Extra arguments for csi-provisioner controller sidecar |
 | csiProvisioner.timeout | string | `"30s"` | Timeout for gRPC calls from the csi-provisioner to the controller |
-| csiResizer | object | `{"extraArgs":[],"image":{"repository":"gcr.io/k8s-staging-sig-storage/csi-resizer","tag":"v1.1.0"}}` | Controller sidecar for volume expansion |
+| csiResizer | object | `{"extraArgs":[],"image":{"repository":"k8s.gcr.io/sig-storage/csi-resizer","tag":"v1.1.0"}}` | Controller sidecar for volume expansion |
 | csiResizer.extraArgs | list | `[]` | Extra arguments for csi-resizer controller sidecar |
-| image.repository | string | `"docker.io/enix/dothill-provisioner"` | Docker repository to use for nodes and controller |
+| image.repository | string | `"docker.io/enix/dothill-csi"` | Docker repository to use for nodes and controller |
 | image.tag | string | The chart will use the appVersion value by default if not given. | Tag to use for nodes and controller |
 | kubeletPath | string | `"/var/lib/kubelet"` | Path to kubelet |
 | multipathd.extraArgs | list | `[]` | Extra arguments for multipathd containers |
