@@ -1,3 +1,7 @@
+# Deprecated Package
+
+➡️ **Upstream project was renamed, please install or upgrade to [enix/x509-certificate-exporter](https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter)**
+
 # 🔏 X.509 Exporter
 
 <p align="center">
