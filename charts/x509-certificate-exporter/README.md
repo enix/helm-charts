@@ -24,27 +24,27 @@ The following metrics are available:
 * `x509_cert_expired`
 * `x509_read_errors`
 
-Best when used with the [Grafana Dashboard](https://raw.githubusercontent.com/enix/x509-exporter/master/docs/grafana-dashboard.json):
+Best when used with the [Grafana Dashboard](https://raw.githubusercontent.com/enix/x509-certificate-exporter/master/docs/grafana-dashboard.json):
 
-![Grafana Dashboard](https://raw.githubusercontent.com/enix/x509-exporter/master/docs/grafana-dashboard.jpg)
+![Grafana Dashboard](https://raw.githubusercontent.com/enix/x509-certificate-exporter/master/docs/grafana-dashboard.jpg)
 
 ## 🏃 TL;DR
 
-It only takes two commands to install x509-exporter, however you should read the instructions in the next section to
+It only takes two commands to install x509-certificate-exporter, however you should read the instructions in the next section to
 take advantage of all the features!
 
 Add our Charts repository :
 ```
 $ helm repo add enix https://charts.enix.io
 ```
-Install x509-exporter for TLS Secrets monitoring with prometheus-operator support :
+Install x509-certificate-exporter for TLS Secrets monitoring with prometheus-operator support :
 ```
-$ helm install x509-exporter enix/x509-exporter
+$ helm install x509-certificate-exporter enix/x509-certificate-exporter
 ```
 
 To remove built-in Prometheus alerts if you'd rather craft your own :
 ```
-$ helm upgrade x509-exporter enix/x509-exporter --reuse-values --set prometheusRules.create=false
+$ helm upgrade x509-certificate-exporter enix/x509-certificate-exporter --reuse-values --set prometheusRules.create=false
 ```
 
 If you don't use the Prometheus operator at all, and don't have the CRD, disable resource creation and perhaps add Pod
@@ -86,7 +86,7 @@ critical to the operation of a cluster and its health should be monitored carefu
 are a common source of outages, and depending on your distribution could happen a few months after installation if left
 unattended.
 
-This Chart provides a facility to deploy `DaemonSets` so that each node of a cluster can run its own x509-exporter
+This Chart provides a facility to deploy `DaemonSets` so that each node of a cluster can run its own x509-certificate-exporter
 and export metrics for host files :
 * `etcd` server and client certificates
 * Kubernetes CA
@@ -101,7 +101,7 @@ Obviously it also works with any other application deployed on cluster nodes as 
 that we could recommend, or even a decent boilerplate. Examples below should give an idea of what to look after.
 
 > 🏙️ While having a single DaemonSet sounds like a fair option, it is not uncommon for nodes to assume different roles,
-and as a result hold different sets of certificate files requiring targeted x509-exporter configurations.
+and as a result hold different sets of certificate files requiring targeted x509-certificate-exporter configurations.
 For example, with the help of node selectors and tolerations, we can have nodes of the control plane run their own
 exporter targeting API and etcd certificates, while regular nodes would have a simpler configuration for Kubelet alone.
 
@@ -230,7 +230,7 @@ working with files that can change path over time and on cluster upgrades.
 
 ### Installing the Chart
 
-Create a file named `x509-exporter.values.yaml` with your values, as discussed previously and with the help of
+Create a file named `x509-certificate-exporter.values.yaml` with your values, as discussed previously and with the help of
 [Chart Values](#values).
 
 Add our Charts repository :
@@ -238,14 +238,14 @@ Add our Charts repository :
 $ helm repo add enix https://charts.enix.io
 ```
 
-Install the x509-exporter with release name `x509-exporter` :
+Install the x509-certificate-exporter with release name `x509-certificate-exporter` :
 ```
-$ helm install x509-exporter enix/x509-exporter --values x509-exporter.values.yaml
+$ helm install x509-certificate-exporter enix/x509-certificate-exporter --values x509-certificate-exporter.values.yaml
 ```
 
 The `upgrade` command is used to change configuration when values are modified :
 ```
-$ helm upgrade x509-exporter enix/x509-exporter --values x509-exporter.values.yaml
+$ helm upgrade x509-certificate-exporter enix/x509-certificate-exporter --values x509-certificate-exporter.values.yaml
 ```
 
 ### Upgrading the Chart
@@ -255,9 +255,9 @@ Update Helm repositories :
 $ helm repo update
 ```
 
-Upgrade release names `x509-exporter` to the latest version :
+Upgrade release names `x509-certificate-exporter` to the latest version :
 ```
-$ helm upgrade x509-exporter enix/x509-exporter
+$ helm upgrade x509-certificate-exporter enix/x509-certificate-exporter
 ```
 
 ## Values
@@ -265,7 +265,7 @@ $ helm upgrade x509-exporter enix/x509-exporter
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | extraLabels | object | `{}` |  |
-| fullnameOverride | string | `""` | String to fully override x509-exporter.fullname template with a string |
+| fullnameOverride | string | `""` | String to fully override x509-certificate-exporter.fullname template with a string |
 | hostPathsExporter.affinity | object | `{}` | Affinity for Pods of hostPath exporters (default for all hostPathsExporter.daemonSets) |
 | hostPathsExporter.daemonSets | object | `{}` | [SEE README] Map to define one or many DaemonSets running hostPath exporters. Key is used as a name ; value is a map to override all default settings set by `hostPathsExporter.*`. |
 | hostPathsExporter.debugMode | bool | `false` | Should debug messages be produced by hostPath exporters (default for all hostPathsExporter.daemonSets) |
@@ -281,12 +281,12 @@ $ helm upgrade x509-exporter enix/x509-exporter
 | hostPathsExporter.watchDirectories | list | `[]` | [SEE README] List of directory paths of the host to scan for PEM encoded certificate files to be watched and exported as metrics (one level deep) |
 | hostPathsExporter.watchFiles | list | `[]` | [SEE README] List of file paths of the host for PEM encoded certificates to be watched and exported as metrics (one level deep) |
 | hostPathsExporter.watchKubeconfFiles | list | `[]` | [SEE README] List of Kubeconf file paths of the host to scan for embedded certificates to export metrics about |
-| image.pullPolicy | string | `"IfNotPresent"` | x509-exporter image pull policy |
-| image.registry | string | `"docker.io"` | x509-exporter image registry |
-| image.repository | string | `"enix/x509-exporter"` | x509-exporter image repository |
-| image.tag | string | `nil` | x509-exporter image tag (defaults to Chart appVersion) |
+| image.pullPolicy | string | `"IfNotPresent"` | x509-certificate-exporter image pull policy |
+| image.registry | string | `"docker.io"` | x509-certificate-exporter image registry |
+| image.repository | string | `"enix/x509-certificate-exporter"` | x509-certificate-exporter image repository |
+| image.tag | string | `nil` | x509-certificate-exporter image tag (defaults to Chart appVersion) |
 | imagePullSecrets | list | `[]` | Specify docker-registry secret names as an array |
-| nameOverride | string | `""` | String to partially override x509-exporter.fullname template with a string (will prepend the release name) |
+| nameOverride | string | `""` | String to partially override x509-certificate-exporter.fullname template with a string (will prepend the release name) |
 | podAnnotations | object | `{}` | Annotations added to all Pods |
 | podExtraLabels | object | `{}` | Extra labels added to all Pods |
 | podListenPort | int | `9090` | TCP port to expose Pods on (whether kube-rbac-proxy is enabled or not) |
