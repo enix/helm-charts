@@ -20,14 +20,3 @@ maintainers:
   - name: Alexandre Buisine
     email: alexandre.buisine@enix.fr
     url: https://github.com/abuisine
-annotations:
-  artifacthub.io/images: |
-    - name: kube-router
-      image: cloudnativelabs/kube-router:v1.1.1
-  artifacthub.io/changes: |
-    - fix(nrc) multiple services with the same VIP
-    - remove deprecated netpol beta API support
-    - Update golang.org/x/net dependency
-    - Update to golang 1.15 and alpine-3.12
-    - Update bgp.md
-    - Cleanup non-DSR externalIPs
