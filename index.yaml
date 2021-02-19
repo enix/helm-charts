@@ -11,6 +11,31 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/configmap2http-3737/configmap2http-3737.tgz
     version: "3737"
+  dothill-csi:
+  - apiVersion: v2
+    appVersion: v3.0.0
+    created: "2021-02-19T11:18:10.639869182Z"
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin).
+    digest: 8508620a03ef85caef4b05bc07ad467fb948fe65f8571cd52b11897cd43c9e81
+    home: https://charts.enix.io/
+    keywords:
+    - storage
+    - iscsi
+    - plugin
+    - csi
+    maintainers:
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+      url: https://blog.plaffitt.com
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: dothill-csi
+    sources:
+    - https://github.com/enix/dothill-csi
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/dothill-csi-3.0.0/dothill-csi-3.0.0.tgz
+    version: 3.0.0
   dothill-provisioner:
   - apiVersion: v2
     appVersion: v2.4.1
