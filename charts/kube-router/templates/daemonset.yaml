@@ -188,6 +188,12 @@ spec:
         - name: xtables-lock
           mountPath: /run/xtables.lock
           readOnly: false
+        {{- if not (kindIs "invalid" .Values.kubeRouter.metrics.port) }}
+        ports:
+        - containerPort: .Values.kubeRouter.metrics.port
+          name: metrics
+          protocol: TCP
+        {{- end }}
       initContainers:
       {{- if .Values.kubeRouter.cni.install }}
       - name: install-cni

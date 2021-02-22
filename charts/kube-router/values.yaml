@@ -208,6 +208,10 @@ kubeRouter:
     # kubeRouter.serviceProxy.excludedCidrs -- Excluded CIDRs are used to exclude IPVS rules from deletion
     excludedCidrs:
 
+podMonitor:
+  # podMonitor.enabled -- Set a Prometheus operator PodMonitor ressource (true or false)
+  enabled: false
+
 # resources -- CPU/Memory resource requests/limits
 resources:
   requests:
