@@ -190,7 +190,7 @@ spec:
           readOnly: false
         {{- if not (kindIs "invalid" .Values.kubeRouter.metrics.port) }}
         ports:
-        - containerPort: .Values.kubeRouter.metrics.port
+        - containerPort: {{ .Values.kubeRouter.metrics.port }}
           name: metrics
           protocol: TCP
         {{- end }}
