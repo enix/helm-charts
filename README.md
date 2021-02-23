@@ -23,9 +23,8 @@ $ helm install my-release enix/<chart>
 
 The following helm charts are maintained :
 * [dothill-csi](https://github.com/enix/helm-charts/tree/master/charts/dothill-csi)
-* [x509-exporter](https://github.com/enix/helm-charts/tree/master/charts/x509-exporter)
+* [x509-certificate-exporter](https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter)
 * [kube-router](https://github.com/enix/helm-charts/tree/master/charts/kube-router)
-* [netbox](https://github.com/enix/helm-charts/tree/master/charts/netbox)
 
 Please refer to each individual documentation !
 
