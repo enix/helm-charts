@@ -992,6 +992,24 @@ entries:
     version: 0.1.1
   qcow-provisioner:
   - apiVersion: v2
+    appVersion: 1.0.0-beta.3
+    created: "2021-02-25T17:34:44.065732588Z"
+    description: QCOW-powered relocatable local path provisioner for Kubernetes
+    digest: 4c60569d22dd1806223874c45a7f0784c72a8c6bde56f7b3e4e892926caa38e7
+    keywords:
+    - storage
+    - plugin
+    - iscsi
+    - csi
+    maintainers:
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: qcow-provisioner
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/qcow-provisioner-1.0.0-beta.3/qcow-provisioner-1.0.0-beta.3.tgz
+    version: 1.0.0-beta.3
+  - apiVersion: v2
     appVersion: 1.0.0-beta.2
     created: "2021-02-18T18:05:33.85911519Z"
     description: QCOW-powered relocatable local path provisioner for Kubernetes
