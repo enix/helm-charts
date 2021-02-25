@@ -10,8 +10,9 @@ ports:
   ssh: 22421
 
 nbdArgs:
-  # WARNING: removing this flag will make the provisioner unstable
-  - --nocache
+  - --cache=none
+  - --discard=unmap
+  - --aio=native
 
 image:
   repository: enix/qcow-provisioner
