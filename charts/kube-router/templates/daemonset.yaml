@@ -219,6 +219,7 @@ spec:
         - name: cni-bin-dir
           mountPath: /cni-bin
       {{- end }}
+      {{- if or (kindIs "invalid" .Values.kubeRouter.enableCni) .Values.kubeRouter.enableCni }}
       - name: configure-cni
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: Always
@@ -239,6 +240,7 @@ spec:
           name: cni-conf-dir
         - mountPath: /etc/kube-router
           name: kube-router-cfg
+      {{- end }}
       hostNetwork: true
     {{- with .Values.nodeSelector }}
       nodeSelector:
