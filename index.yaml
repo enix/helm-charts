@@ -12,6 +12,39 @@ entries:
     - https://github.com/enix/helm-charts/releases/download/configmap2http-3737/configmap2http-3737.tgz
     version: "3737"
   dothill-csi:
+  - annotations:
+      artifacthub.io/images: |
+        - name: dothill-csi
+          image: enix/dothill-csi:v3.0.1
+    apiVersion: v2
+    appVersion: v3.0.1
+    created: "2021-03-02T11:08:56.427654788Z"
+    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
+    digest: 4eed1cf0856f21c8f5741e5aa52e7f360aff8662f2775af3747d19a2a08eb0e2
+    home: https://github.com/enix/dothill-csi
+    keywords:
+    - storage
+    - iscsi
+    - plugin
+    - csi
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+      url: https://blog.plaffitt.com
+    - email: alexandre.buisine@enix.fr
+      name: Alexandre Buisine
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: dothill-csi
+    sources:
+    - https://github.com/enix/dothill-csi/tree/main/helm/dothill-csi
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/dothill-csi-3.0.1/dothill-csi-3.0.1.tgz
+    version: 3.0.1
   - apiVersion: v2
     appVersion: v3.0.0
     created: "2021-02-19T11:18:10.639869182Z"
