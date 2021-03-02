@@ -1,21 +1,29 @@
 apiVersion: v2
 name: dothill-csi
-version: 3.0.0
-description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin).
+version: 3.0.1
+appVersion: v3.0.1
+description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
 type: application
-home: https://charts.enix.io/
-sources: 
-  - https://github.com/enix/dothill-csi
+home: https://github.com/enix/dothill-csi
+sources:
+  - https://github.com/enix/dothill-csi/tree/main/helm/dothill-csi
 keywords:
   - storage
   - iscsi
   - plugin
   - csi
 maintainers:
+  - name: Enix
+    email: contact@enix.fr
+    url: https://github.com/enixsas
   - name: Paul Laffitte
     email: paul.laffitte@enix.fr
     url: https://blog.plaffitt.com
+  - name: Alexandre Buisine
+    email: alexandre.buisine@enix.fr
   - name: Arthur Chaloin
     email: arthur.chaloin@enix.fr
-appVersion: v3.0.0
-deprecated: false
+annotations:
+  artifacthub.io/images: |
+    - name: dothill-csi
+      image: enix/dothill-csi:v3.0.1

@@ -1,14 +1,25 @@
 # dothill-csi
 
-![Version: 3.0.0](https://img.shields.io/badge/Version-3.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v3.0.0](https://img.shields.io/badge/AppVersion-v3.0.0-informational?style=flat-square)
+A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
 
-Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin).
+![Version: 3.0.1](https://img.shields.io/badge/Version-3.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v3.0.1](https://img.shields.io/badge/AppVersion-v3.0.1-informational?style=flat-square)
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/enix)](https://artifacthub.io/packages/search?repo=enix)
 
-**Homepage:** <https://charts.enix.io/>
+# Introduction
+As of version `3.0.0`, this `csi` driver and its helm chart are released as open-source projects under the MIT license.
 
-## 📜 Using the Chart
+Your contribution is obviously most welcomed !
 
-### Installing the Chart
+**Homepage:** <https://github.com/enix/dothill-csi>
+
+## This helm chart
+Is part of the project and is published on [Enix](https://enix.io)'s charts repository.
+
+## Source Code
+
+* <https://github.com/enix/dothill-csi/tree/main/helm/dothill-csi>
+
+# Installing the Chart
 
 Create a file named `dothill-csi.values.yaml` with your values, with the help of [Chart Values](#values).
 
@@ -27,7 +38,7 @@ The `upgrade` command is used to change configuration when values are modified:
 $ helm upgrade -n dothill-system dothill-csi enix/dothill-csi --values dothill-csi.values.yaml
 ```
 
-### Upgrading the Chart
+# Upgrading the Chart
 
 Update Helm repositories:
 ```
@@ -39,7 +50,7 @@ Upgrade release names `dothill-csi` to the latest version:
 $ helm upgrade dothill-csi enix/dothill-csi
 ```
 
-### Creating a storage class
+# Creating a storage class
 
 In order to dynamically provision persistants volumes, you first need to create a storage class. To do so, please refer to the project [documentation](https://github.com/enix/dothill-csi).
 
@@ -47,12 +58,10 @@ In order to dynamically provision persistants volumes, you first need to create 
 
 | Name | Email | Url |
 | ---- | ------ | --- |
+| Enix | contact@enix.fr | https://github.com/enixsas |
 | Paul Laffitte | paul.laffitte@enix.fr | https://blog.plaffitt.com |
+| Alexandre Buisine | alexandre.buisine@enix.fr |  |
 | Arthur Chaloin | arthur.chaloin@enix.fr |  |
-
-## Source Code
-
-* <https://github.com/enix/dothill-csi>
 
 ## Values
 
