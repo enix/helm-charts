@@ -1160,6 +1160,43 @@ entries:
       artifacthub.io/license: MIT
     apiVersion: v2
     appVersion: 2.6.1
+    created: "2021-03-04T18:21:48.081784911Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 5062db1777ea2b6cf77681eb34aee8ff4cf5dd2656bf7c993d91c7d2453b7d56
+    home: https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@paraneko.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+    - https://github.com/enix/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-1.8.0/x509-certificate-exporter-1.8.0.tgz
+    version: 1.8.0
+  - annotations:
+      artifacthub.io/images: |
+        - name: x509-certificate-exporter
+          image: enix/x509-certificate-exporter:2.6.1
+        - name: kube-rbac-proxy
+          image: quay.io/coreos/kube-rbac-proxy:v0.5.0
+          whitelisted: true
+      artifacthub.io/license: MIT
+    apiVersion: v2
+    appVersion: 2.6.1
     created: "2021-03-02T15:43:48.321615836Z"
     description: A Prometheus exporter for certificates focusing on expiration monitoring
     digest: cbeec969e4f7219efb1d04e18b6ee4ca5d63b96dcba574c636a52c758a05eaf8
