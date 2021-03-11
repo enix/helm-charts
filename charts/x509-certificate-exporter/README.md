@@ -121,15 +121,22 @@ control plane dedicated nodes :
 hostPathsExporter:
   daemonSets:
     nodes:
-      watchDirectories:
-      - /etc/kubernetes/pki/
-      - /etc/kubernetes/pki/etcd/
       watchFiles:
       - /var/lib/kubelet/pki/kubelet-client-current.pem
-      - /var/lib/kubelet/pki/kubelet.crt
+      - /etc/kubernetes/pki/apiserver.crt
+      - /etc/kubernetes/pki/apiserver-etcd-client.crt
+      - /etc/kubernetes/pki/apiserver-kubelet-client.crt
+      - /etc/kubernetes/pki/ca.crt
+      - /etc/kubernetes/pki/front-proxy-ca.crt
+      - /etc/kubernetes/pki/front-proxy-client.crt
+      - /etc/kubernetes/pki/etcd/ca.crt
+      - /etc/kubernetes/pki/etcd/healthcheck-client.crt
+      - /etc/kubernetes/pki/etcd/peer.crt
+      - /etc/kubernetes/pki/etcd/server.crt
       watchKubeconfFiles:
-      - /etc/kubernetes/kubelet.conf
       - /etc/kubernetes/admin.conf
+      - /etc/kubernetes/controller-manager.conf
+      - /etc/kubernetes/scheduler.conf
 ```
 
 Dedicated nodes will require other DaemonSets. Based on our kubeadm example, it could be extended like this :
@@ -147,28 +154,31 @@ hostPathsExporter:
       - effect: NoSchedule
         key: node-role.kubernetes.io/master
         operator: Exists
-      watchDirectories:
-      - /etc/kubernetes/pki/
-      - /etc/kubernetes/pki/etcd/
       watchFiles:
       - /var/lib/kubelet/pki/kubelet-client-current.pem
-      - /var/lib/kubelet/pki/kubelet.crt
+      - /etc/kubernetes/pki/apiserver.crt
+      - /etc/kubernetes/pki/apiserver-etcd-client.crt
+      - /etc/kubernetes/pki/apiserver-kubelet-client.crt
+      - /etc/kubernetes/pki/ca.crt
+      - /etc/kubernetes/pki/front-proxy-ca.crt
+      - /etc/kubernetes/pki/front-proxy-client.crt
+      - /etc/kubernetes/pki/etcd/ca.crt
+      - /etc/kubernetes/pki/etcd/healthcheck-client.crt
+      - /etc/kubernetes/pki/etcd/peer.crt
+      - /etc/kubernetes/pki/etcd/server.crt
       watchKubeconfFiles:
-      - /etc/kubernetes/kubelet.conf
       - /etc/kubernetes/admin.conf
+      - /etc/kubernetes/controller-manager.conf
+      - /etc/kubernetes/scheduler.conf
 
     nodes:
       tolerations:
       - effect: NoSchedule
         key: node-role.kubernetes.io/ingress
         operator: Exists
-      watchDirectories:
-      - /etc/kubernetes/pki/
       watchFiles:
       - /var/lib/kubelet/pki/kubelet-client-current.pem
-      - /var/lib/kubelet/pki/kubelet.crt
-      watchKubeconfFiles:
-      - /etc/kubernetes/kubelet.conf
+      - /etc/kubernetes/pki/ca.crt
 ```
 
 With this last configuration we demonstrated :
@@ -360,6 +370,7 @@ in the container namespace.
 | secretsExporter.replicas | int | `1` | Desired number of TLS Secrets exporter Pod |
 | secretsExporter.resources | object | see values.yaml | ResourceRequirements for containers of the TLS Secrets exporter |
 | secretsExporter.restartPolicy | string | `"Always"` | restartPolicy for Pods of the TLS Secrets exporter |
+| secretsExporter.secretTypes | list | `[{"key":"tls.crt","type":"kubernetes.io/tls"}]` | Choose which type of secrets should be watched. Key is the map key in the secret data. |
 | secretsExporter.securityContext | object | see values.yaml | SecurityContext for containers of the TLS Secrets exporter |
 | secretsExporter.strategy | object | `{}` | DeploymentStrategy for the TLS Secrets exporter |
 | secretsExporter.tolerations | list | `[]` | Toleration for Pods of the TLS Secrets exporter |
