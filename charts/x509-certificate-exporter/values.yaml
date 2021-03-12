@@ -26,6 +26,8 @@ image:
 rbac:
   # -- Should RBAC resources be created
   create: true
+  # -- Should Pod Security Policy resources be created
+  pspEnabled: false
 
   secretsExporter:
     # -- Name of the ServiceAccount for the Secrets exporter (required if `rbac.create=false`)
