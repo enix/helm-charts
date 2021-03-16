@@ -61,6 +61,8 @@ spec:
               mountPath: /dev
             - name: iscsi-dir
               mountPath: /etc/iscsi
+            - name: udev-dir
+              mountPath: /run/udev
             - name: plugin-dir
               mountPath: {{ .Values.kubeletPath }}/plugins/dothill.csi.enix.io
             - name: mountpoint-dir
