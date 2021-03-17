@@ -1206,6 +1206,61 @@ entries:
     version: 0.1.0
   x509-certificate-exporter:
   - annotations:
+      artifacthub.io/changes: |
+        - Added support for PodSecurityPolicies
+        - Fixed insufficient memory limit for Secrets exporter
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/images: |
+        - name: x509-certificate-exporter
+          image: enix/x509-certificate-exporter:2.8.0
+        - name: kube-rbac-proxy
+          image: quay.io/coreos/kube-rbac-proxy:v0.5.0
+          whitelisted: true
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+        - name: Commercial Support
+          url: https://enix.io
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    appVersion: 2.8.0
+    created: "2021-03-17T15:53:23.889903119Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 42783f4eb1fca2268ae69d68c61a7cfb35925c5be31972028cd18f6b3ceb766a
+    home: https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@paraneko.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+    - https://github.com/enix/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-1.11.0/x509-certificate-exporter-1.11.0.tgz
+    version: 1.11.0
+  - annotations:
       artifacthub.io/images: |
         - name: x509-certificate-exporter
           image: enix/x509-certificate-exporter:2.8.0
