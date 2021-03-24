@@ -97,11 +97,13 @@ The command removes all the Kubernetes components associated with the chart and 
 | kubeRouter.serviceProxy.ipvsSyncPeriod | string | `nil` | The delay between ipvs config synchronizations (e.g. '5s', '1m', '2h22m'). Must be greater than 0 |
 | kubeRouter.serviceProxy.masqueradeAll | string | `nil` | SNAT all traffic to cluster IP/node port (true or false) |
 | kubeRouter.serviceProxy.nodeportBindonAllIp | string | `nil` | For service of NodePort type create IPVS service that listens on all IP's of the node (true or false) |
+| kubeRouter.serviceProxy.runtimeEndpoint | string | `nil` | Path to CRI compatible container runtime socket (used for DSR mode). |
 | livenessProbe | object | `{"httpGet":{"path":"/healthz","port":20244},"initialDelaySeconds":10,"periodSeconds":3}` | Liveness probe for the kube-router workload |
 | nameOverride | string | `""` | String to partially override kube-router.fullname template with a string (will prepend the release name) |
 | nodeSelector | object | `{}` | Kube-Router labels for pod assignment |
+| podMonitor.enabled | bool | `false` | Set a Prometheus operator PodMonitor ressource (true or false) |
 | readinessProbe | object | `{"exec":{"command":["sh","-c","neighbors=\"$(/usr/local/bin/gobgp neighbor 2>/dev/null | tail -n +2)\"; test $(echo \"$neighbors\" | wc -l) -ge 1; test $(echo \"$neighbors\" | grep -v ' Establ ' | wc -l) -eq 0"]},"initialDelaySeconds":5,"periodSeconds":3}` | Readiness probe for the kube-router workload |
-| resources | object | `{"requests":{"cpu":"250m","memory":"250Mi"}}` | CPU/Memory resource requests/limits |
+| resources | object | `{"limits":{"cpu":"250m","memory":"250Mi"},"requests":{"cpu":"250m","memory":"250Mi"}}` | CPU/Memory resource requests/limits |
 | tolerations | list | `[{"key":"CriticalAddonsOnly","operator":"Exists"},{"effect":"NoSchedule","key":"node-role.kubernetes.io/master","operator":"Exists"},{"effect":"NoSchedule","key":"node.kubernetes.io/not-ready","operator":"Exists"},{"effect":"NoSchedule","key":"node-role.kubernetes.io/controlplane","operator":"Exists"},{"effect":"NoExecute","key":"node-role.kubernetes.io/etcd","operator":"Exists"}]` | Kube-Router labels for tolerations pod assignment |
 | updateStrategy | object | `{"rollingUpdate":{"maxUnavailable":1},"type":"RollingUpdate"}` | Update strategy to use when upgrading workload |
 
