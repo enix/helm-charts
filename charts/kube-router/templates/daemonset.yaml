@@ -153,6 +153,9 @@ spec:
         {{- if not (kindIs "invalid" .excludedCidrs) }}
         - "--excluded-cidrs={{ .excludedCidrs }}"
         {{- end }}
+        {{- if not (kindIs "invalid" .runtimeEndpoint) }}
+        - "--runtime-endpoint={{ .runtimeEndpoint }}"
+        {{- end }}
         {{- else}}
         - "--run-service-proxy=false"
         {{- end }}
