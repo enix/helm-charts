@@ -208,6 +208,9 @@ kubeRouter:
     # kubeRouter.serviceProxy.excludedCidrs -- Excluded CIDRs are used to exclude IPVS rules from deletion
     excludedCidrs:
 
+    # kubeRouter.serviceProxy.runtimeEndpoint -- Path to CRI compatible container runtime socket (used for DSR mode).
+    runtimeEndpoint:
+
 podMonitor:
   # podMonitor.enabled -- Set a Prometheus operator PodMonitor ressource (true or false)
   enabled: false
