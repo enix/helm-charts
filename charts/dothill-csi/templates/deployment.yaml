@@ -32,6 +32,10 @@ spec:
           volumeMounts:
             - name: socket-dir
               mountPath: /csi
+          ports:
+            - containerPort: 9842
+              name: metrics
+              protocol: TCP
         - name: csi-provisioner
           image: {{ .Values.csiProvisioner.image.repository }}:{{ .Values.csiProvisioner.image.tag }}
           args:
@@ -58,6 +62,16 @@ spec:
           image: {{ .Values.csiResizer.image.repository }}:{{ .Values.csiResizer.image.tag }}
           args:
             - --csi-address=/csi/csi.sock
+{{- include "dothill.extraArgs" .Values.csiResizer | indent 10 }}
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+        - name: csi-snapshotter
+          image: {{ .Values.csiSnapshotter.image.repository }}:{{ .Values.csiSnapshotter.image.tag }}
+          args:
+            - --csi-address=/csi/csi.sock
+{{- include "dothill.extraArgs" .Values.csiSnapshotter | indent 10 }}
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: socket-dir

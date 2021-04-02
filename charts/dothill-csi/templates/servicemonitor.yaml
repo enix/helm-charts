@@ -1,0 +1,31 @@
+{{- if .Values.serviceMonitor.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: dothill-controller-metrics
+  labels:
+    name: dothill-controller-metrics
+{{ include "dothill.labels" . | indent 4 }}
+spec:
+  ports:
+  - name: metrics
+    port: 9842
+    targetPort: metrics
+    protocol: TCP
+  selector:
+    app: dothill-controller-server
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: dothill-controller-exporter
+  labels:
+{{ include "dothill.labels" . | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+      name: dothill-controller-metrics
+  endpoints:
+  - port: metrics
+    interval: 1s
+{{- end }}

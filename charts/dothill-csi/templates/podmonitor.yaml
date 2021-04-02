@@ -1,0 +1,14 @@
+{{- if .Values.podMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: dothill-node-exporter
+  labels:
+{{ include "dothill.labels" . | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+      name: dothill-node-server
+  podMetricsEndpoints:
+  - port: metrics
+{{- end }}
