@@ -2,7 +2,7 @@
 
 A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
 
-![Version: 3.1.0](https://img.shields.io/badge/Version-3.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v3.1.0](https://img.shields.io/badge/AppVersion-v3.1.0-informational?style=flat-square)
+![Version: 3.1.1](https://img.shields.io/badge/Version-3.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v3.1.1](https://img.shields.io/badge/AppVersion-v3.1.1-informational?style=flat-square)
 [![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/enix)](https://artifacthub.io/packages/search?repo=enix)
 
 # Introduction
