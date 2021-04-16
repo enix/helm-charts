@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "swift-exporter.fullname" . }}-headless
+  labels:
+    {{- include "swift-exporter.labels" . | nindent 4 }}
+    {{- with .Values.extraLabels }}
+    {{ . | toYaml | trim | nindent 4 }}
+    {{- end }}
+    {{- with .Values.service.extraLabels }}
+    {{- . | toYaml | trim | nindent 4 }}
+    {{- end }}
+{{- with .Values.service.annotations }}
+  annotations:
+    {{- . | toYaml | trim | nindent 4 }}
+{{- end }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.podListenPort }}
+      name: metrics
+      protocol: TCP
+  selector:
+    {{- include "swift-exporter.selectorLabels" . | nindent 4 }}

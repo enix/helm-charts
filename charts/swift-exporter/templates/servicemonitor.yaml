@@ -1,0 +1,25 @@
+{{- if .Values.prometheusServiceMonitor.create }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "swift-exporter.fullname" . }}
+  labels:
+    {{- include "swift-exporter.labels" . | nindent 4 }}
+    {{- with .Values.extraLabels }}
+    {{ . | toYaml | trim | nindent 4 }}
+    {{- end }}
+    {{- with .Values.prometheusServiceMonitor.extraLabels }}
+    {{- . | toYaml | trim | nindent 4 }}
+    {{- end }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "swift-exporter.selectorLabels" . | nindent 6 }}
+  endpoints:
+  - port: metrics
+    interval: {{ .Values.prometheusServiceMonitor.scrapeInterval }}
+  {{- with .Values.prometheusServiceMonitor.relabelings }}
+    relabelings:
+      {{ . | toYaml | nindent 6 }}
+  {{- end }}
+{{- end }}

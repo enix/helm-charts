@@ -1,0 +1,24 @@
+# :rotating_light: Swift Exporter
+
+A Prometheus exporter for Swift Object Storage focusing on authentification monitoring, written in Python. Designed to be used within Kubernetes clusters, however it can also be used as a standalone exporter.
+
+
+![Grafana Dashboard]([./docs/grafana-dashboard.png](https://raw.githubusercontent.com/enix/swift-exporter/master/docs/grafana-dashboard.png))
+
+
+## 🏃 TL; DR
+
+It only takes two commands to install swift-exporter, however you should read the instructions in the next section to
+take advantage of all the features!
+
+Add our Charts repository :
+```
+$ helm repo add enix https://charts.enix.io
+```
+Install swift-exporter for TLS Secrets monitoring with prometheus-operator support :
+```
+$ helm install swift-exporter enix/swift-exporter
+```
+
+{{ template "chart.valuesSection" . }}
+

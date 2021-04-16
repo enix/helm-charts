@@ -1,0 +1,107 @@
+---
+# Default values for swift-exporter.
+
+# -- Extra labels to add on chart resources
+podExtraLabels: {}
+
+# -- Annotations added to all Pods
+podAnnotations: {
+  prometheus.io/port: "8000",
+  prometheus.io/scrape: "true"
+}
+
+# -- TCP port to expose Pods on
+podListenPort: 8000
+
+
+image:
+  # -- swift-exporter image registry
+  registry: docker.io
+  # -- swift-exporter image repository
+  repository: enix/swift-exporter
+  # -- swift-exporter image tag (defaults to Chart appVersion)
+  tag:
+  # -- swift-exporter image pull policy
+  pullPolicy: IfNotPresent
+
+
+swiftExporter:
+  # -- Desired number of Swift Exporter Pod
+  replicas: 1
+  # -- restartPolicy for Pods of the Swift Exporter
+  restartPolicy: Always
+  # -- ResourceRequirements for containers of the Swift Exporter
+  # @default -- see values.yaml
+  resources:
+    limits:
+      cpu: 200m
+      memory: 100Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
+  # -- Node selector for Pods of the Swift Exporter
+  nodeSelector: {}
+  # -- Extra labels added to Pods of the Swift Exporter
+  podExtraLabels: {}
+  # -- Annotations added to Pods of the Swift Exporter
+  podAnnotations: {}
+  # -- PodSecurityContext for Pods of the Swift Exporter
+  podSecurityContext: {}
+  # -- SecurityContext for containers of the Swift Exporter
+  # @default -- see values.yaml
+  securityContext: {}
+
+service:
+  # -- Should a headless Service be installed, targets all instances Deployment (required for ServiceMonitor)
+  create: true
+  # -- TCP port to expose the Service on
+  port: 8000
+  # -- Annotations to add to the Service
+  annotations: {
+    prometheus.io/port: "8000",
+    prometheus.io/scrape: "true"
+  }
+  # -- Extra labels to add to the Service
+  extraLabels: {}
+
+prometheusServiceMonitor:
+  # -- Should a ServiceMonitor ressource be installed to scrape this exporter. For prometheus-operator (kube-prometheus) users.
+  create: true
+  # -- Target scrape interval set in the ServiceMonitor
+  scrapeInterval: 15s
+  # -- Extra labels to add on ServiceMonitor ressources
+  extraLabels: {
+    release: prometheus-operator,
+    serviceapp: coredns-servicemonitor
+  }
+  # -- Relabel config for the ServiceMonitor, see: https://coreos.com/operators/prometheus/docs/latest/api.html#relabelconfig
+  relabelings: {}
+
+prometheusPodMonitor:
+  # -- Should a PodMonitor ressource be installed to scrape this exporter. For prometheus-operator (kube-prometheus) users.
+  create: false
+  # -- Target scrape interval set in the PodMonitor
+  scrapeInterval: 15s
+  # -- Extra labels to add on PodMonitor ressources
+  extraLabels: {}
+  # -- Relabel config for the PodMonitor, see: https://coreos.com/operators/prometheus/docs/latest/api.html#relabelconfig
+  relabelings: {}
+
+
+swift:
+  # -- A Swift authentication url to target
+  url: 
+  # -- A Swift user 
+  usr: 
+  # -- The Swift project 
+  project: 
+  # -- Swift domain
+  domain: Default
+  # -- Swift project domain
+  project_domain: Default
+
+exporter:
+  # -- Exporter's allowed time in seconds to make a request. If this count down reaches 0 a timout exception is raised
+  timeout: 3
+  # -- Defines the exporter's request rate in seconds.
+  request_rate: 5
