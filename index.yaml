@@ -1386,6 +1386,17 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/rancher-monitoring-proxy-0.1.0/rancher-monitoring-proxy-0.1.0.tgz
     version: 0.1.0
+  swift-exporter:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-04-19T08:05:07.314899028Z"
+    description: A Helm chart for Kubernetes
+    digest: 30c928530a480a3332978f7689a613abd2796d6d1d321ad4068a3061dcd1fa4d
+    name: swift-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/swift-exporter-0.1.0/swift-exporter-0.1.0.tgz
+    version: 0.1.0
   x509-certificate-exporter:
   - annotations:
       artifacthub.io/changes: |
