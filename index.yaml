@@ -15,6 +15,39 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: dothill-csi
+          image: enix/dothill-csi:v3.1.4
+    apiVersion: v2
+    appVersion: v3.1.4
+    created: "2021-04-27T10:12:09.838676288Z"
+    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
+    digest: b23cef9a4347bb3d1fb476c884acc8233d89e052507091123c83a2b9028655c6
+    home: https://github.com/enix/dothill-csi
+    keywords:
+    - storage
+    - iscsi
+    - plugin
+    - csi
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+      url: https://blog.plaffitt.com
+    - email: alexandre.buisine@enix.fr
+      name: Alexandre Buisine
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: dothill-csi
+    sources:
+    - https://github.com/enix/dothill-csi/tree/main/helm/dothill-csi
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/dothill-csi-3.1.4/dothill-csi-3.1.4.tgz
+    version: 3.1.4
+  - annotations:
+      artifacthub.io/images: |
+        - name: dothill-csi
           image: enix/dothill-csi:v3.1.3
     apiVersion: v2
     appVersion: v3.1.3
