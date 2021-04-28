@@ -1433,6 +1433,60 @@ entries:
   x509-certificate-exporter:
   - annotations:
       artifacthub.io/changes: |
+        - "exporter: Fix metric labels filtering not effective"
+        - "Fix metric labels filtering not applied to DaemonSets"
+        - "Allow empty list for metric labels filtering"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/images: |
+        - name: x509-certificate-exporter
+          image: enix/x509-certificate-exporter:2.9.1
+        - name: kube-rbac-proxy
+          image: quay.io/coreos/kube-rbac-proxy:v0.5.0
+          whitelisted: true
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    appVersion: 2.9.1
+    created: "2021-04-28T14:41:51.289982646Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 227f202cc58e43da1bf60de173778c51495005f0a793eaccf927f775905db0d7
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@paraneko.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    - https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-1.13.1/x509-certificate-exporter-1.13.1.tgz
+    version: 1.13.1
+  - annotations:
+      artifacthub.io/changes: |
         - "exporter: Base image update (fixes security scan warnings)"
         - "Add support for metric labels filtering (new in exporter v2.9.0)"
         - "Detect Kubernetes version and guess best apiVersion for Deployment and RBAC"
