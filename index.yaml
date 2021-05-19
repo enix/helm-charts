@@ -1434,7 +1434,7 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - "Add scrape timeout setting"
-      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/images: |
         - name: x509-certificate-exporter
           image: enix/x509-certificate-exporter:2.9.2
