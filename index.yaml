@@ -786,12 +786,12 @@ entries:
     version: 1.3.0
   - annotations:
       artifacthub.io/changes: |-
-        - fix(nrc): multiple services with the same VIP
-        - remove deprecated netpol beta API support
-        - Update golang.org/x/net dependency
-        - Update to golang 1.15 and alpine-3.12
-        - Update bgp.md
-        - Cleanup non-DSR externalIPs
+        - "fix(nrc): multiple services with the same VIP"
+        - "remove deprecated netpol beta API support"
+        - "Update golang.org/x/net dependency"
+        - "Update to golang 1.15 and alpine-3.12"
+        - "Update bgp.md"
+        - "Cleanup non-DSR externalIPs"
       artifacthub.io/images: |
         - name: img1
           image: cloudnativelabs/kube-router:v1.1.1
@@ -1897,8 +1897,8 @@ entries:
     version: 1.12.1
   - annotations:
       artifacthub.io/changes: |
-        - exporter: Base image update (fixes security scan warnings)
-        - exporter: Fixed metrics descriptions
+        - "exporter: Base image update (fixes security scan warnings)"
+        - "exporter: Fixed metrics descriptions"
       artifacthub.io/containsSecurityUpdates: "true"
       artifacthub.io/images: |
         - name: x509-certificate-exporter
@@ -1950,8 +1950,8 @@ entries:
     version: 1.12.0
   - annotations:
       artifacthub.io/changes: |
-        - Added support for PodSecurityPolicies
-        - Fixed insufficient memory limit for Secrets exporter
+        - "Added support for PodSecurityPolicies"
+        - "Fixed insufficient memory limit for Secrets exporter"
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/images: |
         - name: x509-certificate-exporter
