@@ -1,0 +1,182 @@
+# Copyright (c) 2021 Enix, SAS
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+# or implied. See the License for the specific language governing
+# permissions and limitations under the License.
+#
+# Authors:
+# Paul Laffitte <paul.laffitte@enix.fr>
+# Arthur Chaloin <arthur.chaloin@enix.fr>
+# Alexandre Buisine <alexandre.buisine@enix.fr>
+
+# This YAML file contains all RBAC objects that are necessary to run external
+# CSI provisioner.
+#
+# In production, each CSI driver deployment has to be customized:
+# - to avoid conflicts, use non-default namespace and different names
+#   for non-namespaced entities like the ClusterRole
+# - decide whether the deployment replicates the external CSI
+#   provisioner, in which case leadership election must be enabled;
+#   this influences the RBAC setup, see below
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: csi-provisioner
+  labels:
+{{ include "san-iscsi-csi.labels" . | indent 4 }}
+
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: external-provisioner-runner-san-iscsi-csi
+  labels:
+{{ include "san-iscsi-csi.labels" . | indent 4 }}
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list"]
+  - apiGroups: [""]
+    resources: ["persistentvolumes"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: [""]
+    resources: ["persistentvolumeclaims"]
+    verbs: ["get", "list", "watch", "update"]
+  - apiGroups: [""]
+    resources: ["persistentvolumeclaims/status"]
+    verbs: ["update", "patch"]
+  - apiGroups: ["storage.k8s.io"]
+    resources: ["storageclasses"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["list", "watch", "create", "update", "patch"]
+  - apiGroups: ["snapshot.storage.k8s.io"]
+    resources: ["volumesnapshots"]
+    verbs: ["get", "list"]
+  - apiGroups: ["snapshot.storage.k8s.io"]
+    resources: ["volumesnapshotclasses"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["snapshot.storage.k8s.io"]
+    resources: ["volumesnapshotcontents"]
+    verbs: ["create", "get", "list", "watch", "update", "delete"]
+  - apiGroups: ["snapshot.storage.k8s.io"]
+    resources: ["volumesnapshotcontents/status"]
+    verbs: ["update"]
+  - apiGroups: ["storage.k8s.io"]
+    resources: ["csinodes"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["storage.k8s.io"]
+    resources: ["volumeattachments"]
+    verbs: ["get", "list", "watch", "update", "patch"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: csi-provisioner-role-san-iscsi-csi
+  labels:
+{{ include "san-iscsi-csi.labels" . | indent 4 }}
+subjects:
+  - kind: ServiceAccount
+    name: csi-provisioner
+    namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: ClusterRole
+  name: external-provisioner-runner-san-iscsi-csi
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# Provisioner must be able to work with endpoints in current namespace
+# if (and only if) leadership election is enabled
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: external-provisioner-cfg-san-iscsi-csi
+  labels:
+{{ include "san-iscsi-csi.labels" . | indent 4 }}
+rules:
+# Only one of the following rules for endpoints or leases is required based on
+# what is set for `--leader-election-type`. Endpoints are deprecated in favor of Leases.
+- apiGroups: [""]
+  resources: ["endpoints"]
+  verbs: ["get", "watch", "list", "delete", "update", "create"]
+- apiGroups: ["coordination.k8s.io"]
+  resources: ["leases"]
+  verbs: ["get", "watch", "list", "delete", "update", "create"]
+{{ if .Values.pspAdmissionControllerEnabled }}
+- apiGroups: ["policy"]
+  resources: ["podsecuritypolicies"]
+  verbs:     ["use"]
+  resourceNames:
+  - san-iscsi-csi
+{{ end }}
+
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: csi-provisioner-role-cfg-san-iscsi-csi
+  labels:
+{{ include "san-iscsi-csi.labels" . | indent 4 }}
+subjects:
+  - kind: ServiceAccount
+    name: csi-provisioner
+roleRef:
+  kind: Role
+  name: external-provisioner-cfg-san-iscsi-csi
+  apiGroup: rbac.authorization.k8s.io
+
+{{ if .Values.pspAdmissionControllerEnabled }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: csi-node-registrar
+  labels:
+{{ include "san-iscsi-csi.labels" . | indent 4 }}
+
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: csi-node-registrar-cfg-san-iscsi-csi
+  labels:
+{{ include "san-iscsi-csi.labels" . | indent 4 }}
+rules:
+- apiGroups: ["policy"]
+  resources: ["podsecuritypolicies"]
+  verbs:     ["use"]
+  resourceNames:
+  - san-iscsi-csi
+
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: csi-node-registrar-role-cfg-san-iscsi-csi
+  labels:
+{{ include "san-iscsi-csi.labels" . | indent 4 }}
+subjects:
+  - kind: ServiceAccount
+    name: csi-node-registrar
+roleRef:
+  kind: Role
+  name: csi-node-registrar-cfg-san-iscsi-csi
+  apiGroup: rbac.authorization.k8s.io
+{{ end }}

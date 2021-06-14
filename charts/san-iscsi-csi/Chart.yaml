@@ -1,0 +1,47 @@
+# Copyright (c) 2021 Enix, SAS
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+# or implied. See the License for the specific language governing
+# permissions and limitations under the License.
+#
+# Authors:
+# Paul Laffitte <paul.laffitte@enix.fr>
+# Alexandre Buisine <alexandre.buisine@enix.fr>
+
+apiVersion: v2
+name: san-iscsi-csi
+version: 4.0.0
+appVersion: v4.0.0
+description: A dynamic persistent volume (PV) provisioner for iSCSI-compatible SAN based storage systems.
+type: application
+home: https://github.com/enix/san-iscsi-csi
+sources:
+  - https://github.com/enix/san-iscsi-csi/tree/main/helm/san-iscsi-csi
+keywords:
+  - storage
+  - iscsi
+  - plugin
+  - csi
+maintainers:
+  - name: Enix
+    email: contact@enix.fr
+    url: https://github.com/enixsas
+  - name: Paul Laffitte
+    email: paul.laffitte@enix.fr
+    url: https://blog.plaffitt.com
+  - name: Alexandre Buisine
+    email: alexandre.buisine@enix.fr
+  - name: Arthur Chaloin
+    email: arthur.chaloin@enix.fr
+annotations:
+  artifacthub.io/images: |
+    - name: san-iscsi-csi
+      image: enix/san-iscsi-csi:v4.0.0
