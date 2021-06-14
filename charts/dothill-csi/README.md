@@ -1,3 +1,7 @@
+# Deprecated Package
+
+➡️ Upstream project was renamed, please install or upgrade to [enix/san-iscsi-csi](https://github.com/enix/helm-charts/tree/master/charts/san-iscsi-csi)
+
 # dothill-csi
 
 A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.

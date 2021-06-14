@@ -1,7 +1,8 @@
 apiVersion: v2
 name: dothill-csi
-version: 3.1.6
+version: 3.1.7
 appVersion: v3.1.6
+deprecated: true
 description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
 type: application
 home: https://github.com/enix/dothill-csi
