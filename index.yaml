@@ -1510,6 +1510,40 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/rancher-monitoring-proxy-0.1.0/rancher-monitoring-proxy-0.1.0.tgz
     version: 0.1.0
+  san-iscsi-csi:
+  - annotations:
+      artifacthub.io/images: |
+        - name: san-iscsi-csi
+          image: enix/san-iscsi-csi:v4.0.0
+    apiVersion: v2
+    appVersion: v4.0.0
+    created: "2021-06-14T10:57:55.848253343Z"
+    description: A dynamic persistent volume (PV) provisioner for iSCSI-compatible SAN based storage systems.
+    digest: 1c0599e86a2de45931837e3a7bdce53dd403e097c3f8b67ac7da274936c8cddb
+    home: https://github.com/enix/san-iscsi-csi
+    keywords:
+    - storage
+    - iscsi
+    - plugin
+    - csi
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+      url: https://blog.plaffitt.com
+    - email: alexandre.buisine@enix.fr
+      name: Alexandre Buisine
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: san-iscsi-csi
+    sources:
+    - https://github.com/enix/san-iscsi-csi/tree/main/helm/san-iscsi-csi
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/san-iscsi-csi-4.0.0/san-iscsi-csi-4.0.0.tgz
+    version: 4.0.0
   swift-exporter:
   - apiVersion: v2
     appVersion: 1.16.0
