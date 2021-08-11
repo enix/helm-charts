@@ -120,7 +120,7 @@ kubeRouter:
     # - ip: "1.2.3.4"
     #    asn: 65000
     #    password: ""
-    #    bgpPort: 179
+    #    port: 179
 
     # kubeRouter.router.peerRouterMultihopTtl -- Enable eBGP multihop supports (Relevant only if ttl >= 2)
     peerRouterMultihopTtl:
