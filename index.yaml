@@ -1623,6 +1623,39 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: san-iscsi-csi
+          image: enix/san-iscsi-csi:v4.0.2
+    apiVersion: v2
+    appVersion: v4.0.2
+    created: "2021-09-29T09:51:09.385635784Z"
+    description: A dynamic persistent volume (PV) provisioner for iSCSI-compatible SAN based storage systems.
+    digest: a243e6ff5f23cf54c9766373d69fc3ed00d378adae5c534040811780a1665416
+    home: https://github.com/enix/san-iscsi-csi
+    keywords:
+    - storage
+    - iscsi
+    - plugin
+    - csi
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+      url: https://blog.plaffitt.com
+    - email: alexandre.buisine@enix.fr
+      name: Alexandre Buisine
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: san-iscsi-csi
+    sources:
+    - https://github.com/enix/san-iscsi-csi/tree/main/helm/san-iscsi-csi
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/san-iscsi-csi-4.0.2/san-iscsi-csi-4.0.2.tgz
+    version: 4.0.2
+  - annotations:
+      artifacthub.io/images: |
+        - name: san-iscsi-csi
           image: enix/san-iscsi-csi:v4.0.1
     apiVersion: v2
     appVersion: v4.0.1
