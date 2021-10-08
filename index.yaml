@@ -1733,6 +1733,52 @@ entries:
   x509-certificate-exporter:
   - annotations:
       artifacthub.io/changes: |
+        - "exporter: fix arm64 images that contained an amd64 binary"
+        - "exporter: build with Golang 1.17"
+        - "exporter: bump base image to Alpine 3.14"
+      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 2.12.0
+    created: "2021-10-08T12:51:44.865186547Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 5e920bfa8fee30a2e2ed1b1d1c2b41de2c5386b69f70f01a9c0d0666169e7a5f
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@paraneko.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    - https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-1.18.0/x509-certificate-exporter-1.18.0.tgz
+    version: 1.18.0
+  - annotations:
+      artifacthub.io/changes: |
         - "This release contains no new feature nor fix ; you may skip the upgrade"
         - "Bump exporter image to version 2.11.0 and refactor socket bind arguments"
       artifacthub.io/containsSecurityUpdates: "false"
