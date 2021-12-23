@@ -1,0 +1,101 @@
+# Copyright (c) 2021 Enix, SAS
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+# or implied. See the License for the specific language governing
+# permissions and limitations under the License.
+#
+# Authors:
+# Paul Laffitte <paul.laffitte@enix.fr>
+# Arthur Chaloin <arthur.chaloin@enix.fr>
+# Alexandre Buisine <alexandre.buisine@enix.fr>
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: san-iscsi-csi-controller-server
+  labels:
+    app.kubernetes.io/version: {{ .Chart.Version }}
+    app.kubernetes.io/component: dynamic-provisionning-controller
+{{ include "san-iscsi-csi.labels" . | indent 4 }}
+
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: san-iscsi-csi-controller-server
+{{ include "san-iscsi-csi.labels" . | indent 6 }}
+  template:
+    metadata:
+      labels:
+        app: san-iscsi-csi-controller-server
+{{ include "san-iscsi-csi.labels" . | indent 8 }}
+    spec:
+      serviceAccount: csi-provisioner
+      containers:
+        - name: san-iscsi-csi-controller
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          command:
+            - san-iscsi-csi-controller
+            - -bind=unix:///csi/csi.sock
+{{- include "san-iscsi-csi.extraArgs" .Values.controller | indent 10 }}
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+          ports:
+            - containerPort: 9842
+              name: metrics
+              protocol: TCP
+        - name: csi-provisioner
+          image: {{ .Values.csiProvisioner.image.repository }}:{{ .Values.csiProvisioner.image.tag }}
+          args:
+            - --csi-address=/csi/csi.sock
+            - --worker-threads=1
+            - --timeout={{ .Values.csiProvisioner.timeout }}
+{{- include "san-iscsi-csi.extraArgs" .Values.csiProvisioner | indent 10 }}
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+        - name: csi-attacher
+          image: {{ .Values.csiAttacher.image.repository }}:{{ .Values.csiAttacher.image.tag }}
+          args:
+            - --csi-address=/csi/csi.sock
+            - --worker-threads=1
+            - --timeout={{ .Values.csiAttacher.timeout }}
+{{- include "san-iscsi-csi.extraArgs" .Values.csiAttacher | indent 10 }}
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+        - name: csi-resizer
+          image: {{ .Values.csiResizer.image.repository }}:{{ .Values.csiResizer.image.tag }}
+          args:
+            - --csi-address=/csi/csi.sock
+{{- include "san-iscsi-csi.extraArgs" .Values.csiResizer | indent 10 }}
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+        - name: csi-snapshotter
+          image: {{ .Values.csiSnapshotter.image.repository }}:{{ .Values.csiSnapshotter.image.tag }}
+          args:
+            - --csi-address=/csi/csi.sock
+{{- include "san-iscsi-csi.extraArgs" .Values.csiSnapshotter | indent 10 }}
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+      volumes:
+        - name: socket-dir
+          emptyDir:
+            medium: Memory

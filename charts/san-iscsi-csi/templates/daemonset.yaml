@@ -1,0 +1,134 @@
+# Copyright (c) 2021 Enix, SAS
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+# or implied. See the License for the specific language governing
+# permissions and limitations under the License.
+#
+# Authors:
+# Paul Laffitte <paul.laffitte@enix.fr>
+# Arthur Chaloin <arthur.chaloin@enix.fr>
+# Alexandre Buisine <alexandre.buisine@enix.fr>
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: san-iscsi-csi-node-server
+  labels:
+    app.kubernetes.io/version: {{ .Chart.Version }}
+    app.kubernetes.io/component: dynamic-provisionning-node
+{{ include "san-iscsi-csi.labels" . | indent 4 }}
+
+spec:
+  selector:
+    matchLabels:
+      name: san-iscsi-csi-node-server
+{{ include "san-iscsi-csi.labels" . | indent 6 }}
+  template:
+    metadata:
+      labels:
+        name: san-iscsi-csi-node-server
+{{ include "san-iscsi-csi.labels" . | indent 8 }}
+    spec:
+      hostNetwork: true
+      hostIPC: true
+      {{ if .Values.pspAdmissionControllerEnabled }}serviceAccount: csi-node-registrar{{ end }}
+      {{- if .Values.nodeServer.nodeAffinity }}
+      affinity:
+        nodeAffinity:
+{{ toYaml .Values.nodeServer.nodeAffinity | indent 10 }}
+      {{- end }}
+      {{- if .Values.nodeServer.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeServer.nodeSelector | indent 8 }}
+      {{- end }}
+      containers:
+        - name: san-iscsi-csi-node
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          command:
+            - san-iscsi-csi-node
+            - -bind=unix://{{ .Values.kubeletPath }}/plugins/san-iscsi.csi.enix.io/csi.sock
+            - -chroot=/host
+{{- include "san-iscsi-csi.extraArgs" .Values.node | indent 10 }}
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: plugin-dir
+              mountPath: {{ .Values.kubeletPath }}/plugins/san-iscsi.csi.enix.io
+            - name: mountpoint-dir
+              mountPath: {{ .Values.kubeletPath }}/pods
+              mountPropagation: Bidirectional
+            - name: san-iscsi-csi-run-dir
+              mountPath: /var/run/san-iscsi.csi.enix.io
+            - name: device-dir
+              mountPath: /dev
+            - name: iscsi-dir
+              mountPath: /etc/iscsi
+            - name: host
+              mountPath: /host
+              mountPropagation: Bidirectional
+          ports:
+          - containerPort: 9808
+            name: healthz
+            protocol: TCP
+          - containerPort: 9842
+            name: metrics
+            protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: healthz
+            periodSeconds: 60
+        - name: liveness-probe
+          image: {{.Values.nodeLivenessProbe.image.repository }}:{{ .Values.nodeLivenessProbe.image.tag }}
+          args:
+            - --csi-address=/csi/csi.sock
+{{- include "san-iscsi-csi.extraArgs" .Values.nodeLivenessProbe | indent 10 }}
+          volumeMounts:
+            - name: plugin-dir
+              mountPath: /csi
+        - name: driver-registrar
+          image: {{ .Values.csiNodeRegistrar.image.repository }}:{{ .Values.csiNodeRegistrar.image.tag }}
+          args:
+            - --csi-address=/csi/csi.sock
+            - --kubelet-registration-path={{ .Values.kubeletPath }}/plugins/san-iscsi.csi.enix.io/csi.sock
+{{- include "san-iscsi-csi.extraArgs" .Values.csiNodeRegistrar | indent 10 }}
+          volumeMounts:
+            - name: plugin-dir
+              mountPath: /csi
+            - name: registration-dir
+              mountPath: /registration
+      volumes:
+        - name: registration-dir
+          hostPath:
+            path: {{ .Values.kubeletPath }}/plugins_registry/
+        - name: mountpoint-dir
+          hostPath:
+            path: {{ .Values.kubeletPath }}/pods
+        - name: plugin-dir
+          hostPath:
+            path: {{ .Values.kubeletPath }}/plugins/san-iscsi.csi.enix.io
+            type: DirectoryOrCreate
+        - name: iscsi-dir
+          hostPath:
+            path: /etc/iscsi
+        - name: device-dir
+          hostPath:
+            path: /dev
+        - name: san-iscsi-csi-run-dir
+          hostPath:
+            path: /var/run/san-iscsi.csi.enix.io
+        - name: host
+          hostPath:
+            path: /
+        - name: init-node
+          configMap:
+            name: init-node
+            defaultMode: 0700

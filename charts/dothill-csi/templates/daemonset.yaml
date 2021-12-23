@@ -20,6 +20,7 @@ spec:
     spec:
       {{ if .Values.pspAdmissionControllerEnabled }}serviceAccount: csi-node-registrar{{ end }}
       hostNetwork: true
+      hostIPC: true
       {{- if .Values.nodeServer.nodeAffinity }}
       affinity:
         nodeAffinity:
