@@ -1,5 +1,5 @@
 kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: {{ include "capabilities.rbac.apiVersion" . }}
 metadata:
   name: {{ include "kube-router.fullname" . }}
   labels:
