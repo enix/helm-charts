@@ -19,6 +19,12 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
+      # https://github.com/helm/helm/issues/8036
+      # https://github.com/helm/chart-releaser-action/issues/74
+      - name: Checkout repositories for dependencies
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.1.0
         env:
