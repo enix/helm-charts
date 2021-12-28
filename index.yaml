@@ -1151,6 +1151,42 @@ entries:
     - https://github.com/enix/helm-charts/releases/download/kube-router-0.0.2/kube-router-0.0.2.tgz
     version: 0.0.2
   netbox:
+  - annotations:
+      artifacthub.io/changes: |
+        - "Deprecation Notice: This chart is not maintained anymore, we advise migrating to bootc/netbox ; further information at https://github.com/enix/helm-charts/issues/50"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bootc/netbox
+    apiVersion: v2
+    appVersion: v2.9.3
+    created: "2021-12-28T10:54:38.38485945Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: '>=8.7.3'
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: '>=10.6.3'
+    description: '[DEPRECATED] This chart is not maintained anymore, we advise migrating to bootc/netbox'
+    digest: aba3643d2442a4df71683fde1842c18707f53e0765ce84f5faa51c78e364e564
+    home: https://netbox.readthedocs.io/en/stable/
+    icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
+    maintainers:
+    - email: antoine@inaps.org
+      name: Antoine Millet
+      url: https://github.com/NaPs
+    - email: julien.girardin@enix.fr
+      name: Zempashi
+      url: https//github.com/Zempashi
+    name: netbox
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/netbox
+    - https://github.com/netbox-community/netbox
+    - https://github.com/netbox-community/netbox-docker
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/netbox-1.2.10/netbox-1.2.10.tgz
+    version: 1.2.10
   - apiVersion: v2
     appVersion: v2.9.3
     created: "2020-09-11T14:18:31.485694821Z"
