@@ -117,10 +117,11 @@ kubeRouter:
 
     # kubeRouter.router.peers -- List of external BGP peers, see values.yaml for example
     peers: []
+    # Only "ip" and "asn" keys are required on all peers. Other options can be set where necessary.
     # - ip: "1.2.3.4"
-    #    asn: 65000
-    #    password: ""
-    #    port: 179
+    #   asn: 65000
+    #   password: ""
+    #   port: 179
 
     # kubeRouter.router.peerRouterMultihopTtl -- Enable eBGP multihop supports (Relevant only if ttl >= 2)
     peerRouterMultihopTtl:
