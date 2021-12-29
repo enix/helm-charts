@@ -645,6 +645,31 @@ entries:
   kube-router:
   - apiVersion: v2
     appVersion: v1.3.2
+    created: "2021-12-29T15:19:52.954185942Z"
+    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    digest: 857e4a87d59b99cb124f27be7e3cdd1f1af314f736123403a7f20abdde04c8de
+    home: https://www.kube-router.io/
+    icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: antoine@inaps.org
+      name: Antoine Millet
+      url: https://github.com/NaPs
+    - email: alexandre.buisine@enix.fr
+      name: Alexandre Buisine
+      url: https://github.com/abuisine
+    name: kube-router
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/kube-router
+    - https://github.com/cloudnativelabs/kube-router
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-router-1.6.0/kube-router-1.6.0.tgz
+    version: 1.6.0
+  - apiVersion: v2
+    appVersion: v1.3.2
     created: "2021-12-24T14:52:18.237854608Z"
     description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
     digest: 0835fdf81d576371ddc88636259f42d2604370f8f172198fae601aa793491d12
