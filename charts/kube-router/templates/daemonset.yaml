@@ -51,10 +51,50 @@ spec:
         - "--router-id={{ .bgpRouterId }}"
         {{- end }}
         {{- if .peers }}
-        - "--peer-router-ips={{ range $i, $peer := .peers }}{{ if not (eq $i 0) }},{{ end }}{{ $peer.ip }}{{ end }}"
-        - "--peer-router-asns={{ range $i, $peer := .peers }}{{ if not (eq $i 0) }},{{ end }}{{ $peer.asn }}{{ end }}"
-        - "--peer-router-passwords={{ range $i, $peer := .peers }}{{ if not (eq $i 0) }},{{ end }}{{ $peer.password }}{{ end }}"
-        - "--peer-router-ports={{ range $i, $peer := .peers }}{{ if not (eq $i 0) }},{{ end }}{{ $peer.port }}{{ end }}"
+        - "--peer-router-ips=
+          {{- range $i, $peer := .peers }}
+          {{- if not (eq $i 0) }},{{ end }}
+          {{- required ( print "Missing IP address for BGP peer in kubeRouter.router.peers[" $i "]" ) ( default "" $peer.ip | trim ) }}
+          {{- end }}"
+        - "--peer-router-asns=
+          {{- range $i, $peer := .peers }}
+          {{- if not (eq $i 0) }},{{ end }}
+          {{- required ( print "Missing or invalid AS number for BGP peer in kubeRouter.router.peers[" $i "]" ) ( regexFind "^[0-9]+$" ( $peer.asn | toString )) }}
+          {{- end }}"
+        {{- $passwords := list -}}
+        {{- $pw_count := 0 -}}
+        {{- range $i, $peer := .peers -}}
+        {{- if $peer.password -}}
+        {{- if regexMatch "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$" ( $peer.password | trim ) -}}
+        {{- $passwords = append $passwords ( $peer.password | trim ) -}}
+        {{- $pw_count = add1 $pw_count -}}
+        {{- else -}}
+        {{- fail ( print "Invalid Base64 string for password of BGP peer in kubeRouter.router.peers[" $i "]" ) -}}
+        {{- end -}}
+        {{- else -}}
+        {{- $passwords = append $passwords "" -}}
+        {{- end -}}
+        {{- end -}}
+        {{- if gt $pw_count 0 }}
+        - "--peer-router-passwords={{ join "," $passwords }}"
+        {{- end }}
+        {{- $ports := list -}}
+        {{- $pt_count := 0 -}}
+        {{- range $i, $peer := .peers -}}
+        {{- if $peer.port -}}
+        {{- if and ( regexMatch "^[0-9]+$" ( $peer.port | toString )) ( gt ( $peer.port | int ) 0 ) ( lt ( $peer.port | int ) 65536 ) -}}
+        {{- $ports = append $ports ( $peer.port | toString | trim ) -}}
+        {{- $pt_count = add1 $pt_count -}}
+        {{- else -}}
+        {{- fail ( print "Invalid port number for BGP peer in kubeRouter.router.peers[" $i "]" ) -}}
+        {{- end -}}
+        {{- else -}}
+        {{- $ports = append $ports "179" -}}
+        {{- end -}}
+        {{- end -}}
+        {{- if gt $pt_count 0 }}
+        - "--peer-router-ports={{ join "," $ports }}"
+        {{- end }}
         {{- end }}
         {{- if not (kindIs "invalid" .peerRouterMultihopTtl) }}
         - "--peer-router-multihop-ttl={{ .peerRouterMultihopTtl }}"
