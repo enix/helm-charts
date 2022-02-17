@@ -13,4 +13,9 @@ data:
         location / {
             proxy_pass http://access-prometheus;
         }
+
+        location /_status {
+            stub_status;
+            allow all;
+        }
     }
