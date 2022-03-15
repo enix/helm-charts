@@ -5,3 +5,4 @@ ignore:
   - name: configmap2http
   - name: x509-exporter
   - name: netbox
+  - name: qcow-provisioner
