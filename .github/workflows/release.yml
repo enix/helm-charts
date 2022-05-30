@@ -33,7 +33,7 @@ jobs:
 
             if [ -f "$chart/ci.sh" ]; then
               cd "$chart"
-              echo "Running custom CI script for chart $chart"
+              echo "Running custom CI script for $chart"
               ./ci.sh "${{ github.event.client_payload.ref }}" "${{ github.event.client_payload.notes }}" "${{ github.event.client_payload.contains_security_updates }}"
               cd - > /dev/null
             fi
