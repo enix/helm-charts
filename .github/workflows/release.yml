@@ -1,6 +1,7 @@
 name: Release Charts
 
 on:
+  repository_dispatch:
   push:
     branches:
       - master
@@ -32,7 +33,7 @@ jobs:
 
             if [ -f "$chart/ci.sh" ]; then
               cd "$chart"
-              ./ci.sh
+              ./ci.sh ${{ github.event.client_payload.ref }}
               cd - > /dev/null
             fi
           done
