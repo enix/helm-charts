@@ -20,7 +20,8 @@ entries:
     appVersion: v3.1.6
     created: "2021-06-14T11:04:52.715771093Z"
     deprecated: true
-    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
+    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN
+      based storage systems.
     digest: 8367ef8bb65e5441384f5ad4b486591ba072a94c5aa2881b5a8eb479e0f0cd7d
     home: https://github.com/enix/dothill-csi
     keywords:
@@ -53,7 +54,8 @@ entries:
     apiVersion: v2
     appVersion: v3.1.6
     created: "2021-06-09T13:36:31.560194367Z"
-    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
+    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN
+      based storage systems.
     digest: da28b4d7d9ceab1c761ee2be95ccefc425f0ca8354ac752ba77bfe300446487b
     home: https://github.com/enix/dothill-csi
     keywords:
@@ -86,7 +88,8 @@ entries:
     apiVersion: v2
     appVersion: v3.1.5
     created: "2021-05-20T10:10:20.927298293Z"
-    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
+    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN
+      based storage systems.
     digest: f4e156d3e65d55baa90b7d64744c184cbff88aed05c5ec52a65ad889326ba264
     home: https://github.com/enix/dothill-csi
     keywords:
@@ -119,7 +122,8 @@ entries:
     apiVersion: v2
     appVersion: v3.1.4
     created: "2021-04-27T10:12:09.838676288Z"
-    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
+    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN
+      based storage systems.
     digest: b23cef9a4347bb3d1fb476c884acc8233d89e052507091123c83a2b9028655c6
     home: https://github.com/enix/dothill-csi
     keywords:
@@ -152,7 +156,8 @@ entries:
     apiVersion: v2
     appVersion: v3.1.3
     created: "2021-04-13T14:14:31.942620358Z"
-    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
+    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN
+      based storage systems.
     digest: 21c2e5ac7e22bd5ac1b370fed2aea8e502c22e4161fb395cd2de855231c0c084
     home: https://github.com/enix/dothill-csi
     keywords:
@@ -185,7 +190,8 @@ entries:
     apiVersion: v2
     appVersion: v3.1.2
     created: "2021-04-08T10:49:12.580878998Z"
-    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
+    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN
+      based storage systems.
     digest: 340423fee9de41a35ee2bcbb90504746759874dc1aa370bccb22d93b28ec40bf
     home: https://github.com/enix/dothill-csi
     keywords:
@@ -218,7 +224,8 @@ entries:
     apiVersion: v2
     appVersion: v3.1.1
     created: "2021-04-07T10:41:29.923242896Z"
-    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
+    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN
+      based storage systems.
     digest: 61263c854b318dd1b108dc8fdbb95f7dd6588fc68d8aa0bcc8c990d0a95ea254
     home: https://github.com/enix/dothill-csi
     keywords:
@@ -251,7 +258,8 @@ entries:
     apiVersion: v2
     appVersion: v3.0.3
     created: "2021-03-31T14:31:19.770170552Z"
-    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
+    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN
+      based storage systems.
     digest: dc4f883391ac3d1f53eb12a6cd3974baa4c7bd64451bad8753490b1f4b82fbda
     home: https://github.com/enix/dothill-csi
     keywords:
@@ -284,7 +292,8 @@ entries:
     apiVersion: v2
     appVersion: v3.0.2
     created: "2021-03-16T13:06:07.674335753Z"
-    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
+    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN
+      based storage systems.
     digest: 786fe1c2a66c318223ac75e24e6072a569a7c1e73018d63bf2e38f2d6eca6291
     home: https://github.com/enix/dothill-csi
     keywords:
@@ -317,7 +326,8 @@ entries:
     apiVersion: v2
     appVersion: v3.0.1
     created: "2021-03-02T11:08:56.427654788Z"
-    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN based storage systems.
+    description: A dynamic persistent volume (PV) provisioner for Dothill AssuredSAN
+      based storage systems.
     digest: 4eed1cf0856f21c8f5741e5aa52e7f360aff8662f2775af3747d19a2a08eb0e2
     home: https://github.com/enix/dothill-csi
     keywords:
@@ -346,7 +356,8 @@ entries:
   - apiVersion: v2
     appVersion: v3.0.0
     created: "2021-02-19T11:18:10.639869182Z"
-    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin).
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
+      plugin).
     digest: 8508620a03ef85caef4b05bc07ad467fb948fe65f8571cd52b11897cd43c9e81
     home: https://charts.enix.io/
     keywords:
@@ -372,7 +383,8 @@ entries:
     appVersion: v2.4.1
     created: "2021-03-16T14:13:59.236121816Z"
     deprecated: true
-    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin).
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
+      plugin).
     digest: 3bafef2da528c5937e37ccfe98a47f4090ed35ef69ebf4de0c1105a1eb53d679
     keywords:
     - storage
@@ -393,7 +405,8 @@ entries:
   - apiVersion: v2
     appVersion: v2.4.1
     created: "2021-02-18T11:25:39.578193092Z"
-    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin).
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
+      plugin).
     digest: 497fc15f326db51486117a3f943f9ecb66c88ff66dd77c2e2bdcb0e384463354
     keywords:
     - storage
@@ -414,7 +427,8 @@ entries:
   - apiVersion: v2
     appVersion: v2.4.0
     created: "2021-02-02T12:02:29.947343091Z"
-    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin).
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
+      plugin).
     digest: ce089b209500b811592ebbac5d6c7a3fb39ce3cea2ab3db2fa961928f9b7bfcc
     keywords:
     - storage
@@ -435,7 +449,8 @@ entries:
   - apiVersion: v2
     appVersion: v2.3.2
     created: "2021-01-26T10:17:37.725585537Z"
-    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin).
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
+      plugin).
     digest: f223320da0cbe56fde47e8d8d550f5455d36fe0c6945d3c0822994dae6826e7c
     keywords:
     - storage
@@ -456,7 +471,8 @@ entries:
   - apiVersion: v2
     appVersion: v2.3.1
     created: "2021-01-19T17:14:58.054042202Z"
-    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin)
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
+      plugin)
     digest: 9c429c73c42a30e3e84a5d44812bf495561acdf05873e60c908e0655584a5a47
     keywords:
     - storage
@@ -477,7 +493,8 @@ entries:
   - apiVersion: v2
     appVersion: v2.3.0
     created: "2021-01-12T10:22:11.25749028Z"
-    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin)
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
+      plugin)
     digest: dd94bb62ed4dc97f4729f213a5a6a74d746a829185ed0ab3f08b92422961eae3
     keywords:
     - storage
@@ -498,7 +515,8 @@ entries:
   - apiVersion: v2
     appVersion: v2.2.3
     created: "2021-01-12T10:04:39.225702636Z"
-    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin)
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
+      plugin)
     digest: 9c97967552f3f4d79ec7967adabab81178bfb795e350228d9e1629e5949be6c4
     keywords:
     - storage
@@ -519,7 +537,8 @@ entries:
   - apiVersion: v2
     appVersion: v2.2.2
     created: "2020-11-07T15:33:00Z"
-    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin)
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
+      plugin)
     digest: b83f1bd855a8914eb720735bf0a9f45dab383bb9f9a1048c4e28a199d0947c7d
     keywords:
     - storage
@@ -540,7 +559,8 @@ entries:
   - apiVersion: v2
     appVersion: v2.2.1
     created: "2020-11-26T18:09:30.322681555Z"
-    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin)
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
+      plugin)
     digest: a4f9cd4077055a0df7eb7ee85f8ea708e0656d46228bb788b78196589b588d25
     keywords:
     - storage
@@ -561,7 +581,8 @@ entries:
   - apiVersion: v2
     appVersion: v2.2.0
     created: "2020-11-09T17:37:42.096977689Z"
-    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin)
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
+      plugin)
     digest: aecc8d9be23c6a093bb7ad42881cb6e683daed49f35e30a0d0c7049882730642
     keywords:
     - storage
@@ -582,7 +603,8 @@ entries:
   - apiVersion: v2
     appVersion: v2.1.0
     created: "2020-10-28T15:36:55.128012477Z"
-    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin)
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
+      plugin)
     digest: aa556411f1887e8823ecea1c17fb49d67cb57a64b43b8877b8c24df48a5f4116
     keywords:
     - storage
@@ -603,7 +625,8 @@ entries:
   - apiVersion: v2
     appVersion: v2.0.2
     created: "2020-10-14T14:20:03.417789517Z"
-    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin)
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
+      plugin)
     digest: dea08c57230e3473d4b0fd078536d5514183a1ea52f4cf651e95a8161c99943d
     keywords:
     - storage
@@ -624,7 +647,8 @@ entries:
   - apiVersion: v2
     appVersion: v2.0.1
     created: "2020-10-14T14:04:25.207508833Z"
-    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI plugin)
+    description: Dothill (Seagate) AssuredSAN dynamic provisioner for Kubernetes (CSI
+      plugin)
     digest: efa9714aeeac4053c76406b6b8d0a4b2e02751c2ab28015f7d25aacde302e65e
     keywords:
     - storage
@@ -646,7 +670,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.4.0
     created: "2022-03-02T15:01:02.920007135Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: e5b3232a48c3b51b2a13d157ebd3423b3d361b6afcafbd134d3234f55139669a
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -671,7 +696,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.3.2
     created: "2021-12-29T15:19:52.954185942Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: 857e4a87d59b99cb124f27be7e3cdd1f1af314f736123403a7f20abdde04c8de
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -696,7 +722,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.3.2
     created: "2021-12-24T14:52:18.237854608Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: 0835fdf81d576371ddc88636259f42d2604370f8f172198fae601aa793491d12
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -721,7 +748,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.3.2
     created: "2021-11-25T09:54:26.503168506Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: 24b569071d4c797109ebab2692df183c3c5f8889b0d199d5e29b60409d500eb4
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -746,7 +774,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.3.1
     created: "2021-09-01T08:30:52.054224659Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: aec4c22e93eae1e8c4ed1e3e84fb736bdd839d681c6b55821df71da8574c4de0
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -771,7 +800,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.3.0
     created: "2021-08-02T16:02:57.370754648Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: 73f218394c7e05a526993712fd51367087a5b18c4e6db1ac8db8b03334dd0668
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -796,7 +826,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.2.3
     created: "2021-06-14T15:48:55.555581408Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: d76240e2257e76a4620e2578f47b7e9614a5ea09afd29fd168ffa6f2369751f9
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -821,7 +852,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.2.2
     created: "2021-05-27T12:42:57.333424065Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: 5b85e62dca809afd1a4bb45d6bc0424221f2ab53757962ef45767701a571f72d
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -846,7 +878,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.2.1
     created: "2021-04-02T13:02:55.836738717Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: 47a888ec300404d507d5ca680d88845b840e3e314d8fd02e2f47ef07ee3ad961
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -871,7 +904,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.2.0
     created: "2021-03-24T12:41:36.561652475Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: 226132ae45dc10477db91fd4aa766c33881646927ec20e4debb1ed21bb9f98ba
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -896,7 +930,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.1.1
     created: "2021-02-26T15:17:08.095959317Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: fc8a741cc9bba458b66b16204dabb55890a81277e695c9a31a3f5f38e75bc02e
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -921,7 +956,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.1.1
     created: "2021-02-26T14:26:44.952320833Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: 4285958b73dbd3ca972c7f4e4884d03964db52c2093cb433fc45afef859dac87
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -946,7 +982,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.1.1
     created: "2021-02-22T15:32:16.948241826Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: a0e4fa3db663d73354ee25055828ab66d3f0c85b6ad20eee1744164c4096d693
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -971,7 +1008,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.1.1
     created: "2021-02-22T14:40:54.273328115Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: d87b536a31c8aa022f7cac13e90e75a2260e9e4f18fbc3f07113f856cea574b2
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -1007,7 +1045,8 @@ entries:
     apiVersion: v2
     appVersion: v1.1.1
     created: "2021-02-18T10:30:07.777320666Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: 7ce67e72f3cf5bc914db8628005f4de1b5b621acb5d34a43347ab94fb114ff4c
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -1032,7 +1071,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.1.0
     created: "2020-10-09T15:25:15.421602223Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: 1b6adf795d373620ef9aa63f91cc292ddb4c04aab7dde5f2d228b152c9fc39fa
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -1051,7 +1091,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.1.0
     created: "2020-10-09T12:46:59.667500181Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: e2306607ff09818f05834e84d0e629201457fdd9d6006e5dc92ebc4ec1a64a36
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -1070,7 +1111,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.0.0
     created: "2020-07-02T11:53:10.294370244Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: 64017e93d6aa59adea4c2bf5a69203505180a905a9bbc7702848b3e01ef5aab4
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -1089,7 +1131,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.0.0
     created: "2020-06-29T17:04:59.629248243Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: ec8784899be345915db0e035cb2f964c44608bff4af05ce438a622bf01f78bb5
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -1108,7 +1151,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.0.0-rc6
     created: "2020-06-25T13:07:40.510133494Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: e082ae868597b562edece612f871ea6c64112b5b28147c0fb3ba2d69d458dadd
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -1127,7 +1171,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.0.0-rc6
     created: "2020-06-25T13:01:16.051390326Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: cc32ae8c1d99fc9d94941dbe3cd6f352a922566b9f0b28d82ebbd5518d8c84bb
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -1146,7 +1191,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.0.0-rc6
     created: "2020-06-25T12:10:20.22590546Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: 694818df96b2e0ea2736bbf1d70b4aa44a5ef9b04efec33add16d4210e8cf1f7
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -1165,7 +1211,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.0.0-rc6
     created: "2020-06-25T10:28:05.517687191Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: b571e1697c2525f2c25eaf5fae5af416fd849b0e3650042ee26902c37670f2d5
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -1184,7 +1231,8 @@ entries:
   - apiVersion: v2
     appVersion: v1.0.0-rc6
     created: "2020-06-25T10:07:58.292544877Z"
-    description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
+    description: A turnkey solution for Kubernetes networking with aim to provide
+      operational simplicity and high performance.
     digest: 6e0afc5de9d06973690ed3b43a729149a494daec497b9659d9fff4f817ae95cf
     home: https://www.kube-router.io/
     icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
@@ -1218,7 +1266,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: '>=10.6.3'
-    description: '[DEPRECATED] This chart is not maintained anymore, we advise migrating to bootc/netbox'
+    description: '[DEPRECATED] This chart is not maintained anymore, we advise migrating
+      to bootc/netbox'
     digest: aba3643d2442a4df71683fde1842c18707f53e0765ce84f5faa51c78e364e564
     home: https://netbox.readthedocs.io/en/stable/
     icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
@@ -1249,7 +1298,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: '>=10.6.3'
-    description: NetBox is an open source web application designed to help manage and document computer networks.
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
     digest: 9f8d2e7e933bb6502bfcf3e48b93b31de5571062a432128e88aea1e17309e9d7
     home: https://netbox.readthedocs.io/en/stable/
     icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
@@ -1280,7 +1330,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: '>=10.6.3'
-    description: NetBox is an open source web application designed to help manage and document computer networks.
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
     digest: 90f63a49d24112d6c7aaf1055fed8eb77bbed985372723e24c1e789c7d53e0c9
     home: https://netbox.readthedocs.io/en/stable/
     icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
@@ -1311,7 +1362,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: '>=10.6.3'
-    description: NetBox is an open source web application designed to help manage and document computer networks.
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
     digest: 35b337c3bf34ed178cc3419a5fb5b5c9e21982ddaab05ee1b208b0596d7d3cd9
     home: https://netbox.readthedocs.io/en/stable/
     icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
@@ -1342,7 +1394,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: '>=10.6.3'
-    description: NetBox is an open source web application designed to help manage and document computer networks.
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
     digest: 0aad4bcacf2219efd37fc0c3ef52bfc2ceee4b7fd508142dc254b2fb31995eb7
     home: https://netbox.readthedocs.io/en/stable/
     icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
@@ -1373,7 +1426,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: '>=10.6.3'
-    description: NetBox is an open source web application designed to help manage and document computer networks.
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
     digest: a35bad36bfecac15af93f428fe8a6a21a214df05240f578e20043245e4998c63
     home: https://netbox.readthedocs.io/en/stable/
     icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
@@ -1404,7 +1458,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: '>=10.6.3'
-    description: NetBox is an open source web application designed to help manage and document computer networks.
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
     digest: d512f7a674a19cb6fea61b9e24c636591ca5ba8d8bd245c0a738da6d10844e40
     home: https://netbox.readthedocs.io/en/stable/
     icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
@@ -1435,7 +1490,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: '>=10.6.3'
-    description: NetBox is an open source web application designed to help manage and document computer networks.
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
     digest: a1d59de27e351952f19d2e582b45f1cb01c682c5ff15a736f71d9414ab4010e1
     home: https://netbox.readthedocs.io/en/stable/
     icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
@@ -1466,7 +1522,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: '>=10.6.3'
-    description: NetBox is an open source web application designed to help manage and document computer networks.
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
     digest: 6d48b31c3369408213474db5e6dd9c810e3c36c3cb31672393295d33af77b6ce
     home: https://netbox.readthedocs.io/en/stable/
     icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
@@ -1497,7 +1554,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: '>=10.6.3'
-    description: NetBox is an open source web application designed to help manage and document computer networks.
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
     digest: 2e2ba87696077beec01f8faa3158e67e01c462731a178fe4d11d796eac65f117
     home: https://netbox.readthedocs.io/en/stable/
     icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
@@ -1528,7 +1586,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: '>=10.6.3'
-    description: NetBox is an open source web application designed to help manage and document computer networks.
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
     digest: 1f9232d92abedab1951d48eb43743bc83f39836e8b303ad60dc983d7776d6250
     home: https://netbox.readthedocs.io/en/stable/
     icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
@@ -1559,7 +1618,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: '>=10.6.3'
-    description: NetBox is an open source web application designed to help manage and document computer networks.
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
     digest: f330004708142e1e48edee45ae82be4903ecfa7f14e175952e378f26c67eeff4
     home: https://netbox.readthedocs.io/en/stable/
     icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
@@ -1590,7 +1650,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: '>=10.6.3'
-    description: NetBox is an open source web application designed to help manage and document computer networks.
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
     digest: 3c14ad32ae39fc98bd1a021cbf767035b2dce7ba6330d310f2b76fde983d5a92
     home: https://netbox.readthedocs.io/en/stable/
     icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
@@ -1621,7 +1682,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: '>=10.6.3'
-    description: NetBox is an open source web application designed to help manage and document computer networks.
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
     digest: f65e1fe92ba2b8a623195e0828961f2c1092b20c44ec605463ab1f662dfe5b83
     home: https://netbox.readthedocs.io/en/stable/
     icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
@@ -1649,7 +1711,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: '>=10.6.3'
-    description: NetBox is an open source web application designed to help manage and document computer networks.
+    description: NetBox is an open source web application designed to help manage
+      and document computer networks.
     digest: d1bcd68b3ba094193ce687b829a83b90b80ed83a452cfc7111d4fe03948fa72f
     home: https://netbox.readthedocs.io/en/stable/
     icon: https://github.com/netbox-community/netbox/raw/develop/docs/netbox_logo.svg?sanitize=true
@@ -1773,7 +1836,8 @@ entries:
     apiVersion: v2
     appVersion: v4.0.2
     created: "2021-09-29T09:51:09.385635784Z"
-    description: A dynamic persistent volume (PV) provisioner for iSCSI-compatible SAN based storage systems.
+    description: A dynamic persistent volume (PV) provisioner for iSCSI-compatible
+      SAN based storage systems.
     digest: a243e6ff5f23cf54c9766373d69fc3ed00d378adae5c534040811780a1665416
     home: https://github.com/enix/san-iscsi-csi
     keywords:
@@ -1806,7 +1870,8 @@ entries:
     apiVersion: v2
     appVersion: v4.0.1
     created: "2021-08-17T11:15:45.653484385Z"
-    description: A dynamic persistent volume (PV) provisioner for iSCSI-compatible SAN based storage systems.
+    description: A dynamic persistent volume (PV) provisioner for iSCSI-compatible
+      SAN based storage systems.
     digest: 0c4a5cebfe31a6fe541abdc955eeb03c1844b4d402b3ffddd4a3738f2045d0dd
     home: https://github.com/enix/san-iscsi-csi
     keywords:
@@ -1839,7 +1904,8 @@ entries:
     apiVersion: v2
     appVersion: v4.0.0
     created: "2021-06-14T10:57:55.848253343Z"
-    description: A dynamic persistent volume (PV) provisioner for iSCSI-compatible SAN based storage systems.
+    description: A dynamic persistent volume (PV) provisioner for iSCSI-compatible
+      SAN based storage systems.
     digest: 1c0599e86a2de45931837e3a7bdce53dd403e097c3f8b67ac7da274936c8cddb
     home: https://github.com/enix/san-iscsi-csi
     keywords:
@@ -1877,6 +1943,55 @@ entries:
     - https://github.com/enix/helm-charts/releases/download/swift-exporter-0.1.0/swift-exporter-0.1.0.tgz
     version: 0.1.0
   x509-certificate-exporter:
+  - annotations:
+      artifacthub.io/changes: |-
+        # [3.0.0-beta.3](https://github.com/enix/x509-certificate-exporter/compare/v3.0.0-beta.2...v3.0.0-beta.3) (2022-05-31)
+
+
+        ### Features
+
+        * **ci:** dumy feature to force new release ([80f48b0](https://github.com/enix/x509-certificate-exporter/commit/80f48b03872b3aefcf7f6be3b7777733b16d9a2a))
+      artifacthub.io/containsSecurityUpdates: ""
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: v3.0.0-beta.3
+    created: "2022-05-31T15:34:08.624688382Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 8ac7ec43eb252f1c6da6e4327e2e742741c77fa615140d1a5e53a3595c98a4cf
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@paraneko.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    - https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-v3.0.0-beta.3/x509-certificate-exporter-v3.0.0-beta.3.tgz
+    version: v3.0.0-beta.3
   - annotations:
       artifacthub.io/changes: |
         - "Reverted to exporter version 2.12.0, and defaults values from chart version 1.18.0 ; a bug is being investigated"
@@ -3554,4 +3669,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2020-04-09T11:05:20.531459729Z"
+generated: "2022-05-31T15:34:08.631245479Z"
