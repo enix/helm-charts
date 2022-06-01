@@ -1944,6 +1944,55 @@ entries:
     version: 0.1.0
   x509-certificate-exporter:
   - annotations:
+      artifacthub.io/changes: |
+        - # [3.0.0-beta.4](https://github.com/enix/x509-certificate-exporter/compare/v3.0.0-beta.3...v3.0.0-beta.4) (2022-06-01)
+        - ### Bug Fixes
+        - * **ci:** remove leading v from chart version ([78dd9b9](https://github.com/enix/x509-certificate-exporter/commit/78dd9b9940cb96a06bd0c9bb772c71e31f22ce8d))
+        - ### Features
+        - * **exporter:** --profile flag to run pprof server on :6060 ([765ace4](https://github.com/enix/x509-certificate-exporter/commit/765ace4cd9c74b0e5dca646124c8a8f9e16fe839))
+        - * **exporter:** remove unneeded data from secrets to try reduce memory usage ([4adeee7](https://github.com/enix/x509-certificate-exporter/commit/4adeee750a4fa30b308261fa50028531286b11b7))
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 3.0.0-beta.4
+    created: "2022-06-01T14:36:09.680775186Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 2028f2be402c01037845c17979991e39de082ac3edf67a589b819434aebda2cb
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@paraneko.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    - https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-3.0.0-beta.4/x509-certificate-exporter-3.0.0-beta.4.tgz
+    version: 3.0.0-beta.4
+  - annotations:
       artifacthub.io/changes: |-
         # [3.0.0-beta.3](https://github.com/enix/x509-certificate-exporter/compare/v3.0.0-beta.2...v3.0.0-beta.3) (2022-05-31)
 
@@ -3669,4 +3718,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2022-05-31T15:34:08.631245479Z"
+generated: "2022-06-01T14:36:09.681689794Z"
