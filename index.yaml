@@ -1945,6 +1945,52 @@ entries:
   x509-certificate-exporter:
   - annotations:
       artifacthub.io/changes: |
+        - # [3.0.0-beta.8](https://github.com/enix/x509-certificate-exporter/compare/v3.0.0-beta.7...v3.0.0-beta.8) (2022-06-02)
+        - ### Bug Fixes
+        - * **ci:** pass correct version to ci script ([1edcf63](https://github.com/enix/x509-certificate-exporter/commit/1edcf63ca83bc59f2bec8aa7d09e2c6309e179ea))
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 3.0.0-beta.8
+    created: "2022-06-02T13:00:58.973001327Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 0585827c4f44dd50a7745c2cdb37096406807d75697cf6ba573c8c9461206984
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@paraneko.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    - https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-3.0.0-beta.8/x509-certificate-exporter-3.0.0-beta.8.tgz
+    version: 3.0.0-beta.8
+  - annotations:
+      artifacthub.io/changes: |
         - # [3.0.0-beta.4](https://github.com/enix/x509-certificate-exporter/compare/v3.0.0-beta.3...v3.0.0-beta.4) (2022-06-01)
         - ### Bug Fixes
         - * **ci:** remove leading v from chart version ([78dd9b9](https://github.com/enix/x509-certificate-exporter/commit/78dd9b9940cb96a06bd0c9bb772c71e31f22ce8d))
@@ -3718,4 +3764,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2022-06-01T14:36:09.681689794Z"
+generated: "2022-06-02T13:00:58.973681727Z"
