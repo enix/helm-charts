@@ -1,3 +1,0 @@
-Thank you for using Dothill provisioner. It will be soon up and running.
-
-In order to dynamically provide a persistant volume, you have to create a storage class first. Please refer to this example to do so: https://github.com/enix/dothill-csi/blob/main/example/storage-class.yaml

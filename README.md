@@ -22,7 +22,7 @@ $ helm install my-release enix/<chart>
 ## Charts collection
 
 The following helm charts are maintained :
-* [dothill-csi](https://github.com/enix/helm-charts/tree/master/charts/dothill-csi)
+* [san-iscsi-csi](https://github.com/enix/helm-charts/tree/master/charts/san-iscsi-csi)
 * [x509-certificate-exporter](https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter)
 * [kube-router](https://github.com/enix/helm-charts/tree/master/charts/kube-router)
 
@@ -30,7 +30,7 @@ Please refer to each individual documentation !
 
 # License
 
-Copyright (c) 2021 ENIX
+Copyright (c) 2022 ENIX
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
