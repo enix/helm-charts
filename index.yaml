@@ -1944,6 +1944,59 @@ entries:
     version: 0.1.0
   x509-certificate-exporter:
   - annotations:
+      artifacthub.io/changes: '[   "**exporter:** ignore keys containing an empty
+        string ([bbeb328](https://github.com/enix/x509-certificate-exporter/commit/bbeb328d6551a629a34e132775b9b1a63f42f8a2))\\r",   "**chart:**
+        made all alerting severity configurable ([ba19d2a](https://github.com/enix/x509-certificate-exporter/commit/ba19d2a1c877f592c68e95fa338675b3a44fb4ba)),
+        closes [#30](https://github.com/enix/x509-certificate-exporter/issues/30)\\r",   "**chart:**
+        adjust secrets exporter resources ([5fe3f19](https://github.com/enix/x509-certificate-exporter/commit/5fe3f191621c6e5c1e1dbbd6a09462e71a6ed257))\\r",   "**exporter:**
+        --profile flag to run pprof server on :6060 ([765ace4](https://github.com/enix/x509-certificate-exporter/commit/765ace4cd9c74b0e5dca646124c8a8f9e16fe839))\\r",   "**exporter:**
+        remove unneeded data from secrets to try reduce memory usage ([4adeee7](https://github.com/enix/x509-certificate-exporter/commit/4adeee750a4fa30b308261fa50028531286b11b7))\\r",   "**exporter:**
+        remove dependency on local libc ([0f6b20f](https://github.com/enix/x509-certificate-exporter/commit/0f6b20fae33998e696f1bfb851b4e5b9ca8df966)),
+        closes [#28](https://github.com/enix/x509-certificate-exporter/issues/28)\\r",   "The
+        exporter will not emit errors when missing YAML entries.\\r",   "The exporter
+        will no longer emit errors when keys are empty strings.\\r" ]'
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 3.0.0
+    created: "2022-06-21T13:12:40.159337556Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: c7942e59fb4c4fdb9f25e6e6ed6ff4df62c5376e933829bdaf10c5f8b096602b
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@paraneko.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    - https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-3.0.0/x509-certificate-exporter-3.0.0.tgz
+    version: 3.0.0
+  - annotations:
       artifacthub.io/changes: '[   "**ci:** properly set changelog in chart.yml ([c547e15](https://github.com/enix/x509-certificate-exporter/commit/c547e158531444ef384f62d54908015784ab1876))"
         ]'
       artifacthub.io/containsSecurityUpdates: "false"
@@ -3887,4 +3940,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2022-06-20T12:13:11.2718998Z"
+generated: "2022-06-21T13:12:40.161551233Z"
