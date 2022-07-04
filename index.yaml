@@ -1944,6 +1944,51 @@ entries:
     version: 0.1.0
   x509-certificate-exporter:
   - annotations:
+      artifacthub.io/changes: '[   "**helm:** allow deployment of extra k8s objects
+        ([29df17d](https://github.com/enix/x509-certificate-exporter/commit/29df17daf1ff5a9c896d463d81bb193b22834afe))",   "**helm:**
+        customize additional alerts in PrometheusRule ([be6e446](https://github.com/enix/x509-certificate-exporter/commit/be6e446ab5711e94fb3bff4c24b52483c04ba57d))"
+        ]'
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/chart
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 3.2.0
+    created: "2022-07-04T10:37:56.443211771Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 6537183e1a21a4367d7e1771cbd5c7c47b6c5530b8b2c57286b9f6b959954e07
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@paraneko.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-3.2.0/x509-certificate-exporter-3.2.0.tgz
+    version: 3.2.0
+  - annotations:
       artifacthub.io/changes: '[   "add alertExtraLabels and rulePrefix to prometheusrule
         ([5a17ecf](https://github.com/enix/x509-certificate-exporter/commit/5a17ecf7bbdcb607651849052e70d11b55de166a))"
         ]'
@@ -4163,4 +4208,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2022-06-30T13:12:28.517788254Z"
+generated: "2022-07-04T10:37:56.445232501Z"
