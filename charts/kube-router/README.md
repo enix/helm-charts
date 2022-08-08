@@ -82,6 +82,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | kubeRouter.router.enableOverlay | string | `nil` | Enable IP-in-IP tunneling for pod-to-pod networking across nodes in different subnets (true or false) |
 | kubeRouter.router.enablePodEgress | string | `nil` | SNAT traffic from Pods to destinations outside the cluster (true or false) |
 | kubeRouter.router.enabled | bool | `true` | Enables Pod Networking, Advertises and learns the routes to Pods via iBGP |
+| kubeRouter.router.injectedRoutesSyncPeriod | string | `nil` | The delay between route table synchronizations  (e.g. '5s', '1m', '2h22m'). Must be greater than 0 |
 | kubeRouter.router.nodesFullMesh | string | `nil` | Each node in the cluster will setup BGP peering with rest of the nodes (true or false) |
 | kubeRouter.router.overlayType | string | `nil` | Topology of overlay network. Possible values: subnet or full. |
 | kubeRouter.router.overrideNexthop | string | `nil` | Override the next-hop in bgp routes sent to peers with the local ip |

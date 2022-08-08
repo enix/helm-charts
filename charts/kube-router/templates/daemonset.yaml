@@ -150,6 +150,9 @@ spec:
         {{- if not (kindIs "invalid" .routesSyncPeriod) }}
         - "--routes-sync-period={{ .routesSyncPeriod }}"
         {{- end }}
+        {{- if not (kindIs "invalid" .injectedRoutesSyncPeriod) }}
+        - "--injected-routes-sync-period={{ .injectedRoutesSyncPeriod }}"
+        {{- end }}
         {{- else}}
         - "--run-router=false"
         {{- end }}
