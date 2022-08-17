@@ -1,3 +1,5 @@
+title: The Enix Package collection for Kubernetes
+description: "A collection of Helm packages brought to you by Enix Monkeys :monkey_face:"
 theme: jekyll-theme-cayman
 plugins:
   - jemoji
