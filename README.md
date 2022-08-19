@@ -23,7 +23,7 @@ $ helm install my-release enix/<chart>
 
 The following helm charts are maintained :
 * [san-iscsi-csi](https://github.com/enix/helm-charts/tree/master/charts/san-iscsi-csi)
-* [x509-certificate-exporter](https://github.com/enix/helm-charts/tree/master/charts/x509-certificate-exporter)
+* [x509-certificate-exporter](https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter)
 * [kube-router](https://github.com/enix/helm-charts/tree/master/charts/kube-router)
 
 Please refer to each individual documentation !
