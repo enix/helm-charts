@@ -7,10 +7,12 @@ metadata:
   name: {{ printf "%s-%s" (include "x509-certificate-exporter.fullname" $) $dsName }}
   labels:
     {{- include "x509-certificate-exporter.labels" $ | nindent 4 }}
+    x509-certificate-exporter.enix.io/daemonset-name: {{ $dsName | quote }}
 spec:
   selector:
     matchLabels:
       {{- include "x509-certificate-exporter.selectorLabels" $ | nindent 6 }}
+      x509-certificate-exporter.enix.io/daemonset-name: {{ $dsName | quote }}
   {{- with default $.Values.hostPathsExporter.updateStrategy $dsDef.updateStrategy }}
   updateStrategy:
     {{- . | toYaml | trim | nindent 4 }}
@@ -19,6 +21,7 @@ spec:
     metadata:
       labels:
         {{- include "x509-certificate-exporter.labels" $ | nindent 8 }}
+        x509-certificate-exporter.enix.io/daemonset-name: {{ $dsName | quote }}
         {{- with $.Values.podExtraLabels }}
         {{- . | toYaml | trim | nindent 8 }}
         {{- end }}
@@ -78,13 +81,13 @@ spec:
         {{- end }}
         - --trim-path-components=3
         {{- range default $.Values.hostPathsExporter.watchDirectories $dsDef.watchDirectories }}
-        - --watch-dir=/mnt/watch/dir-{{ . | clean | sha1sum }}/{{ . | clean }}
+        - --watch-dir=/mnt/watch/dir-{{ . | clean | sha1sum }}/{{ . | clean | trimPrefix "/" }}
         {{- end }}
         {{- range default $.Values.hostPathsExporter.watchFiles $dsDef.watchFiles }}
-        - --watch-file=/mnt/watch/file-{{ . | clean | sha1sum }}/{{ . | clean }}
+        - --watch-file=/mnt/watch/file-{{ . | clean | sha1sum }}/{{ . | clean | trimPrefix "/" }}
         {{- end }}
         {{- range default $.Values.hostPathsExporter.watchKubeconfFiles $dsDef.watchKubeconfFiles }}
-        - --watch-kubeconf=/mnt/watch/kube-{{ . | clean | sha1sum }}/{{ . | clean }}
+        - --watch-kubeconf=/mnt/watch/kube-{{ . | clean | sha1sum }}/{{ . | clean | trimPrefix "/" }}
         {{- end }}
         {{- if not (kindIs "invalid" $.Values.metricLabelsFilterList) }}
         - --expose-labels={{ $.Values.metricLabelsFilterList | join "," }}
@@ -100,18 +103,18 @@ spec:
         volumeMounts:
         {{- range default $.Values.hostPathsExporter.watchDirectories $dsDef.watchDirectories }}
         - name: dir-{{ . | clean | sha1sum }}
-          mountPath: /mnt/watch/dir-{{ . | clean | sha1sum }}/{{ . | clean }}
+          mountPath: /mnt/watch/dir-{{ . | clean | sha1sum }}/{{ . | clean | trimPrefix "/" }}
           readOnly: true
         {{- end }}
         {{- range default $.Values.hostPathsExporter.watchFiles $dsDef.watchFiles }}
         - name: file-{{ . | clean | sha1sum }}
-          mountPath: /mnt/watch/file-{{ . | clean | sha1sum }}/{{ . | clean | dir }}
+          mountPath: /mnt/watch/file-{{ . | clean | sha1sum }}/{{ . | clean | dir | trimPrefix "/" }}
           #subPath: {{ . | base }}
           readOnly: true
         {{- end }}
         {{- range default $.Values.hostPathsExporter.watchKubeconfFiles $dsDef.watchKubeconfFiles }}
         - name: kube-{{ . | clean | sha1sum }}
-          mountPath: /mnt/watch/kube-{{ . | clean | sha1sum }}/{{ . | clean | dir }}
+          mountPath: /mnt/watch/kube-{{ . | clean | sha1sum }}/{{ . | clean | dir | trimPrefix "/" }}
           #subPath: {{ . | base }}
           readOnly: true
         {{- end }}
