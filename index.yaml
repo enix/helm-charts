@@ -1970,6 +1970,60 @@ entries:
     version: 0.1.0
   x509-certificate-exporter:
   - annotations:
+      artifacthub.io/changes: '[   "**helm:** prometheus relabelings default value
+        should be a list ([ee6b997](https://github.com/enix/x509-certificate-exporter/commit/ee6b997a6aecccc87c11e5f81bdc105220f5a16a)),
+        closes [#43](https://github.com/enix/x509-certificate-exporter/issues/43)",   "**test:**
+        bind to localhost in tests to avoid firewall popups for the test executable
+        on macOS ([516b691](https://github.com/enix/x509-certificate-exporter/commit/516b691f46e0e546931852fe93ec129d157a2c20))",   "**test:**
+        create service account tokens explicitly since Kubernetes 1.24 disables this
+        insecure default ([c550166](https://github.com/enix/x509-certificate-exporter/commit/c550166e11905c5d8f7194a7c385fc056f9be822))",   "**test:**
+        make tests repeatable if pointing to a running Kubernetes cluster (by deleting
+        generated items first) ([6f4b1a3](https://github.com/enix/x509-certificate-exporter/commit/6f4b1a3b3ac9666034bc1aed778ba353e83fb055))",   "**test:**
+        show real error message if there is already a conflicting server running locally
+        ([6f58f1d](https://github.com/enix/x509-certificate-exporter/commit/6f58f1de79386ff2461c87547e6d0c4d31a9b936))",   "**build:**
+        upgrade to golang 1.18 and bump dependencies ([27edd66](https://github.com/enix/x509-certificate-exporter/commit/27edd6679416b450c1268b527d79122ee7232f3b))"
+        ]'
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/chart
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 3.4.0-beta.1
+    created: "2022-09-13T14:40:14.646435426Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 49ca38dd395080b40ab6623953f975fba4e08764a483c2b9b51f1234cc4b77ec
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@paraneko.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-3.4.0-beta.1/x509-certificate-exporter-3.4.0-beta.1.tgz
+    version: 3.4.0-beta.1
+  - annotations:
       artifacthub.io/changes: '[   "**build:** release binaries for additional Unixes
         ([1a597af](https://github.com/enix/x509-certificate-exporter/commit/1a597af1855fc05ad01284fd2070829389ff0b00))"
         ]'
@@ -4323,4 +4377,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2022-08-08T22:56:32.201007394Z"
+generated: "2022-09-13T14:40:14.649371693Z"
