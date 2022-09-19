@@ -1971,6 +1971,53 @@ entries:
   x509-certificate-exporter:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'chart: allow nil as image tag suffix, string for default tag type'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/020c0cc36c0fac0acc5d0a6773edc6f839514c0c
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 3.5.0-beta.3
+    created: "2022-09-19T18:14:57.519656343Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: fb2ef44a89da65c6113e69215141061bb2fbc12975730aec3da1fa7c1004b7d0
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-3.5.0-beta.3/x509-certificate-exporter-3.5.0-beta.3.tgz
+    version: 3.5.0-beta.3
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'container: format entrypoint as array (fixes scratch image)'
           kind: fixed
           links:
@@ -4572,4 +4619,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2022-09-19T17:35:45.89227529Z"
+generated: "2022-09-19T18:14:57.520801238Z"
