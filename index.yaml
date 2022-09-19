@@ -1970,6 +1970,100 @@ entries:
     version: 0.1.0
   x509-certificate-exporter:
   - annotations:
+      artifacthub.io/changes: |-
+        - description: binaries know their build date and commit hash
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/e5ff47e3d0c199b739ef5ab62df9851c11bd7721
+        - description: binary releases for illumos (amd64 only)
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/6301f2582f0c6240b1dc20c2744174f39b8dec51
+        - description: binary releases for NetBSD
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/c7b992b1970a82936f9c2939c866e63ab49e61f9
+        - description: binary releases for the RISC-V architecture (Linux only)
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/fbe127cd8c4d01c977c216dcab9746256e0e19a1
+          - name: 'GitHub issue #49'
+            url: https://github.com/enix/x509-certificate-exporter/issues/49
+        - description: busybox (uclibc) based container images
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/c483f14ce91b78487c5ec051f72d1ba4ee4f20fd
+        - description: container images for the RISC-V architecture
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/a813e99908aee9ca460f657fefe1f7bacf910337
+        - description: container images now default to the busybox flavor
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/d388ca5c66cd8620883e50e531539f875b30666c
+        - description: distroless "scratch" container images
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/a34604236c8b3baa7c1edd5f7da746e9e45c81c7
+        - description: new value `image.tagSuffix` for container flavor selection
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/c6d59c92ca20e2ed4e05a8bfbd7741907b08fbe1
+        - description: Alpine based container images pull version 3.16.2
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/40c33f555375da4442fa42d3de85a33b3d3fcca7
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: v3.5.0-beta.1
+    created: "2022-09-19T15:08:39.354149797Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 1dbea2d58570637a745a7d14be489846725ea971339e03b90c16eabe6367daf3
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-v3.5.0-beta.1/x509-certificate-exporter-v3.5.0-beta.1.tgz
+    version: v3.5.0-beta.1
+  - annotations:
       artifacthub.io/changes: '[   "**helm:** prometheus relabelings default value
         should be a list ([ee6b997](https://github.com/enix/x509-certificate-exporter/commit/ee6b997a6aecccc87c11e5f81bdc105220f5a16a)),
         closes [#43](https://github.com/enix/x509-certificate-exporter/issues/43)",   "**test:**
@@ -4431,4 +4525,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2022-09-13T16:47:00.401462038Z"
+generated: "2022-09-19T15:08:39.355207304Z"
