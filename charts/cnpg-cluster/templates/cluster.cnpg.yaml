@@ -1,0 +1,56 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ include "cnpg-cluster.fullname" . }}
+  labels:
+    {{- include "cnpg-cluster.labels" . | nindent 4 }}
+spec:
+  instances: {{ .Values.replicaCount }}
+  {{- if .Values.image.repository }}
+  imageName: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+  {{- end }}
+  imagePullPolicy: {{ .Values.image.pullPolicy }}
+  {{- if or .Values.imagePullSecrets .Values.registryCredentials }}
+  imagePullSecrets:
+  {{- with .Values.imagePullSecrets }}
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
+  {{- range $name, $settings := .Values.registryCredentials }}
+    - name: "{{ include "cnpg-cluster.fullname" $ }}-{{ $name }}"
+  {{- end }}
+  {{- end }}
+
+  {{- if or .Values.nodeSelector .Values.tolerations .Values.extraAffinity }}
+  affinity:
+    {{- with .Values.nodeSelector }}
+    nodeSelector:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+    tolerations:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+    {{- with .Values.extraAffinity }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- end }}
+
+  storage:
+    size: {{ .Values.persistence.size | quote }}
+    {{- with .Values.persistence.resizeInUseVolumes }}
+    resizeInUseVolumes: {{ . | quote }}
+    {{- end }}
+    {{- if .Values.persistence.storageClass }}
+    {{- if (eq "-" .Values.persistence.storageClass) }}
+    storageClass: ""
+    {{- else }}
+    storageClass: "{{ .Values.persistence.storageClass }}"
+    {{- end }}
+    {{- end }}
+    {{- with .Values.persistence.pvcTemplate }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  
+{{- with .Values.clusterExtraSpec }}
+  {{- toYaml . | nindent 2 }}
+{{- end }}

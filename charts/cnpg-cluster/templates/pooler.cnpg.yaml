@@ -1,0 +1,12 @@
+{{- range $name, $spec := .Values.poolers }}
+apiVersion: postgresql.cnpg.io/v1
+kind: Pooler
+metadata:
+  name: {{ include "cnpg-cluster.fullname" $ }}-{{ $name }}
+  labels:
+    {{- include "cnpg-cluster.labels" . | nindent 4 }}
+spec:
+  cluster:
+    name: {{ include "cnpg-cluster.fullname" $ }}
+  {{- toYaml $spec | nindent 2 }}
+{{- end }}

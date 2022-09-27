@@ -1,0 +1,12 @@
+{{- range $name, $spec := .Values.scheduledBackups }}
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: {{ include "cnpg-cluster.fullname" $ }}-{{ $name }}
+  labels:
+    {{- include "cnpg-cluster.labels" . | nindent 4 }}
+spec:
+  cluster:
+    name: {{ include "cnpg-cluster.fullname" $ }}
+  {{- toYaml $spec | nindent 2 }}
+{{- end }}

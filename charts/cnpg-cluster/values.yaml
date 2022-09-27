@@ -1,0 +1,88 @@
+# Default values for cnpg-cluster.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# -- Number of Postgres instances in the cluster
+replicaCount: 1
+
+image:
+  # -- Postgres image repository. Keep empty to use operator's default image. See: https://cloudnative-pg.io/documentation/1.17/operator_capability_levels/#override-of-operand-images-through-the-crd
+  repository: "ghcr.io/cloudnative-pg/postgresql"
+  # -- Postgres image pull policy
+  pullPolicy: IfNotPresent
+  # -- Override the Postgres image tag
+  tag: ""
+
+# -- Docker-registry secret names as an array
+imagePullSecrets: []
+# -- Create a docker-registry secret and use it as imagePullSecrets
+registryCredentials:
+# Eg:
+#   mygitlab:
+#     registry: gitlab-registry.example.org
+#     email: foo@example.org
+#     username: foobar
+#     password: secret
+# -- String to partially override cnpg-cluster.fullname template with a string (will prepend the release name)
+nameOverride: ""
+# --  String to fully override cnpg-cluster.fullname template with a string
+fullnameOverride: ""
+
+# -- CPU/Memory resource requests/limits
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# -- Postgres instances labels for pod assignment
+nodeSelector: {}
+
+# -- Postgres instances labels for tolerations pod assignment
+tolerations: []
+
+# -- Extra configuration for Cluster's affinity resource,
+# see: https://cloudnative-pg.io/documentation/1.17/api_reference/#AffinityConfiguration
+extraAffinity: {}
+
+persistence:
+  # -- Size of each instance storage volume
+  size: 1Gi
+  # -- Resize existent PVCs, defaults to true	
+  resizeInUseVolumes:
+  # persistence.storageClass -- StorageClass to use for database data,
+  # Applied after evaluating the PVC template, if available.
+  # If not specified, generated PVCs will be satisfied by the default storage class
+  storageClass: ""
+  # persistence.pvcTemplate -- Template to be used to generate the Persistent Volume Claim
+  pvcTemplate: {}
+
+# -- Extra configuration for Cluster resource.
+# See: https://cloudnative-pg.io/documentation/1.17/api_reference/#clusterspec
+clusterExtraSpec: {}
+
+# -- ScheduledBackup resources to create for this Cluster resource
+# See: https://cloudnative-pg.io/documentation/1.17/api_reference/#ScheduledBackupSpec
+scheduledBackups: {}
+# Eg:
+#   daily:
+#     schedule: "0 0 0 * * *"
+
+# -- Poller resources to create for this Cluster resource
+# See: https://cloudnative-pg.io/documentation/1.17/api_reference/#PoolerSpec
+poolers: {}
+# Eg:
+#   rw:
+#     instances: 3
+#     type: rw
+#     pgbouncer:
+#       poolMode: session
+#       parameters:
+#         max_client_conn: "1000"
+#         default_pool_size: "10"
