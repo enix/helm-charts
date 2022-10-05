@@ -63,6 +63,67 @@ persistence:
   # persistence.pvcTemplate -- Template to be used to generate the Persistent Volume Claim
   pvcTemplate: {}
 
+backup:
+  # -- Enable backups
+  enabled: false
+
+  # -- The path where to store the backup (i.e. s3://bucket/path/to/folder) this path,
+  # with different destination folders, will be used for WALs and for data --
+  destinationPath: ""
+
+  # -- RetentionPolicy is the retention policy to be used for backups and WALs (i.e. '60d').
+  # The retention policy is expressed in the form of XXu where XX is a positive integer and
+  # u is in [dwm] - days, weeks, months.
+  retentionPolicy: 30d
+
+  # -- (string) Endpoint to be used to upload data to the cloud, overriding the automatic endpoint discovery
+  endpointURL:
+
+  # -- (string) EndpointCA store the CA bundle of the barman endpoint. Useful when using self-signed
+  # certificates to avoid errors with certificate issuer and barman-cloud-wal-archive
+  endpointCA:
+
+  # -- (string) The server name on S3, the cluster name is used if this parameter is omitted
+  serverName:
+
+  # -- Configuration of the backup of the WAL stream
+  # See: https://cloudnative-pg.io/documentation/1.17/api_reference/#walbackupconfiguration
+  wal: {}
+
+  # -- Configuration of the backup of the data directory
+  # See: https://cloudnative-pg.io/documentation/1.17/api_reference/#DataBackupConfiguration
+  data: {}
+
+  # -- Tags is a list of key value pairs that will be passed to the Barman --tags option
+  tags: {}
+
+  # -- HistoryTags is a list of key value pairs that will be passed to the Barman --history-tags option
+  historyTags: {}
+
+  # -- (object) The credentials to use to upload data to Google Cloud Storage
+  # See: https://cloudnative-pg.io/documentation/1.17/api_reference/#GoogleCredentials
+  googleCredentials:
+    #gkeEnvironment:
+    #applicationCredentials:
+
+  # -- (object) The credentials to use to upload data to S3
+  # See: https://cloudnative-pg.io/documentation/1.17/api_reference/#S3Credentials
+  s3Credentials:
+    # accessKeyId:
+    # secretAccessKey:
+    # region:
+    # sessionToken:
+    # inheritFromIAMRole:
+
+  # -- (object) The credentials to use to upload data to Azure Blob Storage
+  # See: https://cloudnative-pg.io/documentation/1.17/api_reference/#AzureCredentials
+  azureCredentials:
+    connectionString:
+    storageAccount:
+    storageKey:
+    storageSasToken:
+    inheritFromAzureAD:
+
 # -- Extra configuration for Cluster resource.
 # See: https://cloudnative-pg.io/documentation/1.17/api_reference/#clusterspec
 clusterExtraSpec: {}

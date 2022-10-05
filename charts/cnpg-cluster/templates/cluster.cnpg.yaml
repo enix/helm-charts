@@ -50,7 +50,101 @@ spec:
     {{- with .Values.persistence.pvcTemplate }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
-  
+
+{{- if .Values.backup.enabled }}
+  backup:
+    retentionPolicy: "{{ .Values.backup.retentionPolicy }}"
+    barmanObjectStore:
+    {{- with .Values.backup.endpointURL }}
+      endpointURL: "{{ . }}"
+    {{- end }}
+    {{- with .Values.backup.endpointCA }}
+      endpointCA: "{{ . }}"
+    {{- end }}
+      destinationPath: {{ .Values.backup.destinationPath }}
+    {{- with .Values.backup.serverName }}
+      serverName: "{{ . }}"
+    {{- end }}
+    {{- with .Values.backup.wal }}
+      wal:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.backup.data }}
+      data:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.backup.tags }}
+      tags:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.backup.historyTags }}
+      historyTags:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- if .Values.backup.s3Credentials }}
+      s3Credentials:
+        {{- with .Values.backup.s3Credentials.accessKeyId }}
+        accessKeyId:
+          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          key: "accessKeyId"
+        {{- end }}
+        {{- with .Values.backup.s3Credentials.secretAccessKey }}
+        secretAccessKey:
+          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          key: "secretAccessKey"
+        {{- end }}
+        {{- with .Values.backup.s3Credentials.region }}
+        region:
+          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          key: "region"
+        {{- end }}
+        {{- with .Values.backup.s3Credentials.sessionToken }}
+        sessionToken:
+          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          key: "sessionToken"
+        {{- end }}
+        {{- with .Values.backup.s3Credentials.inheritFromIAMRole }}
+        inheritFromIAMRole: {{ . }}
+        {{- end }}
+    {{- else if .Values.backup.googleCredentials }}
+      googleCredentials:
+        {{- with .Values.backup.googleCredentials.gkeEnvironment }}
+        gkeEnvironment: {{ . }}
+        {{- end }}
+        {{- with .Values.backup.googleCredentials.applicationCredentials }}
+        applicationCredentials:
+          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          key: "applicationCredentials"
+        {{- end }}
+    {{- else if .Values.backup.azureCredentials  }}
+      azureCredentials:
+        {{- with .Values.backup.azureCredentials.connectionString }}
+        connectionString:
+          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          key: "connectionString"
+        {{- end }}
+        {{- with .Values.backup.azureCredentials.storageAccount }}
+        storageAccount:
+          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          key: "storageAccount"
+        {{- end }}
+        {{- with .Values.backup.azureCredentials.storageKey }}
+        storageKey:
+          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          key: "storageKey"
+        {{- end }}
+        {{- with .Values.backup.azureCredentials.storageSasToken }}
+        storageSasToken:
+          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          key: "storageSasToken"
+        {{- end }}
+        {{- with .Values.backup.azureCredentials.inheritFromAzureAD }}
+        inheritFromAzureAD: {{ . }}
+        {{- end }}
+    {{- else }}
+    {{- end }}
+{{- end }}
+
 {{- with .Values.clusterExtraSpec }}
   {{- toYaml . | nindent 2 }}
 {{- end }}
