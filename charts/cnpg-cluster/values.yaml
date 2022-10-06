@@ -118,11 +118,11 @@ backup:
   # -- (object) The credentials to use to upload data to Azure Blob Storage
   # See: https://cloudnative-pg.io/documentation/1.17/api_reference/#AzureCredentials
   azureCredentials:
-    connectionString:
-    storageAccount:
-    storageKey:
-    storageSasToken:
-    inheritFromAzureAD:
+    # connectionString:
+    # storageAccount:
+    # storageKey:
+    # storageSasToken:
+    # inheritFromAzureAD:
 
 # -- Extra configuration for Cluster resource.
 # See: https://cloudnative-pg.io/documentation/1.17/api_reference/#clusterspec
