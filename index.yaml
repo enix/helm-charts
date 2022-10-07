@@ -2121,7 +2121,7 @@ entries:
           links:
           - name: GitHub commit
             url: https://github.com/enix/x509-certificate-exporter/commit/40c33f555375da4442fa42d3de85a33b3d3fcca7
-      artifacthub.io/containsSecurityUpdates: false
+      artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/license: MIT
       artifacthub.io/links: |
         - name: Chart Sources
