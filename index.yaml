@@ -2001,6 +2001,48 @@ entries:
     version: 0.1.0
   x509-certificate-exporter:
   - annotations:
+      artifacthub.io/changes: '[]'
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 3.6.0-beta.1
+    created: "2022-10-07T14:25:36.284707684Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 79ea7c1dc11eefada52b75171861c24e7929653c970480789adccd012d87ccfd
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-3.6.0-beta.1/x509-certificate-exporter-3.6.0-beta.1.tgz
+    version: 3.6.0-beta.1
+  - annotations:
       artifacthub.io/changes: |-
         - description: 'chart: allow nil as image tag suffix, string for default tag type'
           kind: fixed
@@ -4826,4 +4868,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2022-10-06T17:00:47.702485626Z"
+generated: "2022-10-07T14:25:36.28519619Z"
