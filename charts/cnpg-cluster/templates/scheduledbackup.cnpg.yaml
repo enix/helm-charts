@@ -4,7 +4,7 @@ kind: ScheduledBackup
 metadata:
   name: {{ include "cnpg-cluster.fullname" $ }}-{{ $name }}
   labels:
-    {{- include "cnpg-cluster.labels" . | nindent 4 }}
+    {{- include "cnpg-cluster.labels" $ | nindent 4 }}
 spec:
   cluster:
     name: {{ include "cnpg-cluster.fullname" $ }}
