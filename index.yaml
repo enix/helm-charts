@@ -2012,6 +2012,54 @@ entries:
   x509-certificate-exporter:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'revert: Revert "feat(container): images for RISC-V now track Alpine
+            stable"'
+          kind: removed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/2022fd36b941c5cb2aa405011e8b62b2edcf6d00
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 3.7.0-beta.2
+    created: "2022-12-20T10:10:37.440831658Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: d726b0e5f80d610976274a1ad4d8fdacaabf54024132d3d6c5771a521265e726
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-3.7.0-beta.2/x509-certificate-exporter-3.7.0-beta.2.tgz
+    version: 3.7.0-beta.2
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'chart: add alertExtraAnnotations'
           kind: added
           links:
@@ -4977,4 +5025,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2022-10-27T14:58:06.701018115Z"
+generated: "2022-12-20T10:10:37.441277457Z"
