@@ -25,6 +25,7 @@ The following helm charts are maintained :
 * [san-iscsi-csi](https://github.com/enix/helm-charts/tree/master/charts/san-iscsi-csi)
 * [x509-certificate-exporter](https://github.com/enix/x509-certificate-exporter/tree/main/deploy/charts/x509-certificate-exporter)
 * [kube-router](https://github.com/enix/helm-charts/tree/master/charts/kube-router)
+* [kube-image-keeper](https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper)
 
 Please refer to each individual documentation !
 
