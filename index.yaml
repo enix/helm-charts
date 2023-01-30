@@ -710,6 +710,43 @@ entries:
   kube-image-keeper:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'README: Typo in description'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/28455f48926aac5f90cfdb1492eb30f981d68124
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.0.1
+    created: "2023-01-30T13:07:04.893412335Z"
+    description: kuik is a container image caching system for Kubernetes.
+    digest: 681c6d563896a9f6ce6268167e61e541c8602f359ac9bc76cdaa8dc8f2b95c2c
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.0.1/kube-image-keeper-1.0.1.tgz
+    version: 1.0.1
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'cache: fix pod watching for in-cluster config'
           kind: fixed
           links:
@@ -5444,4 +5481,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-25T16:02:22.197079927Z"
+generated: "2023-01-30T13:07:04.893818337Z"
