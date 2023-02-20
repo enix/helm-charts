@@ -2,8 +2,8 @@ apiVersion: v2
 name: kube-router
 description: A turnkey solution for Kubernetes networking with aim to provide operational simplicity and high performance.
 type: application
-version: 1.8.0
-appVersion: v1.5.1
+version: 1.9.0
+appVersion: v1.5.3
 
 icon: https://cdn.rawgit.com/cloudnativelabs/kube-router/64f7700e/Documentation/img/logo-full.svg
 home: https://www.kube-router.io/
