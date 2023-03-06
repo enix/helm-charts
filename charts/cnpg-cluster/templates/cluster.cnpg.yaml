@@ -48,7 +48,8 @@ spec:
     {{- end }}
     {{- end }}
     {{- with .Values.persistence.pvcTemplate }}
-    {{- toYaml . | nindent 4 }}
+    pvcTemplate:
+      {{- toYaml . | nindent 6 }}
     {{- end }}
 
 {{- if .Values.backup.enabled }}
