@@ -100,6 +100,12 @@ backup:
   # -- HistoryTags is a list of key value pairs that will be passed to the Barman --history-tags option
   historyTags: {}
 
+  # -- Override secret name for the backup credentials
+  secretName: 
+
+  # -- Enable the secret creation for the backup credentials
+  createSecret: false
+
   # -- (object) The credentials to use to upload data to Google Cloud Storage
   # See: https://cloudnative-pg.io/documentation/1.17/api_reference/#GoogleCredentials
   googleCredentials:

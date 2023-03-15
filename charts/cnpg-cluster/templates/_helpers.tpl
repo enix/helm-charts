@@ -49,3 +49,10 @@ Selector labels
 app.kubernetes.io/name: {{ include "cnpg-cluster.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Backup secret name
+*/}}
+{{- define "cnpg-cluster.backupSecretName" -}}
+{{ or .Values.secretName (print (include "cnpg-cluster.fullname" .) `-backup`) }}
+{{- end }}
