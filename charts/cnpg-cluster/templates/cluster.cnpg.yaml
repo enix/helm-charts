@@ -86,22 +86,22 @@ spec:
       s3Credentials:
         {{- with .Values.backup.s3Credentials.accessKeyId }}
         accessKeyId:
-          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          name: {{ include "cnpg-cluster.backupSecretName" $ }}
           key: "accessKeyId"
         {{- end }}
         {{- with .Values.backup.s3Credentials.secretAccessKey }}
         secretAccessKey:
-          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          name: {{ include "cnpg-cluster.backupSecretName" $ }}
           key: "secretAccessKey"
         {{- end }}
         {{- with .Values.backup.s3Credentials.region }}
         region:
-          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          name: {{ include "cnpg-cluster.backupSecretName" $ }}
           key: "region"
         {{- end }}
         {{- with .Values.backup.s3Credentials.sessionToken }}
         sessionToken:
-          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          name: {{ include "cnpg-cluster.backupSecretName" $ }}
           key: "sessionToken"
         {{- end }}
         {{- with .Values.backup.s3Credentials.inheritFromIAMRole }}
@@ -114,29 +114,29 @@ spec:
         {{- end }}
         {{- with .Values.backup.googleCredentials.applicationCredentials }}
         applicationCredentials:
-          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          name: {{ include "cnpg-cluster.backupSecretName" $ }}
           key: "applicationCredentials"
         {{- end }}
     {{- else if .Values.backup.azureCredentials  }}
       azureCredentials:
         {{- with .Values.backup.azureCredentials.connectionString }}
         connectionString:
-          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          name: {{ include "cnpg-cluster.backupSecretName" $ }}
           key: "connectionString"
         {{- end }}
         {{- with .Values.backup.azureCredentials.storageAccount }}
         storageAccount:
-          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          name: {{ include "cnpg-cluster.backupSecretName" $ }}
           key: "storageAccount"
         {{- end }}
         {{- with .Values.backup.azureCredentials.storageKey }}
         storageKey:
-          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          name: {{ include "cnpg-cluster.backupSecretName" $ }}
           key: "storageKey"
         {{- end }}
         {{- with .Values.backup.azureCredentials.storageSasToken }}
         storageSasToken:
-          name: {{ include "cnpg-cluster.fullname" $ }}-backup
+          name: {{ include "cnpg-cluster.backupSecretName" $ }}
           key: "storageSasToken"
         {{- end }}
         {{- with .Values.backup.azureCredentials.inheritFromAzureAD }}

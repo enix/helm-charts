@@ -54,6 +54,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | backup.retentionPolicy | string | `"30d"` | RetentionPolicy is the retention policy to be used for backups and WALs (i.e. '60d'). The retention policy is expressed in the form of XXu where XX is a positive integer and u is in [dwm] - days, weeks, months. |
 | backup.s3Credentials | object | `nil` | The credentials to use to upload data to S3 See: https://cloudnative-pg.io/documentation/1.17/api_reference/#S3Credentials |
 | backup.serverName | string | `nil` | The server name on S3, the cluster name is used if this parameter is omitted |
+| backup.secretName | string | `nil` | Override secret name for the backup credentials |
+| backup.createSecret | bool | `false` | Enable the secret creation for the backup credentials |
 | backup.tags | object | `{}` |  |
 | backup.wal | object | `{}` | Configuration of the backup of the WAL stream See: https://cloudnative-pg.io/documentation/1.17/api_reference/#walbackupconfiguration |
 | clusterExtraSpec | object | `{}` | Extra configuration for Cluster resource. See: https://cloudnative-pg.io/documentation/1.17/api_reference/#clusterspec |
