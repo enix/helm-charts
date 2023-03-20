@@ -3,6 +3,16 @@ entries:
   cnpg-cluster:
   - apiVersion: v2
     appVersion: 14.5-6
+    created: "2023-03-20T15:17:05.403497588Z"
+    description: A Helm chart to create cloudnative-pg.io clusters
+    digest: a21a71ba8aca6fc17bb840a9819984f8aa24a5902a19e154def4336c599c2dfc
+    name: cnpg-cluster
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/cnpg-cluster-1.2.0/cnpg-cluster-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v2
+    appVersion: 14.5-6
     created: "2023-03-06T12:44:20.652365855Z"
     description: A Helm chart to create cloudnative-pg.io clusters
     digest: c0ca638453eb951462970c6007ad64f57a6a5545f1291339a6b84e1b97795c29
@@ -5517,4 +5527,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-06T12:44:20.654664928Z"
+generated: "2023-03-20T15:17:05.404194386Z"
