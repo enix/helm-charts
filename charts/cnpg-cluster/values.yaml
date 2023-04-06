@@ -153,3 +153,30 @@ poolers: {}
 #       parameters:
 #         max_client_conn: "1000"
 #         default_pool_size: "10"
+
+# -- Custom services to create
+customServices:
+  # -- Custom services for any member
+  any:
+    enabled: False
+    type: ClusterIP
+    annotations: {}
+    externalIPs: []
+  # -- Custom services for readable members
+  r:
+    enabled: False
+    type: ClusterIP
+    annotations: {}
+    externalIPs: []
+  # -- Custom services for read-only (replicas) members
+  ro:
+    enabled: False
+    type: ClusterIP
+    annotations: {}
+    externalIPs: []
+  # -- Custom services for read-write (primary) member
+  rw:
+    enabled: False
+    type: ClusterIP
+    annotations: {}
+    externalIPs: []
