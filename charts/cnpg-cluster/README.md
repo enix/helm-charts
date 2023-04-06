@@ -43,9 +43,10 @@ The command removes all the Kubernetes components associated with the chart and 
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| backup.azureCredentials | object | `{"connectionString":null,"inheritFromAzureAD":null,"storageAccount":null,"storageKey":null,"storageSasToken":null}` | The credentials to use to upload data to Azure Blob Storage See: https://cloudnative-pg.io/documentation/1.17/api_reference/#AzureCredentials |
+| backup.azureCredentials | object | `nil` | The credentials to use to upload data to Azure Blob Storage See: https://cloudnative-pg.io/documentation/1.17/api_reference/#AzureCredentials |
+| backup.createSecret | bool | `false` | Enable the secret creation for the backup credentials |
 | backup.data | object | `{}` | Configuration of the backup of the data directory See: https://cloudnative-pg.io/documentation/1.17/api_reference/#DataBackupConfiguration |
-| backup.destinationPath | string | `""` | The path where to store the backup (i.e. s3://bucket/path/to/folder) this path, with different destination folders, will be used for WALs and for data --  |
+| backup.destinationPath | string | `""` | The path where to store the backup (i.e. s3://bucket/path/to/folder) this path, with different destination folders, will be used for WALs and for data -- |
 | backup.enabled | bool | `false` | Enable backups |
 | backup.endpointCA | string | `nil` | EndpointCA store the CA bundle of the barman endpoint. Useful when using self-signed certificates to avoid errors with certificate issuer and barman-cloud-wal-archive |
 | backup.endpointURL | string | `nil` | Endpoint to be used to upload data to the cloud, overriding the automatic endpoint discovery |
@@ -53,12 +54,16 @@ The command removes all the Kubernetes components associated with the chart and 
 | backup.historyTags | object | `{}` |  |
 | backup.retentionPolicy | string | `"30d"` | RetentionPolicy is the retention policy to be used for backups and WALs (i.e. '60d'). The retention policy is expressed in the form of XXu where XX is a positive integer and u is in [dwm] - days, weeks, months. |
 | backup.s3Credentials | object | `nil` | The credentials to use to upload data to S3 See: https://cloudnative-pg.io/documentation/1.17/api_reference/#S3Credentials |
-| backup.serverName | string | `nil` | The server name on S3, the cluster name is used if this parameter is omitted |
 | backup.secretName | string | `nil` | Override secret name for the backup credentials |
-| backup.createSecret | bool | `false` | Enable the secret creation for the backup credentials |
+| backup.serverName | string | `nil` | The server name on S3, the cluster name is used if this parameter is omitted |
 | backup.tags | object | `{}` |  |
 | backup.wal | object | `{}` | Configuration of the backup of the WAL stream See: https://cloudnative-pg.io/documentation/1.17/api_reference/#walbackupconfiguration |
 | clusterExtraSpec | object | `{}` | Extra configuration for Cluster resource. See: https://cloudnative-pg.io/documentation/1.17/api_reference/#clusterspec |
+| customServices | object | `{"any":{"annotations":{},"enabled":false,"externalIPs":[],"type":"ClusterIP"},"r":{"annotations":{},"enabled":false,"externalIPs":[],"type":"ClusterIP"},"ro":{"annotations":{},"enabled":false,"externalIPs":[],"type":"ClusterIP"},"rw":{"annotations":{},"enabled":false,"externalIPs":[],"type":"ClusterIP"}}` | Custom services to create |
+| customServices.any | object | `{"annotations":{},"enabled":false,"externalIPs":[],"type":"ClusterIP"}` | Custom services for any member |
+| customServices.r | object | `{"annotations":{},"enabled":false,"externalIPs":[],"type":"ClusterIP"}` | Custom services for readable members |
+| customServices.ro | object | `{"annotations":{},"enabled":false,"externalIPs":[],"type":"ClusterIP"}` | Custom services for read-only (replicas) members |
+| customServices.rw | object | `{"annotations":{},"enabled":false,"externalIPs":[],"type":"ClusterIP"}` | Custom services for read-write (primary) member |
 | extraAffinity | object | `{}` | Extra configuration for Cluster's affinity resource, see: https://cloudnative-pg.io/documentation/1.17/api_reference/#AffinityConfiguration |
 | fullnameOverride | string | `""` | String to fully override cnpg-cluster.fullname template with a string |
 | image.pullPolicy | string | `"IfNotPresent"` | Postgres image pull policy |
