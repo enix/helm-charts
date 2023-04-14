@@ -740,6 +740,110 @@ entries:
   kube-image-keeper:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'chart: rename registry statefulset and fix use of values'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/f33f414f8e7fc8a613522298633eda1507740796
+        - description: don't print stacktraces on errors
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/4da4350b57a7500820dc61d162d09a50fbd33adb
+        - description: encode time in logs with ISO8601TimeEncoder
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/898acbb781ca64b13691b9ef1b0bb067410abc40
+        - description: 'helm: allow controller to watch secrets'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/04a3f88dd25692007afead3b57e51295e23ab517
+        - description: 'helm: ignore certificateIssuerRef when creating certificate issuer'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/014ce7163345a932894767e145879f5e774e578e
+        - description: 'helm: rename registry statefulset and related resources'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/ebf624944ef3de0623b68c038569d1873c7837c0
+        - description: support external registries with a non-default port
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/e74c5ae1f64ed8683ecc55277532ff4ec0ec6f27
+        - description: 'vulns: fix many golang vulnerabilities by upgrading dependencies ([#23](https://github.com/enix/kube-image-keeper/issues/23))'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/f87e5ed06bc1f117ae72eba35c7a63c7d1069a9d
+        - description: 'workflows: Fix typo in test workflow'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/64332dd4b43951f734e24aebca903f91b0231682
+        - description: 'ci: Enable vulnerabity scanning ([#38](https://github.com/enix/kube-image-keeper/issues/38))'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/6491ed8b7e090359b4f0a1a705b8dbce238f302b
+        - description: 'helm: Use helm-docs to generate Chart README ([#37](https://github.com/enix/kube-image-keeper/issues/37))'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/b653fc059be4f9226e3727af7a80362f07d82013
+        - description: 'revert: Revert "chore(helm): prefix resources with kuik- instead of
+            kube-image-keeper-"'
+          kind: removed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/48c9cefc583d82fcb6819fc4b7fd2cf69e13e46b
+        - description: 'revert: Revert "chore(deps): bump go-containerregistry from 0.6.0
+            to 0.13.0"'
+          kind: removed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/c22fd902847aba4de5a459b2b37155194fc6d19b
+        - description: 'revert: Revert "chore(deps); bump golang from 1.16 to 1.18"'
+          kind: removed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/340c4297f06e583b2ee1a4e42306120a5c4d406a
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 1.1.0-beta.1
+    created: "2023-04-14T12:27:06.013436383Z"
+    description: kuik is a container image caching system for Kubernetes.
+    digest: 9e5438bfd43734e92dac44f54eaa5ce9927c407f6b668c3454cb4cfbca0b9ca6
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.1.0-beta.1/kube-image-keeper-1.1.0-beta.1.tgz
+    version: 1.1.0-beta.1
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'README: Typo in description'
           kind: fixed
           links:
@@ -5537,4 +5641,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-06T09:55:06.981769431Z"
+generated: "2023-04-14T12:27:06.013762085Z"
