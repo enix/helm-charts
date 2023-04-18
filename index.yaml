@@ -2628,6 +2628,95 @@ entries:
   x509-certificate-exporter:
   - annotations:
       artifacthub.io/changes: |-
+        - description: consider no match as a read error
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/8d11d1a0cc1ffe06798110dabb0e19a3b24674da
+        - description: 'helm: DaemonSets inherit global podAnnotations '
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/1a670ed3012050d17237f15df9309db3d9bac071
+          - name: 'GitHub issue #106'
+            url: https://github.com/enix/x509-certificate-exporter/issues/106
+        - description: properly resolve symlink paths ([#86](https://github.com/enix/x509-certificate-exporter/issues/86))
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/beb88b34b490add4015c8b380d975eb9cb340d44
+        - description: 'build: upgrade to golang 1.19'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/3916d18e575bd026b00566a6ce631b96f125b0d3
+        - description: 'container: bump Alpine base image to version 3.17.3'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/de23f78fbda6c01540d8281d68b0866f0e8d2272
+        - description: 'container: bump Busybox base image to version 1.36'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/29464caab5d3d8584f4c46dd30e9339b393afa8b
+        - description: globbing support for -d
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/cbebdde4b57b02f118c1fcc89ef92b9550680e34
+        - description: globbing support for -f option
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/7fa2298724fe92ce9da656ae2bc52e0e3f83812c
+        - description: globbing support for -k
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/30b406e5d21204335dbb32e58ae0a3075f9c385f
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 3.7.0-beta.3
+    created: "2023-04-18T15:53:19.72194217Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: f533535be23a5e5c7f91a9b6710e1e508d345991292d43d061363f733b2e9860
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-3.7.0-beta.3/x509-certificate-exporter-3.7.0-beta.3.tgz
+    version: 3.7.0-beta.3
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'revert: Revert "feat(container): images for RISC-V now track Alpine
             stable"'
           kind: removed
@@ -5641,4 +5730,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-14T12:27:06.013762085Z"
+generated: "2023-04-18T15:53:19.722496375Z"
