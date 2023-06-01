@@ -740,6 +740,108 @@ entries:
   kube-image-keeper:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'proxy: respond with http status 500 on error instead of 200'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/917aba569c5992ba2129004f591fee8f829fba23
+        - description: 'controllers: export cached/uncached images metrics'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/599a46eb6e026bdfc88bcf4d8e22249d91e638cc
+        - description: 'helm: add minio dependency for registry storage backend in HA mode'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/7c01fe5319ba39ea083dfb69e5d9504337398161
+        - description: 'helm: add registry ServiceMonitor'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/3294978e3522d00a5618be4f2e7dbef256793508
+        - description: 'helm: allow to use S3 or minio storage backends without HA enabled'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/ebd5bf9c2a2d3ce0efbe345ce7a12fc5fd41fdc8
+        - description: 'helm: allow using existing secret for S3'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/6d60b66504c0cdbf984e18506fdd06b5dda2f87b
+        - description: 'helm: install optional PodMonitor and ServiceMonitor'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/4ffe92b9777bf781e3d457b99179a9af47f2c2c2
+        - description: 'helm: registry high-availability with external S3 storage'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/07876cc8855ed6bd7b7f9eba188d7314c4eeae57
+        - description: 'metrics: export cached_images gauge'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/b74c5bfea0f4386c56f160dbeda496deb3640f42
+        - description: 'metrics: export controller_is_leader gauge'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/d279a1307ab16b11c45b9bc7b84e0b541f759ed8
+        - description: 'metrics: export controller_up gauge'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/d8d5ecd181e195f3f8397a8b037f516c12de567a
+        - description: 'metrics: export version, revision and build date time metric'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/4b571865d3084bd24ca1b5629e7d03f4545a3f71
+        - description: 'proxy: export http calls metrics'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/68a066048d02483db79ade5e313d89105e5ec9f9
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 1.2.0-beta.1
+    created: "2023-06-01T14:11:24.474734185Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.4
+    description: kuik is a container image caching system for Kubernetes.
+    digest: 6280db470cf9a5ce1ec9d165734dd010584f6cfea3c70e0a260944d092e8bd84
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.2.0-beta.1/kube-image-keeper-1.2.0-beta.1.tgz
+    version: 1.2.0-beta.1
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'chart: rename registry statefulset and fix use of values'
           kind: fixed
           links:
@@ -5972,4 +6074,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-23T09:05:23.678413461Z"
+generated: "2023-06-01T14:11:24.475073888Z"
