@@ -3120,16 +3120,6 @@ entries:
   x509-certificate-exporter:
   - annotations:
       artifacthub.io/changes: |-
-        - description: 'ci: print line numbers for golang-ci-lint'
-          kind: fixed
-          links:
-          - name: GitHub commit
-            url: https://github.com/enix/x509-certificate-exporter/commit/e2d82531dfeac82d99787c2606ab0242ea47f405
-        - description: consider no match as a read error
-          kind: fixed
-          links:
-          - name: GitHub commit
-            url: https://github.com/enix/x509-certificate-exporter/commit/8d11d1a0cc1ffe06798110dabb0e19a3b24674da
         - description: 'helm: DaemonSets inherit global podAnnotations '
           kind: fixed
           links:
@@ -3137,21 +3127,6 @@ entries:
             url: https://github.com/enix/x509-certificate-exporter/commit/1a670ed3012050d17237f15df9309db3d9bac071
           - name: 'GitHub issue #106'
             url: https://github.com/enix/x509-certificate-exporter/issues/106
-        - description: properly resolve relative syminks
-          kind: fixed
-          links:
-          - name: GitHub commit
-            url: https://github.com/enix/x509-certificate-exporter/commit/a59a7ab7393137a385434640fce695afda1719f0
-        - description: use doublestar fork to properly resolve symlinks
-          kind: fixed
-          links:
-          - name: GitHub commit
-            url: https://github.com/enix/x509-certificate-exporter/commit/f7944e4b41abefae9b61f1327e7f3416008fcfe6
-        - description: 'build: upgrade to golang 1.19'
-          kind: added
-          links:
-          - name: GitHub commit
-            url: https://github.com/enix/x509-certificate-exporter/commit/3916d18e575bd026b00566a6ce631b96f125b0d3
         - description: 'container: bump Alpine base image to 3.17.0'
           kind: added
           links:
@@ -3214,32 +3189,11 @@ entries:
           links:
           - name: GitHub commit
             url: https://github.com/enix/x509-certificate-exporter/commit/0bc9f177d66eeb3e23febe1d69fd52a14f3228d5
-        - description: 'revert: Revert "chore: fix outdated tests"'
-          kind: removed
+        - description: 'build: upgrade to golang 1.19'
+          kind: added
           links:
           - name: GitHub commit
-            url: https://github.com/enix/x509-certificate-exporter/commit/6bc8b6c1c3b45d01048db9b562c44e13533d898b
-        - description: 'revert: Revert "chore: fix outdated tests"'
-          kind: removed
-          links:
-          - name: GitHub commit
-            url: https://github.com/enix/x509-certificate-exporter/commit/c4497f420fc9fddfca643c542567ce8506d3fea0
-        - description: 'revert: Revert "chore: fix outdated tests"'
-          kind: removed
-          links:
-          - name: GitHub commit
-            url: https://github.com/enix/x509-certificate-exporter/commit/ccf683c25a315bc6c1b5962a2682179b0ad04aba
-        - description: 'revert: Revert "chore: fix outdated tests"'
-          kind: removed
-          links:
-          - name: GitHub commit
-            url: https://github.com/enix/x509-certificate-exporter/commit/0d50cb3b2063de71d684aa4067a83bb9c73205f3
-        - description: 'revert: Revert "feat(container): images for RISC-V now track Alpine
-            stable"'
-          kind: removed
-          links:
-          - name: GitHub commit
-            url: https://github.com/enix/x509-certificate-exporter/commit/2022fd36b941c5cb2aa405011e8b62b2edcf6d00
+            url: https://github.com/enix/x509-certificate-exporter/commit/3916d18e575bd026b00566a6ce631b96f125b0d3
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/license: MIT
       artifacthub.io/links: |
