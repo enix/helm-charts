@@ -3120,6 +3120,75 @@ entries:
   x509-certificate-exporter:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'build: release FreeBSD binaries for RISC-V'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/0b8db06f9809018ec878eaa51a02250074fc45a3
+        - description: 'build: upgrade to golang 1.20'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/16429b9238badc3be550dfbed7fe44406dc6d6e3
+        - description: 'container: bump Alpine base image to 3.18.2'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/53ede98e503028ab4cd7e37552f6d6afdc17495c
+        - description: 'container: bump Busybox base image to version 1.36.1'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/8201737a8ac37fa59b24c1165b9e03ad52d4e17a
+        - description: 'helm: do not use a headless Service by default'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/a5d2bf8714db30ea2707572148930cdbc4d03125
+          - name: 'GitHub issue #50'
+            url: https://github.com/enix/x509-certificate-exporter/issues/50
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 3.8.0
+    created: "2023-07-12T18:24:49.45884972Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: c1c36099ec60f189f612793330050e093f8cb530b140dac012e7910c08c28eea
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-3.8.0/x509-certificate-exporter-3.8.0.tgz
+    version: 3.8.0
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'helm: DaemonSets inherit global podAnnotations '
           kind: fixed
           links:
@@ -6471,4 +6540,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-10T09:14:05.972910957Z"
+generated: "2023-07-12T18:24:49.460181306Z"
