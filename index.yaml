@@ -740,6 +740,83 @@ entries:
   kube-image-keeper:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'controllers: ignore notFound errors when getting an imagePullSecret'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/60ec8b42e00b318891b7916bafde67299e208982
+        - description: 'controllers: log reconciliation only when object still exists'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/60bb12dc8d379a315469e0bfb29eda57694a1e2c
+        - description: 'controllers: properly update usedBy CachedImage status'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/937b568cf8717e9fcc8fc0cbb14f12f25bdfc8dd
+        - description: 'controllers: reconcile Pods with deleting images only once'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/75c6473198706d43ba4d60dfcbda8ce59323da28
+        - description: 'proxy: lazy discovery of rest mapping to avoid throttling at start'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/7254b4887ab01323c8048f1997739e07328e546a
+        - description: use go.uber.org/automaxprocs to detect GOMAXPROCS in containers
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/66dedccafb8c9888d2e35431798e163b82add394
+        - description: 'cache: add AWS ECR auth support'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/79c2a36b8fca2a6b2f166c14a83066d345446837
+        - description: 'controllers: add maxConcurrentCachedImageReconciles flag'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/d333c53f1900dfb6fb14a4aa4cc8f894f2a07582
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 1.3.0-beta.1
+    created: "2023-07-21T14:55:37.933205452Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.4
+    description: kuik is a container image caching system for Kubernetes.
+    digest: cf1848a40e1f3408b04024a801185d1e1b1a7818db4beea59f4d71cae8c73467
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.3.0-beta.1/kube-image-keeper-1.3.0-beta.1.tgz
+    version: 1.3.0-beta.1
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'helm: missing registry Prometheus configuration in HA mode'
           kind: fixed
           links:
@@ -6540,4 +6617,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-12T18:24:49.460181306Z"
+generated: "2023-07-21T14:55:37.933537252Z"
