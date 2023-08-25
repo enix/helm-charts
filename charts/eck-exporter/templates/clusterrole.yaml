@@ -1,0 +1,32 @@
+{{- if .Values.rbac.create }}
+apiVersion: {{ include "capabilities.rbac.apiVersion" . }}
+kind: ClusterRole
+metadata:
+  name: {{ include "eck-exporter.fullname" . }}
+  labels:
+    {{- include "eck-exporter.labels" . | nindent 4 }}
+rules:
+  - apiGroups: ["apiextensions.k8s.io"]
+    resources: ["customresourcedefinitions"]
+    verbs: ["list", "watch"]
+  {{- if .Values.eckResources.elasticsearches }}
+  - apiGroups: ["elasticsearch.k8s.elastic.co"]
+    resources: ["elasticsearches"]
+    verbs: ["list", "watch"]
+  {{- end }}
+  {{- if .Values.eckResources.kibanas }}
+  - apiGroups: ["kibana.k8s.elastic.co"]
+    resources: ["kibanas"]
+    verbs: ["list", "watch"]
+  {{- end }}
+  {{- if .Values.eckResources.apmservers }}
+  - apiGroups: ["apm.k8s.elastic.co"]
+    resources: ["apmservers"]
+    verbs: ["list", "watch"]
+  {{- end }}
+  {{- if .Values.eckResources.agents }}
+  - apiGroups: ["agent.k8s.elastic.co"]
+    resources: ["agents"]
+    verbs: ["list", "watch"]
+  {{- end }}
+{{- end }}

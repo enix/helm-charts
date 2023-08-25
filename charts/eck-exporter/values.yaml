@@ -1,0 +1,216 @@
+# Note to contributors:
+# We use helm-docs to generate README.md from comments in this file.
+# Please run this command after you make changes to values.yaml:
+#  $ helm-docs --sort-values-order file
+
+# @ignored
+replicaCount: 1
+
+eckResources:
+  # -- Whether to produce metrics for ECK's Elasticsearch objects or not
+  elasticsearches: true
+  # -- Whether to produce metrics for ECK's Kibana objects or not
+  kibanas: true
+  # -- Whether to produce metrics for ECK's ApmServer objects or not
+  apmservers: true
+  # -- Whether to produce metrics for ECK's Agent objects or not
+  agents: true
+
+prometheusRules:
+  # -- Should a PrometheusRule object be installed to alert on certificate expiration. For prometheus-operator (kube-prometheus) users.
+  create: true
+  # -- Additional labels to add to PrometheusRule objects
+  extraLabels: {}
+  # -- Additional labels to add to PrometheusRule rules
+  alertExtraLabels: {}
+  # -- Additional annotations to add to PrometheusRule rules
+  alertExtraAnnotations: {}
+  # -- Additional rulePrefix to PrometheusRule rules
+  rulePrefix: ""
+  # -- Skip all built-in alerts when using extraAlertGroups
+  disableBuiltinAlertGroup: false
+  # -- Additional alert groups for custom configuration (example in `values.yaml`)
+  extraAlertGroups: []
+  buildinAlerts:
+    EckElasticsearchHealth:
+      create: true
+      for: 5m
+      severity:
+        yellow: warning
+        red: critical
+        unknown: critical
+    EckElasticsearchNotReady:
+      create: true
+      for: 5m
+      severity:
+        NotReady: warning
+        ApplyingChanges: warning
+        MigratingData: warning
+        Stalled: critical
+        Invalid: critical
+    EckElasticsearchApplyingChangesTooLong:
+      create: true
+      for: 1h
+      severity: critical
+    EckElasticsearchMigratingDataTooLong:
+      create: true
+      for: 1h
+      severity: critical
+    EckElasticsearchReconciliationInProgress:
+      create: true
+      for: 1h
+      severity: critical
+    EckElasticsearchNotRunningDesiredVersion:
+      create: true
+      for: 1h
+      severity: critical
+    EckElasticsearchUnreachable:
+      create: true
+      for: 5m
+      severity: critical
+    EckKibanaHealth:
+      create: true
+      for: 5m
+      severity:
+        yellow: warning
+        red: critical
+        unknown: critical
+    EckApmServerHealth:
+      create: true
+      for: 5m
+      severity:
+        yellow: warning
+        red: critical
+        unknown: critical
+    EckAgentHealth:
+      create: true
+      for: 5m
+      severity:
+        yellow: warning
+        red: critical
+        unknown: critical
+
+serviceMonitor:
+  # -- Should a ServiceMonitor object be installed to scrape this exporter. For prometheus-operator (kube-prometheus-stack) users.
+  create: true
+  # -- Optional namespace in which to create the ServiceMonitor. Could be where prometheus-operator is running.
+  namespace: ""
+  # -- Optional name of the label on the target Service to use as the job name in Prometheus
+  jobLabel: ""
+  # -- Endpoint scrape interval set in the ServiceMonitor
+  interval: 60s
+  # -- Endpoint scrape timeout set in the ServiceMonitor
+  scrapeTimeout: 30s
+  # -- Whether to honor metrics labels or not
+  honorLabels: false
+  # -- Additional labels to add to ServiceMonitor objects
+  extraLabels: {}
+  # -- Relabel config for the ServiceMonitor
+  relabelings: []
+  # -- Metric relabel config for the ServiceMonitor
+  metricRelabelings: []
+  # -- Any extra parameter to be added to the endpoint configured in the ServiceMonitor
+  extraParameters: {}
+
+# -- Specify docker-registry secret names as an array
+imagePullSecrets: []
+
+image:
+  # -- kube-state-metrics image registry
+  registry: registry.k8s.io
+  # -- kube-state-metrics image repository
+  repository: kube-state-metrics/kube-state-metrics
+  # -- kube-state-metrics image tag (defaults to Chart appVersion)
+  tag: ""
+  # -- Suffix added to kube-state-metrics image tag
+  tagSuffix: ""
+  # -- kube-state-metrics image pull policy
+  pullPolicy: IfNotPresent
+
+# -- ResourceRequirements for the kube-state-metrics container
+# @default -- check `values.yaml`
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
+
+# -- Additional labels added to all chart objects
+extraLabels: {}
+
+# -- Additional labels added to all Pods
+podExtraLabels: {}
+
+# -- Annotations added to all Pods
+podAnnotations: {}
+#  prometheus.io/port: "9793"
+#  prometheus.io/scrape: "true"
+
+# -- TCP port to expose the Pod on
+podListenPort: 8080
+
+service:
+  # -- Should a Service be installed (required for ServiceMonitor)
+  create: true
+  # -- Type of the Service to be created
+  type: ClusterIP
+  # -- Optional: set IP address for a Service of type ClusterIP. Use `None` to make it a headless Service.
+  clusterIP: ""
+  # -- TCP port to expose the Service on
+  port: 8080
+  # -- Additional labels to add to the Service
+  extraLabels: {}
+  # -- Annotations to add to the Service
+  annotations: {}
+
+rbac:
+  # -- Whether to create and use RBAC resources or not
+  create: true
+
+serviceAccount:
+  # -- Whether a ServiceAccount should be created or not
+  create: true
+  # -- Annotations added to the ServiceAccount if created
+  annotations: {}
+  # -- Name of the ServiceAccount for the ServiceAccount (required if `rbac.create=false`)
+  name: ""
+  # -- Whether to automount the ServiceAccount token or not
+  automountServiceAccountToken: true
+
+# -- SecurityContext for the kube-state-metrics Pod
+podSecurityContext: {}
+
+# -- SecurityContext for the kube-state-metrics container
+# @default -- check `values.yaml`
+securityContext:
+  runAsUser: 65534
+  runAsGroup: 65534
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+    - ALL
+
+# -- PriorityClassName for the kube-state-metrics Pod
+priorityClassName: ""
+
+# -- Node selector for the kube-state-metrics Pod
+nodeSelector: {}
+# -- Tolerations for the kube-state-metrics Pod
+tolerations: []
+# -- Affinity for the kube-state-metrics Pod
+affinity: {}
+
+# -- Additional objects to deploy with the release
+extraDeploy: []
+# -- Same as `extraDeploy` but objects won't go through the templating engine
+extraDeployVerbatim: []
+
+# -- Partially override eck-exporter.fullname template (will prepend the release name)
+nameOverride: ""
+# -- Fully override eck-exporter.fullname template
+fullnameOverride: ""
+
+# -- Override Kubernetes version detection ; usefull with "helm template"
+kubeVersion: ""

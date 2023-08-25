@@ -1,0 +1,42 @@
+{{- if and .Values.serviceMonitor.create .Values.service.create }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "eck-exporter.fullname" . }}
+  namespace: {{ default .Release.Namespace .Values.serviceMonitor.namespace | quote }}
+  labels:
+    {{- include "eck-exporter.labels" . | nindent 4 }}
+    {{- with .Values.serviceMonitor.extraLabels }}
+    {{- . | toYaml | trim | nindent 4 }}
+    {{- end }}
+spec:
+  jobLabel: {{ .Values.serviceMonitor.jobLabel | quote }}
+  selector:
+    matchLabels:
+      {{- include "eck-exporter.selectorLabels" . | nindent 6 }}
+  endpoints:
+  - port: metrics
+    {{- if .Values.serviceMonitor.interval }}
+    interval: {{ .Values.serviceMonitor.interval }}
+    {{- end }}
+    {{- if .Values.serviceMonitor.scrapeTimeout }}
+    scrapeTimeout: {{ .Values.serviceMonitor.scrapeTimeout }}
+    {{- end }}
+    {{- if .Values.serviceMonitor.honorLabels }}
+    honorLabels: {{ .Values.serviceMonitor.honorLabels }}
+    {{- end }}
+    {{- if .Values.serviceMonitor.relabelings }}
+    relabelings:
+    {{- .Values.serviceMonitor.relabelings | toYaml | nindent 4 }}
+    {{- end }}
+    {{- if .Values.serviceMonitor.metricRelabelings }}
+    metricRelabelings:
+    {{- .Values.serviceMonitor.metricRelabelings | toYaml | nindent 4 }}
+    {{- end }}
+    {{- if .Values.serviceMonitor.extraParameters }}
+    {{- toYaml .Values.serviceMonitor.extraParameters | nindent 4 }}
+    {{- end }}
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace }}
+{{- end }}

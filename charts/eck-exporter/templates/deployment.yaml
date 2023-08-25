@@ -1,0 +1,76 @@
+apiVersion: {{ include "capabilities.deployment.apiVersion" . }}
+kind: Deployment
+metadata:
+  name: {{ include "eck-exporter.fullname" . }}
+  labels:
+    {{- include "eck-exporter.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "eck-exporter.selectorLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicaCount | int }}
+  template:
+    metadata:
+      labels:
+        {{- include "eck-exporter.labels" . | nindent 8 }}
+        {{- with .Values.podExtraLabels }}
+        {{- . | toYaml | trim | nindent 8 }}
+        {{- end }}
+      annotations:
+        checksum/config: {{ include (print .Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | trim | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | trim | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | trim | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+      {{- toYaml . | trim | nindent 6 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | trim | nindent 8 }}
+      {{- end }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | trim | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "eck-exporter.serviceAccountName" . }}
+      {{- with .Values.priorityClassName }}
+      priorityClassName: {{ . | quote }}
+      {{- end }}
+      containers:
+      - name: {{ .Chart.Name }}
+        {{- with .Values.securityContext }}
+        securityContext:
+          {{- toYaml . | trim | nindent 10 }}
+        {{- end }}
+        {{- with .Values.resources }}
+        resources:
+          {{- . | toYaml | trim | nindent 10 }}
+        {{- end }}
+        image: {{ include "eck-exporter.image" . }}
+        imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        args:
+        - --port={{ .Values.podListenPort | int }}
+        - --custom-resource-state-only
+        - --custom-resource-state-config-file=/etc/eckresourcestate/config.yaml
+        ports:
+        - name: metrics
+          containerPort: {{ .Values.podListenPort | int }}
+        volumeMounts:
+        - name: eckresourcestate-config
+          mountPath: /etc/eckresourcestate
+          readOnly: true
+      volumes:
+      - name: eckresourcestate-config
+        configMap:
+          defaultMode: 420
+          name: {{ include "eck-exporter.fullname" . }}

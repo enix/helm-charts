@@ -1,0 +1,153 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "eck-exporter.fullname" . }}
+  labels:
+    {{- include "eck-exporter.labels" . | nindent 4 }}
+data:
+  config.yaml: |
+    spec:
+      resources:
+      {{- if .Values.eckResources.elasticsearches }}
+      #
+      # Elasticsearch
+      #
+      - groupVersionKind:
+          group: elasticsearch.k8s.elastic.co
+          kind: Elasticsearch
+          version: v1
+        metricNamePrefix: eck_elasticsearch
+        labelsFromPath:
+          name:
+          - metadata
+          - name
+          namespace:
+          - metadata
+          - namespace
+        metrics:
+        - name: info
+          each:
+            type: Info
+            info:
+              labelsFromPath:
+                desired_version: [ spec, version ]
+                version: [ status, version ]
+        - name: health
+          each:
+            type: StateSet
+            stateSet:
+              labelName: health
+              path: [ status, health ]
+              list: [ red, yellow, green, unknown ]
+        - name: phase
+          each:
+            type: StateSet
+            stateSet:
+              labelName: phase
+              path: [ status, phase ]
+              list: [ Ready, ApplyingChanges, MigratingData, Stalled, Invalid ]
+        - name: condition
+          each:
+            type: Gauge
+            gauge:
+              path: [ status, conditions ]
+              labelsFromPath:
+                type: [ type ]
+              valueFrom: [ status ]
+      {{- end }}
+      {{- if .Values.eckResources.kibanas }}
+      #
+      # Kibana
+      #
+      - groupVersionKind:
+          group: kibana.k8s.elastic.co
+          kind: Kibana
+          version: v1
+        metricNamePrefix: eck_kibana
+        labelsFromPath:
+          name:
+          - metadata
+          - name
+          namespace:
+          - metadata
+          - namespace
+        metrics:
+        - name: info
+          each:
+            type: Info
+            info:
+              labelsFromPath:
+                desired_version: [ spec, version ]
+                version: [ status, version ]
+        - name: health
+          each:
+            type: StateSet
+            stateSet:
+              labelName: health
+              path: [ status, health ]
+              list: [ red, yellow, green, unknown ]
+      {{- end }}
+      {{- if .Values.eckResources.apmservers }}
+      #
+      # ApmServer
+      #
+      - groupVersionKind:
+          group: apm.k8s.elastic.co
+          kind: ApmServer
+          version: v1
+        metricNamePrefix: eck_apmserver
+        labelsFromPath:
+          name:
+          - metadata
+          - name
+          namespace:
+          - metadata
+          - namespace
+        metrics:
+        - name: info
+          each:
+            type: Info
+            info:
+              labelsFromPath:
+                desired_version: [ spec, version ]
+                version: [ status, version ]
+        - name: health
+          each:
+            type: StateSet
+            stateSet:
+              labelName: health
+              path: [ status, health ]
+              list: [ red, yellow, green, unknown ]
+      {{- end }}
+      {{- if .Values.eckResources.agents }}
+      #
+      # Agent
+      #
+      - groupVersionKind:
+          group: agent.k8s.elastic.co
+          kind: Agent
+          version: v1alpha1
+        metricNamePrefix: eck_agent
+        labelsFromPath:
+          name:
+          - metadata
+          - name
+          namespace:
+          - metadata
+          - namespace
+        metrics:
+        - name: info
+          each:
+            type: Info
+            info:
+              labelsFromPath:
+                desired_version: [ spec, version ]
+                version: [ status, version ]
+        - name: health
+          each:
+            type: StateSet
+            stateSet:
+              labelName: health
+              path: [ status, health ]
+              list: [ red, yellow, green, unknown ]
+      {{- end }}

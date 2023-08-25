@@ -1,0 +1,16 @@
+{{- range .Values.extraDeploy }}
+---
+    {{- if typeIs "string" . }}
+        {{- tpl . $ }}
+    {{- else }}
+        {{- tpl (. | toYaml) $ }}
+    {{- end }}
+{{- end }}
+{{- range .Values.extraDeployVerbatim }}
+---
+    {{- if typeIs "string" . }}
+        {{- . }}
+    {{- else }}
+        {{- . | toYaml }}
+    {{- end }}
+{{- end }}

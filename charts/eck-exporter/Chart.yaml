@@ -1,0 +1,37 @@
+version: 0.1.0
+appVersion: "2.9.2"
+annotations:
+  artifacthub.io/containsSecurityUpdates: 'false'
+  artifacthub.io/prerelease: 'false'
+  artifacthub.io/license: MIT
+  artifacthub.io/links: |
+    - name: Chart Sources
+      url: https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+    - name: Helm Repository
+      url: https://charts.enix.io
+    - name: Application Sources
+      url: https://github.com/kubernetes/kube-state-metrics
+  artifacthub.io/changes: ''
+
+apiVersion: v2
+name: eck-exporter
+type: application
+description: A Prometheus exporter for the ECK operator custom resources. Based on kube-state-metrics.
+keywords:
+  - Prometheus
+  - exporter
+  - operator
+  - ECK
+  - Elasticsearch
+  - Kibana
+home: https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+icon: https://github.githubassets.com/images/icons/emoji/unicode/1fae7.png
+sources:
+  - https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+maintainers:
+  - name: Enix
+    email: contact@enix.fr
+    url: https://github.com/enixsas
+  - name: Thibault Vincent
+    email: root@devcat.org
+    url: https://github.com/npdgm

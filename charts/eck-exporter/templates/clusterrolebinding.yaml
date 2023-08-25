@@ -1,0 +1,16 @@
+{{- if .Values.rbac.create }}
+apiVersion: {{ include "capabilities.rbac.apiVersion" . }}
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "eck-exporter.fullname" . }}
+  labels:
+    {{- include "eck-exporter.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "eck-exporter.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "eck-exporter.fullname" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end }}

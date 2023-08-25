@@ -1,0 +1,62 @@
+{{- if .Values.prometheusRules.create }}
+{{- $rulePrefix:= .Values.prometheusRules.rulePrefix }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "eck-exporter.fullname" . }}
+  labels:
+    {{- include "eck-exporter.labels" . | nindent 4 }}
+    {{- with .Values.prometheusRules.extraLabels }}
+    {{- . | toYaml | trim | nindent 4 }}
+    {{- end }}
+spec:
+  groups:
+  {{- if .Values.prometheusRules.disableBuiltinAlertGroup }}
+    {{- if not (len .Values.prometheusRules.extraAlertGroups) }}
+      {{ fail "Extra alert groups (extraAlertGroups) are required when disableBuiltinAlertGroup is set!" }}
+    {{- end }}
+  {{- else }}
+  - name: eck-exporter.rules
+    rules:
+    #
+    # Health status
+    #
+    {{- range list "Elasticsearch" "Kibana" "ApmServer" "Agent" }}
+      {{- $resourceName := . }}
+      {{- $alertName := printf "Eck%sHealth" . }}
+      {{- $alert := get $.Values.prometheusRules.buildinAlerts $alertName }}
+      {{- if $alert.create }}
+        {{- $severities := values $alert.severity | uniq }}
+        {{- range $severities }}
+          {{- $severity := . }}
+          {{- $choices := list }}
+          {{- range $k, $v := $alert.severity }}
+            {{- if eq $severity $v }}
+              {{- $choices = append $choices $k }}
+            {{- end }}
+          {{- end }}
+          {{- if $choices }}
+    - alert: '{{ printf "%s%s" $rulePrefix $alertName | trim }}'
+      expr: eck_{{ $resourceName | lower }}_health{health=~"{{ join "|" $choices }}"} > 0
+      for: {{ get $alert "for" }}
+      labels:
+        severity: {{ $severity }}
+            {{- if $.Values.prometheusRules.alertExtraLabels }}
+              {{- toYaml $.Values.prometheusRules.alertExtraLabels | nindent 8 }}
+            {{- end }}
+      annotations:
+        summary: '{{ $resourceName }} health is {{ "{{" }} $labels.health {{ "}}" }} for {{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}'
+        description: 'Over the last {{ get $alert "for" }}, health status for {{ $resourceName }} "{{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}" has been one of: {{ join ", " $choices }}. At the time of firing this alert it was: {{ "{{" }} $labels.health {{ "}}" }}.'
+            {{- if $.Values.prometheusRules.alertExtraAnnotations }}
+              {{- toYaml $.Values.prometheusRules.alertExtraAnnotations | nindent 8 }}
+            {{- end }}
+          {{- end }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+
+  {{- end }}
+{{- range .Values.prometheusRules.extraAlertGroups }}
+  - {{ tpl (toYaml .) $ | indent 4 | trim }}
+{{- end }}
+{{- end }}
