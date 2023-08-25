@@ -13,15 +13,15 @@ Supported CRDs:
 * Agent
 
 The following metrics are available:
-* `eck_elasticsearch_info` (version)
+* `eck_elasticsearch_info` (version, desired_version)
 * `eck_elasticsearch_health` (red, yellow, green, unknown)
 * `eck_elasticsearch_phase` (Ready, ApplyingChanges, MigratingData, Stalled, Invalid)
 * `eck_elasticsearch_condition` (ReconciliationComplete, RunningDesiredVersion, ElasticsearchIsReachable, ResourcesAwareManagement)
-* `eck_kibana_info` (version)
+* `eck_kibana_info` (version, desired_version)
 * `eck_kibana_health` (red, yellow, green, unknown)
-* `eck_apmserver_info` (version)
+* `eck_apmserver_info` (version, desired_version)
 * `eck_apmserver_health` (red, yellow, green, unknown)
-* `eck_agent_info` (version)
+* `eck_agent_info` (version, desired_version)
 * `eck_agent_health` (red, yellow, green, unknown)
 
 Shipped with Prometheus alerts:
