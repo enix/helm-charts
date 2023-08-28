@@ -26,12 +26,13 @@ The following helm charts are maintained :
 * [x509-certificate-exporter](https://github.com/enix/x509-certificate-exporter/tree/main/deploy/charts/x509-certificate-exporter)
 * [kube-router](https://github.com/enix/helm-charts/tree/master/charts/kube-router)
 * [kube-image-keeper](https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper)
+* [eck-exporter](https://github.com/enix/helm-charts/tree/master/charts/eck-exporter)
 
-Please refer to each individual documentation !
+Please refer to each individual documentation!
 
 # License
 
-Copyright (c) 2022 ENIX
+Copyright (c) 2022, 2023 ENIX
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
