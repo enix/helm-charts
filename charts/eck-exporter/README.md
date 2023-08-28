@@ -12,6 +12,7 @@ Supported CRDs:
 * Agent
 * ApmServer
 * Beat
+* Logstash
 
 The following metrics are available:
 * `eck_elasticsearch_info` (version, desired_version)
@@ -26,6 +27,7 @@ The following metrics are available:
 * `eck_apmserver_health` (red, yellow, green, unknown)
 * `eck_beat_info` (version, desired_version)
 * `eck_beat_health` (red, yellow, green, unknown)
+* `eck_logstash_info` (version, desired_version)
 
 Shipped with Prometheus alerts:
 * `EckElasticsearchHealth`
@@ -104,6 +106,7 @@ Great question... To be answered when the need arises 😅
 | eckResources.beats | bool | `true` | Whether to produce metrics for ECK's Beat objects or not |
 | eckResources.elasticsearches | bool | `true` | Whether to produce metrics for ECK's Elasticsearch objects or not |
 | eckResources.kibanas | bool | `true` | Whether to produce metrics for ECK's Kibana objects or not |
+| eckResources.logstashes | bool | `true` | Whether to produce metrics for ECK's Logstash objects or not |
 | prometheusRules.create | bool | `true` | Should a PrometheusRule object be installed to alert on certificate expiration. For prometheus-operator (kube-prometheus) users. |
 | prometheusRules.extraLabels | object | `{}` | Additional labels to add to PrometheusRule objects |
 | prometheusRules.alertExtraLabels | object | `{}` | Additional labels to add to PrometheusRule rules |

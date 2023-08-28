@@ -183,3 +183,28 @@ data:
               path: [ status, health ]
               list: [ red, yellow, green, unknown ]
       {{- end }}
+      {{- if .Values.eckResources.logstashes }}
+      #
+      # Logstash
+      #
+      - groupVersionKind:
+          group: logstash.k8s.elastic.co
+          kind: Logstash
+          version: v1alpha1
+        metricNamePrefix: eck_logstash
+        labelsFromPath:
+          name:
+          - metadata
+          - name
+          namespace:
+          - metadata
+          - namespace
+        metrics:
+        - name: info
+          each:
+            type: Info
+            info:
+              labelsFromPath:
+                desired_version: [ spec, version ]
+                version: [ status, version ]
+      {{- end }}

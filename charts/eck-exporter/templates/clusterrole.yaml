@@ -34,4 +34,9 @@ rules:
     resources: ["kibanas"]
     verbs: ["list", "watch"]
   {{- end }}
+  {{- if .Values.eckResources.logstashes }}
+  - apiGroups: ["logstash.k8s.elastic.co"]
+    resources: ["logstashes"]
+    verbs: ["list", "watch"]
+  {{- end }}
 {{- end }}
