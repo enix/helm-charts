@@ -1,4 +1,4 @@
-version: 1.1.0
+version: 1.2.0
 appVersion: "2.9.2"
 annotations:
   artifacthub.io/containsSecurityUpdates: 'false'
@@ -12,8 +12,14 @@ annotations:
     - name: Application Sources
       url: https://github.com/kubernetes/kube-state-metrics
   artifacthub.io/changes: |
-    - kind: fixed
-      description: "Changed values naming for built-in alerts"
+    - kind: added
+      description: "Support for Beat objects (info, health) with Health alert"
+    - kind: added
+      description: "Support for ElasticMapsServer objects (info, health) with Health alert"
+    - kind: added
+      description: "Support for EnterpriseSearch objects (info, health) with Health alert"
+    - kind: added
+      description: "Support for Logstash objects (info)"
 
 apiVersion: v2
 name: eck-exporter
