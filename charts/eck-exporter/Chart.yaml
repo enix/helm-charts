@@ -11,7 +11,9 @@ annotations:
       url: https://charts.enix.io
     - name: Application Sources
       url: https://github.com/kubernetes/kube-state-metrics
-  artifacthub.io/changes: ''
+  artifacthub.io/changes: |
+    - kind: added
+      description: New built-in alerts for prometheus-operator
 
 apiVersion: v2
 name: eck-exporter
