@@ -1,0 +1,10 @@
+apiVersion: enterprisesearch.k8s.elastic.co/v1
+kind: EnterpriseSearch
+metadata:
+  namespace: sandbox
+  name: sandbox
+spec:
+  version: 8.9.0
+  count: 1
+  elasticsearchRef:
+    name: sandbox

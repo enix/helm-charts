@@ -1,0 +1,43 @@
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  namespace: sandbox
+  name: sandbox-es-users
+stringData:
+  # sandbox:sandbox
+  users: |-
+    sandbox:{PBKDF2}10000$zLczbWAo964urOETwyAQ6yJDZauS3DI9/jhJgvlheJA=$lvcX0QgHC9tdWU6U3Zk4zdMYhiT2mTchfmCPtqO+lHc=
+  users_roles: |-
+    superuser:sandbox
+
+---
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: sandbox
+  namespace: sandbox
+spec:
+  version: 8.9.0
+  auth:
+    fileRealm:
+    - secretName: sandbox-es-users
+  monitoring:
+    metrics:
+      elasticsearchRefs:
+      - name: sandbox
+    logs:
+      elasticsearchRefs:
+      - name: sandbox
+  nodeSets:
+  - name: node
+    count: 3
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi

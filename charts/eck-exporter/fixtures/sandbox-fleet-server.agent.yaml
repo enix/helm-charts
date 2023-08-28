@@ -1,0 +1,100 @@
+---
+apiVersion: agent.k8s.elastic.co/v1alpha1
+kind: Agent
+metadata:
+  namespace: sandbox
+  name: sandbox-fleet-server
+spec:
+  version: 8.9.0
+  mode: fleet
+  fleetServerEnabled: true
+  policyID: eck-fleet-server
+  elasticsearchRefs:
+  - name: sandbox
+  kibanaRef:
+    name: sandbox
+  deployment:
+    replicas: 1
+    podTemplate:
+      spec:
+        automountServiceAccountToken: true
+        serviceAccountName: sandbox-elastic-agent
+        securityContext:
+          runAsUser: 0
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: sandbox-elastic-agent
+rules:
+- apiGroups: [""]
+  resources:
+  - namespaces
+  - pods
+  - nodes
+  - nodes/metrics
+  - nodes/proxy
+  - nodes/stats
+  - events
+  verbs:
+  - get
+  - watch
+  - list
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  - replicasets
+  - statefulsetsstatefulsets
+  verbs:
+  - get
+  - watch
+  - list
+- apiGroups:
+  - batch
+  resources:
+  - cronjobs
+  - jobs
+  verbs:
+  - get
+  - watch
+  - list
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - watch
+  - list
+  - delete
+  - update
+  - create
+- nonResourceURLs:
+  - /metrics
+  verbs:
+  - get
+  - watch
+  - list
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sandbox-elastic-agent
+  namespace: sandbox
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: sandbox-elastic-agent
+subjects:
+- kind: ServiceAccount
+  name: sandbox-elastic-agent
+  namespace: sandbox
+roleRef:
+  kind: ClusterRole
+  name: sandbox-elastic-agent
+  apiGroup: rbac.authorization.k8s.io

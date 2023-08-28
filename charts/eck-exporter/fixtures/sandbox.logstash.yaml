@@ -1,0 +1,43 @@
+apiVersion: logstash.k8s.elastic.co/v1alpha1
+kind: Logstash
+metadata:
+  name: sandbox
+  namespace: sandbox
+spec:
+  version: 8.9.0
+  count: 1
+  elasticsearchRefs:
+  - name: sandbox
+    clusterName: sandbox
+  monitoring:
+    metrics:
+      elasticsearchRefs:
+      - name: sandbox
+    logs:
+      elasticsearchRefs:
+      - name: sandbox
+  pipelines:
+  - pipeline.id: main
+    config.string: |
+      input {
+        beats {
+          port => 5044
+        }
+      }
+      output {
+        elasticsearch {
+          hosts => [ "sandbox-es-http" ]
+          user => "sandbox"
+          password => "sandbox"
+        }
+      }
+  services:
+  - name: beats
+    service:
+      spec:
+        type: ClusterIP
+        ports:
+        - port: 5044
+          name: filebeat
+          protocol: TCP
+          targetPort: 5044

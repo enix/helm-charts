@@ -1,0 +1,10 @@
+apiVersion: maps.k8s.elastic.co/v1alpha1
+kind: ElasticMapsServer
+metadata:
+  name: sandbox
+  namespace: sandbox
+spec:
+  version: 8.9.0
+  count: 1
+  elasticsearchRef:
+    name: sandbox
