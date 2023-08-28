@@ -32,7 +32,7 @@ prometheusRules:
   # -- Additional alert groups for custom configuration (example in `values.yaml`)
   extraAlertGroups: []
   #
-  buildinAlerts:
+  builtinAlerts:
     # Elasticsearch
     EckElasticsearchHealth:
       create: true

@@ -24,7 +24,7 @@ spec:
     {{- range list "Elasticsearch" "Kibana" "ApmServer" "Agent" }}
       {{- $resourceName := . }}
       {{- $alertName := printf "Eck%sHealth" $resourceName }}
-      {{- $alert := get $.Values.prometheusRules.buildinAlerts $alertName }}
+      {{- $alert := get $.Values.prometheusRules.builtinAlerts $alertName }}
       {{- if $alert.create }}
         {{- $severities := values $alert.severity | uniq }}
         {{- range $severities }}
@@ -58,7 +58,7 @@ spec:
     # EckElasticsearchPhase
     #
     {{- $alertName := "EckElasticsearchPhase" }}
-    {{- $alert := get $.Values.prometheusRules.buildinAlerts $alertName }}
+    {{- $alert := get $.Values.prometheusRules.builtinAlerts $alertName }}
     {{- if $alert.create }}
       {{- $severities := values $alert.severity | uniq }}
       {{- range $severities }}
@@ -104,7 +104,7 @@ spec:
     # EckElasticsearchUnreachable
     #
     {{- $alertName := "EckElasticsearchUnreachable" }}
-    {{- $alert := get $.Values.prometheusRules.buildinAlerts $alertName }}
+    {{- $alert := get $.Values.prometheusRules.builtinAlerts $alertName }}
     {{- if $alert.create }}
     - alert: '{{ printf "%s%s" $rulePrefix $alertName | trim }}'
       expr: 'avg_over_time(eck_elasticsearch_condition{type="ElasticsearchIsReachable"}[{{ $alert.averageInterval }}]) < {{ $alert.averageThresholdUnder }}'
@@ -125,7 +125,7 @@ spec:
     # EckElasticsearchReconciliationTooLong
     #
     {{- $alertName := "EckElasticsearchReconciliationTooLong" }}
-    {{- $alert := get $.Values.prometheusRules.buildinAlerts $alertName }}
+    {{- $alert := get $.Values.prometheusRules.builtinAlerts $alertName }}
     {{- if $alert.create }}
     - alert: '{{ printf "%s%s" $rulePrefix $alertName | trim }}'
       expr: 'avg_over_time(eck_elasticsearch_condition{type="ReconciliationComplete"}[{{ $alert.averageInterval }}]) < {{ $alert.averageThresholdUnder }}'
@@ -146,7 +146,7 @@ spec:
     # EckElasticsearchUpgradeTooLong
     #
     {{- $alertName := "EckElasticsearchUpgradeTooLong" }}
-    {{- $alert := get $.Values.prometheusRules.buildinAlerts $alertName }}
+    {{- $alert := get $.Values.prometheusRules.builtinAlerts $alertName }}
     {{- if $alert.create }}
     - alert: '{{ printf "%s%s" $rulePrefix $alertName | trim }}'
       expr: 'avg_over_time(eck_elasticsearch_condition{type="RunningDesiredVersion"}[{{ $alert.averageInterval }}]) < {{ $alert.averageThresholdUnder }}'
@@ -167,7 +167,7 @@ spec:
     # EckElasticsearchApplyingChangesTooLong
     #
     {{- $alertName := "EckElasticsearchApplyingChangesTooLong" }}
-    {{- $alert := get $.Values.prometheusRules.buildinAlerts $alertName }}
+    {{- $alert := get $.Values.prometheusRules.builtinAlerts $alertName }}
     {{- if $alert.create }}
     - alert: '{{ printf "%s%s" $rulePrefix $alertName | trim }}'
       expr: 'avg_over_time(eck_elasticsearch_phase{phase="ApplyingChanges"}[{{ $alert.averageInterval }}]) > {{ $alert.averageThresholdOver }}'
@@ -188,7 +188,7 @@ spec:
     # EckElasticsearchMigratingDataTooLong
     #
     {{- $alertName := "EckElasticsearchMigratingDataTooLong" }}
-    {{- $alert := get $.Values.prometheusRules.buildinAlerts $alertName }}
+    {{- $alert := get $.Values.prometheusRules.builtinAlerts $alertName }}
     {{- if $alert.create }}
     - alert: '{{ printf "%s%s" $rulePrefix $alertName | trim }}'
       expr: 'avg_over_time(eck_elasticsearch_phase{phase="MigratingData"}[{{ $alert.averageInterval }}]) > {{ $alert.averageThresholdOver }}'
