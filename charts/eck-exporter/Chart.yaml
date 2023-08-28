@@ -1,4 +1,4 @@
-version: 1.0.1
+version: 1.1.0
 appVersion: "2.9.2"
 annotations:
   artifacthub.io/containsSecurityUpdates: 'false'
@@ -13,7 +13,7 @@ annotations:
       url: https://github.com/kubernetes/kube-state-metrics
   artifacthub.io/changes: |
     - kind: fixed
-      description: "README: add mention to desired_version label for info metrics"
+      description: "Changed values naming for built-in alerts"
 
 apiVersion: v2
 name: eck-exporter
