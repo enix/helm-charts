@@ -1,4 +1,4 @@
-version: 1.0.0
+version: 1.0.1
 appVersion: "2.9.2"
 annotations:
   artifacthub.io/containsSecurityUpdates: 'false'
@@ -12,8 +12,8 @@ annotations:
     - name: Application Sources
       url: https://github.com/kubernetes/kube-state-metrics
   artifacthub.io/changes: |
-    - kind: added
-      description: New built-in alerts for prometheus-operator
+    - kind: fixed
+      description: "README: add mention to desired_version label for info metrics"
 
 apiVersion: v2
 name: eck-exporter
