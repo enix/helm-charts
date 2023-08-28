@@ -9,8 +9,9 @@ It exposes metrics on the operator's Custom Resources and their current statuses
 Supported CRDs:
 * Elasticsearch
 * Kibana
-* ApmServer
 * Agent
+* ApmServer
+* Beat
 
 The following metrics are available:
 * `eck_elasticsearch_info` (version, desired_version)
@@ -19,10 +20,12 @@ The following metrics are available:
 * `eck_elasticsearch_condition` (ReconciliationComplete, RunningDesiredVersion, ElasticsearchIsReachable, ResourcesAwareManagement)
 * `eck_kibana_info` (version, desired_version)
 * `eck_kibana_health` (red, yellow, green, unknown)
-* `eck_apmserver_info` (version, desired_version)
-* `eck_apmserver_health` (red, yellow, green, unknown)
 * `eck_agent_info` (version, desired_version)
 * `eck_agent_health` (red, yellow, green, unknown)
+* `eck_apmserver_info` (version, desired_version)
+* `eck_apmserver_health` (red, yellow, green, unknown)
+* `eck_beat_info` (version, desired_version)
+* `eck_beat_health` (red, yellow, green, unknown)
 
 Shipped with Prometheus alerts:
 * `EckElasticsearchHealth`
@@ -33,8 +36,9 @@ Shipped with Prometheus alerts:
 * `EckElasticsearchApplyingChangesTooLong`
 * `EckElasticsearchMigratingDataTooLong`
 * `EckKibanaHealth`
-* `EckApmServerHealth`
 * `EckAgentHealth`
+* `EckApmServerHealth`
+* `EckBeatHealth`
 
 [Chart values](#⚙️-values) offer knobs to disable or customize default alerts, and even inject your own.
 

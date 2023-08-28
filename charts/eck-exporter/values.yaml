@@ -11,6 +11,8 @@ eckResources:
   agents: true
   # -- Whether to produce metrics for ECK's ApmServer objects or not
   apmservers: true
+  # -- Whether to produce metrics for ECK's Beat objects or not
+  beats: true
   # -- Whether to produce metrics for ECK's Elasticsearch objects or not
   elasticsearches: true
   # -- Whether to produce metrics for ECK's Kibana objects or not
@@ -95,6 +97,16 @@ prometheusRules:
         yellow: warning
         red: critical
         unknown: critical
+    # Agent
+    EckAgentHealth:
+      create: true
+      for: 1m
+      averageInterval: 5m
+      averageThresholdOver: 0.2
+      severity:
+        yellow: warning
+        red: critical
+        unknown: critical
     # ApmServer
     EckApmServerHealth:
       create: true
@@ -105,8 +117,8 @@ prometheusRules:
         yellow: warning
         red: critical
         unknown: critical
-    # Agent
-    EckAgentHealth:
+    # Beat
+    EckBeatHealth:
       create: true
       for: 1m
       averageInterval: 5m

@@ -9,8 +9,9 @@ It exposes metrics on the operator's Custom Resources and their current statuses
 Supported CRDs:
 * Elasticsearch
 * Kibana
-* ApmServer
 * Agent
+* ApmServer
+* Beat
 
 The following metrics are available:
 * `eck_elasticsearch_info` (version, desired_version)
@@ -19,10 +20,12 @@ The following metrics are available:
 * `eck_elasticsearch_condition` (ReconciliationComplete, RunningDesiredVersion, ElasticsearchIsReachable, ResourcesAwareManagement)
 * `eck_kibana_info` (version, desired_version)
 * `eck_kibana_health` (red, yellow, green, unknown)
-* `eck_apmserver_info` (version, desired_version)
-* `eck_apmserver_health` (red, yellow, green, unknown)
 * `eck_agent_info` (version, desired_version)
 * `eck_agent_health` (red, yellow, green, unknown)
+* `eck_apmserver_info` (version, desired_version)
+* `eck_apmserver_health` (red, yellow, green, unknown)
+* `eck_beat_info` (version, desired_version)
+* `eck_beat_health` (red, yellow, green, unknown)
 
 Shipped with Prometheus alerts:
 * `EckElasticsearchHealth`
@@ -33,8 +36,9 @@ Shipped with Prometheus alerts:
 * `EckElasticsearchApplyingChangesTooLong`
 * `EckElasticsearchMigratingDataTooLong`
 * `EckKibanaHealth`
-* `EckApmServerHealth`
 * `EckAgentHealth`
+* `EckApmServerHealth`
+* `EckBeatHealth`
 
 [Chart values](#⚙️-values) offer knobs to disable or customize default alerts, and even inject your own.
 
@@ -95,10 +99,11 @@ Great question... To be answered when the need arises 😅
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| eckResources.agents | bool | `true` | Whether to produce metrics for ECK's Agent objects or not |
+| eckResources.apmservers | bool | `true` | Whether to produce metrics for ECK's ApmServer objects or not |
+| eckResources.beats | bool | `true` | Whether to produce metrics for ECK's Beat objects or not |
 | eckResources.elasticsearches | bool | `true` | Whether to produce metrics for ECK's Elasticsearch objects or not |
 | eckResources.kibanas | bool | `true` | Whether to produce metrics for ECK's Kibana objects or not |
-| eckResources.apmservers | bool | `true` | Whether to produce metrics for ECK's ApmServer objects or not |
-| eckResources.agents | bool | `true` | Whether to produce metrics for ECK's Agent objects or not |
 | prometheusRules.create | bool | `true` | Should a PrometheusRule object be installed to alert on certificate expiration. For prometheus-operator (kube-prometheus) users. |
 | prometheusRules.extraLabels | object | `{}` | Additional labels to add to PrometheusRule objects |
 | prometheusRules.alertExtraLabels | object | `{}` | Additional labels to add to PrometheusRule rules |
@@ -155,13 +160,6 @@ Great question... To be answered when the need arises 😅
 | prometheusRules.builtinAlerts.EckKibanaHealth.severity.yellow | string | `"warning"` |  |
 | prometheusRules.builtinAlerts.EckKibanaHealth.severity.red | string | `"critical"` |  |
 | prometheusRules.builtinAlerts.EckKibanaHealth.severity.unknown | string | `"critical"` |  |
-| prometheusRules.builtinAlerts.EckApmServerHealth.create | bool | `true` |  |
-| prometheusRules.builtinAlerts.EckApmServerHealth.for | string | `"1m"` |  |
-| prometheusRules.builtinAlerts.EckApmServerHealth.averageInterval | string | `"5m"` |  |
-| prometheusRules.builtinAlerts.EckApmServerHealth.averageThresholdOver | float | `0.2` |  |
-| prometheusRules.builtinAlerts.EckApmServerHealth.severity.yellow | string | `"warning"` |  |
-| prometheusRules.builtinAlerts.EckApmServerHealth.severity.red | string | `"critical"` |  |
-| prometheusRules.builtinAlerts.EckApmServerHealth.severity.unknown | string | `"critical"` |  |
 | prometheusRules.builtinAlerts.EckAgentHealth.create | bool | `true` |  |
 | prometheusRules.builtinAlerts.EckAgentHealth.for | string | `"1m"` |  |
 | prometheusRules.builtinAlerts.EckAgentHealth.averageInterval | string | `"5m"` |  |
@@ -169,6 +167,20 @@ Great question... To be answered when the need arises 😅
 | prometheusRules.builtinAlerts.EckAgentHealth.severity.yellow | string | `"warning"` |  |
 | prometheusRules.builtinAlerts.EckAgentHealth.severity.red | string | `"critical"` |  |
 | prometheusRules.builtinAlerts.EckAgentHealth.severity.unknown | string | `"critical"` |  |
+| prometheusRules.builtinAlerts.EckApmServerHealth.create | bool | `true` |  |
+| prometheusRules.builtinAlerts.EckApmServerHealth.for | string | `"1m"` |  |
+| prometheusRules.builtinAlerts.EckApmServerHealth.averageInterval | string | `"5m"` |  |
+| prometheusRules.builtinAlerts.EckApmServerHealth.averageThresholdOver | float | `0.2` |  |
+| prometheusRules.builtinAlerts.EckApmServerHealth.severity.yellow | string | `"warning"` |  |
+| prometheusRules.builtinAlerts.EckApmServerHealth.severity.red | string | `"critical"` |  |
+| prometheusRules.builtinAlerts.EckApmServerHealth.severity.unknown | string | `"critical"` |  |
+| prometheusRules.builtinAlerts.EckBeatHealth.create | bool | `true` |  |
+| prometheusRules.builtinAlerts.EckBeatHealth.for | string | `"1m"` |  |
+| prometheusRules.builtinAlerts.EckBeatHealth.averageInterval | string | `"5m"` |  |
+| prometheusRules.builtinAlerts.EckBeatHealth.averageThresholdOver | float | `0.2` |  |
+| prometheusRules.builtinAlerts.EckBeatHealth.severity.yellow | string | `"warning"` |  |
+| prometheusRules.builtinAlerts.EckBeatHealth.severity.red | string | `"critical"` |  |
+| prometheusRules.builtinAlerts.EckBeatHealth.severity.unknown | string | `"critical"` |  |
 | serviceMonitor.create | bool | `true` | Should a ServiceMonitor object be installed to scrape this exporter. For prometheus-operator (kube-prometheus-stack) users. |
 | serviceMonitor.namespace | string | `""` | Optional namespace in which to create the ServiceMonitor. Could be where prometheus-operator is running. |
 | serviceMonitor.jobLabel | string | `""` | Optional name of the label on the target Service to use as the job name in Prometheus |

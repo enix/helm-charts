@@ -19,6 +19,11 @@ rules:
     resources: ["apmservers"]
     verbs: ["list", "watch"]
   {{- end }}
+  {{- if .Values.eckResources.beats }}
+  - apiGroups: ["beat.k8s.elastic.co"]
+    resources: ["beats"]
+    verbs: ["list", "watch"]
+  {{- end }}
   {{- if .Values.eckResources.elasticsearches }}
   - apiGroups: ["elasticsearch.k8s.elastic.co"]
     resources: ["elasticsearches"]
