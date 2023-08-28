@@ -23,7 +23,7 @@ spec:
     #
     {{- range list "Elasticsearch" "Kibana" "ApmServer" "Agent" }}
       {{- $resourceName := . }}
-      {{- $alertName := printf "Eck%sHealth" . }}
+      {{- $alertName := printf "Eck%sHealth" $resourceName }}
       {{- $alert := get $.Values.prometheusRules.buildinAlerts $alertName }}
       {{- if $alert.create }}
         {{- $severities := values $alert.severity | uniq }}
@@ -37,16 +37,16 @@ spec:
           {{- end }}
           {{- if $choices }}
     - alert: '{{ printf "%s%s" $rulePrefix $alertName | trim }}'
-      expr: eck_{{ $resourceName | lower }}_health{health=~"{{ join "|" $choices }}"} > 0
-      for: {{ get $alert "for" }}
+      expr: 'avg_over_time(eck_{{ $resourceName | lower }}_health{health=~"{{ join "|" $choices }}"}[{{ $alert.averageInterval }}]) > {{ $alert.averageThresholdOver }}'
+      for: {{ $alert.for }}
       labels:
         severity: {{ $severity }}
             {{- if $.Values.prometheusRules.alertExtraLabels }}
               {{- toYaml $.Values.prometheusRules.alertExtraLabels | nindent 8 }}
             {{- end }}
       annotations:
-        summary: '{{ $resourceName }} health is {{ "{{" }} $labels.health {{ "}}" }} for {{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}'
-        description: 'Over the last {{ get $alert "for" }}, health status for {{ $resourceName }} "{{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}" has been one of: {{ join ", " $choices }}. At the time of firing this alert it was: {{ "{{" }} $labels.health {{ "}}" }}.'
+        summary: 'Health is {{ "{{" }} $labels.health {{ "}}" }} for {{ $resourceName }}: {{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}'
+        description: 'For the last {{ $alert.for }}, the {{ $alert.averageInterval }} average health status for {{ $resourceName }} object "{{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}" was one of: {{ join ", " $choices }}. At the time of firing this alert it was: {{ "{{" }} $labels.health {{ "}}" }}.'
             {{- if $.Values.prometheusRules.alertExtraAnnotations }}
               {{- toYaml $.Values.prometheusRules.alertExtraAnnotations | nindent 8 }}
             {{- end }}
@@ -54,7 +54,157 @@ spec:
         {{- end }}
       {{- end }}
     {{- end }}
-
+    #
+    # EckElasticsearchPhase
+    #
+    {{- $alertName := "EckElasticsearchPhase" }}
+    {{- $alert := get $.Values.prometheusRules.buildinAlerts $alertName }}
+    {{- if $alert.create }}
+      {{- $severities := values $alert.severity | uniq }}
+      {{- range $severities }}
+        {{- $severity := . }}
+        {{- $choices := list }}
+        {{- range $k, $v := $alert.severity }}
+          {{- if eq $severity $v }}
+            {{- $choices = append $choices $k }}
+          {{- end }}
+        {{- end }}
+        {{- if $choices }}
+          {{- $choicesHasNotReady := has "NotReady" $choices }}
+          {{- $choicesWithoutNotReady := without $choices "NotReady" }}
+    - alert: '{{ printf "%s%s" $rulePrefix $alertName | trim }}'
+      expr: |
+        (
+          {{- if $choicesHasNotReady }}
+          avg_over_time(eck_elasticsearch_phase{phase="Ready"}[{{ $alert.averageInterval }}]) < {{ $alert.averageThresholdUnder }}
+            {{- if $choicesWithoutNotReady }}
+            or
+            {{- end }}
+          {{- end }}
+          {{- if $choicesWithoutNotReady }}
+          avg_over_time(eck_elasticsearch_phase{phase=~"{{ join "|" $choicesWithoutNotReady }}"}[{{ $alert.averageInterval }}]) > {{ $alert.averageThresholdOver }}
+          {{- end }}
+        )
+      for: {{ $alert.for }}
+      labels:
+        severity: {{ $severity }}
+          {{- if $.Values.prometheusRules.alertExtraLabels }}
+            {{- toYaml $.Values.prometheusRules.alertExtraLabels | nindent 8 }}
+          {{- end }}
+      annotations:
+        summary: 'Phase is not Ready for Elasticsearch: {{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}'
+        description: 'For the last {{ $alert.for }}, the {{ $alert.averageInterval }} average phase for Elasticsearch object "{{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}" was one of: {{ join ", " $choices }}.'
+          {{- if $.Values.prometheusRules.alertExtraAnnotations }}
+            {{- toYaml $.Values.prometheusRules.alertExtraAnnotations | nindent 8 }}
+          {{- end }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+    #
+    # EckElasticsearchUnreachable
+    #
+    {{- $alertName := "EckElasticsearchUnreachable" }}
+    {{- $alert := get $.Values.prometheusRules.buildinAlerts $alertName }}
+    {{- if $alert.create }}
+    - alert: '{{ printf "%s%s" $rulePrefix $alertName | trim }}'
+      expr: 'avg_over_time(eck_elasticsearch_condition{type="ElasticsearchIsReachable"}[{{ $alert.averageInterval }}]) < {{ $alert.averageThresholdUnder }}'
+      for: {{ $alert.for }}
+      labels:
+        severity: {{ $alert.severity }}
+      {{- if $.Values.prometheusRules.alertExtraLabels }}
+        {{- toYaml $.Values.prometheusRules.alertExtraLabels | nindent 8 }}
+      {{- end }}
+      annotations:
+        summary: 'Operator cannot connect to Elasticsearch: {{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}'
+        description: 'For the last {{ $alert.for }}, the operator reportedly could not connect on a {{ $alert.averageInterval }} average to Elasticsearch cluster "{{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}".'
+      {{- if $.Values.prometheusRules.alertExtraAnnotations }}
+        {{- toYaml $.Values.prometheusRules.alertExtraAnnotations | nindent 8 }}
+      {{- end }}
+    {{- end }}
+    #
+    # EckElasticsearchReconciliationTooLong
+    #
+    {{- $alertName := "EckElasticsearchReconciliationTooLong" }}
+    {{- $alert := get $.Values.prometheusRules.buildinAlerts $alertName }}
+    {{- if $alert.create }}
+    - alert: '{{ printf "%s%s" $rulePrefix $alertName | trim }}'
+      expr: 'avg_over_time(eck_elasticsearch_condition{type="ReconciliationComplete"}[{{ $alert.averageInterval }}]) < {{ $alert.averageThresholdUnder }}'
+      for: {{ $alert.for }}
+      labels:
+        severity: {{ $alert.severity }}
+      {{- if $.Values.prometheusRules.alertExtraLabels }}
+        {{- toYaml $.Values.prometheusRules.alertExtraLabels | nindent 8 }}
+      {{- end }}
+      annotations:
+        summary: 'Reconciliation is lagging for Elasticsearch: {{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}'
+        description: 'For the last {{ $alert.for }}, the condition ReconciliationComplete was not met on a {{ $alert.averageInterval }} average for Elasticsearch cluster "{{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}".'
+      {{- if $.Values.prometheusRules.alertExtraAnnotations }}
+        {{- toYaml $.Values.prometheusRules.alertExtraAnnotations | nindent 8 }}
+      {{- end }}
+    {{- end }}
+    #
+    # EckElasticsearchUpgradeTooLong
+    #
+    {{- $alertName := "EckElasticsearchUpgradeTooLong" }}
+    {{- $alert := get $.Values.prometheusRules.buildinAlerts $alertName }}
+    {{- if $alert.create }}
+    - alert: '{{ printf "%s%s" $rulePrefix $alertName | trim }}'
+      expr: 'avg_over_time(eck_elasticsearch_condition{type="RunningDesiredVersion"}[{{ $alert.averageInterval }}]) < {{ $alert.averageThresholdUnder }}'
+      for: {{ $alert.for }}
+      labels:
+        severity: {{ $alert.severity }}
+      {{- if $.Values.prometheusRules.alertExtraLabels }}
+        {{- toYaml $.Values.prometheusRules.alertExtraLabels | nindent 8 }}
+      {{- end }}
+      annotations:
+        summary: 'Upgrade is lagging for Elasticsearch: {{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}'
+        description: 'For the last {{ $alert.for }}, the condition RunningDesiredVersion was not met on a {{ $alert.averageInterval }} average for Elasticsearch cluster "{{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}".'
+      {{- if $.Values.prometheusRules.alertExtraAnnotations }}
+        {{- toYaml $.Values.prometheusRules.alertExtraAnnotations | nindent 8 }}
+      {{- end }}
+    {{- end }}
+    #
+    # EckElasticsearchApplyingChangesTooLong
+    #
+    {{- $alertName := "EckElasticsearchApplyingChangesTooLong" }}
+    {{- $alert := get $.Values.prometheusRules.buildinAlerts $alertName }}
+    {{- if $alert.create }}
+    - alert: '{{ printf "%s%s" $rulePrefix $alertName | trim }}'
+      expr: 'avg_over_time(eck_elasticsearch_phase{phase="ApplyingChanges"}[{{ $alert.averageInterval }}]) > {{ $alert.averageThresholdOver }}'
+      for: {{ $alert.for }}
+      labels:
+        severity: {{ $alert.severity }}
+      {{- if $.Values.prometheusRules.alertExtraLabels }}
+        {{- toYaml $.Values.prometheusRules.alertExtraLabels | nindent 8 }}
+      {{- end }}
+      annotations:
+        summary: 'Configuration propagation is lagging for Elasticsearch: {{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}'
+        description: 'For the last {{ $alert.for }}, phase ApplyingChanges was active on a {{ $alert.averageInterval }} average for Elasticsearch cluster "{{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}".'
+      {{- if $.Values.prometheusRules.alertExtraAnnotations }}
+        {{- toYaml $.Values.prometheusRules.alertExtraAnnotations | nindent 8 }}
+      {{- end }}
+    {{- end }}
+    #
+    # EckElasticsearchMigratingDataTooLong
+    #
+    {{- $alertName := "EckElasticsearchMigratingDataTooLong" }}
+    {{- $alert := get $.Values.prometheusRules.buildinAlerts $alertName }}
+    {{- if $alert.create }}
+    - alert: '{{ printf "%s%s" $rulePrefix $alertName | trim }}'
+      expr: 'avg_over_time(eck_elasticsearch_phase{phase="MigratingData"}[{{ $alert.averageInterval }}]) > {{ $alert.averageThresholdOver }}'
+      for: {{ $alert.for }}
+      labels:
+        severity: {{ $alert.severity }}
+      {{- if $.Values.prometheusRules.alertExtraLabels }}
+        {{- toYaml $.Values.prometheusRules.alertExtraLabels | nindent 8 }}
+      {{- end }}
+      annotations:
+        summary: 'Data migrations are lagging for Elasticsearch: {{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}'
+        description: 'For the last {{ $alert.for }}, phase MigratingData was active on a {{ $alert.averageInterval }} average for Elasticsearch cluster "{{ "{{" }} $labels.exported_namespace {{ "}}" }}/{{ "{{" }} $labels.name {{ "}}" }}".'
+      {{- if $.Values.prometheusRules.alertExtraAnnotations }}
+        {{- toYaml $.Values.prometheusRules.alertExtraAnnotations | nindent 8 }}
+      {{- end }}
+    {{- end }}
   {{- end }}
 {{- range .Values.prometheusRules.extraAlertGroups }}
   - {{ tpl (toYaml .) $ | indent 4 | trim }}

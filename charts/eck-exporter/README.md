@@ -13,25 +13,25 @@ Supported CRDs:
 * Agent
 
 The following metrics are available:
-* `eck_elasticsearch_info` (version, desired_version)
+* `eck_elasticsearch_info` (version)
 * `eck_elasticsearch_health` (red, yellow, green, unknown)
 * `eck_elasticsearch_phase` (Ready, ApplyingChanges, MigratingData, Stalled, Invalid)
 * `eck_elasticsearch_condition` (ReconciliationComplete, RunningDesiredVersion, ElasticsearchIsReachable, ResourcesAwareManagement)
-* `eck_kibana_info` (version, desired_version)
+* `eck_kibana_info` (version)
 * `eck_kibana_health` (red, yellow, green, unknown)
-* `eck_apmserver_info` (version, desired_version)
+* `eck_apmserver_info` (version)
 * `eck_apmserver_health` (red, yellow, green, unknown)
-* `eck_agent_info` (version, desired_version)
+* `eck_agent_info` (version)
 * `eck_agent_health` (red, yellow, green, unknown)
 
 Shipped with Prometheus alerts:
 * `EckElasticsearchHealth`
-* `EckElasticsearchNotReady`
-* `EckElasticsearchApplyingChangesIsSlow`
-* `EckElasticsearchMigratingDataIsSlow`
-* `EckElasticsearchReconciliationInProgress`
-* `EckElasticsearchNotRunningDesiredVersion`
+* `EckElasticsearchPhase`
 * `EckElasticsearchUnreachable`
+* `EckElasticsearchReconciliationTooLong`
+* `EckElasticsearchUpgradeTooLong`
+* `EckElasticsearchApplyingChangesTooLong`
+* `EckElasticsearchMigratingDataTooLong`
 * `EckKibanaHealth`
 * `EckApmServerHealth`
 * `EckAgentHealth`
@@ -107,52 +107,73 @@ Great question... To be answered when the need arises 😅
 | prometheusRules.disableBuiltinAlertGroup | bool | `false` | Skip all built-in alerts when using extraAlertGroups |
 | prometheusRules.extraAlertGroups | list | `[]` | Additional alert groups for custom configuration (example in `values.yaml`) |
 | prometheusRules.buildinAlerts.EckElasticsearchHealth.create | bool | `true` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchHealth.for | string | `"5m"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchHealth.for | string | `"1m"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchHealth.averageInterval | string | `"5m"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchHealth.averageThresholdOver | float | `0.2` |  |
 | prometheusRules.buildinAlerts.EckElasticsearchHealth.severity.yellow | string | `"warning"` |  |
 | prometheusRules.buildinAlerts.EckElasticsearchHealth.severity.red | string | `"critical"` |  |
 | prometheusRules.buildinAlerts.EckElasticsearchHealth.severity.unknown | string | `"critical"` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchNotReady.create | bool | `true` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchNotReady.for | string | `"5m"` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchNotReady.severity.NotReady | string | `"warning"` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchNotReady.severity.ApplyingChanges | string | `"warning"` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchNotReady.severity.MigratingData | string | `"warning"` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchNotReady.severity.Stalled | string | `"critical"` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchNotReady.severity.Invalid | string | `"critical"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchPhase.create | bool | `true` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchPhase.for | string | `"1m"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchPhase.averageInterval | string | `"5m"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchPhase.averageThresholdUnder | float | `0.8` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchPhase.averageThresholdOver | float | `0.2` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchPhase.severity.NotReady | string | `"warning"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchPhase.severity.ApplyingChanges | string | `"warning"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchPhase.severity.MigratingData | string | `"warning"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchPhase.severity.Stalled | string | `"critical"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchPhase.severity.Invalid | string | `"critical"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchUnreachable.create | bool | `true` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchUnreachable.for | string | `"1m"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchUnreachable.averageInterval | string | `"5m"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchUnreachable.averageThresholdUnder | float | `0.5` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchUnreachable.severity | string | `"critical"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchReconciliationTooLong.create | bool | `true` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchReconciliationTooLong.for | string | `"1h"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchReconciliationTooLong.averageInterval | string | `"5m"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchReconciliationTooLong.averageThresholdUnder | float | `0.8` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchReconciliationTooLong.severity | string | `"critical"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchUpgradeTooLong.create | bool | `true` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchUpgradeTooLong.for | string | `"1h"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchUpgradeTooLong.averageInterval | string | `"5m"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchUpgradeTooLong.averageThresholdUnder | float | `0.8` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchUpgradeTooLong.severity | string | `"critical"` |  |
 | prometheusRules.buildinAlerts.EckElasticsearchApplyingChangesTooLong.create | bool | `true` |  |
 | prometheusRules.buildinAlerts.EckElasticsearchApplyingChangesTooLong.for | string | `"1h"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchApplyingChangesTooLong.averageInterval | string | `"5m"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchApplyingChangesTooLong.averageThresholdOver | float | `0.2` |  |
 | prometheusRules.buildinAlerts.EckElasticsearchApplyingChangesTooLong.severity | string | `"critical"` |  |
 | prometheusRules.buildinAlerts.EckElasticsearchMigratingDataTooLong.create | bool | `true` |  |
 | prometheusRules.buildinAlerts.EckElasticsearchMigratingDataTooLong.for | string | `"1h"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchMigratingDataTooLong.averageInterval | string | `"5m"` |  |
+| prometheusRules.buildinAlerts.EckElasticsearchMigratingDataTooLong.averageThresholdOver | float | `0.2` |  |
 | prometheusRules.buildinAlerts.EckElasticsearchMigratingDataTooLong.severity | string | `"critical"` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchReconciliationInProgress.create | bool | `true` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchReconciliationInProgress.for | string | `"1h"` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchReconciliationInProgress.severity | string | `"critical"` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchNotRunningDesiredVersion.create | bool | `true` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchNotRunningDesiredVersion.for | string | `"1h"` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchNotRunningDesiredVersion.severity | string | `"critical"` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchUnreachable.create | bool | `true` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchUnreachable.for | string | `"5m"` |  |
-| prometheusRules.buildinAlerts.EckElasticsearchUnreachable.severity | string | `"critical"` |  |
 | prometheusRules.buildinAlerts.EckKibanaHealth.create | bool | `true` |  |
-| prometheusRules.buildinAlerts.EckKibanaHealth.for | string | `"5m"` |  |
+| prometheusRules.buildinAlerts.EckKibanaHealth.for | string | `"1m"` |  |
+| prometheusRules.buildinAlerts.EckKibanaHealth.averageInterval | string | `"5m"` |  |
+| prometheusRules.buildinAlerts.EckKibanaHealth.averageThresholdOver | float | `0.2` |  |
 | prometheusRules.buildinAlerts.EckKibanaHealth.severity.yellow | string | `"warning"` |  |
 | prometheusRules.buildinAlerts.EckKibanaHealth.severity.red | string | `"critical"` |  |
 | prometheusRules.buildinAlerts.EckKibanaHealth.severity.unknown | string | `"critical"` |  |
 | prometheusRules.buildinAlerts.EckApmServerHealth.create | bool | `true` |  |
-| prometheusRules.buildinAlerts.EckApmServerHealth.for | string | `"5m"` |  |
+| prometheusRules.buildinAlerts.EckApmServerHealth.for | string | `"1m"` |  |
+| prometheusRules.buildinAlerts.EckApmServerHealth.averageInterval | string | `"5m"` |  |
+| prometheusRules.buildinAlerts.EckApmServerHealth.averageThresholdOver | float | `0.2` |  |
 | prometheusRules.buildinAlerts.EckApmServerHealth.severity.yellow | string | `"warning"` |  |
 | prometheusRules.buildinAlerts.EckApmServerHealth.severity.red | string | `"critical"` |  |
 | prometheusRules.buildinAlerts.EckApmServerHealth.severity.unknown | string | `"critical"` |  |
 | prometheusRules.buildinAlerts.EckAgentHealth.create | bool | `true` |  |
-| prometheusRules.buildinAlerts.EckAgentHealth.for | string | `"5m"` |  |
+| prometheusRules.buildinAlerts.EckAgentHealth.for | string | `"1m"` |  |
+| prometheusRules.buildinAlerts.EckAgentHealth.averageInterval | string | `"5m"` |  |
+| prometheusRules.buildinAlerts.EckAgentHealth.averageThresholdOver | float | `0.2` |  |
 | prometheusRules.buildinAlerts.EckAgentHealth.severity.yellow | string | `"warning"` |  |
 | prometheusRules.buildinAlerts.EckAgentHealth.severity.red | string | `"critical"` |  |
 | prometheusRules.buildinAlerts.EckAgentHealth.severity.unknown | string | `"critical"` |  |
 | serviceMonitor.create | bool | `true` | Should a ServiceMonitor object be installed to scrape this exporter. For prometheus-operator (kube-prometheus-stack) users. |
 | serviceMonitor.namespace | string | `""` | Optional namespace in which to create the ServiceMonitor. Could be where prometheus-operator is running. |
 | serviceMonitor.jobLabel | string | `""` | Optional name of the label on the target Service to use as the job name in Prometheus |
-| serviceMonitor.interval | string | `"60s"` | Endpoint scrape interval set in the ServiceMonitor |
-| serviceMonitor.scrapeTimeout | string | `"30s"` | Endpoint scrape timeout set in the ServiceMonitor |
+| serviceMonitor.interval | string | `"30s"` | Endpoint scrape interval set in the ServiceMonitor. Warning: increasing this will require changes in built-in alerts settings for averaging! Make sure you understand how `avg_over_time` is used. |
+| serviceMonitor.scrapeTimeout | string | `"20s"` | Endpoint scrape timeout set in the ServiceMonitor |
 | serviceMonitor.honorLabels | bool | `false` | Whether to honor metrics labels or not |
 | serviceMonitor.extraLabels | object | `{}` | Additional labels to add to ServiceMonitor objects |
 | serviceMonitor.relabelings | list | `[]` | Relabel config for the ServiceMonitor |

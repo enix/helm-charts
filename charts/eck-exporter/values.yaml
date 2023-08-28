@@ -31,60 +31,86 @@ prometheusRules:
   disableBuiltinAlertGroup: false
   # -- Additional alert groups for custom configuration (example in `values.yaml`)
   extraAlertGroups: []
+  #
   buildinAlerts:
+    # Elasticsearch
     EckElasticsearchHealth:
       create: true
-      for: 5m
+      for: 1m
+      averageInterval: 5m
+      averageThresholdOver: 0.2
       severity:
         yellow: warning
         red: critical
         unknown: critical
-    EckElasticsearchNotReady:
+    EckElasticsearchPhase:
       create: true
-      for: 5m
+      for: 1m
+      averageInterval: 5m
+      averageThresholdUnder: 0.8 # for Ready only (metric should be 1)
+      averageThresholdOver: 0.2  # for all other phases (should be 0)
       severity:
         NotReady: warning
         ApplyingChanges: warning
         MigratingData: warning
         Stalled: critical
         Invalid: critical
+    EckElasticsearchUnreachable:
+      create: true
+      for: 1m
+      averageInterval: 5m
+      averageThresholdUnder: 0.5
+      severity: critical
+    EckElasticsearchReconciliationTooLong:
+      create: true
+      for: 1h
+      averageInterval: 5m
+      averageThresholdUnder: 0.8
+      severity: critical
+    EckElasticsearchUpgradeTooLong:
+      create: true
+      for: 1h
+      averageInterval: 5m
+      averageThresholdUnder: 0.8
+      severity: critical
     EckElasticsearchApplyingChangesTooLong:
       create: true
       for: 1h
+      averageInterval: 5m
+      averageThresholdOver: 0.2
       severity: critical
     EckElasticsearchMigratingDataTooLong:
       create: true
       for: 1h
+      averageInterval: 5m
+      averageThresholdOver: 0.2
       severity: critical
-    EckElasticsearchReconciliationInProgress:
-      create: true
-      for: 1h
-      severity: critical
-    EckElasticsearchNotRunningDesiredVersion:
-      create: true
-      for: 1h
-      severity: critical
-    EckElasticsearchUnreachable:
-      create: true
-      for: 5m
-      severity: critical
+    # Kibana
     EckKibanaHealth:
       create: true
-      for: 5m
+      for: 1m
+      averageInterval: 5m
+      averageThresholdOver: 0.2
       severity:
         yellow: warning
         red: critical
         unknown: critical
+    # ApmServer
     EckApmServerHealth:
       create: true
-      for: 5m
+      for: 1m
+      averageInterval: 5m
+      averageThresholdOver: 0.2
       severity:
         yellow: warning
         red: critical
         unknown: critical
+    # Agent
     EckAgentHealth:
       create: true
-      for: 5m
+      for: 1m
+      averageInterval: 5m
+      averageThresholdOver: 0.2
       severity:
         yellow: warning
         red: critical
@@ -97,10 +123,10 @@ serviceMonitor:
   namespace: ""
   # -- Optional name of the label on the target Service to use as the job name in Prometheus
   jobLabel: ""
-  # -- Endpoint scrape interval set in the ServiceMonitor
-  interval: 60s
+  # -- Endpoint scrape interval set in the ServiceMonitor. Warning: increasing this will require changes in built-in alerts settings for averaging! Make sure you understand how `avg_over_time` is used.
+  interval: 30s
   # -- Endpoint scrape timeout set in the ServiceMonitor
-  scrapeTimeout: 30s
+  scrapeTimeout: 20s
   # -- Whether to honor metrics labels or not
   honorLabels: false
   # -- Additional labels to add to ServiceMonitor objects
