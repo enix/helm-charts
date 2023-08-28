@@ -21,7 +21,7 @@ spec:
     #
     # Health status
     #
-    {{- range list "Elasticsearch" "Kibana" "Agent" "ApmServer" "Beat" "EnterpriseSearch" }}
+    {{- range list "Elasticsearch" "Kibana" "Agent" "ApmServer" "Beat" "ElasticMapsServer" "EnterpriseSearch" }}
       {{- $resourceName := . }}
       {{- $alertName := printf "Eck%sHealth" $resourceName }}
       {{- $alert := get $.Values.prometheusRules.builtinAlerts $alertName }}

@@ -17,6 +17,8 @@ eckResources:
   apmservers: true
   # -- Whether to produce metrics for ECK's Beat objects or not
   beats: true
+  # -- Whether to produce metrics for ECK's ElasticMapsServer objects or not
+  elasticmapsservers: true
   # -- Whether to produce metrics for ECK's EnterpriseSearch objects or not
   enterprisesearches: true
   # -- Whether to produce metrics for ECK's Logstash objects or not
@@ -123,6 +125,16 @@ prometheusRules:
         unknown: critical
     # Beat
     EckBeatHealth:
+      create: true
+      for: 1m
+      averageInterval: 5m
+      averageThresholdOver: 0.2
+      severity:
+        yellow: warning
+        red: critical
+        unknown: critical
+    # ElasticMapsServer
+    EckElasticMapsServerHealth:
       create: true
       for: 1m
       averageInterval: 5m

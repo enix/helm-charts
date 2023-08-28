@@ -12,6 +12,7 @@ Supported CRDs:
 * Agent
 * ApmServer
 * Beat
+* ElasticMapsServer
 * EnterpriseSearch
 * Logstash
 
@@ -28,6 +29,8 @@ The following metrics are available:
 * `eck_apmserver_health` (red, yellow, green, unknown)
 * `eck_beat_info` (version, desired_version)
 * `eck_beat_health` (red, yellow, green, unknown)
+* `eck_elasticmapsserver_info` (version, desired_version)
+* `eck_elasticmapsserver_health` (red, yellow, green, unknown)
 * `eck_enterprisesearch_info` (version, desired_version)
 * `eck_enterprisesearch_health` (red, yellow, green, unknown)
 * `eck_logstash_info` (version, desired_version)
@@ -44,6 +47,7 @@ Shipped with Prometheus alerts:
 * `EckAgentHealth`
 * `EckApmServerHealth`
 * `EckBeatHealth`
+* `EckElasticMapsServerHealth`
 * `EckEnterpriseSearchHealth`
 
 [Chart values](#⚙️-values) offer knobs to disable or customize default alerts, and even inject your own.
@@ -110,6 +114,7 @@ Great question... To be answered when the need arises 😅
 | eckResources.agents | bool | `true` | Whether to produce metrics for ECK's Agent objects or not |
 | eckResources.apmservers | bool | `true` | Whether to produce metrics for ECK's ApmServer objects or not |
 | eckResources.beats | bool | `true` | Whether to produce metrics for ECK's Beat objects or not |
+| eckResources.elasticmapsservers | bool | `true` | Whether to produce metrics for ECK's ElasticMapsServer objects or not |
 | eckResources.enterprisesearches | bool | `true` | Whether to produce metrics for ECK's EnterpriseSearch objects or not |
 | eckResources.logstashes | bool | `true` | Whether to produce metrics for ECK's Logstash objects or not |
 | prometheusRules.create | bool | `true` | Should a PrometheusRule object be installed to alert on certificate expiration. For prometheus-operator (kube-prometheus) users. |
@@ -189,6 +194,13 @@ Great question... To be answered when the need arises 😅
 | prometheusRules.builtinAlerts.EckBeatHealth.severity.yellow | string | `"warning"` |  |
 | prometheusRules.builtinAlerts.EckBeatHealth.severity.red | string | `"critical"` |  |
 | prometheusRules.builtinAlerts.EckBeatHealth.severity.unknown | string | `"critical"` |  |
+| prometheusRules.builtinAlerts.EckElasticMapsServerHealth.create | bool | `true` |  |
+| prometheusRules.builtinAlerts.EckElasticMapsServerHealth.for | string | `"1m"` |  |
+| prometheusRules.builtinAlerts.EckElasticMapsServerHealth.averageInterval | string | `"5m"` |  |
+| prometheusRules.builtinAlerts.EckElasticMapsServerHealth.averageThresholdOver | float | `0.2` |  |
+| prometheusRules.builtinAlerts.EckElasticMapsServerHealth.severity.yellow | string | `"warning"` |  |
+| prometheusRules.builtinAlerts.EckElasticMapsServerHealth.severity.red | string | `"critical"` |  |
+| prometheusRules.builtinAlerts.EckElasticMapsServerHealth.severity.unknown | string | `"critical"` |  |
 | prometheusRules.builtinAlerts.EckEnterpriseSearchHealth.create | bool | `true` |  |
 | prometheusRules.builtinAlerts.EckEnterpriseSearchHealth.for | string | `"1m"` |  |
 | prometheusRules.builtinAlerts.EckEnterpriseSearchHealth.averageInterval | string | `"5m"` |  |

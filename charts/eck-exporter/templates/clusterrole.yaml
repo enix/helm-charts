@@ -24,6 +24,11 @@ rules:
     resources: ["beats"]
     verbs: ["list", "watch"]
   {{- end }}
+  {{- if .Values.eckResources.elasticmapsservers }}
+  - apiGroups: ["maps.k8s.elastic.co"]
+    resources: ["elasticmapsservers"]
+    verbs: ["list", "watch"]
+  {{- end }}
   {{- if .Values.eckResources.elasticsearches }}
   - apiGroups: ["elasticsearch.k8s.elastic.co"]
     resources: ["elasticsearches"]
