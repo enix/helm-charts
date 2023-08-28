@@ -12,6 +12,7 @@ Supported CRDs:
 * Agent
 * ApmServer
 * Beat
+* EnterpriseSearch
 * Logstash
 
 The following metrics are available:
@@ -27,6 +28,8 @@ The following metrics are available:
 * `eck_apmserver_health` (red, yellow, green, unknown)
 * `eck_beat_info` (version, desired_version)
 * `eck_beat_health` (red, yellow, green, unknown)
+* `eck_enterprisesearch_info` (version, desired_version)
+* `eck_enterprisesearch_health` (red, yellow, green, unknown)
 * `eck_logstash_info` (version, desired_version)
 
 Shipped with Prometheus alerts:
@@ -41,6 +44,7 @@ Shipped with Prometheus alerts:
 * `EckAgentHealth`
 * `EckApmServerHealth`
 * `EckBeatHealth`
+* `EckEnterpriseSearchHealth`
 
 [Chart values](#⚙️-values) offer knobs to disable or customize default alerts, and even inject your own.
 
@@ -93,7 +97,7 @@ Going back to the goal for this project, we also don't want to become too redund
 We wanted to provide the same experience as installing a full-fledged and well packaged exporter, with all prometheus-operator facilities ready in seconds. It's also better for continuous improvement and testing, as it's a convenient platform to receive contributions on.  
 Should this project evolve to a dedicated codebase — whatever the reason would be — we'll be able to offer a clear and smooth transition to existing users.
 
-> How do you manage GVK version bumps in ECK's CRDs?
+> How do you manage GVR version bumps in ECK's CRDs?
 
 Great question... To be answered when the need arises 😅
 
@@ -101,11 +105,12 @@ Great question... To be answered when the need arises 😅
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| eckResources.elasticsearches | bool | `true` | Whether to produce metrics for ECK's Elasticsearch objects or not |
+| eckResources.kibanas | bool | `true` | Whether to produce metrics for ECK's Kibana objects or not |
 | eckResources.agents | bool | `true` | Whether to produce metrics for ECK's Agent objects or not |
 | eckResources.apmservers | bool | `true` | Whether to produce metrics for ECK's ApmServer objects or not |
 | eckResources.beats | bool | `true` | Whether to produce metrics for ECK's Beat objects or not |
-| eckResources.elasticsearches | bool | `true` | Whether to produce metrics for ECK's Elasticsearch objects or not |
-| eckResources.kibanas | bool | `true` | Whether to produce metrics for ECK's Kibana objects or not |
+| eckResources.enterprisesearches | bool | `true` | Whether to produce metrics for ECK's EnterpriseSearch objects or not |
 | eckResources.logstashes | bool | `true` | Whether to produce metrics for ECK's Logstash objects or not |
 | prometheusRules.create | bool | `true` | Should a PrometheusRule object be installed to alert on certificate expiration. For prometheus-operator (kube-prometheus) users. |
 | prometheusRules.extraLabels | object | `{}` | Additional labels to add to PrometheusRule objects |
@@ -184,6 +189,13 @@ Great question... To be answered when the need arises 😅
 | prometheusRules.builtinAlerts.EckBeatHealth.severity.yellow | string | `"warning"` |  |
 | prometheusRules.builtinAlerts.EckBeatHealth.severity.red | string | `"critical"` |  |
 | prometheusRules.builtinAlerts.EckBeatHealth.severity.unknown | string | `"critical"` |  |
+| prometheusRules.builtinAlerts.EckEnterpriseSearchHealth.create | bool | `true` |  |
+| prometheusRules.builtinAlerts.EckEnterpriseSearchHealth.for | string | `"1m"` |  |
+| prometheusRules.builtinAlerts.EckEnterpriseSearchHealth.averageInterval | string | `"5m"` |  |
+| prometheusRules.builtinAlerts.EckEnterpriseSearchHealth.averageThresholdOver | float | `0.2` |  |
+| prometheusRules.builtinAlerts.EckEnterpriseSearchHealth.severity.yellow | string | `"warning"` |  |
+| prometheusRules.builtinAlerts.EckEnterpriseSearchHealth.severity.red | string | `"critical"` |  |
+| prometheusRules.builtinAlerts.EckEnterpriseSearchHealth.severity.unknown | string | `"critical"` |  |
 | serviceMonitor.create | bool | `true` | Should a ServiceMonitor object be installed to scrape this exporter. For prometheus-operator (kube-prometheus-stack) users. |
 | serviceMonitor.namespace | string | `""` | Optional namespace in which to create the ServiceMonitor. Could be where prometheus-operator is running. |
 | serviceMonitor.jobLabel | string | `""` | Optional name of the label on the target Service to use as the job name in Prometheus |

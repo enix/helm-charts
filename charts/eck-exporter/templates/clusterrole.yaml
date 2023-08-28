@@ -29,6 +29,11 @@ rules:
     resources: ["elasticsearches"]
     verbs: ["list", "watch"]
   {{- end }}
+  {{- if .Values.eckResources.enterprisesearches }}
+  - apiGroups: ["enterprisesearch.k8s.elastic.co"]
+    resources: ["enterprisesearches"]
+    verbs: ["list", "watch"]
+  {{- end }}
   {{- if .Values.eckResources.kibanas }}
   - apiGroups: ["kibana.k8s.elastic.co"]
     resources: ["kibanas"]

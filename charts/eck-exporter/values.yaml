@@ -7,16 +7,18 @@
 replicaCount: 1
 
 eckResources:
+  # -- Whether to produce metrics for ECK's Elasticsearch objects or not
+  elasticsearches: true
+  # -- Whether to produce metrics for ECK's Kibana objects or not
+  kibanas: true
   # -- Whether to produce metrics for ECK's Agent objects or not
   agents: true
   # -- Whether to produce metrics for ECK's ApmServer objects or not
   apmservers: true
   # -- Whether to produce metrics for ECK's Beat objects or not
   beats: true
-  # -- Whether to produce metrics for ECK's Elasticsearch objects or not
-  elasticsearches: true
-  # -- Whether to produce metrics for ECK's Kibana objects or not
-  kibanas: true
+  # -- Whether to produce metrics for ECK's EnterpriseSearch objects or not
+  enterprisesearches: true
   # -- Whether to produce metrics for ECK's Logstash objects or not
   logstashes: true
 
@@ -121,6 +123,16 @@ prometheusRules:
         unknown: critical
     # Beat
     EckBeatHealth:
+      create: true
+      for: 1m
+      averageInterval: 5m
+      averageThresholdOver: 0.2
+      severity:
+        yellow: warning
+        red: critical
+        unknown: critical
+    # EnterpriseSearch
+    EckEnterpriseSearchHealth:
       create: true
       for: 1m
       averageInterval: 5m

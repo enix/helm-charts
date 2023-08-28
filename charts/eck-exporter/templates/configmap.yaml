@@ -151,6 +151,38 @@ data:
                 type: [ type ]
               valueFrom: [ status ]
       {{- end }}
+      {{- if .Values.eckResources.enterprisesearches }}
+      #
+      # EnterpriseSearch
+      #
+      - groupVersionKind:
+          group: enterprisesearch.k8s.elastic.co
+          kind: EnterpriseSearch
+          version: v1
+        metricNamePrefix: eck_enterprisesearch
+        labelsFromPath:
+          name:
+          - metadata
+          - name
+          namespace:
+          - metadata
+          - namespace
+        metrics:
+        - name: info
+          each:
+            type: Info
+            info:
+              labelsFromPath:
+                desired_version: [ spec, version ]
+                version: [ status, version ]
+        - name: health
+          each:
+            type: StateSet
+            stateSet:
+              labelName: health
+              path: [ status, health ]
+              list: [ red, yellow, green, unknown ]
+      {{- end }}
       {{- if .Values.eckResources.kibanas }}
       #
       # Kibana

@@ -12,6 +12,7 @@ Supported CRDs:
 * Agent
 * ApmServer
 * Beat
+* EnterpriseSearch
 * Logstash
 
 The following metrics are available:
@@ -27,6 +28,8 @@ The following metrics are available:
 * `eck_apmserver_health` (red, yellow, green, unknown)
 * `eck_beat_info` (version, desired_version)
 * `eck_beat_health` (red, yellow, green, unknown)
+* `eck_enterprisesearch_info` (version, desired_version)
+* `eck_enterprisesearch_health` (red, yellow, green, unknown)
 * `eck_logstash_info` (version, desired_version)
 
 Shipped with Prometheus alerts:
@@ -41,6 +44,7 @@ Shipped with Prometheus alerts:
 * `EckAgentHealth`
 * `EckApmServerHealth`
 * `EckBeatHealth`
+* `EckEnterpriseSearchHealth`
 
 [Chart values](#⚙️-values) offer knobs to disable or customize default alerts, and even inject your own.
 
@@ -93,7 +97,7 @@ Going back to the goal for this project, we also don't want to become too redund
 We wanted to provide the same experience as installing a full-fledged and well packaged exporter, with all prometheus-operator facilities ready in seconds. It's also better for continuous improvement and testing, as it's a convenient platform to receive contributions on.   
 Should this project evolve to a dedicated codebase — whatever the reason would be — we'll be able to offer a clear and smooth transition to existing users.
 
-> How do you manage GVK version bumps in ECK's CRDs?
+> How do you manage GVR version bumps in ECK's CRDs?
 
 Great question... To be answered when the need arises 😅
 
