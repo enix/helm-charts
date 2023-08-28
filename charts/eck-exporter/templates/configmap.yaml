@@ -8,6 +8,70 @@ data:
   config.yaml: |
     spec:
       resources:
+      {{- if .Values.eckResources.agents }}
+      #
+      # Agent
+      #
+      - groupVersionKind:
+          group: agent.k8s.elastic.co
+          kind: Agent
+          version: v1alpha1
+        metricNamePrefix: eck_agent
+        labelsFromPath:
+          name:
+          - metadata
+          - name
+          namespace:
+          - metadata
+          - namespace
+        metrics:
+        - name: info
+          each:
+            type: Info
+            info:
+              labelsFromPath:
+                desired_version: [ spec, version ]
+                version: [ status, version ]
+        - name: health
+          each:
+            type: StateSet
+            stateSet:
+              labelName: health
+              path: [ status, health ]
+              list: [ red, yellow, green, unknown ]
+      {{- end }}
+      {{- if .Values.eckResources.apmservers }}
+      #
+      # ApmServer
+      #
+      - groupVersionKind:
+          group: apm.k8s.elastic.co
+          kind: ApmServer
+          version: v1
+        metricNamePrefix: eck_apmserver
+        labelsFromPath:
+          name:
+          - metadata
+          - name
+          namespace:
+          - metadata
+          - namespace
+        metrics:
+        - name: info
+          each:
+            type: Info
+            info:
+              labelsFromPath:
+                desired_version: [ spec, version ]
+                version: [ status, version ]
+        - name: health
+          each:
+            type: StateSet
+            stateSet:
+              labelName: health
+              path: [ status, health ]
+              list: [ red, yellow, green, unknown ]
+      {{- end }}
       {{- if .Values.eckResources.elasticsearches }}
       #
       # Elasticsearch
@@ -64,70 +128,6 @@ data:
           kind: Kibana
           version: v1
         metricNamePrefix: eck_kibana
-        labelsFromPath:
-          name:
-          - metadata
-          - name
-          namespace:
-          - metadata
-          - namespace
-        metrics:
-        - name: info
-          each:
-            type: Info
-            info:
-              labelsFromPath:
-                desired_version: [ spec, version ]
-                version: [ status, version ]
-        - name: health
-          each:
-            type: StateSet
-            stateSet:
-              labelName: health
-              path: [ status, health ]
-              list: [ red, yellow, green, unknown ]
-      {{- end }}
-      {{- if .Values.eckResources.apmservers }}
-      #
-      # ApmServer
-      #
-      - groupVersionKind:
-          group: apm.k8s.elastic.co
-          kind: ApmServer
-          version: v1
-        metricNamePrefix: eck_apmserver
-        labelsFromPath:
-          name:
-          - metadata
-          - name
-          namespace:
-          - metadata
-          - namespace
-        metrics:
-        - name: info
-          each:
-            type: Info
-            info:
-              labelsFromPath:
-                desired_version: [ spec, version ]
-                version: [ status, version ]
-        - name: health
-          each:
-            type: StateSet
-            stateSet:
-              labelName: health
-              path: [ status, health ]
-              list: [ red, yellow, green, unknown ]
-      {{- end }}
-      {{- if .Values.eckResources.agents }}
-      #
-      # Agent
-      #
-      - groupVersionKind:
-          group: agent.k8s.elastic.co
-          kind: Agent
-          version: v1alpha1
-        metricNamePrefix: eck_agent
         labelsFromPath:
           name:
           - metadata
