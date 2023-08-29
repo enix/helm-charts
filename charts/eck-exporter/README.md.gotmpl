@@ -70,7 +70,7 @@ With clusters that don't use the Prometheus operator at all — missing the CRDs
 annotations for scrapping with classic Kubernetes service discovery:
 ```yaml
 podAnnotations:
-  prometheus.io/port: "9793"
+  prometheus.io/port: "8080"
   prometheus.io/scrape: "true"
 service:
   create: false
