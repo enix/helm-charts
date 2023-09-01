@@ -37,8 +37,8 @@ spec:
 
   storage:
     size: {{ .Values.persistence.size | quote }}
-    {{- with .Values.persistence.resizeInUseVolumes }}
-    resizeInUseVolumes: {{ . | quote }}
+    {{- if not (eq .Values.persistence.resizeInUseVolumes nil) }}
+    resizeInUseVolumes: {{ .Values.persistence.resizeInUseVolumes | quote }}
     {{- end }}
     {{- if .Values.persistence.storageClass }}
     {{- if (eq "-" .Values.persistence.storageClass) }}
