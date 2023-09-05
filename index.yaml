@@ -740,6 +740,49 @@ entries:
   eck-exporter:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: "Bump kube-state-metrics to version 2.10.0"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Application Sources
+          url: https://github.com/kubernetes/kube-state-metrics
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 2.10.0
+    created: "2023-09-05T13:00:56.219657348Z"
+    description: A Prometheus exporter for the ECK operator custom resources. Based
+      on kube-state-metrics.
+    digest: a1b2e565fc3467a528f7b7682446ab6721a02d1dfb665c1e93aef79589d041e9
+    home: https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1fae7.png
+    keywords:
+    - Prometheus
+    - exporter
+    - operator
+    - ECK
+    - Elasticsearch
+    - Kibana
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    name: eck-exporter
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/eck-exporter-1.3.0/eck-exporter-1.3.0.tgz
+    version: 1.3.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: fixed
           description: "doc: wrong port number for Prometheus annotations"
       artifacthub.io/containsSecurityUpdates: "false"
@@ -6651,4 +6694,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2023-09-05T11:38:57.422476664Z"
+generated: "2023-09-05T13:00:56.220851862Z"
