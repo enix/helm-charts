@@ -21,18 +21,19 @@ $ helm install my-release enix/<chart>
 
 ## Charts collection
 
-The following helm charts are maintained :
-* [san-iscsi-csi](https://github.com/enix/helm-charts/tree/master/charts/san-iscsi-csi)
-* [x509-certificate-exporter](https://github.com/enix/x509-certificate-exporter/tree/main/deploy/charts/x509-certificate-exporter)
-* [kube-router](https://github.com/enix/helm-charts/tree/master/charts/kube-router)
-* [kube-image-keeper](https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper)
-* [eck-exporter](https://github.com/enix/helm-charts/tree/master/charts/eck-exporter)
+The following helm charts are maintained:
+* [kube-image-keeper](https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper) ([Artifacthub](https://artifacthub.io/packages/helm/enix/kube-image-keeper))
+* [x509-certificate-exporter](https://github.com/enix/x509-certificate-exporter/tree/main/deploy/charts/x509-certificate-exporter) ([Artifacthub](https://artifacthub.io/packages/helm/enix/x509-certificate-exporter))
+* [kube-router](https://github.com/enix/helm-charts/tree/master/charts/kube-router) ([Artifacthub](https://artifacthub.io/packages/helm/enix/kube-router))
+* [eck-exporter](https://github.com/enix/helm-charts/tree/master/charts/eck-exporter) ([Artifacthub](https://artifacthub.io/packages/helm/enix/eck-exporter))
+* [san-iscsi-csi](https://github.com/enix/helm-charts/tree/master/charts/san-iscsi-csi) ([Artifacthub](https://artifacthub.io/packages/helm/enix/san-iscsi-csi))
 
-Please refer to each individual documentation !
+Please refer to each individual documentation!
 
 # License
 
-Copyright (c) 2023 ENIX
+```
+Copyright (c) 2022, 2023 ENIX
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -45,3 +46,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+```
