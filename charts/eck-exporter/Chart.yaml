@@ -1,4 +1,4 @@
-version: 1.2.0
+version: 1.2.1
 appVersion: "2.9.2"
 annotations:
   artifacthub.io/containsSecurityUpdates: 'false'
@@ -11,15 +11,10 @@ annotations:
       url: https://charts.enix.io
     - name: Application Sources
       url: https://github.com/kubernetes/kube-state-metrics
+  # https://artifacthub.io/docs/topics/annotations/helm/
   artifacthub.io/changes: |
-    - kind: added
-      description: "Support for Beat objects (info, health) with Health alert"
-    - kind: added
-      description: "Support for ElasticMapsServer objects (info, health) with Health alert"
-    - kind: added
-      description: "Support for EnterpriseSearch objects (info, health) with Health alert"
-    - kind: added
-      description: "Support for Logstash objects (info)"
+    - kind: fixed
+      description: "doc: wrong port number for Prometheus annotations"
 
 apiVersion: v2
 name: eck-exporter
