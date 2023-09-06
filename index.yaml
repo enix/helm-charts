@@ -3550,6 +3550,63 @@ entries:
   x509-certificate-exporter:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'build: bump Golang to version 1.20.7'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/f2a7a19055cd1b636928f0a71a2acbfa35c19982
+        - description: 'container: bump Alpine base image to version 3.18.3'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/1d089c68cf443e6c32f382626e2e0c288684910d
+        - description: 'helm: new value to set HostPath type for DaemonSet volumes'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/290094a8d50a78749801d7c6a81f006aed1d5bba
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 3.9.0
+    created: "2023-09-06T14:27:07.408632255Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 5f1ee4e92cc6c9388d884506848c08f56835f1b4a0fb9798fa9e32436f6796b7
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-3.9.0/x509-certificate-exporter-3.9.0.tgz
+    version: 3.9.0
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'build: release FreeBSD binaries for RISC-V'
           kind: added
           links:
@@ -6694,4 +6751,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2023-09-05T13:00:56.220851862Z"
+generated: "2023-09-06T14:27:07.409248962Z"
