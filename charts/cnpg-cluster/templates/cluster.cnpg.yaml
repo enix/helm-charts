@@ -13,7 +13,7 @@ spec:
   {{- if or .Values.imagePullSecrets .Values.registryCredentials }}
   imagePullSecrets:
   {{- with .Values.imagePullSecrets }}
-    {{- toYaml . | nindent 8 }}
+    {{- toYaml . | nindent 4 }}
   {{- end }}
   {{- range $name, $settings := .Values.registryCredentials }}
     - name: "{{ include "cnpg-cluster.fullname" $ }}-{{ $name }}"
