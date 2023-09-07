@@ -20,6 +20,11 @@ spec:
   {{- end }}
   {{- end }}
 
+  {{- with .Values.resources }}
+  resources:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+
   {{- if or .Values.nodeSelector .Values.tolerations .Values.extraAffinity }}
   affinity:
     {{- with .Values.nodeSelector }}
