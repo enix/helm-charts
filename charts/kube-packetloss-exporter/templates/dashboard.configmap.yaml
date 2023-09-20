@@ -1,0 +1,14 @@
+{{- if .Values.dashboard.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "kube-packetloss-exporter.fullname" . }}-dashboard
+  namespace: {{ .Values.dashboard.namespace | default .Release.Namespace }}
+  {{- with .Values.dashboard.labels }}
+  labels:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+data:
+  kube-packetloss-exporter.json: |-
+    {{- .Files.Get "files/kube-packetloss-exporter-dashboard.json" | nindent 4 }}
+{{- end }}
