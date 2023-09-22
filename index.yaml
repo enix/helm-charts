@@ -1056,6 +1056,143 @@ entries:
   kube-image-keeper:
   - annotations:
       artifacthub.io/changes: |-
+        - description: bump docker version to v24.0.6 to fix security issues
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/511a177ef769cc6cccaf744763bc75a1e0ab47a8
+        - description: bump registry version to 2.8.2 to fix security issues
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/189c5734292be1eb11da3f90d4fe67be0dc6f225
+        - description: 'controllers: fix pod count when scaling up from a >0 number of pods'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/fbcfb302c659ab1735445e3974bea746241328a0
+        - description: 'controllers: ignore notFound errors when getting an imagePullSecret'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/60ec8b42e00b318891b7916bafde67299e208982
+        - description: 'controllers: log reconciliation only when object still exists'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/60bb12dc8d379a315469e0bfb29eda57694a1e2c
+        - description: 'controllers: properly update usedBy CachedImage status'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/937b568cf8717e9fcc8fc0cbb14f12f25bdfc8dd
+        - description: 'controllers: reconcile Pods with deleting images only once'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/75c6473198706d43ba4d60dfcbda8ce59323da28
+        - description: 'controllers: set expiration date from CachedImageController'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/4b002ffb8fa4469bb3e4ed2ceca724c6646b9761
+        - description: don't leave open file descriptors after collecting metrics
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/adad9197cdf8548188b46b00e1673a3376d25057
+        - description: hash container names that are too long to be used as annotation key
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/0248e4b31828438f5c22b64c5c969417cb966fbc
+        - description: 'proxy: add support for 307 responses with an S3 storage backend'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/8ecfbf3b149691cb85f1ddf45264779f959b0db0
+        - description: 'proxy: don''t replace -[0-9] with :[0-9] in domain name'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/c65d4bf4f40bea4902856cd33998e8dfecefcc01
+        - description: 'proxy: lazy discovery of rest mapping to avoid throttling at start'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/d5b46578acbfc1c032cd66b97f3212ac691dd2af
+        - description: 'proxy: lazy discovery of rest mapping to avoid throttling at start'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/7254b4887ab01323c8048f1997739e07328e546a
+        - description: use go.uber.org/automaxprocs to detect GOMAXPROCS in containers
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/66dedccafb8c9888d2e35431798e163b82add394
+        - description: 'cache: add AWS ECR auth support'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/79c2a36b8fca2a6b2f166c14a83066d345446837
+        - description: 'controller: allow ignoring images using regexes'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/884bbcdaaa1e2b86eb50245ce317157b47ef32f2
+        - description: 'controllers: add maxConcurrentCachedImageReconciles flag'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/d333c53f1900dfb6fb14a4aa4cc8f894f2a07582
+        - description: 'helm: make delete-untagged registry flag configurable from helm'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/15c262831aa4549bc356c572547bbe9d667fab6c
+        - description: 'proxy: make Kube client throttling rates configurable'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/31b0f654431d797306a5f7aba5722d452e61bb5e
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.3.0
+    created: "2023-09-22T14:21:28.589258312Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.4
+    description: kuik is a container image caching system for Kubernetes.
+    digest: c7c86ee975f7f2f2af2f75b397fd74b49eb34fbda3cf29cb249f31ed43d28171
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.3.0/kube-image-keeper-1.3.0.tgz
+    version: 1.3.0
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'controllers: fix pod count when scaling up from a >0 number of pods'
           kind: fixed
           links:
@@ -6948,4 +7085,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2023-09-22T10:11:11.455280886Z"
+generated: "2023-09-22T14:21:28.58978324Z"
