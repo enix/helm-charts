@@ -1,0 +1,17 @@
+{{- if .Values.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "kube-packetloss-exporter.fullname" . }}
+  labels:
+    {{- include "kube-packetloss-exporter.labels" . | nindent 4 }}
+spec:
+  endpoints:
+  - path: /metrics
+    port: http
+    scheme: http
+    scrapeTimeout: 30s
+  selector:
+    matchLabels:
+      {{- include "kube-packetloss-exporter.labels" . | nindent 6 }}
+{{- end }}

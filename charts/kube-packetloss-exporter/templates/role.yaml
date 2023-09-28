@@ -1,0 +1,8 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "kube-packetloss-exporter.serviceAccountName" . }}-config-reloader
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["endpoints"]
+  verbs: ["get", "watch", "list"]

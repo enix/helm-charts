@@ -1,0 +1,145 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "kube-packetloss-exporter.fullname" . }}
+  labels:
+    {{- include "kube-packetloss-exporter.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "kube-packetloss-exporter.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "kube-packetloss-exporter.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "kube-packetloss-exporter.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      shareProcessNamespace: true
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - "/bin/sh"
+            - "-c"
+            - |
+               while [ ! -f {{ .Values.configFile }} ]; do
+                 echo 'waiting for configfile';
+                 sleep 1;
+               done;
+               while smokeping_prober $@; EC=$?; [ ${EC} -eq 0 ] || [ ${EC} -eq 143 ]; do
+                 echo 'restarting....';
+               done;
+               exit ${EC}
+            - "--"
+          args:
+            - "--config.file={{ .Values.configFile }}"
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          - name: config
+            mountPath: {{ .Values.configDir | default (osDir .Values.configFile) }}
+        - name: config-reloader
+          securityContext:
+            {{- toYaml .Values.configReloader.securityContext | nindent 12 }}
+          image: {{ .Values.configReloader.image.repository }}:{{ .Values.configReloader.image.tag | default (printf "%s.%s" .Capabilities.KubeVersion.Major .Capabilities.KubeVersion.Minor) }}
+          imagePullPolicy: {{ .Values.configReloader.image.pullPolicy }}
+          command:
+            - "/bin/sh"
+            - "-c"
+          args:
+            - |
+               SERVICE_NAME="{{ tpl .Values.lookupService . }}"
+               CONFIG_FILE="{{ .Values.configFile }}"
+               SAMPLE_NODE="{{ .Values.sampleNode }}"
+
+               mk_config () {
+                  TMP_CONFIG=$(mktemp -p $(dirname "${CONFIG_FILE}"))
+                  ALL_HOSTS=$(kubectl get ep "${SERVICE_NAME}" -o jsonpath="{range .subsets[*].addresses[*]}{.ip}{'\n'}{end}")
+                  if [ "${SAMPLE_NODE}" = "all" ]; then
+                      RETAIN_HOSTS=$(echo "${ALL_HOSTS}"|grep -v "${POD_IP}")
+                  else
+                      RETAIN_HOSTS=$( (echo "${ALL_HOSTS}";echo "${ALL_HOSTS}")|grep "${POD_IP}" -m 1 -A "${SAMPLE_NODE}"|grep -v "${POD_IP}")
+                  fi;
+                  if [ -z "${RETAIN_HOSTS}" ]; then
+                      echo "No hosts to create config..."
+                      return 1
+                  fi
+                  (echo "targets:"
+                   echo "- interval: ${PING_INTERVAL}"
+                   echo "  hosts:"
+                   for IP in ${RETAIN_HOSTS}; do
+                      echo "  - ${IP}";
+                   done) > "${TMP_CONFIG}";
+                  if ! diff --new-file "${TMP_CONFIG}" "${CONFIG_FILE}" > /dev/null; then
+                       echo "Installing new config"
+                       mv "${TMP_CONFIG}" "${CONFIG_FILE}"
+                       cat ${CONFIG_FILE}
+                       echo "Restart exporter ($(pgrep 'smokeping'))"
+                       kill $(pgrep 'smokeping')
+                  else
+                    rm "${TMP_CONFIG}"
+                  fi
+               }
+               while true; do
+                   while mk_config; do
+                       kubectl get ep "${SERVICE_NAME}" --watch-only | while read line; do
+                           mk_config
+                       done
+                   done
+                   sleep 1
+               done
+          volumeMounts:
+          - name: config
+            mountPath: {{ .Values.configDir | default (osDir .Values.configFile) }}
+          env:
+          - name: PING_INTERVAL
+            value: "{{ .Values.pingInterval }}"
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+          {{- with .Values.configReloader.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      volumes:
+      - name: config
+        emptyDir:
+      hostNetwork: {{ .Values.hostNetwork }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
