@@ -2443,6 +2443,17 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.0.0/kube-image-keeper-1.0.0.tgz
     version: 1.0.0
+  kube-packetloss-exporter:
+  - apiVersion: v2
+    appVersion: v0.7.1
+    created: "2023-09-28T15:26:23.404027379Z"
+    description: A Helm chart for Kubernetes
+    digest: ca7966f8a2e59f383f0fca20fbaa49f114068b84a315687ba4b521270139abe8
+    name: kube-packetloss-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-packetloss-exporter-0.1.0/kube-packetloss-exporter-0.1.0.tgz
+    version: 0.1.0
   kube-router:
   - apiVersion: v2
     appVersion: v1.6.0
@@ -7085,4 +7096,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2023-09-22T14:21:28.58978324Z"
+generated: "2023-09-28T15:26:23.405152484Z"
