@@ -1056,6 +1056,98 @@ entries:
   kube-image-keeper:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'chart: align secret name between kuik and minio to avoid inconsistency'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/ec5d2cd6dee4352d5ce1fa08948bce43bcd71dce
+        - description: 'controller: don''t reset expiresAt field on startup'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/a0f37f47e1575ff6dfbc239e7d21561d73909fb9
+        - description: 'helm: add missing parameter in GC cronjob'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/6d1ff9bd0df53968c55a44e1ef6252a67535df9b
+        - description: 'helm: minio svc name customisation in values'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/6f01a140e3d6cf262d45e67cdf8d9ca0e20bed4d
+        - description: 'helm: use dynamic deployment name in GC cronjob'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/52f70a59368a1dd87d142d6f48dc53458b8542e3
+        - description: 'help: improve description for CLI flags'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/c5fbf75281f1e478fb28a40b2141fd383636bf35
+        - description: 'proxy: klog.Info doesn''t support formatting directive %s'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/50bab375024e54ad188865c2e9b029256045ebae
+        - description: allow to add additional root CAs to trust for caching and proxying
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/78b277b5c0a5e924252d9c79b60d2ab185faaaf0
+        - description: allow to add extra envs and preconfigure no_proxy variable
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/85ee352b525bd667b491dc81afaef97f59a693b5
+        - description: 'helm: add a service account for the registry'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/3ea99e56d85b77f4e80c5a7b656f761c26067471
+        - description: insecure-registries flag in controller and proxy
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/8379b7babaeb7bb2270018b2037db83a84f0b2c4
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 1.5.0-beta.1
+    created: "2023-11-22T13:12:30.151405711Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.4
+    description: kuik is a container image caching system for Kubernetes.
+    digest: 4090949193e59b4527b20b65a94afd4305bc63bf1db352167200530182153419
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.5.0-beta.1/kube-image-keeper-1.5.0-beta.1.tgz
+    version: 1.5.0-beta.1
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'controllers: don''t cache secrets as it can consume a lot of memory'
           kind: fixed
           links:
@@ -7195,4 +7287,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-24T09:13:40.960122236Z"
+generated: "2023-11-22T13:12:30.151753039Z"
