@@ -751,6 +751,49 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: "Bump kube-state-metrics to version 2.10.1"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Application Sources
+          url: https://github.com/kubernetes/kube-state-metrics
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 2.10.1
+    created: "2023-12-19T15:37:44.884446579Z"
+    description: A Prometheus exporter for the ECK operator custom resources. Based
+      on kube-state-metrics.
+    digest: 6d548248f506d5f9b15a8fb4681d88e5f2ad603689246a356c473987311ecf6c
+    home: https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1fae7.png
+    keywords:
+    - Prometheus
+    - exporter
+    - operator
+    - ECK
+    - Elasticsearch
+    - Kibana
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    name: eck-exporter
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/eck-exporter-1.3.1/eck-exporter-1.3.1.tgz
+    version: 1.3.1
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: "Bump kube-state-metrics to version 2.10.0"
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/license: MIT
@@ -7329,4 +7372,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2023-12-14T11:14:04.08770855Z"
+generated: "2023-12-19T15:37:44.885967566Z"
