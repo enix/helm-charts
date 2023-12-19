@@ -1,5 +1,5 @@
 version: 1.3.0
-appVersion: "2.10.0"
+appVersion: "2.10.1"
 annotations:
   artifacthub.io/containsSecurityUpdates: 'false'
   artifacthub.io/prerelease: 'false'
@@ -14,7 +14,7 @@ annotations:
   # https://artifacthub.io/docs/topics/annotations/helm/
   artifacthub.io/changes: |
     - kind: changed
-      description: "Bump kube-state-metrics to version 2.10.0"
+      description: "Bump kube-state-metrics to version 2.10.1"
 
 apiVersion: v2
 name: eck-exporter
