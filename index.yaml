@@ -1099,6 +1099,83 @@ entries:
   kube-image-keeper:
   - annotations:
       artifacthub.io/changes: |-
+        - description: prevent overriding kube-system in ignoredNamespaces
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/39d238aad60b88bc75e24f420d09d5c743923049
+        - description: 'proxy: make readiness probe work out of the box in hostNetwork mode'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/e606d43ccab9d671a24d8564a8aeaea1db3daeba
+        - description: try all corresponding secrets until one works
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/f862b56d6d5d6fa7b911945e060fa588cb4f6f16
+        - description: upgrade k8s components to 1.23.17
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/91115a4e854141306181608feb659666ccd5d3e4
+        - description: 'helm: upgrade kubebuilder to 3.4.1 and k8s libs to 1.26.13'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/127b4b07b40770ebddb17fc03b38c422e7ff0075
+        - description: 'helm: upgrade minio dependency to 13.2.0'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/0ee30b09fd2c7457c7b2024c497c5976a6690697
+        - description: 'proxy: add support for hostNetwork in the helm chart'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/5371b0376c8c8ef65d50adf34862fcdb80929876
+        - description: 'proxy: allow to configure the proxy bind address'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/977dae1308a86b4e0870798a6a8b0afc36c88f99
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 1.6.0-beta.1
+    created: "2024-02-05T16:37:05.374774248Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.2.0
+    description: kuik is a container image caching system for Kubernetes.
+    digest: 09ee22a9c3bc2c4e69ed8a471ee81e3f2dec432a88b80762576b8ed3d826c20b
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.6.0-beta.1/kube-image-keeper-1.6.0-beta.1.tgz
+    version: 1.6.0-beta.1
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'chart: align secret name between kuik and minio to avoid inconsistency'
           kind: fixed
           links:
@@ -7556,4 +7633,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-09T18:03:21.187449734Z"
+generated: "2024-02-05T16:37:05.375173875Z"
