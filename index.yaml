@@ -1099,6 +1099,68 @@ entries:
   kube-image-keeper:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'controllers: add a finalizer on Repositories'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/23ce61da0c622d60ab0df767e02886f308c65fe8
+        - description: 'controllers: add Repository.status.images'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/39633c829fb7cdd73d548b53e158f03eb3e5bb14
+        - description: 'controllers: create missing CachedImages at start'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/2fdfcdae5dd9f68cf5fbd73cd27bcc2314dad5e7
+        - description: 'controllers: generate CachedImage name and repository labels'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/746438c647b0b89b095b6191b67fadf895b3bfc8
+        - description: move pull secrets from CachedImage to Repository
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/3a0cc3652ecb5047bd8103096b4afbdcfc328cde
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 1.7.0-beta.1
+    created: "2024-02-08T13:37:06.140721367Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.2.0
+    description: kuik is a container image caching system for Kubernetes.
+    digest: f2f0064e75d0f5d24c6031021717831fe4c58875feb12c47217b37272f921bf0
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.7.0-beta.1/kube-image-keeper-1.7.0-beta.1.tgz
+    version: 1.7.0-beta.1
+  - annotations:
+      artifacthub.io/changes: |-
         - description: prevent overriding kube-system in ignoredNamespaces
           kind: fixed
           links:
@@ -7710,4 +7772,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-05T17:28:10.25734604Z"
+generated: "2024-02-08T13:37:06.141134258Z"
