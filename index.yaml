@@ -1099,6 +1099,78 @@ entries:
   kube-image-keeper:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'chart: configure the garbage collection cronjob image'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/c4bb23c31356840a62179e71be8722d75eaf0fa0
+        - description: 'ci: add k8s 1.29 to test workflow'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/3fa572eb3da2a7821cf7cf755db9fc65adfff5aa
+        - description: 'ci: add tests from k8s 1.24 to 1.29'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/21d286e9953ff406228855219dce59398a35ccd6
+        - description: 'controllers: allow to ignore images with pullPolicy: Always'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/10d2d580986c3e9a0e6a5407a00cd3df96fbb8c6
+        - description: 'registry-statefulset: added an additionally supported HA mode'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/50a24dc71c3a6e599d71480256d3545d4124ccec
+        - description: 'registry-statefulset: added optional access mode override'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/ccd366e03fc2a4ec07df4519d0d3867a3f4c0432
+        - description: 'webhook: log rewritten images'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/83c7695d752a2db7cf55c85e20e3ad9b1bdf161f
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 1.7.0-beta.2
+    created: "2024-02-20T16:32:44.015883003Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.2.0
+    description: kuik is a container image caching system for Kubernetes.
+    digest: 0f177ebe3ec0d0d2b9b2037d02b6e1e870575c778173eb91dd41e5107c62c9b3
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.7.0-beta.2/kube-image-keeper-1.7.0-beta.2.tgz
+    version: 1.7.0-beta.2
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'controllers: add a finalizer on Repositories'
           kind: added
           links:
@@ -7772,4 +7844,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-08T13:37:06.141134258Z"
+generated: "2024-02-20T16:32:44.016302975Z"
