@@ -1,4 +1,5 @@
-{{- if .Values.controlPlane.enabled }}
+{{- if or .Values.controlPlane.enabled }}
+{{- if or .Values.kubeControllerManager.enabled .Values.kubeScheduler.enabled .Values.etcd.enabled }}
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -26,10 +27,12 @@ spec:
     spec:
       serviceAccountName: {{ include "monitoring-proxy.serviceAccountName" . }}
       hostNetwork: true
+      {{- if or .Values.kubeControllerManager.enabled .Values.kubeScheduler.enabled }}
       volumes:
         - name: config-haproxy
           configMap:
             name: {{ include "monitoring-proxy.fullname" . }}-haproxy
+      {{- end }}
       nodeSelector:
         {{- if .Values.controlPlane.overrideNodeSelector }}
           {{- toYaml .Values.controlPlane.overrideNodeSelector | nindent 8 }}
@@ -39,6 +42,7 @@ spec:
       tolerations:
         {{- toYaml .Values.controlPlane.tolerations | nindent 8 }}
       containers:
+      {{- if or .Values.kubeControllerManager.enabled .Values.kubeScheduler.enabled }}
         - name: haproxy
           image: {{ .Values.haproxy.image.repository }}:{{ .Values.haproxy.image.tag }}
           volumeMounts:
@@ -60,6 +64,8 @@ spec:
               name: kube-scheduler
           securityContext:
             allowPrivilegeEscalation: false
+      {{- end }}
+      {{- if .Values.etcd.enabled }}
         - name: kube-rbac-proxy
           image: {{ .Values.kubeRbacProxy.image.repository }}:{{ .Values.kubeRbacProxy.image.tag }}
           args:
@@ -84,4 +90,6 @@ spec:
               name: etcd
           securityContext:
             allowPrivilegeEscalation: false
+      {{- end }}
+{{- end }}
 {{- end }}

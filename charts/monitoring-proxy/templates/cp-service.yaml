@@ -1,4 +1,5 @@
 {{- if .Values.controlPlane.service.enabled }}
+{{- if or .Values.kubeControllerManager.enabled .Values.kubeScheduler.enabled .Values.etcd.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -25,4 +26,5 @@ spec:
   selector:
     {{- include "monitoring-proxy.selectorLabels" . | nindent 4 }}
     app.kubernetes.io/component: control-plane
+{{- end }}
 {{- end }}

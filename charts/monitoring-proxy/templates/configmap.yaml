@@ -1,4 +1,5 @@
 {{- if .Values.controlPlane.enabled }}
+{{- if or .Values.kubeControllerManager.enabled .Values.kubeScheduler.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -8,15 +9,20 @@ data:
     defaults
       mode tcp
 
+    {{- if .Values.kubeControllerManager.enabled }}
     frontend kube-controller-manager
       bind ${POD_IP}:{{ .Values.kubeControllerManager.port }}
       default_backend kube-controller-manager
     backend kube-controller-manager
       server kube-controller-manager 127.0.0.1:{{ .Values.kubeControllerManager.port }}
+    {{- end }}
 
+    {{- if .Values.kubeScheduler.enabled }}
     frontend kube-scheduler
       bind ${POD_IP}:{{ .Values.kubeScheduler.port }}
       default_backend kube-scheduler
     backend kube-scheduler
       server kube-scheduler 127.0.0.1:{{ .Values.kubeScheduler.port }}
+    {{- end }}
+{{- end }}
 {{- end }}

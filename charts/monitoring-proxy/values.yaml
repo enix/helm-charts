@@ -11,6 +11,7 @@ podAnnotations: {}
 podLabels: {}
 
 haproxy:
+  enabled: true
   image:
     repository: haproxy
     tag: "2.9.6"
@@ -50,12 +51,15 @@ controlPlane:
       effect: NoSchedule
 
 etcd:
+  enabled: true
   port: 2381
   https: false
   upstreamScheme: http
 kubeControllerManager:
+  enabled: true
   port: 10257
 kubeScheduler:
+  enabled: true
   port: 10259
 
 kubeProxy:
