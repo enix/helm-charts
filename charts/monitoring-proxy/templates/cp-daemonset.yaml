@@ -5,10 +5,12 @@ metadata:
   name: {{ include "monitoring-proxy.fullname" . }}
   labels:
     {{- include "monitoring-proxy.labels" . | nindent 4 }}
+    app.kubernetes.io/component: control-plane
 spec:
   selector:
     matchLabels:
       {{- include "monitoring-proxy.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: control-plane
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -20,6 +22,7 @@ spec:
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
+        app.kubernetes.io/component: control-plane
     spec:
       serviceAccountName: {{ include "monitoring-proxy.serviceAccountName" . }}
       hostNetwork: true
