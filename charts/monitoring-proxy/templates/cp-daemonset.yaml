@@ -64,6 +64,16 @@ spec:
               name: kube-scheduler
           securityContext:
             allowPrivilegeEscalation: false
+      {{- else }}
+      {{- if .Values.controlPlane.service.enabled }}
+        - name: placeholder
+          image: registry.k8s.io/pause
+          ports:
+            - containerPort: {{ .Values.kubeControllerManager.port }}
+              name: kube-c-m
+            - containerPort: {{ .Values.kubeScheduler.port }}
+              name: kube-scheduler
+      {{- end }}
       {{- end }}
       {{- if .Values.etcd.enabled }}
         - name: kube-rbac-proxy
@@ -90,6 +100,14 @@ spec:
               name: etcd
           securityContext:
             allowPrivilegeEscalation: false
+      {{- else }}
+      {{- if .Values.controlPlane.service.enabled }}
+        - name: placeholder-etcd
+          image: registry.k8s.io/pause
+          ports:
+            - containerPort: {{ .Values.etcd.port }}
+              name: etcd
+      {{- end }}
       {{- end }}
 {{- end }}
 {{- end }}
