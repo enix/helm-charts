@@ -1,0 +1,20 @@
+{{- if .Values.kubeProxy.service.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "monitoring-proxy.fullname" . }}-kube-proxy
+  labels:
+    {{- include "monitoring-proxy.labels" . | nindent 4 }}
+    app.kubernetes.io/component: kube-proxy
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - port: {{ .Values.kubeProxy.port }}
+      targetPort: kube-proxy
+      protocol: TCP
+      name: kube-proxy
+  selector:
+    {{- include "monitoring-proxy.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: kube-proxy
+{{- end }}

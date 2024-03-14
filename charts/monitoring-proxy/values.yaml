@@ -36,6 +36,8 @@ kubeRbacProxy:
 
 controlPlane:
   enabled: true
+  service:
+    enabled: false
   nodeSelector:
     node-role.kubernetes.io/control-plane: ""
   overrideNodeSelector: {}
@@ -58,6 +60,8 @@ kubeScheduler:
 
 kubeProxy:
   enabled: true
+  service:
+    enabled: false
   port: 10249
   https: false
   upstreamScheme: http

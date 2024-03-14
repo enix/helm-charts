@@ -1,0 +1,28 @@
+{{- if .Values.controlPlane.service.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "monitoring-proxy.fullname" . }}
+  labels:
+    {{- include "monitoring-proxy.labels" . | nindent 4 }}
+    app.kubernetes.io/component: control-plane
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - port: {{ .Values.kubeControllerManager.port }}
+      targetPort: kube-c-m
+      protocol: TCP
+      name: kube-c-m
+    - port: {{ .Values.kubeScheduler.port }}
+      targetPort: kube-scheduler
+      protocol: TCP
+      name: kube-scheduler
+    - port: {{ .Values.etcd.port }}
+      targetPort: etcd
+      protocol: TCP
+      name: etcd
+  selector:
+    {{- include "monitoring-proxy.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: control-plane
+{{- end }}
