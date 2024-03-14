@@ -28,7 +28,11 @@ spec:
           configMap:
             name: {{ include "monitoring-proxy.fullname" . }}-haproxy
       nodeSelector:
-        {{- toYaml .Values.controlPlane.nodeSelector | nindent 8 }}
+        {{- if .Values.controlPlane.overrideNodeSelector }}
+          {{- toYaml .Values.controlPlane.overrideNodeSelector | nindent 8 }}
+        {{- else }}
+          {{- toYaml .Values.controlPlane.nodeSelector | nindent 8 }}
+        {{- end }}
       tolerations:
         {{- toYaml .Values.controlPlane.tolerations | nindent 8 }}
       containers:
