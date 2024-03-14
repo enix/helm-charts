@@ -3768,6 +3768,17 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/kube-router-0.0.2/kube-router-0.0.2.tgz
     version: 0.0.2
+  monitoring-proxy:
+  - apiVersion: v2
+    created: "2024-03-14T10:22:51.405790661Z"
+    description: Expose control-plane and kube-proxy metrics for monitoring, with
+      auth when required
+    digest: 1aa6008d46dfd8bd32e05d05150cc52f38b7308f933ba632a85164ad183815d9
+    name: monitoring-proxy
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/monitoring-proxy-0.1.0/monitoring-proxy-0.1.0.tgz
+    version: 0.1.0
   netbox:
   - annotations:
       artifacthub.io/changes: |
@@ -7844,4 +7855,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-20T16:32:44.016302975Z"
+generated: "2024-03-14T10:22:51.406551956Z"
