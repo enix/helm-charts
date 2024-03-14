@@ -1,0 +1,69 @@
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+haproxy:
+  image:
+    repository: haproxy
+    tag: "2.9.6"
+  resources:
+    requests:
+      cpu: 1m
+      memory: 100Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
+kubeRbacProxy:
+  image:
+    repository: quay.io/brancz/kube-rbac-proxy
+    tag: "v0.16.0"
+  resources:
+    requests:
+      cpu: 1m
+      memory: 10Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
+controlPlane:
+  enabled: true
+  nodeSelector:
+    node-role.kubernetes.io/control-plane: ""
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists
+      effect: NoSchedule
+    - key: node-role.kubernetes.io/master
+      operator: Exists
+      effect: NoSchedule
+
+etcd:
+  port: 2381
+  https: false
+  upstreamScheme: http
+kubeControllerManager:
+  port: 10257
+kubeScheduler:
+  port: 10259
+
+kubeProxy:
+  enabled: true
+  port: 10249
+  https: false
+  upstreamScheme: http
+  tolerations:
+    - effect: NoSchedule
+      operator: Exists
+    - key: CriticalAddonsOnly
+      operator: Exists
+    - effect: NoExecute
+      operator: Exists

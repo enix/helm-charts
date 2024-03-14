@@ -1,0 +1,5 @@
+apiVersion: v2
+name: monitoring-proxy
+description: Expose control-plane and kube-proxy metrics for monitoring, with auth when required
+type: application
+version: 0.1.0

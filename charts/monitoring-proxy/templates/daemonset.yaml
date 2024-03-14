@@ -1,0 +1,53 @@
+{{- if .Values.kubeProxy.enabled }}
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "monitoring-proxy.fullname" . }}-kube-proxy
+  labels:
+    {{- include "monitoring-proxy.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "monitoring-proxy.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "monitoring-proxy.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      serviceAccountName: {{ include "monitoring-proxy.serviceAccountName" . }}
+      hostNetwork: true
+      tolerations:
+        {{- toYaml .Values.kubeProxy.tolerations | nindent 8 }}
+      containers:
+        - name: kube-rbac-proxy
+          image: {{ .Values.kubeRbacProxy.image.repository }}:{{ .Values.kubeRbacProxy.image.tag }}
+          args:
+            {{- if .Values.kubeProxy.https }}
+            - "--secure-listen-address=$(POD_IP):{{ .Values.kubeProxy.port }}"
+            {{- else }}
+            - "--insecure-listen-address=$(POD_IP):{{ .Values.kubeProxy.port }}"
+            {{- end }}
+            - "--upstream={{ .Values.kubeProxy.upstreamScheme }}://127.0.0.1:{{ .Values.kubeProxy.port }}/"
+            - "--auth-header-fields-enabled"
+            - "--allow-paths=/metrics"
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+          resources:
+            {{- toYaml .Values.kubeRbacProxy.resources | nindent 12 }}
+          ports:
+            - containerPort: {{ .Values.kubeProxy.port }}
+              name: kube-proxy
+          securityContext:
+            allowPrivilegeEscalation: false
+{{- end }}

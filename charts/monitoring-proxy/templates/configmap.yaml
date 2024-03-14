@@ -1,0 +1,22 @@
+{{- if .Values.controlPlane.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "monitoring-proxy.fullname" . }}-haproxy
+data:
+  haproxy.cfg: |
+    defaults
+      mode tcp
+
+    frontend kube-controller-manager
+      bind ${POD_IP}:{{ .Values.kubeControllerManager.port }}
+      default_backend kube-controller-manager
+    backend kube-controller-manager
+      server kube-controller-manager 127.0.0.1:{{ .Values.kubeControllerManager.port }}
+
+    frontend kube-scheduler
+      bind ${POD_IP}:{{ .Values.kubeScheduler.port }}
+      default_backend kube-scheduler
+    backend kube-scheduler
+      server kube-scheduler 127.0.0.1:{{ .Values.kubeScheduler.port }}
+{{- end }}

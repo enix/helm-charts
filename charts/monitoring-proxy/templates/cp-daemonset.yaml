@@ -1,0 +1,80 @@
+{{- if .Values.controlPlane.enabled }}
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "monitoring-proxy.fullname" . }}
+  labels:
+    {{- include "monitoring-proxy.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "monitoring-proxy.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "monitoring-proxy.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      serviceAccountName: {{ include "monitoring-proxy.serviceAccountName" . }}
+      hostNetwork: true
+      volumes:
+        - name: config-haproxy
+          configMap:
+            name: {{ include "monitoring-proxy.fullname" . }}-haproxy
+      nodeSelector:
+        {{- toYaml .Values.controlPlane.nodeSelector | nindent 8 }}
+      tolerations:
+        {{- toYaml .Values.controlPlane.tolerations | nindent 8 }}
+      containers:
+        - name: haproxy
+          image: {{ .Values.haproxy.image.repository }}:{{ .Values.haproxy.image.tag }}
+          volumeMounts:
+            - name: config-haproxy
+              mountPath: /usr/local/etc/haproxy
+              readOnly: true
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+          resources:
+            {{- toYaml .Values.haproxy.resources | nindent 12 }}
+          ports:
+            - containerPort: {{ .Values.kubeControllerManager.port }}
+              name: kube-c-m
+            - containerPort: {{ .Values.kubeScheduler.port }}
+              name: kube-scheduler
+          securityContext:
+            allowPrivilegeEscalation: false
+        - name: kube-rbac-proxy
+          image: {{ .Values.kubeRbacProxy.image.repository }}:{{ .Values.kubeRbacProxy.image.tag }}
+          args:
+            {{- if .Values.etcd.https }}
+            - "--secure-listen-address=$(POD_IP):{{ .Values.etcd.port }}"
+            {{- else }}
+            - "--insecure-listen-address=$(POD_IP):{{ .Values.etcd.port }}"
+            {{- end }}
+            - "--upstream={{ .Values.etcd.upstreamScheme }}://127.0.0.1:{{ .Values.etcd.port }}/"
+            - "--auth-header-fields-enabled"
+            - "--allow-paths=/metrics"
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+          resources:
+            {{- toYaml .Values.kubeRbacProxy.resources | nindent 12 }}
+          ports:
+            - containerPort: {{ .Values.etcd.port }}
+              name: etcd
+          securityContext:
+            allowPrivilegeEscalation: false
+{{- end }}
