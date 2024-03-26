@@ -13,8 +13,10 @@ annotations:
       url: https://github.com/kubernetes/kube-state-metrics
   # https://artifacthub.io/docs/topics/annotations/helm/
   artifacthub.io/changes: |
+    - kind: added
+      description: "Support for Logstash health status"
     - kind: changed
-      description: "Bump kube-state-metrics to version 2.10.1"
+      description: "Bump kube-state-metrics to version 2.11.0"
 
 apiVersion: v2
 name: eck-exporter
