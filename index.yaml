@@ -750,8 +750,10 @@ entries:
   eck-exporter:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: "Support for Logstash health status"
         - kind: changed
-          description: "Bump kube-state-metrics to version 2.10.1"
+          description: "Bump kube-state-metrics to version 2.11.0"
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/license: MIT
       artifacthub.io/links: |
