@@ -12,9 +12,9 @@ Supported CRDs:
 * Agent
 * ApmServer
 * Beat
+* Logstash
 * ElasticMapsServer
 * EnterpriseSearch
-* Logstash
 
 The following metrics are available:
 * `eck_elasticsearch_info` (version, desired_version)
@@ -29,11 +29,12 @@ The following metrics are available:
 * `eck_apmserver_health` (red, yellow, green, unknown)
 * `eck_beat_info` (version, desired_version)
 * `eck_beat_health` (red, yellow, green, unknown)
+* `eck_logstash_info` (version, desired_version)
+* `eck_logstash_health` (red, yellow, green, unknown)
 * `eck_elasticmapsserver_info` (version, desired_version)
 * `eck_elasticmapsserver_health` (red, yellow, green, unknown)
 * `eck_enterprisesearch_info` (version, desired_version)
 * `eck_enterprisesearch_health` (red, yellow, green, unknown)
-* `eck_logstash_info` (version, desired_version)
 
 Shipped with Prometheus alerts:
 * `EckElasticsearchHealth`
@@ -47,6 +48,7 @@ Shipped with Prometheus alerts:
 * `EckAgentHealth`
 * `EckApmServerHealth`
 * `EckBeatHealth`
+* `EckLogstashHealth`
 * `EckElasticMapsServerHealth`
 * `EckEnterpriseSearchHealth`
 

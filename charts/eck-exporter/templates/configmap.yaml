@@ -271,4 +271,11 @@ data:
               labelsFromPath:
                 desired_version: [ spec, version ]
                 version: [ status, version ]
+        - name: health
+          each:
+            type: StateSet
+            stateSet:
+              labelName: health
+              path: [ status, health ]
+              list: [ red, yellow, green, unknown ]
       {{- end }}

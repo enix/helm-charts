@@ -133,6 +133,16 @@ prometheusRules:
         yellow: warning
         red: critical
         unknown: critical
+    # Logstash
+    EckLogstashHealth:
+      create: true
+      for: 1m
+      averageInterval: 5m
+      averageThresholdOver: 0.2
+      severity:
+        yellow: warning
+        red: critical
+        unknown: critical
     # ElasticMapsServer
     EckElasticMapsServerHealth:
       create: true

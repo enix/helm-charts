@@ -12,9 +12,9 @@ Supported CRDs:
 * Agent
 * ApmServer
 * Beat
+* Logstash
 * ElasticMapsServer
 * EnterpriseSearch
-* Logstash
 
 The following metrics are available:
 * `eck_elasticsearch_info` (version, desired_version)
@@ -29,11 +29,12 @@ The following metrics are available:
 * `eck_apmserver_health` (red, yellow, green, unknown)
 * `eck_beat_info` (version, desired_version)
 * `eck_beat_health` (red, yellow, green, unknown)
+* `eck_logstash_info` (version, desired_version)
+* `eck_logstash_health` (red, yellow, green, unknown)
 * `eck_elasticmapsserver_info` (version, desired_version)
 * `eck_elasticmapsserver_health` (red, yellow, green, unknown)
 * `eck_enterprisesearch_info` (version, desired_version)
 * `eck_enterprisesearch_health` (red, yellow, green, unknown)
-* `eck_logstash_info` (version, desired_version)
 
 Shipped with Prometheus alerts:
 * `EckElasticsearchHealth`
@@ -47,6 +48,7 @@ Shipped with Prometheus alerts:
 * `EckAgentHealth`
 * `EckApmServerHealth`
 * `EckBeatHealth`
+* `EckLogstashHealth`
 * `EckElasticMapsServerHealth`
 * `EckEnterpriseSearchHealth`
 
@@ -194,6 +196,13 @@ Great question... To be answered when the need arises 😅
 | prometheusRules.builtinAlerts.EckBeatHealth.severity.yellow | string | `"warning"` |  |
 | prometheusRules.builtinAlerts.EckBeatHealth.severity.red | string | `"critical"` |  |
 | prometheusRules.builtinAlerts.EckBeatHealth.severity.unknown | string | `"critical"` |  |
+| prometheusRules.builtinAlerts.EckLogstashHealth.create | bool | `true` |  |
+| prometheusRules.builtinAlerts.EckLogstashHealth.for | string | `"1m"` |  |
+| prometheusRules.builtinAlerts.EckLogstashHealth.averageInterval | string | `"5m"` |  |
+| prometheusRules.builtinAlerts.EckLogstashHealth.averageThresholdOver | float | `0.2` |  |
+| prometheusRules.builtinAlerts.EckLogstashHealth.severity.yellow | string | `"warning"` |  |
+| prometheusRules.builtinAlerts.EckLogstashHealth.severity.red | string | `"critical"` |  |
+| prometheusRules.builtinAlerts.EckLogstashHealth.severity.unknown | string | `"critical"` |  |
 | prometheusRules.builtinAlerts.EckElasticMapsServerHealth.create | bool | `true` |  |
 | prometheusRules.builtinAlerts.EckElasticMapsServerHealth.for | string | `"1m"` |  |
 | prometheusRules.builtinAlerts.EckElasticMapsServerHealth.averageInterval | string | `"5m"` |  |
