@@ -763,6 +763,49 @@ entries:
           url: https://github.com/kubernetes/kube-state-metrics
       artifacthub.io/prerelease: "false"
     apiVersion: v2
+    appVersion: 2.11.0
+    created: "2024-03-26T16:18:27.220013683Z"
+    description: A Prometheus exporter for the ECK operator custom resources. Based
+      on kube-state-metrics.
+    digest: cfd839f46e008d4f4d48fccbda832750bcc1bce07438ffce94906b3c9603e348
+    home: https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1fae7.png
+    keywords:
+    - Prometheus
+    - exporter
+    - operator
+    - ECK
+    - Elasticsearch
+    - Kibana
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    name: eck-exporter
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/eck-exporter-1.4.0/eck-exporter-1.4.0.tgz
+    version: 1.4.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: "Bump kube-state-metrics to version 2.10.1"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Application Sources
+          url: https://github.com/kubernetes/kube-state-metrics
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
     appVersion: 2.10.1
     created: "2023-12-19T15:37:44.884446579Z"
     description: A Prometheus exporter for the ECK operator custom resources. Based
@@ -8014,4 +8057,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-03-19T09:36:57.574792878Z"
+generated: "2024-03-26T16:18:27.220778456Z"
