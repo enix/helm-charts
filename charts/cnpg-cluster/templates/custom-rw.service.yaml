@@ -16,7 +16,7 @@ spec:
     targetPort: 5432
   publishNotReadyAddresses: true
   selector:
-    postgresql: {{ include "cnpg-cluster.fullname" . }}
+    cnpg.io/cluster: {{ include "cnpg-cluster.fullname" . }}
     role: primary
   {{- with .Values.customServices.rw.externalIPs }}
   externalIPs:

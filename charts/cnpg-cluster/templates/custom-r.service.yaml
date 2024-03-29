@@ -15,7 +15,8 @@ spec:
     protocol: TCP
     targetPort: 5432
   selector:
-    postgresql: {{ include "cnpg-cluster.fullname" . }}
+    cnpg.io/cluster: {{ include "cnpg-cluster.fullname" . }}
+    cnpg.io/podRole: instance
   {{- with .Values.customServices.r.externalIPs }}
   externalIPs:
     {{- toYaml . | nindent 4 }}

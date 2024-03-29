@@ -15,7 +15,7 @@ spec:
     protocol: TCP
     targetPort: 5432
   selector:
-    postgresql: {{ include "cnpg-cluster.fullname" . }}
+    cnpg.io/cluster: {{ include "cnpg-cluster.fullname" . }}
     role: replica
   {{- with .Values.customServices.ro.externalIPs }}
   externalIPs:
