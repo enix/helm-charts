@@ -4690,6 +4690,73 @@ entries:
   x509-certificate-exporter:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'build: bump all Go dependencies'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/e3b6c7440cd72ea4ec8f3d1314e48f66644999c3
+        - description: 'build: bump Golang to version 1.21.6'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/a8000336422fcdb8dc32e8aa2b76948290686fda
+        - description: 'build: bump Golang to version 1.21.8'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/05582fc90a659b51b59b387824bb1201148274c9
+        - description: 'build: bump Golang to version 1.21.9'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/61a0f7155d2d315145b4fd1926a392a1bf5ffb77
+        - description: 'container: bump Alpine base image to version 3.19.1'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/9d0f7b5585f9b50741c4ec6befa237b9da914c30
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 3.13.0
+    created: "2024-04-05T11:06:28.152242679Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 7b8e1d0c281acb0ea652be840e96fc6ea35c8b82a46d2dbb441e9e3f75eed1d7
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-3.13.0/x509-certificate-exporter-3.13.0.tgz
+    version: 3.13.0
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'exporter: use `automaxprocs` to limit threads count'
           kind: added
           links:
@@ -8069,4 +8136,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-03-29T11:11:17.78353268Z"
+generated: "2024-04-05T11:06:28.152995111Z"
