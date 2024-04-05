@@ -760,6 +760,49 @@ entries:
   eck-exporter:
   - annotations:
       artifacthub.io/changes: |
+        - kind: security
+          description: "Bump kube-state-metrics to version 2.12.0"
+      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Application Sources
+          url: https://github.com/kubernetes/kube-state-metrics
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 2.12.0
+    created: "2024-04-05T13:02:06.838520086Z"
+    description: A Prometheus exporter for the ECK operator custom resources. Based
+      on kube-state-metrics.
+    digest: b0c55835af0e90fded621ccc8e49786cb63def4929ecaf83bc51108d7ef85553
+    home: https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1fae7.png
+    keywords:
+    - Prometheus
+    - exporter
+    - operator
+    - ECK
+    - Elasticsearch
+    - Kibana
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    name: eck-exporter
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/eck-exporter-1.5.0/eck-exporter-1.5.0.tgz
+    version: 1.5.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: "Support for Logstash health status"
         - kind: changed
@@ -8136,4 +8179,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-05T11:06:28.152995111Z"
+generated: "2024-04-05T13:02:06.839393323Z"
