@@ -1197,6 +1197,124 @@ entries:
   kube-image-keeper:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'controllers: cache and update expiring images'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/b5cf03b4b1e00b2c8ffd45e0f28fee815aedef2f
+        - description: 'controllers: generate repositories names'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/1548e88243adf3768c573d521c65681ed66cba8e
+        - description: 'deps: update dependencies'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/236ac0e45cde9e198d762ca95e2ef04296bbf01d
+        - description: 'deps: update docker go mod'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/e5633538a8013425d6c0bfdbad56472b6940befb
+        - description: 'docs: update docker registry documentation link'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/3778eec42b469865f73df592869a31c431573fbc
+        - description: 'ci: add helm upgrade test to the workflow'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/ce595f42f7ec99baaaf1f0852a62c0dfc65336fe
+        - description: 'ci: backport our e2e tests to the release workflow'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/3a529a6887f1c4961cfb3833522b80c30e171e33
+        - description: 'ci: update Kind image version'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/da098c5ec7da32145ac82c4aae8414a7f1c8a062
+        - description: 'controllers: add phase status and events to Repositories'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/5e929f16631f7df91ccadabd55a3a24a45debaeb
+        - description: 'controllers: add phase status to CachedImages'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/00b34ec090c861fccc89c79fde9a09d780b14b7b
+        - description: 'controllers: allow to filter images to update in Repository'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/1f7344911ad7a794e4722ce40ae7e0e998a66562
+        - description: 'controllers: optionally update repositories at custom interval'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/ac86d46ddea168fd53d9ab70bb1bb44e1a1ecf9a
+        - description: 'Dockerfile: update upstream image version'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/c7283dab0cbedcdda835e764279a87ced36744fa
+        - description: 'helm: use latest stable docker registry version'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/6a4b829654d0832f037375f90d5dcd68176b32a7
+        - description: 'Makefile: use fixed version of envtest'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/1c456b9fd780876bc133de26c576d1b4a3501166
+        - description: 'workflow: run units tests from k8s 1.24 to 1.29'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/ed05c09914b3643884576b95214cbc3dcb5fc1c6
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.8.0
+    created: "2024-04-09T12:24:02.815616507Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.2.0
+    description: kuik is a container image caching system for Kubernetes.
+    digest: 88a11bd297d592b48f25cba726ef4575ded9a8dcec38224188752189c6190d7a
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+      url: https://github.com/paullaffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.8.0/kube-image-keeper-1.8.0.tgz
+    version: 1.8.0
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'README: add details for upgrade to 1.7.x since we move CRDs location'
           kind: fixed
           links:
@@ -8179,4 +8297,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-05T13:02:06.839393323Z"
+generated: "2024-04-09T12:24:02.816106658Z"
