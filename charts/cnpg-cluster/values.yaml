@@ -130,6 +130,10 @@ backup:
     # storageSasToken:
     # inheritFromAzureAD:
 
+  # -- (object) The configuration for the execution of volume snapshot backups.
+  # See: https://cloudnative-pg.io/documentation/1.22/cloudnative-pg.v1/#postgresql-cnpg-io-v1-VolumeSnapshotConfiguration
+  volumeSnapshot: {}
+
 # -- Extra configuration for Cluster resource.
 # See: https://cloudnative-pg.io/documentation/1.17/api_reference/#clusterspec
 clusterExtraSpec: {}

@@ -149,6 +149,10 @@ spec:
         {{- end }}
     {{- else }}
     {{- end }}
+    {{- with .Values.backup.volumeSnapshot }}
+    volumeSnapshot:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
 {{- end }}
 
 {{- with .Values.clusterExtraSpec }}

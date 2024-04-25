@@ -57,6 +57,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | backup.secretName | string | `nil` | Override secret name for the backup credentials |
 | backup.serverName | string | `nil` | The server name on S3, the cluster name is used if this parameter is omitted |
 | backup.tags | object | `{}` |  |
+| backup.volumeSnapshot | object | `{}` | The configuration for the execution of volume snapshot backups. See: https://cloudnative-pg.io/documentation/1.22/cloudnative-pg.v1/#postgresql-cnpg-io-v1-VolumeSnapshotConfiguration |
 | backup.wal | object | `{}` | Configuration of the backup of the WAL stream See: https://cloudnative-pg.io/documentation/1.17/api_reference/#walbackupconfiguration |
 | clusterExtraSpec | object | `{}` | Extra configuration for Cluster resource. See: https://cloudnative-pg.io/documentation/1.17/api_reference/#clusterspec |
 | customServices | object | `{"any":{"annotations":{},"enabled":false,"externalIPs":[],"type":"ClusterIP"},"r":{"annotations":{},"enabled":false,"externalIPs":[],"type":"ClusterIP"},"ro":{"annotations":{},"enabled":false,"externalIPs":[],"type":"ClusterIP"},"rw":{"annotations":{},"enabled":false,"externalIPs":[],"type":"ClusterIP"}}` | Custom services to create |
