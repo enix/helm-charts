@@ -1207,6 +1207,49 @@ entries:
   kube-image-keeper:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'controllers: prevent crash at start when some pods are terminating'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/e189105c2da93ea84830493f0b61050eb2f20072
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 1.8.1-beta.1
+    created: "2024-04-29T08:30:47.942160692Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.2.0
+    description: kuik is a container image caching system for Kubernetes.
+    digest: 97ee12441919445a38edc3f4d033cff5dc9925346726dfd75f20e6592ee76ff8
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+      url: https://github.com/paullaffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.8.1-beta.1/kube-image-keeper-1.8.1-beta.1.tgz
+    version: 1.8.1-beta.1
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'controllers: cache and update expiring images'
           kind: fixed
           links:
@@ -8431,4 +8474,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-25T09:38:03.255958831Z"
+generated: "2024-04-29T08:30:47.942603851Z"
