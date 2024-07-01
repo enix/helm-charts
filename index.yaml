@@ -1219,6 +1219,49 @@ entries:
           url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
         - name: Helm Repository
           url: https://charts.enix.io
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.9.1
+    created: "2024-07-01T09:16:37.987295504Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.2.0
+    description: kuik is a container image caching system for Kubernetes.
+    digest: 70bc9433a9c9cc177a2fc8de5377cc72f34bd53d1c6462728323d0199b17d109
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+      url: https://github.com/paullaffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.9.1/kube-image-keeper-1.9.1.tgz
+    version: 1.9.1
+  - annotations:
+      artifacthub.io/changes: |-
+        - description: 'controller: manually add a decoder since its not injected anymore'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/74c3680628cabbb98b887d0bc0abe023fd16ffad
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
       artifacthub.io/prerelease: "true"
     apiVersion: v2
     appVersion: 1.9.1-beta.1
@@ -8628,4 +8671,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-06-10T15:32:54.335824739Z"
+generated: "2024-07-01T09:16:37.987777083Z"
