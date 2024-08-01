@@ -1,0 +1,101 @@
+kube-state-metrics:
+  prometheus:
+    monitor:
+      enabled: true
+      jobLabel: "app.kubernetes.io/instance"
+  collectors: [ ]
+  extraArgs:
+    - --custom-resource-state-only=true
+  rbac:
+    extraRules:
+      - apiGroups:
+          - postgresql.cnpg.io
+        resources:
+          - clusters
+          - poolers
+          - scheduledbackups
+        verbs: [ "list", "watch" ]
+
+  customResourceState:
+    enabled: true
+    config:
+      spec:
+        resources:
+          - groupVersionKind:
+              group: postgresql.cnpg.io
+              version: v1
+              kind: Cluster
+            metricNamePrefix: cnpg_resource_cluster
+            metrics:
+              - name: info
+                help: Information about CNPG Cluster
+                each:
+                  type: Info
+                  info:
+                    labelsFromPath:
+                      cnpg_commit_hash: [status, cloudNativePGCommitHash]
+                      primary_update_method: [spec, primaryUpdateMethod]
+                      primary_update_strategy: [spec, primaryUpdateStrategy]
+              - name: condition
+                help: The condition of a CNPG Cluster
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, conditions]
+                    labelsFromPath:
+                      type: [type]
+                      reason: [reason]
+                    valueFrom: [status]
+              - name: spec_instances
+                help: Number of desired instances for a CNPG Cluster
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [spec, instances]
+              - name: status_instances
+                help: Number of instances per CNPG Cluster
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, instances]
+              - name: status_ready_instances
+                help: Number of ready instances per CNPG Cluster
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, readyInstances]
+            labelsFromPath:
+              name: [metadata, name]
+              namespace: [metadata, namespace]
+              cnpg_cluster: [metadata, name]
+          - groupVersionKind:
+              group: postgresql.cnpg.io
+              version: v1
+              kind: Pooler
+            metricNamePrefix: cnpg_resource_pooler
+            metrics:
+              - name: info
+                help: Information about CNPG Pooler
+                each:
+                  type: Info
+                  info:
+                    labelsFromPath:
+                      type: [spec, type]
+                      paused: [spec, pgbouncer, paused]
+                      pool_mode: [spec, pgbouncer, poolMode]
+              - name: spec_instances
+                help: Number of desired instances for a CNPG Pooler
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [spec, instances]
+              - name: status_instances
+                help: Number of instances per CNPG Pooler
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, instances]
+            labelsFromPath:
+              name: [metadata, name]
+              namespace: [metadata, namespace]
+              cnpg_cluster: [spec, cluster, name]
