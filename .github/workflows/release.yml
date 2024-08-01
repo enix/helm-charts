@@ -25,6 +25,7 @@ jobs:
       - name: Checkout repositories for dependencies
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
       - name: Run CI script if present
         run: |
