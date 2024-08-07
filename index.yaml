@@ -1221,6 +1221,49 @@ entries:
   kube-image-keeper:
   - annotations:
       artifacthub.io/changes: |-
+        - description: expired cachedimages with pull errors were not deleted
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/5fe3ef2af6351f41f888e857e109495d8503ccd5
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.9.3
+    created: "2024-08-07T10:21:08.457299968Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.2.0
+    description: kuik is a container image caching system for Kubernetes.
+    digest: 806d58dff1c4beeffac21fca3e21b59734266dfb3f226e7ebb834056dc8b2a63
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+      url: https://github.com/paullaffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.9.3/kube-image-keeper-1.9.3.tgz
+    version: 1.9.3
+  - annotations:
+      artifacthub.io/changes: |-
         - description: always use available context
           kind: fixed
           links:
@@ -8738,4 +8781,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-08-01T10:13:08.7587297Z"
+generated: "2024-08-07T10:21:08.457799583Z"
