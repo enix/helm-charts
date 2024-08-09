@@ -45,6 +45,14 @@ The command removes all the Kubernetes components associated with the chart and 
 
 {{ template "chart.valuesSection" . }}
 
+## Upgrading
+
+### To 2.0.0
+
+This major bump changes the following backup settings:
+* fix a discrepancy between doc and template, the parameter `secretName` previously a root value is now under `backup`: `backup.secretName`.
+* remove `backup.createSecret` parameter, secret is created by default unless `backup.secretName` is provided.
+
 ## License
 
 Copyright (c) 2022 ENIX

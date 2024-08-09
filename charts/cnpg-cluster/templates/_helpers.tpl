@@ -54,5 +54,5 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Backup secret name
 */}}
 {{- define "cnpg-cluster.backupSecretName" -}}
-{{ or .Values.secretName (print (include "cnpg-cluster.fullname" .) `-backup`) }}
+{{ or .Values.backup.secretName (print (include "cnpg-cluster.fullname" .) `-backup`) }}
 {{- end }}

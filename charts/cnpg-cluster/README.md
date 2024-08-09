@@ -44,7 +44,6 @@ The command removes all the Kubernetes components associated with the chart and 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | backup.azureCredentials | object | `nil` | The credentials to use to upload data to Azure Blob Storage See: https://cloudnative-pg.io/documentation/1.17/api_reference/#AzureCredentials |
-| backup.createSecret | bool | `false` | Enable the secret creation for the backup credentials |
 | backup.data | object | `{}` | Configuration of the backup of the data directory See: https://cloudnative-pg.io/documentation/1.17/api_reference/#DataBackupConfiguration |
 | backup.destinationPath | string | `""` | The path where to store the backup (i.e. s3://bucket/path/to/folder) this path, with different destination folders, will be used for WALs and for data -- |
 | backup.enabled | bool | `false` | Enable backups |
@@ -83,6 +82,14 @@ The command removes all the Kubernetes components associated with the chart and 
 | resources | object | `{}` | CPU/Memory resource requests/limits |
 | scheduledBackups | object | `{}` | ScheduledBackup resources to create for this Cluster resource See: https://cloudnative-pg.io/documentation/1.17/api_reference/#ScheduledBackupSpec |
 | tolerations | list | `[]` | Postgres instances labels for tolerations pod assignment |
+
+## Upgrading
+
+### To 2.0.0
+
+This major bump changes the following backup settings:
+* fix a discrepancy between doc and template, the parameter `secretName` previously a root value is now under `backup`: `backup.secretName`.
+* remove `backup.createSecret` parameter, secret is created by default unless `backup.secretName` is provided.
 
 ## License
 
