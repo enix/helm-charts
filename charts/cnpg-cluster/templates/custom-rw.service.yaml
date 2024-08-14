@@ -1,3 +1,4 @@
+{{- if .Values.customServices.rw.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -22,3 +23,4 @@ spec:
   externalIPs:
     {{- toYaml . | nindent 4 }}
   {{- end }}
+{{- end }}
