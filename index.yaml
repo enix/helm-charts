@@ -5231,6 +5231,94 @@ entries:
   x509-certificate-exporter:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'deploy,chart: remove cpu limits for secretsExporter and hostPathsExporter'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/a9d4a86ce60543be47824386b2d8ff94b7f721eb
+        - description: shrinkSecret to actually shrink
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/3bb2ed2ac09853458f887bf1a9659ae921a9d255
+        - description: 'build: bump all Go dependencies'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/fc3bff2ec35fcfad79b38e829cf9a4e39bc6a2c7
+        - description: 'build: bump Golang to version 1.22.5'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/956074c9290b2992645c5df8f850e615279251f2
+        - description: 'build: bump Golang to version 1.23.0'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/862481bb51fac6c5fb8c73ee2c484ea66e7b2a87
+        - description: 'container: bump Alpine base image to version 3.20.1'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/500829e5cde81e0dedfd03896ca5e496e3301c2b
+        - description: 'container: bump Alpine base image to version 3.20.2'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/1738e298e643579ab25d40388795582fca11833f
+        - description: 'deploy,chart: make metricRelabelings configurable in ServiceMonitor
+            and PodMonitor'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/6f8119721053fcbcc7c652de5622ac7f838cb771
+        - description: 'helm: increase CPU limits for all containers'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/902a45e03a6532ca84e41256d97ee731fe77dcd8
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 3.15.0
+    created: "2024-08-28T12:21:04.946895845Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 349646fefdca3257e3e68af435cf0c869f8cbdff595bbaf4d7b5e73a2e8b9054
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-3.15.0/x509-certificate-exporter-3.15.0.tgz
+    version: 3.15.0
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'build: bump Golang to version 1.22.2'
           kind: added
           links:
@@ -8801,4 +8889,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-08-14T13:50:17.08514522Z"
+generated: "2024-08-28T12:21:04.947300119Z"
