@@ -1241,6 +1241,95 @@ entries:
   kube-image-keeper:
   - annotations:
       artifacthub.io/changes: |-
+        - description: cachedimages with non-nil expiresAt where not updated
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/5631715a23f49bfaa0d0611e8b2c23033fad80c6
+        - description: 'controller: re-enable some metrics disabled by mistake'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/8c437be50bf9bd118fd54112f5003866412fbbca
+        - description: http connection leak in NewBearer()
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/3d7560dfb09433408be057127df8ba683d89d5c0
+          - name: 'GitHub issue #378'
+            url: https://github.com/enix/kube-image-keeper/issues/378
+        - description: ignore pod patching failures during startup
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/d3bc9f1c2d76c99eb3f873b3d5e26b967756689b
+        - description: replace unmaintained parabuzzle/craneoperator with joxit/docker-registry-ui
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/367b8949edd45db66e1a2031257913681e1d413c
+        - description: repository LastUpdate status wasn't updated
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/94e4907091ffd48c3dbf2dac791768155f6c69e2
+        - description: 'helm: add customizable garbage collection deadline'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/1129d0de67d637db5c9f39c0cd257defc5164663
+        - description: 'helm: add nodeSelector to GC pod'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/ee3c2c1439e8dbd4282a0505b17af8f695bd580a
+        - description: 'helm: add resources for garbage collector cronjob'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/482dc6bb73bd4610a7f07c3db14841a3700a6169
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.10.0
+    created: "2024-10-09T13:47:00.057163135Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.2.0
+    - condition: docker-registry-ui.enabled
+      name: docker-registry-ui
+      repository: https://helm.joxit.dev
+      version: 1.1.3
+    description: kuik is a container image caching system for Kubernetes.
+    digest: d9c1e0cf9a7bf271adc9ce5f7f4c56c42ae52b172affb8a4a0e7dab56c83e9f5
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+      url: https://github.com/paullaffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.10.0/kube-image-keeper-1.10.0.tgz
+    version: 1.10.0
+  - annotations:
+      artifacthub.io/changes: |-
         - description: expired cachedimages with pull errors were not deleted
           kind: fixed
           links:
@@ -8889,4 +8978,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-08-28T12:21:04.947300119Z"
+generated: "2024-10-09T13:47:00.057652715Z"
