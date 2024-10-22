@@ -64,6 +64,22 @@ kube-state-metrics:
                   type: Gauge
                   gauge:
                     path: [status, readyInstances]
+              - name: primary
+                help: CNPG pod primary state
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, instancesReportedState]
+                    labelFromKey: pod
+                    valueFrom: [isPrimary]
+              - name: timeline_id
+                help: CNPG pod timeline id
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, instancesReportedState]
+                    labelFromKey: pod
+                    valueFrom: [timeLineID]
             labelsFromPath:
               name: [metadata, name]
               namespace: [metadata, namespace]
