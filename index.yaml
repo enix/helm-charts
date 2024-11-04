@@ -1254,6 +1254,89 @@ entries:
   kube-image-keeper:
   - annotations:
       artifacthub.io/changes: |-
+        - description: don't show error when pulling an image that doesn't come from ECR
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/760d098f8734c7a3b56116162af133d0820a376d
+        - description: 'helm: revert registry version from 2.8.3 to 2.8 to not lock the patch
+            level'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/35341a25112226adca9a64606e1d30e489830409
+        - description: Add accept-images parameter to whitelist images
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/4e0e75e9f90bab27951188502bfca6da445cb814
+        - description: add support for ACR credential helper
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/be1c9f60ea020fdd865b9a01ad89e5e7124e0f51
+        - description: add support for GCR credential helper
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/597a99aebe0e3396293dba91c3163b56bb574005
+        - description: 'helm: add affinity and tolerations to GC pod'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/721548da50e58f88f99b61db04297351eff2625e
+        - description: 'storage: add azure support'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/5e9563c33187393fd2e1ae4fe43532afc2dfa126
+        - description: 'storage: add gcs support'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/9677d44131c4a829df70db020424b7c88a8ceb93
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 1.11.0-beta.1
+    created: "2024-11-04T16:31:44.327552317Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.2.0
+    - condition: docker-registry-ui.enabled
+      name: docker-registry-ui
+      repository: https://helm.joxit.dev
+      version: 1.1.3
+    description: kuik is a container image caching system for Kubernetes.
+    digest: e97907294246237477b481d165670dd0e8353410ef0bdc525b318a4bf2f8309e
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+      url: https://github.com/paullaffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.11.0-beta.1/kube-image-keeper-1.11.0-beta.1.tgz
+    version: 1.11.0-beta.1
+  - annotations:
+      artifacthub.io/changes: |-
         - description: cachedimages with non-nil expiresAt where not updated
           kind: fixed
           links:
@@ -9043,4 +9126,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-24T13:40:09.934915638Z"
+generated: "2024-11-04T16:31:44.328118237Z"
