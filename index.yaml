@@ -5668,6 +5668,68 @@ entries:
   x509-certificate-exporter:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'build: bump Golang to version 1.23.4'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/1d90a66ebb80ba0d86d9c3ca51f057ea8229f64f
+        - description: 'build: publish OpenVEX documents for new releases'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/1ed09e50a2be75b91e8dcbd64536c1236cf40368
+        - description: 'build: publish SBOM documents for new releases'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/3bf4f4ac39b1302f0527772cd4d4a3493adedb79
+        - description: 'container: bump Alpine base image to version 3.21.0'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/476b09364c9429a67d1a1c484448c871e852a08d
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 3.18.0
+    created: "2024-12-18T21:06:58.877181277Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: 474061e2be74d1427f59e35ee2b1e148fe1b4b8edf344464b6aa35c678b06c39
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-3.18.0/x509-certificate-exporter-3.18.0.tgz
+    version: 3.18.0
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'container: switch Busybox images to glibc flavor (fix for RISC-V)'
           kind: added
           links:
@@ -9378,4 +9440,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-11-28T18:29:26.587351834Z"
+generated: "2024-12-18T21:06:58.877590985Z"
