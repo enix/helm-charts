@@ -5746,6 +5746,55 @@ entries:
   x509-certificate-exporter:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'kubernetes: fetch ConfigMaps when keys are configured'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/x509-certificate-exporter/commit/77f58c10c84021936778adf9f58f833baeddf481
+          - name: 'GitHub issue #368'
+            url: https://github.com/enix/x509-certificate-exporter/issues/368
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter
+        - name: Application Sources
+          url: https://github.com/enix/x509-certificate-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Grafana Dashboard
+          url: https://grafana.com/grafana/dashboards/13922
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 3.18.1
+    created: "2024-12-27T12:51:43.666806177Z"
+    description: A Prometheus exporter for certificates focusing on expiration monitoring
+    digest: b055819d01ab8e73aebc00ca25d2a79825cacca62a48047b1a30be104c2f6441
+    home: https://github.com/enix/x509-certificate-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+    keywords:
+    - prometheus
+    - exporter
+    - certificate
+    - expiration
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    - email: arthur.chaloin@enix.fr
+      name: Arthur Chaloin
+    name: x509-certificate-exporter
+    sources:
+    - https://github.com/enix/x509-certificate-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-3.18.1/x509-certificate-exporter-3.18.1.tgz
+    version: 3.18.1
+  - annotations:
+      artifacthub.io/changes: |-
         - description: 'build: bump Golang to version 1.23.4'
           kind: added
           links:
@@ -9518,4 +9567,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-12-20T16:19:13.309437602Z"
+generated: "2024-12-27T12:51:43.667249581Z"
