@@ -35,11 +35,15 @@ Common labels
 */}}
 {{- define "cnpg-cluster.labels" -}}
 helm.sh/chart: {{ include "cnpg-cluster.chart" . }}
+{{- if and (hasKey .Values "labels") (.Values.labels)  }}
+{{ toYaml .Values.labels }}
+{{- else }}
 {{ include "cnpg-cluster.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end -}}
 {{- end }}
 
 {{/*
