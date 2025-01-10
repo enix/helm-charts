@@ -10,6 +10,8 @@ serviceAccount:
 podAnnotations: {}
 podLabels: {}
 
+priorityClassName: ""
+
 haproxy:
   enabled: true
   image:
@@ -37,6 +39,7 @@ kubeRbacProxy:
 
 controlPlane:
   enabled: true
+  priorityClassName: ""
   service:
     enabled: false
   nodeSelector:
@@ -64,6 +67,7 @@ kubeScheduler:
 
 kubeProxy:
   enabled: true
+  priorityClassName: ""
   service:
     enabled: false
   port: 10249

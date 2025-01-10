@@ -28,6 +28,9 @@ spec:
       hostNetwork: true
       tolerations:
         {{- toYaml .Values.kubeProxy.tolerations | nindent 8 }}
+      {{- with default .Values.priorityClassName .Values.kubeProxy.priorityClassName }}
+      priorityClassName: {{ . | quote }}
+      {{- end }}
       containers:
         - name: kube-rbac-proxy
           image: {{ .Values.kubeRbacProxy.image.repository }}:{{ .Values.kubeRbacProxy.image.tag }}
