@@ -5030,6 +5030,16 @@ entries:
     version: 0.0.2
   monitoring-proxy:
   - apiVersion: v2
+    created: "2025-01-10T14:07:33.938625232Z"
+    description: Expose control-plane and kube-proxy metrics for monitoring, with
+      auth when required
+    digest: d32e45f7482c7716b0dfa817677b6b723e004dae90cce04a932d30d47a751b78
+    name: monitoring-proxy
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/monitoring-proxy-0.3.0/monitoring-proxy-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     created: "2024-03-14T15:58:14.82715423Z"
     description: Expose control-plane and kube-proxy metrics for monitoring, with
       auth when required
@@ -9567,4 +9577,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-12-27T12:51:43.667249581Z"
+generated: "2025-01-10T14:07:33.94054697Z"
