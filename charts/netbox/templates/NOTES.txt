@@ -1,4 +1,0 @@
-Deprecation Notice
-------------------
-
-This chart is not maintained anymore, we advise migrating to https://artifacthub.io/packages/helm/bootc/netbox
