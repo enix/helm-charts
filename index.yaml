@@ -1340,6 +1340,84 @@ entries:
           url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
         - name: Helm Repository
           url: https://charts.enix.io
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.12.0
+    created: "2025-01-27T13:05:08.423599724Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.2.0
+    - condition: docker-registry-ui.enabled
+      name: docker-registry-ui
+      repository: https://helm.joxit.dev
+      version: 1.1.3
+    description: kuik is a container image caching system for Kubernetes.
+    digest: 05d63a953c42ee5ba6c58ccd0998f6874dca2a92869c371559fce3fdbdd872b8
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+      url: https://github.com/paullaffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.12.0/kube-image-keeper-1.12.0.tgz
+    version: 1.12.0
+  - annotations:
+      artifacthub.io/changes: |-
+        - description: handle errors in podsWithDeletingCachedImages
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/1c776c4532305be12989edd00da17a051b13e634
+        - description: time.ParseDuration() doesn't actually support 'd' suffix, warn on negative
+            Duration
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/2896cc41def5218afef11c50a8906a856ecd66ae
+        - description: 'docs: grafana dashboard updated with new panels'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/1da995e70e26f599a60af86ed396e1b284759dab
+        - description: 'metrics: add containers_with_cached_images metric'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/25098e90284805b14ec16e6213ef31fa928e7f8c
+        - description: 'metrics: add image_caching_request metric'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/e533d741045109f76fed99e8373874d63433ae3f
+        - description: 'metrics: add repositories metric'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/4dc6cf7a8185e7c01d993668841ed7e3a3aaccb3
+        - description: 'metrics: add status in cached_images metric'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/8a1dcc2ac6dd55ff6c22437aa7be1948213ea7dc
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
       artifacthub.io/prerelease: "true"
     apiVersion: v2
     appVersion: 1.12.0-beta.1
@@ -9577,4 +9655,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2025-01-10T14:07:33.94054697Z"
+generated: "2025-01-27T13:05:08.424191778Z"
