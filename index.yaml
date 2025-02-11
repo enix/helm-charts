@@ -9655,4 +9655,15 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/x509-exporter-0.1.0/x509-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2025-01-27T13:05:08.424191778Z"
+  zfs-exporter:
+  - apiVersion: v2
+    appVersion: v2.3.4
+    created: "2025-02-11T14:57:31.915108925Z"
+    description: A Helm chart of https://github.com/pdf/zfs_exporter for Kubernetes
+    digest: e21d0ea767b5feb87069650fc7eb5d60aeabf45c7201939ba33c449b6c9b3e1e
+    name: zfs-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
+    version: 1.1.0
+generated: "2025-02-11T14:57:31.916751368Z"
