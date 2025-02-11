@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    {{- include "zfs-exporter.labels" . | nindent 4 }}
+    {{- with .Values.serviceMonitor.additionalLabels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ include "zfs-exporter.fullname" . }}
+spec:
+  endpoints:
+  - port: http
+    scheme: http
+  selector:
+    matchLabels:
+      {{- include "zfs-exporter.selectorLabels" . | nindent 6 }}

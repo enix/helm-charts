@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "zfs-exporter.fullname" . }}
+  labels:
+    {{- include "zfs-exporter.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  port: 9134
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "zfs-exporter.selectorLabels" . | nindent 4 }}

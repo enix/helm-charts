@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    {{- include "zfs-exporter.labels" . | nindent 4 }}
+  name: zfspv-bin
+data:
+  zfs: |
+    #!/bin/sh
+    if [ -x /host/sbin/zfs ]; then
+      chroot /host /sbin/zfs "$@"
+    elif [ -x /host/usr/sbin/zfs ]; then
+      chroot /host /usr/sbin/zfs "$@"
+    else
+      chroot /host "zfs" "$@"
+    fi
+  zpool: |
+    #!/bin/sh
+    if [ -x /host/sbin/zpool ]; then
+      chroot /host /sbin/zpool "$@"
+    elif [ -x /host/usr/sbin/zpool ]; then
+      chroot /host /usr/sbin/zpool "$@"
+    else
+      chroot /host "zpool" "$@"
+    fi
