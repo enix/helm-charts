@@ -1297,6 +1297,73 @@ entries:
   kube-image-keeper:
   - annotations:
       artifacthub.io/changes: |-
+        - description: 'deps: upgrade dependencies to fix security vulnerabilities'
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/df8c7681b6087ec71347bfeff346ff3ff09e56da
+        - description: disable tls on metrics endpoint
+          kind: fixed
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/4910558d2dc6baec7eea539d2b3db7b2884238ed
+        - description: 'helm: add imagepullsecrets to garbage-collector-cron-job.yaml'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/d406804a98796e3cd068c873cb96397893f73094
+        - description: 'helm: add securityContext to registry init containers'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/b46ac2826c3bdbf2909bef4f9eff6afa05360f9d
+        - description: 'helm: securityContext for garbage collection pod'
+          kind: added
+          links:
+          - name: GitHub commit
+            url: https://github.com/enix/kube-image-keeper/commit/36b5752677020c46339ee3d30c482d09096365fc
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+        - name: Helm Repository
+          url: https://charts.enix.io
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.13.0
+    created: "2025-03-26T11:01:04.05540347Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.2.0
+    - condition: docker-registry-ui.enabled
+      name: docker-registry-ui
+      repository: https://helm.joxit.dev
+      version: 1.1.3
+    description: kuik is a container image caching system for Kubernetes.
+    digest: 6aca96895eb9fa893847e060afcd37c67e948fb743accf80b22ac7df5d13a11e
+    home: https://github.com/enix/kube-image-keeper
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: paul.laffitte@enix.fr
+      name: Paul Laffitte
+      url: https://github.com/paullaffitte
+    - email: david.donchez@enix.fr
+      name: David Donchez
+      url: https://github.com/donch
+    name: kube-image-keeper
+    sources:
+    - https://github.com/enix/kube-image-keeper
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-image-keeper-1.13.0/kube-image-keeper-1.13.0.tgz
+    version: 1.13.0
+  - annotations:
+      artifacthub.io/changes: |-
         - description: handle errors in podsWithDeletingCachedImages
           kind: fixed
           links:
@@ -9676,4 +9743,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
     version: 1.1.0
-generated: "2025-03-14T14:13:21.115785691Z"
+generated: "2025-03-26T11:01:04.056018544Z"
