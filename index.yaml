@@ -9732,6 +9732,7 @@ entries:
     type: application
     urls:
     - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.1/zfs-exporter-1.1.1.tgz
+    - oci://registry-1.docker.io/enix/zfs-exporter:1.1.1
     version: 1.1.1
   - apiVersion: v2
     appVersion: v2.3.4
@@ -9741,6 +9742,7 @@ entries:
     name: zfs-exporter
     type: application
     urls:
+    - oci://registry-1.docker.io/enix/zfs-exporter:1.1.0
     - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
     version: 1.1.0
 generated: "2025-03-26T11:01:04.056018544Z"
