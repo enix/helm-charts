@@ -4,5 +4,4 @@ ignore:
   - name: rancher-monitoring-proxy
   - name: configmap2http
   - name: x509-exporter
-  - name: netbox
   - name: qcow-provisioner
