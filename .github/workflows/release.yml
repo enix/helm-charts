@@ -6,6 +6,10 @@ on:
     branches:
       - master
 
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
