@@ -2,5 +2,5 @@ apiVersion: v2
 type: application
 name: configmap2http
 description: expose a configmap through an ingress
-version: 3737
-appVersion: 3737
+version: 3737.0.0
+appVersion: 3737.0.0
