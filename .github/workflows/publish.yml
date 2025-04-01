@@ -17,6 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
+          ref: gh-pages
           fetch-depth: 0
 
       - name: Setup Oras
@@ -25,4 +26,13 @@ jobs:
       - name: Download index.yaml
         #uses: mikefarah/yq@master
         run: |
-          oras pull ${REGISTRY}/${{ inputs.index_path }}
+          mkdir dist/
+          oras pull ${REGISTRY}/${{ inputs.index_path }} -o dist/
+          cat dist/index.yaml
+
+      - name: Merge index.yaml
+        uses: mikefarah/yq@master
+        with:
+          run: |
+            yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' index.yaml dist/index.yaml > merge.yaml
+            cat merge.yaml
