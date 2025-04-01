@@ -25,4 +25,4 @@ jobs:
       - name: Download index.yaml
         #uses: mikefarah/yq@master
         run: |
-          oras pull ${REGISTRY}/${inputs.index_path}
+          oras pull ${REGISTRY}/${{ inputs.index_path }}
