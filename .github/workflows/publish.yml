@@ -1,0 +1,26 @@
+name: Publish OCI charts
+
+on:
+  workflow_dispatch:
+      inputs:
+        index_path:
+          description: 'OCI index.yaml path without registry prefix'
+          required: true
+
+env:
+  REGISTRY: quay.io
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Download index.yaml
+        uses: oras-project/setup-oras@v1
+        #uses: mikefarah/yq@master
+        run: |
+          oras pull ${REGISTRY}/${inputs.index_path}
