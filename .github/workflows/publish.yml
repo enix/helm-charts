@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           ref: gh-pages
           fetch-depth: 0
@@ -28,7 +28,7 @@ jobs:
         run: |
           mkdir dist/
           oras pull ${REGISTRY}/${{ inputs.index_path }} -o dist/
-          cat dist/index.yaml
+          find .
 
       - name: Merge index.yaml
         uses: mikefarah/yq@master
