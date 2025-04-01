@@ -19,8 +19,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Download index.yaml
+      - name: Setup Oras
         uses: oras-project/setup-oras@v1
+
+      - name: Download index.yaml
         #uses: mikefarah/yq@master
         run: |
           oras pull ${REGISTRY}/${inputs.index_path}
