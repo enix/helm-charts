@@ -28,7 +28,7 @@ jobs:
         run: |
           mkdir dist/
           oras pull ${REGISTRY}/${{ inputs.index_path }} -o dist/
-          find .
+          cat dist/index.yaml
 
       - name: Merge index.yaml
         uses: mikefarah/yq@master
