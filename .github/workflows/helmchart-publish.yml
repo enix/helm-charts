@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
       inputs:
         index_path:
-          description: 'OCI index.yaml path without registry prefix'
+          description: 'OCI index-latest.yaml path, without registry hostname'
           required: true
 
 env:
@@ -27,30 +27,30 @@ jobs:
       - name: Setup Oras
         uses: oras-project/setup-oras@v1
 
-      - name: Download index-latest.yaml
+      - name: Download index-latest.yaml from workflow input
         #uses: mikefarah/yq@master
         run: |
           oras pull ${REGISTRY}/${{ inputs.index_path }}
           cat index-latest.yaml
 
-      - name: Get chart name
+      - name: Get index-latest.yaml chart name
         id: get_chart_name
         uses: mikefarah/yq@master
         with:
           cmd: yq '.entries | to_entries[0] | (.key)' index-latest.yaml
 
-      - name: Get chart version
+      - name: Get index-latest.yaml chart version
         id: get_chart_version
         uses: mikefarah/yq@master
         with:
           cmd: yq '.entries | to_entries[0] | (.value[0].version)' index-latest.yaml
 
-      - name: Remove duplicate prior to merge
+      - name: Remove potential duplicate prior to merge
         uses: mikefarah/yq@master
         with:
           cmd: yq -i 'del(.entries.["${{ steps.get_chart_name.outputs.result }}"][] | select(.version == "${{ steps.get_chart_version.outputs.result }}"))' index.yaml
 
-      - name: Merge index.yaml
+      - name: Merge index-latest.yaml into index.yaml
         uses: mikefarah/yq@master
         with:
           cmd: yq -i eval-all 'select(fi == 0) *++ select(fi == 1) | select(fi == 0)' index.yaml index-latest.yaml
