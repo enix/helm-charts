@@ -27,24 +27,23 @@ jobs:
       - name: Setup Oras
         uses: oras-project/setup-oras@v1
 
-      - name: Download index.yaml
+      - name: Download index-latest.yaml
         #uses: mikefarah/yq@master
         run: |
-          mkdir dist/
-          oras pull ${REGISTRY}/${{ inputs.index_path }} -o dist/
-          cat dist/index.yaml
+          oras pull ${REGISTRY}/${{ inputs.index_path }}
+          cat index-latest.yaml
 
       - name: Get chart name
         id: get_chart_name
         uses: mikefarah/yq@master
         with:
-          cmd: yq '.entries | to_entries[0] | (.key)' dist/index.yaml
+          cmd: yq '.entries | to_entries[0] | (.key)' index-latest.yaml
 
       - name: Get chart version
         id: get_chart_version
         uses: mikefarah/yq@master
         with:
-          cmd: yq '.entries | to_entries[0] | (.value[0].version)' dist/index.yaml
+          cmd: yq '.entries | to_entries[0] | (.value[0].version)' index-latest.yaml
 
       - name: Remove duplicate prior to merge
         uses: mikefarah/yq@master
@@ -54,7 +53,7 @@ jobs:
       - name: Merge index.yaml
         uses: mikefarah/yq@master
         with:
-          cmd: yq -i eval-all 'select(fi == 0) *++ select(fi == 1) | select(fi == 0)' index.yaml dist/index.yaml
+          cmd: yq -i eval-all 'select(fi == 0) *++ select(fi == 1) | select(fi == 0)' index.yaml index-latest.yaml
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
