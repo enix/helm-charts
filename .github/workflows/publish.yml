@@ -45,7 +45,7 @@ jobs:
       - name: Remove duplicate prior to merge
         uses: mikefarah/yq@master
         with:
-          cmd: yq "del(.entries.[\"${{ steps.get_chart_name.outputs.result }}\"][] | select(.version == \"${{ steps.get_chart_version.outputs.result }}\"))" index.yaml
+          cmd: yq 'del(.entries.["${{ steps.get_chart_name.outputs.result }}"][] | select(.version == "${{ steps.get_chart_version.outputs.result }}"))' index.yaml
 
       - name: Merge index.yaml
         uses: mikefarah/yq@master
