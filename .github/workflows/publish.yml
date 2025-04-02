@@ -11,8 +11,12 @@ env:
   REGISTRY: quay.io
 
 jobs:
-  release:
+  helmchart-publish:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -52,6 +56,11 @@ jobs:
         with:
           cmd: yq -i eval-all 'select(fi == 0) *++ select(fi == 1) | select(fi == 0)' index.yaml dist/index.yaml
 
-      - name: Publish merged index.yaml
-        run: |
-          cat index.yaml
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Publish chart ${{ steps.get_chart_name.outputs.result }} version ${{ steps.get_chart_version.outputs.result }}
+          branch: gh-pages
+          file_pattern: 'index.yaml'
+          skip_fetch: true
+          skip_checkout: true
