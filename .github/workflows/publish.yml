@@ -19,18 +19,39 @@ jobs:
         with:
           ref: gh-pages
           fetch-depth: 0
+
       - name: Setup Oras
         uses: oras-project/setup-oras@v1
+
       - name: Download index.yaml
         #uses: mikefarah/yq@master
         run: |
           mkdir dist/
           oras pull ${REGISTRY}/${{ inputs.index_path }} -o dist/
           cat dist/index.yaml
+
+      - name: Get chart name
+        id: get_chart_name
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq '.entries | to_entries[0] | (.key)' dist/index.yaml
+
+      - name: Get chart version
+        id: get_chart_version
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq '.entries | to_entries[0] | (.value[0].version)' dist/index.yaml
+
+      - name: Remove duplicate prior to merge
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq "del(.entries.[\"${{ steps.get_chart_name.outputs.result }}\"][] | select(.version == \"${{ steps.get_chart_version.outputs.result }}\"))" index.yaml
+
       - name: Merge index.yaml
         uses: mikefarah/yq@master
         with:
           cmd: yq eval-all 'select(fi == 0) *++ select(fi == 1) | select(fi == 0)' index.yaml dist/index.yaml > merge.yaml
+
       - name: Publish merged index.yaml
         run: |
           cat merge.yaml
