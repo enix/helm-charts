@@ -30,7 +30,7 @@ jobs:
       - name: Merge index.yaml
         uses: mikefarah/yq@master
         with:
-          cmd: yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' index.yaml dist/index.yaml > merge.yaml
+          cmd: yq eval-all 'select(fi == 0) *++ select(fi == 1) | select(fi == 0)' index.yaml dist/index.yaml > merge.yaml
       - name: Publish merged index.yaml
-        run: |        
+        run: |
           cat merge.yaml
