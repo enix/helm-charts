@@ -44,12 +44,7 @@ jobs:
             fi
           done
 
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.7.0
-        env:
-          CR_TOKEN: '${{ secrets.CR_TOKEN }}'
-
-      - name: Run chart-releaser
+      - name: Run chart-releaser OCI
         uses: bitdeps/helm-oci-charts-releaser@v0.1.3
         with:
             oci_registry: quay.io/enix/charts
@@ -60,3 +55,8 @@ jobs:
             skip_helm_install: true
             skip_dependencies: true
             skip_gh_release: true
+
+      - name: Run chart-releaser index.yaml
+        uses: helm/chart-releaser-action@v1.7.0
+        env:
+          CR_TOKEN: '${{ secrets.CR_TOKEN }}'
