@@ -151,6 +151,16 @@ entries:
   configmap2http:
   - apiVersion: v2
     appVersion: 3737.0.0
+    created: "2025-04-07T13:57:15.186533277Z"
+    description: expose a configmap through an ingress
+    digest: 718e16111b30729d972b15f93a1fff0d76d6be566f28ec6f39d8ba4be774791e
+    name: configmap2http
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/configmap2http-3737.0.4/configmap2http-3737.0.4.tgz
+    version: 3737.0.4
+  - apiVersion: v2
+    appVersion: 3737.0.0
     created: "2025-04-07T11:23:54.781125542Z"
     description: expose a configmap through an ingress
     digest: 4c04f2a5e476a91be2f0adea128e4b070dfb907e864e8afcfc3c7bb1252b5c27
@@ -8165,4 +8175,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
     version: 1.1.0
-generated: "2025-04-07T11:23:54.781761059Z"
+generated: "2025-04-07T13:57:15.186957424Z"
