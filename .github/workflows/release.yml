@@ -1,6 +1,7 @@
 name: Release Charts
 
 on:
+  workflow_dispatch:
   repository_dispatch:
   push:
     branches:
