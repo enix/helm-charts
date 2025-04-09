@@ -8122,4 +8122,14 @@ entries:
       urls:
         - oci://quay.io/enix/charts/zfs-exporter:2.0.1
       version: 2.0.1
-generated: "2025-04-09T10:02:03.510225241Z"
+    - apiVersion: v2
+      appVersion: 2.3.6
+      created: "2025-04-09T10:07:22.0851306Z"
+      description: A Helm chart of https://github.com/pdf/zfs_exporter for Kubernetes
+      digest: 650ec0b68d7e01e9925ca253361d09e967f12df3d577057ec284e842394244ab
+      name: zfs-exporter
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/zfs-exporter:2.1.0
+      version: 2.1.0
+generated: "2025-04-09T10:07:22.084121354Z"
