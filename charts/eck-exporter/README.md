@@ -1,6 +1,6 @@
 # 🫧 ECK Exporter
 
-![Version: 1.8.0](https://img.shields.io/badge/Version-1.8.0-informational?style=flat-square) ![AppVersion: 2.15.0](https://img.shields.io/badge/AppVersion-2.15.0-informational?style=flat-square)
+![Version: 1.9.0](https://img.shields.io/badge/Version-1.9.0-informational?style=flat-square) ![AppVersion: 2.15.0](https://img.shields.io/badge/AppVersion-2.15.0-informational?style=flat-square)
 [![Brought by Enix](https://img.shields.io/badge/Brought%20to%20you%20by-ENIX-%23377dff?labelColor=888&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAQAAAC1QeVaAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfkBAkQIg/iouK/AAABZ0lEQVQY0yXBPU8TYQDA8f/zcu1RSDltKliD0BKNECYZmpjgIAOLiYtubn4EJxI/AImzg3E1+AGcYDIMJA7lxQQQQRAiSSFG2l457+655x4Gfz8B45zwipWJ8rPCQ0g3+p9Pj+AlHxHjnLHAbvPW2+GmLoBN+9/+vNlfGeU2Auokd8Y+VeYk/zk6O2fP9fcO8hGpN/TUbxpiUhJiEorTgy+6hUlU5N1flK+9oIJHiKNCkb5wMyOFw3V9o+zN69o0Exg6ePh4/GKr6s0H72Tc67YsdXbZ5gENNjmigaXbMj0tzEWrZNtqigva5NxjhFP6Wfw1N1pjqpFaZQ7FAY6An6zxTzHs0BGqY/NQSnxSBD6WkDRTf3O0wG2Ztl/7jaQEnGNxZMdy2yET/B2xfGlDagQE1OgRRvL93UOHqhLnesPKqJ4NxLLn2unJgVka/HBpbiIARlHFq1n/cWlMZMne1ZfyD5M/Aa4BiyGSwP4Jl3UAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjAtMDQtMDlUMTQ6MzQ6MTUrMDI6MDDBq8/nAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIwLTA0LTA5VDE0OjM0OjE1KzAyOjAwsPZ3WwAAAABJRU5ErkJggg==)](https://enix.io)
 
 A Prometheus exporter for [Elastic Cloud on Kubernetes (ECK)](https://github.com/elastic/cloud-on-k8s), put together with [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics) and a custom configuration.  
@@ -227,6 +227,17 @@ Great question... To be answered when the need arises 😅
 | serviceMonitor.relabelings | list | `[]` | Relabel config for the ServiceMonitor |
 | serviceMonitor.metricRelabelings | list | `[]` | Metric relabel config for the ServiceMonitor |
 | serviceMonitor.extraParameters | object | `{}` | Any extra parameter to be added to the endpoint configured in the ServiceMonitor |
+| podMonitor.create | bool | `false` | Should a PodMonitor object be installed to scrape this exporter. For prometheus-operator (kube-prometheus-stack) users. |
+| podMonitor.selfMonitor | bool | `false` | Also scrape internal metrics of kube-state-metrics on it's telemetry endpoint |
+| podMonitor.namespace | string | `""` | Optional namespace in which to create the PodMonitor. Could be where prometheus-operator is running. |
+| podMonitor.jobLabel | string | `""` | Optional name of the label on the target Service to use as the job name in Prometheus |
+| podMonitor.interval | string | `"30s"` | Endpoint scrape interval set in the PodMonitor. Warning: increasing this will require changes in built-in alerts settings for averaging! Make sure you understand how `avg_over_time` is used. |
+| podMonitor.scrapeTimeout | string | `"20s"` | Endpoint scrape timeout set in the PodMonitor |
+| podMonitor.honorLabels | bool | `false` | Whether to honor metrics labels or not |
+| podMonitor.extraLabels | object | `{}` | Additional labels to add to PodMonitor objects |
+| podMonitor.relabelings | list | `[]` | Relabel config for the PodMonitor |
+| podMonitor.metricRelabelings | list | `[]` | Metric relabel config for the PodMonitor |
+| podMonitor.extraParameters | object | `{}` | Any extra parameter to be added to the endpoint configured in the PodMonitor |
 | imagePullSecrets | list | `[]` | Specify docker-registry secret names as an array |
 | image.registry | string | `"registry.k8s.io"` | kube-state-metrics image registry |
 | image.repository | string | `"kube-state-metrics/kube-state-metrics"` | kube-state-metrics image repository |
@@ -241,6 +252,9 @@ Great question... To be answered when the need arises 😅
 | podExtraLabels | object | `{}` | Additional labels added to all Pods |
 | podAnnotations | object | `{}` | Annotations added to all Pods |
 | podListenPort | int | `8080` | TCP port to expose ECK metrics on |
+| podTelemetryListenPort | int | `8081` | TCP port to expose kube-state-metrics telemetry on (self metrics of the exporter, used by container healthchecks) |
+| livenessProbe | object | see `values.yaml` | livenessProbe parameters for the kube-state-metrics container |
+| readinessProbe | object | see `values.yaml` | readinessProbe parameters for the kube-state-metrics container |
 | service.create | bool | `true` | Should a Service be installed (required for ServiceMonitor) |
 | service.type | string | `"ClusterIP"` | Type of the Service to be created |
 | service.clusterIP | string | `""` | Optional: set IP address for a Service of type ClusterIP. Use `None` to make it a headless Service. |

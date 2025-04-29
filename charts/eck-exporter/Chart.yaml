@@ -1,4 +1,4 @@
-version: 1.8.0
+version: 1.9.0
 appVersion: "2.15.0"
 annotations:
   artifacthub.io/prerelease: "false"
@@ -13,11 +13,11 @@ annotations:
   # https://artifacthub.io/docs/topics/annotations/helm/
   artifacthub.io/changes: |
     - kind: added
-      description: "Enable autogomemlimit in kube-state-metrics by default"
+      description: "Configurable container healchecks"
     - kind: added
-      description: "Support for custom environment variables to kube-state-metrics"
+      description: "Support for PodMonitor (disabled by default)"
     - kind: added
-      description: "Run kube-state-metrics with GOMAXPROCS=1 by default"
+      description: "Self monitoring of kube-state-metrics (telemetry endpoint). Only scraped with PodMonitor."
   artifacthub.io/containsSecurityUpdates: "false"
 
 apiVersion: v2
