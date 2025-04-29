@@ -12,8 +12,12 @@ annotations:
       url: https://github.com/kubernetes/kube-state-metrics
   # https://artifacthub.io/docs/topics/annotations/helm/
   artifacthub.io/changes: |
-    - kind: changed
-      description: "Bump kube-state-metrics to version 2.15.0"
+    - kind: added
+      description: "Enable autogomemlimit in kube-state-metrics by default"
+    - kind: added
+      description: "Support for custom environment variables to kube-state-metrics"
+    - kind: added
+      description: "Run kube-state-metrics with GOMAXPROCS=1 by default"
   artifacthub.io/containsSecurityUpdates: "false"
 
 apiVersion: v2
