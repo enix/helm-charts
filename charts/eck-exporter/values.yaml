@@ -201,6 +201,12 @@ image:
   # -- kube-state-metrics image pull policy
   pullPolicy: IfNotPresent
 
+# -- kube-state-metrics environment variables
+# @default -- see `values.yaml`
+env:
+  - name: GOMAXPROCS
+    value: "1"
+
 # -- ResourceRequirements for the kube-state-metrics container
 # @default -- see `values.yaml`
 resources:
