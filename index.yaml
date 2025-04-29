@@ -182,6 +182,53 @@ entries:
   eck-exporter:
   - annotations:
       artifacthub.io/changes: |
+        - kind: added
+          description: "Configurable container healchecks"
+        - kind: added
+          description: "Support for PodMonitor (disabled by default)"
+        - kind: added
+          description: "Self monitoring of kube-state-metrics (telemetry endpoint). Only scraped with PodMonitor."
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Application Sources
+          url: https://github.com/kubernetes/kube-state-metrics
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 2.15.0
+    created: "2025-04-29T15:37:25.020162707Z"
+    description: A Prometheus exporter for the ECK operator custom resources. Based
+      on kube-state-metrics.
+    digest: 212b248dd5f930039349604ef3b5f7279a2506d1d44917b5dc73f54d5308d373
+    home: https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1fae7.png
+    keywords:
+    - Prometheus
+    - exporter
+    - operator
+    - ECK
+    - Elasticsearch
+    - Kibana
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    name: eck-exporter
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/eck-exporter-1.9.0/eck-exporter-1.9.0.tgz
+    version: 1.9.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: changed
           description: "Bump kube-state-metrics to version 2.15.0"
       artifacthub.io/containsSecurityUpdates: "false"
@@ -8318,4 +8365,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
     version: 1.1.0
-generated: "2025-04-29T13:56:21.66096551Z"
+generated: "2025-04-29T15:37:25.020489418Z"
