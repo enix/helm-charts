@@ -56,10 +56,23 @@ spec:
         resources:
           {{- . | toYaml | trim | nindent 10 }}
         {{- end }}
+        {{- if .Values.enableHealthProbes }}
+        livenessProbe:
+          httpGet:
+            path: /livez
+            port: metrics
+          {{- toYaml .Values.livenessProbe | nindent 10 }}
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: telemetry
+          {{- toYaml .Values.readinessProbe | nindent 10 }}
+        {{- end }}
         image: {{ include "eck-exporter.image" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
         args:
-        - --port={{ .Values.podListenPort | int }}
+        - --port={{ int .Values.podListenPort }}
+        - --telemetry-port={{ int .Values.podTelemetryListenPort }}
         - --custom-resource-state-only
         - --custom-resource-state-config-file=/etc/eckresourcestate/config.yaml
         {{- if .Values.autoGoMemLimit.enabled }}
@@ -74,7 +87,9 @@ spec:
         {{- end }}
         ports:
         - name: metrics
-          containerPort: {{ .Values.podListenPort | int }}
+          containerPort: {{ int .Values.podListenPort }}
+        - name: telemetry
+          containerPort: {{ int .Values.podTelemetryListenPort }}
         volumeMounts:
         - name: eckresourcestate-config
           mountPath: /etc/eckresourcestate

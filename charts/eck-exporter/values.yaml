@@ -237,6 +237,22 @@ podAnnotations: {}
 # -- TCP port to expose ECK metrics on
 podListenPort: 8080
 
+# -- TCP port to expose kube-state-metrics telemetry on (self metrics of the exporter, used by container healthchecks)
+podTelemetryListenPort: 8081
+
+# @ignored
+enableHealthProbes: true
+# -- livenessProbe parameters for the kube-state-metrics container
+# @default -- see `values.yaml`
+livenessProbe:
+  initialDelaySeconds: 5
+  timeoutSeconds: 5
+# -- readinessProbe parameters for the kube-state-metrics container
+# @default -- see `values.yaml`
+readinessProbe:
+  initialDelaySeconds: 5
+  timeoutSeconds: 5
+
 service:
   # -- Should a Service be installed (required for ServiceMonitor)
   create: true
