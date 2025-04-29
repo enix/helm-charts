@@ -36,6 +36,29 @@ spec:
     {{- if .Values.serviceMonitor.extraParameters }}
     {{- toYaml .Values.serviceMonitor.extraParameters | nindent 4 }}
     {{- end }}
+  {{- if .Values.serviceMonitor.selfMonitor }}
+  - port: telemetry
+    {{- if .Values.serviceMonitor.interval }}
+    interval: {{ .Values.serviceMonitor.interval }}
+    {{- end }}
+    {{- if .Values.serviceMonitor.scrapeTimeout }}
+    scrapeTimeout: {{ .Values.serviceMonitor.scrapeTimeout }}
+    {{- end }}
+    {{- if .Values.serviceMonitor.honorLabels }}
+    honorLabels: {{ .Values.serviceMonitor.honorLabels }}
+    {{- end }}
+    {{- if .Values.serviceMonitor.relabelings }}
+    relabelings:
+    {{- .Values.serviceMonitor.relabelings | toYaml | nindent 4 }}
+    {{- end }}
+    {{- if .Values.serviceMonitor.metricRelabelings }}
+    metricRelabelings:
+    {{- .Values.serviceMonitor.metricRelabelings | toYaml | nindent 4 }}
+    {{- end }}
+    {{- if .Values.serviceMonitor.extraParameters }}
+    {{- toYaml .Values.serviceMonitor.extraParameters | nindent 4 }}
+    {{- end }}
+  {{- end }}
   namespaceSelector:
     matchNames:
     - {{ .Release.Namespace }}

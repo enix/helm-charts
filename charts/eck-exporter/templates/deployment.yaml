@@ -73,6 +73,9 @@ spec:
         args:
         - --port={{ int .Values.podListenPort }}
         - --telemetry-port={{ int .Values.podTelemetryListenPort }}
+        {{- if .Values.serviceMonitor.selfMonitor }}
+        - --telemetry-host=0.0.0.0
+        {{- end }}
         - --custom-resource-state-only
         - --custom-resource-state-config-file=/etc/eckresourcestate/config.yaml
         {{- if .Values.autoGoMemLimit.enabled }}

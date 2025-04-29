@@ -167,6 +167,8 @@ prometheusRules:
 serviceMonitor:
   # -- Should a ServiceMonitor object be installed to scrape this exporter. For prometheus-operator (kube-prometheus-stack) users.
   create: true
+  # -- Also scrape internal metrics of kube-state-metrics on it's telemetry endpoint
+  selfMonitor: false
   # -- Optional namespace in which to create the ServiceMonitor. Could be where prometheus-operator is running.
   namespace: ""
   # -- Optional name of the label on the target Service to use as the job name in Prometheus
@@ -292,7 +294,7 @@ securityContext:
   readOnlyRootFilesystem: true
   capabilities:
     drop:
-    - ALL
+      - ALL
 
 # -- PriorityClassName for the kube-state-metrics Pod
 priorityClassName: ""
