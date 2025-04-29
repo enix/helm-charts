@@ -62,6 +62,12 @@ spec:
         - --port={{ .Values.podListenPort | int }}
         - --custom-resource-state-only
         - --custom-resource-state-config-file=/etc/eckresourcestate/config.yaml
+        {{- if .Values.autoGoMemLimit.enabled }}
+        - --auto-gomemlimit
+        {{- with .Values.autoGoMemLimit.ratio }}
+        - --auto-gomemlimit-ratio={{ . }}
+        {{- end }}
+        {{- end }}
         {{- if .Values.env }}
         env:
         {{- toYaml .Values.env | trim | nindent 8 }}

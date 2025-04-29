@@ -207,6 +207,12 @@ env:
   - name: GOMAXPROCS
     value: "1"
 
+autoGoMemLimit:
+  # -- automatically set GOMEMLIMIT to match container or system memory limit (experimental in kube-state-metrics)
+  enabled: true
+  # -- the ratio of reserved GOMEMLIMIT memory to the detected maximum container or system memory (kube-state-metrics should default to 0.9)
+  ratio: ""
+
 # -- ResourceRequirements for the kube-state-metrics container
 # @default -- see `values.yaml`
 resources:
