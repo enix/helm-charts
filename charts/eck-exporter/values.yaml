@@ -208,7 +208,7 @@ resources:
     cpu: 10m
     memory: 32Mi
   limits:
-    cpu: 100m
+    cpu: 1
     memory: 128Mi
 
 # -- Additional labels added to all chart objects
