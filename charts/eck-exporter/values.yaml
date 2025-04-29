@@ -56,7 +56,7 @@ prometheusRules:
       for: 1m
       averageInterval: 5m
       averageThresholdUnder: 0.8 # for Ready only (metric should be 1)
-      averageThresholdOver: 0.2  # for all other phases (should be 0)
+      averageThresholdOver: 0.2 # for all other phases (should be 0)
       severity:
         NotReady: warning
         ApplyingChanges: warning
@@ -202,7 +202,7 @@ image:
   pullPolicy: IfNotPresent
 
 # -- ResourceRequirements for the kube-state-metrics container
-# @default -- check `values.yaml`
+# @default -- see `values.yaml`
 resources:
   requests:
     cpu: 10m
@@ -222,7 +222,7 @@ podAnnotations: {}
 #  prometheus.io/port: "9793"
 #  prometheus.io/scrape: "true"
 
-# -- TCP port to expose the Pod on
+# -- TCP port to expose ECK metrics on
 podListenPort: 8080
 
 service:
@@ -257,7 +257,7 @@ serviceAccount:
 podSecurityContext: {}
 
 # -- SecurityContext for the kube-state-metrics container
-# @default -- check `values.yaml`
+# @default -- see `values.yaml`
 securityContext:
   runAsUser: 65534
   runAsGroup: 65534
