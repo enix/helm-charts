@@ -1,0 +1,65 @@
+{{- if and .Values.podMonitor.create .Values.service.create }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ include "eck-exporter.fullname" . }}
+  namespace: {{ default .Release.Namespace .Values.podMonitor.namespace | quote }}
+  labels:
+    {{- include "eck-exporter.labels" . | nindent 4 }}
+    {{- with .Values.podMonitor.extraLabels }}
+    {{- . | toYaml | trim | nindent 4 }}
+    {{- end }}
+spec:
+  jobLabel: {{ .Values.podMonitor.jobLabel | quote }}
+  selector:
+    matchLabels:
+      {{- include "eck-exporter.selectorLabels" . | nindent 6 }}
+  podMetricsEndpoints:
+  - port: metrics
+    {{- if .Values.podMonitor.interval }}
+    interval: {{ .Values.podMonitor.interval }}
+    {{- end }}
+    {{- if .Values.podMonitor.scrapeTimeout }}
+    scrapeTimeout: {{ .Values.podMonitor.scrapeTimeout }}
+    {{- end }}
+    {{- if .Values.podMonitor.honorLabels }}
+    honorLabels: {{ .Values.podMonitor.honorLabels }}
+    {{- end }}
+    {{- if .Values.podMonitor.relabelings }}
+    relabelings:
+    {{- .Values.podMonitor.relabelings | toYaml | nindent 4 }}
+    {{- end }}
+    {{- if .Values.podMonitor.metricRelabelings }}
+    metricRelabelings:
+    {{- .Values.podMonitor.metricRelabelings | toYaml | nindent 4 }}
+    {{- end }}
+    {{- if .Values.podMonitor.extraParameters }}
+    {{- toYaml .Values.podMonitor.extraParameters | nindent 4 }}
+    {{- end }}
+  {{- if .Values.podMonitor.selfMonitor }}
+  - port: telemetry
+    {{- if .Values.podMonitor.interval }}
+    interval: {{ .Values.podMonitor.interval }}
+    {{- end }}
+    {{- if .Values.podMonitor.scrapeTimeout }}
+    scrapeTimeout: {{ .Values.podMonitor.scrapeTimeout }}
+    {{- end }}
+    {{- if .Values.podMonitor.honorLabels }}
+    honorLabels: {{ .Values.podMonitor.honorLabels }}
+    {{- end }}
+    {{- if .Values.podMonitor.relabelings }}
+    relabelings:
+    {{- .Values.podMonitor.relabelings | toYaml | nindent 4 }}
+    {{- end }}
+    {{- if .Values.podMonitor.metricRelabelings }}
+    metricRelabelings:
+    {{- .Values.podMonitor.metricRelabelings | toYaml | nindent 4 }}
+    {{- end }}
+    {{- if .Values.podMonitor.extraParameters }}
+    {{- toYaml .Values.podMonitor.extraParameters | nindent 4 }}
+    {{- end }}
+  {{- end }}
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace }}
+{{- end }}
