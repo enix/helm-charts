@@ -1,5 +1,5 @@
 version: 1.6.0
-appVersion: "2.14.0"
+appVersion: "2.15.0"
 annotations:
   artifacthub.io/prerelease: "false"
   artifacthub.io/license: MIT
@@ -12,9 +12,9 @@ annotations:
       url: https://github.com/kubernetes/kube-state-metrics
   # https://artifacthub.io/docs/topics/annotations/helm/
   artifacthub.io/changes: |
-    - kind: security
-      description: "Bump kube-state-metrics to version 2.14.0"
-  artifacthub.io/containsSecurityUpdates: "true"
+    - kind: changed
+      description: "Bump kube-state-metrics to version 2.15.0"
+  artifacthub.io/containsSecurityUpdates: "false"
 
 apiVersion: v2
 name: eck-exporter
