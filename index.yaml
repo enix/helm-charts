@@ -8293,4 +8293,34 @@ entries:
       urls:
         - oci://quay.io/enix/charts/topomatik:1.1.1
       version: 1.1.1
-generated: "2025-06-05T15:54:36.409818623Z"
+    - annotations:
+        artifacthub.io/changes: ""
+        artifacthub.io/containsSecurityUpdates: "false"
+        artifacthub.io/license: MIT
+        artifacthub.io/links: |
+          - name: Chart Sources
+            url: https://github.com/enix/topomatik/blob/main/helm/topomatik
+          - name: Helm Repository
+            url: https://charts.enix.io
+        artifacthub.io/prerelease: "false"
+      apiVersion: v2
+      appVersion: 1.1.2
+      created: "2025-06-06T16:12:53.039727963Z"
+      description: You don't have to do anything, it's all Topomatik™!
+      digest: 2673d1e57d31a351d512323485ca0ee0ab2d977af51373d9b15da63d8866fccc
+      home: https://github.com/enix/topomatik
+      maintainers:
+        - email: contact@enix.fr
+          name: Enix
+          url: https://enix.io
+        - email: paul.laffitte@enix.fr
+          name: Paul Laffitte
+          url: https://github.com/paullaffitte
+      name: topomatik
+      sources:
+        - https://github.com/enix/topomatik
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/topomatik:1.1.2
+      version: 1.1.2
+generated: "2025-06-06T16:12:53.039188065Z"
