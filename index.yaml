@@ -182,6 +182,49 @@ entries:
   eck-exporter:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: "Bump kube-state-metrics to version 2.16.0"
+      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Chart Sources
+          url: https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+        - name: Helm Repository
+          url: https://charts.enix.io
+        - name: Application Sources
+          url: https://github.com/kubernetes/kube-state-metrics
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 2.16.0
+    created: "2025-06-27T15:49:35.093051657Z"
+    description: A Prometheus exporter for the ECK operator custom resources. Based
+      on kube-state-metrics.
+    digest: bca1b11ac3e75eea6192b78c5ff0f2dc8716254ac2675d61ec53f1344c5d4391
+    home: https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+    icon: https://github.githubassets.com/images/icons/emoji/unicode/1fae7.png
+    keywords:
+    - Prometheus
+    - exporter
+    - operator
+    - ECK
+    - Elasticsearch
+    - Kibana
+    maintainers:
+    - email: contact@enix.fr
+      name: Enix
+      url: https://github.com/enixsas
+    - email: root@devcat.org
+      name: Thibault Vincent
+      url: https://github.com/npdgm
+    name: eck-exporter
+    sources:
+    - https://github.com/enix/helm-charts/tree/master/charts/eck-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/eck-exporter-1.10.0/eck-exporter-1.10.0.tgz
+    version: 1.10.0
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: "Configurable container healchecks"
         - kind: added
@@ -8532,4 +8575,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
     version: 1.1.0
-generated: "2025-06-19T20:03:25.532404864Z"
+generated: "2025-06-27T15:49:35.093389072Z"
