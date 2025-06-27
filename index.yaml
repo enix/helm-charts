@@ -184,7 +184,7 @@ entries:
       artifacthub.io/changes: |
         - kind: changed
           description: "Bump kube-state-metrics to version 2.16.0"
-      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/license: MIT
       artifacthub.io/links: |
         - name: Chart Sources
