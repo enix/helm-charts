@@ -1,5 +1,5 @@
-version: 1.9.0
-appVersion: "2.15.0"
+version: 1.10.0
+appVersion: "2.16.0"
 annotations:
   artifacthub.io/prerelease: "false"
   artifacthub.io/license: MIT
@@ -12,13 +12,9 @@ annotations:
       url: https://github.com/kubernetes/kube-state-metrics
   # https://artifacthub.io/docs/topics/annotations/helm/
   artifacthub.io/changes: |
-    - kind: added
-      description: "Configurable container healchecks"
-    - kind: added
-      description: "Support for PodMonitor (disabled by default)"
-    - kind: added
-      description: "Self monitoring of kube-state-metrics (telemetry endpoint). Only scraped with PodMonitor."
-  artifacthub.io/containsSecurityUpdates: "false"
+    - kind: changed
+      description: "Bump kube-state-metrics to version 2.16.0"
+  artifacthub.io/containsSecurityUpdates: "true"
 
 apiVersion: v2
 name: eck-exporter
