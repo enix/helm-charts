@@ -61,6 +61,7 @@ configReloader:
 
 serviceMonitor:
   enabled: false
+  extraLabels: {}
 
 dashboard:
   enabled: false
