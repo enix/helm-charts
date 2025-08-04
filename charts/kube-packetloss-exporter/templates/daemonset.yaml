@@ -93,7 +93,7 @@ spec:
                    echo "- interval: ${PING_INTERVAL}"
                    echo "  hosts:"
                    for IP in ${RETAIN_HOSTS}; do
-                      echo "  - ${IP}";
+                      echo "  - \"${IP}\"";
                    done) > "${TMP_CONFIG}";
                   if ! diff --new-file "${TMP_CONFIG}" "${CONFIG_FILE}" > /dev/null; then
                        echo "Installing new config"
