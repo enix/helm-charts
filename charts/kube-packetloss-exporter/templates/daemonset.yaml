@@ -81,9 +81,14 @@ spec:
                   TMP_CONFIG=$(mktemp -p $(dirname "${CONFIG_FILE}"))
                   ALL_HOSTS=$(kubectl get ep "${SERVICE_NAME}" -o jsonpath="{range .subsets[*].addresses[*]}{.ip}{'\n'}{end}")
                   if [ "${SAMPLE_NODE}" = "all" ]; then
-                      RETAIN_HOSTS=$(echo "${ALL_HOSTS}"|grep -v "${POD_IP}")
+                      HOSTS=$(echo "${ALL_HOSTS}"|grep -v "${POD_IP}")
                   else
-                      RETAIN_HOSTS=$( (echo "${ALL_HOSTS}";echo "${ALL_HOSTS}")|grep "${POD_IP}" -m 1 -A "${SAMPLE_NODE}"|grep -v "${POD_IP}")
+                      HOSTS=$( (echo "${ALL_HOSTS}";echo "${ALL_HOSTS}")|grep "${POD_IP}" -m 1 -A "${SAMPLE_NODE}"|grep -v "${POD_IP}")
+                  fi;
+                  if [ "${EXTRA_HOSTS}" ] ; then
+                      RETAIN_HOSTS=$(echo ${HOSTS}; echo ${EXTRA_HOSTS})
+                  else
+                      RETAIN_HOSTS=$(echo ${HOSTS})
                   fi;
                   if [ -z "${RETAIN_HOSTS}" ]; then
                       echo "No hosts to create config..."
@@ -119,6 +124,8 @@ spec:
           env:
           - name: PING_INTERVAL
             value: "{{ .Values.pingInterval }}"
+          - name: EXTRA_HOSTS
+            value: "{{ .Values.extraHosts }}"
           - name: POD_IP
             valueFrom:
               fieldRef:
