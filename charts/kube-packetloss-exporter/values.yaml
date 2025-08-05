@@ -61,6 +61,7 @@ configReloader:
 
 serviceMonitor:
   enabled: false
+  extraLabels: {}
 
 dashboard:
   enabled: false
@@ -99,3 +100,6 @@ tolerations:
 
 
 affinity: {}
+
+extraHosts: ""
+ # Add each extra hosts with a space delimiter (e.g. "host01 host02 host03")

@@ -5,6 +5,9 @@ metadata:
   name: {{ include "kube-packetloss-exporter.fullname" . }}
   labels:
     {{- include "kube-packetloss-exporter.labels" . | nindent 4 }}
+    {{- with .Values.serviceMonitor.extraLabels }}
+    {{- . | toYaml | trim | nindent 4 }}
+    {{- end }}
 spec:
   endpoints:
   - path: /metrics
