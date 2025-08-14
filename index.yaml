@@ -4450,9 +4450,9 @@ entries:
         artifacthub.io/prerelease: "true"
       apiVersion: v2
       appVersion: 2.0.0-beta.1
-      created: "2025-08-14T13:51:27.360254998Z"
+      created: "2025-08-14T14:17:56.698833772Z"
       description: The keeper of your images in your cluster!
-      digest: 47f1cef7b9dc38e0672a7cda1784cf5ca90bd0c0c3fcb470195fb84543a28e7c
+      digest: ca6191d0faf2697bf8cdccaec366c66db71eb55f804965a80005573204fe9855
       home: https://github.com/enix/kube-image-keeper
       maintainers:
         - email: contact@enix.fr
@@ -8877,4 +8877,4 @@ entries:
       urls:
         - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
       version: 1.1.0
-generated: "2025-08-14T13:51:27.353979218Z"
+generated: "2025-08-14T14:17:56.694223546Z"
