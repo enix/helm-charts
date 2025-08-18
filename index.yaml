@@ -1053,39 +1053,6 @@ entries:
         - oci://quay.io/enix/charts/kube-image-keeper:2.0.0-alpha.2
       version: 2.0.0-alpha.2
     - annotations:
-        artifacthub.io/changes: ""
-        artifacthub.io/containsSecurityUpdates: "false"
-        artifacthub.io/license: MIT
-        artifacthub.io/links: |
-          - name: Chart Sources
-            url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
-          - name: Helm Repository
-            url: https://charts.enix.io
-        artifacthub.io/prerelease: "true"
-      apiVersion: v2
-      appVersion: 2.0.0-alpha.1
-      created: "2025-07-17T16:20:00.858960196Z"
-      description: The keeper of your images in your cluster!
-      digest: 4bb9723cd62081b59ffb03b21c92352e53f2787333f267546bc2ab93bfd3ae3d
-      home: https://github.com/enix/kube-image-keeper
-      maintainers:
-        - email: contact@enix.fr
-          name: Enix
-          url: https://github.com/enixsas
-        - email: paul.laffitte@enix.fr
-          name: Paul Laffitte
-          url: https://github.com/paullaffitte
-        - email: david.donchez@enix.fr
-          name: David Donchez
-          url: https://github.com/donch
-      name: kube-image-keeper
-      sources:
-        - https://github.com/enix/kube-image-keeper
-      type: application
-      urls:
-        - oci://quay.io/enix/charts/kube-image-keeper:2.0.0-alpha.1
-      version: 2.0.0-alpha.1
-    - annotations:
         artifacthub.io/changes: |-
           - description: 'helm: remove -metrics-secure flag in proxy'
             kind: fixed
