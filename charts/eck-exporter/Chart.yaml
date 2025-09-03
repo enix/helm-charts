@@ -1,5 +1,5 @@
-version: 1.10.0
-appVersion: "2.16.0"
+version: 1.11.0
+appVersion: "2.17.0"
 annotations:
   artifacthub.io/prerelease: "false"
   artifacthub.io/license: MIT
@@ -13,7 +13,7 @@ annotations:
   # https://artifacthub.io/docs/topics/annotations/helm/
   artifacthub.io/changes: |
     - kind: changed
-      description: "Bump kube-state-metrics to version 2.16.0"
+      description: "Bump kube-state-metrics to version 2.17.0"
   artifacthub.io/containsSecurityUpdates: "true"
 
 apiVersion: v2

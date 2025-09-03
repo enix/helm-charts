@@ -1,9 +1,9 @@
 # 🫧 ECK Exporter
 
-![Version: 1.10.0](https://img.shields.io/badge/Version-1.10.0-informational?style=flat-square) ![AppVersion: 2.16.0](https://img.shields.io/badge/AppVersion-2.16.0-informational?style=flat-square)
+![Version: 1.11.0](https://img.shields.io/badge/Version-1.11.0-informational?style=flat-square) ![AppVersion: 2.17.0](https://img.shields.io/badge/AppVersion-2.17.0-informational?style=flat-square)
 [![Brought by Enix](https://img.shields.io/badge/Brought%20to%20you%20by-ENIX-%23377dff?labelColor=888&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAQAAAC1QeVaAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfkBAkQIg/iouK/AAABZ0lEQVQY0yXBPU8TYQDA8f/zcu1RSDltKliD0BKNECYZmpjgIAOLiYtubn4EJxI/AImzg3E1+AGcYDIMJA7lxQQQQRAiSSFG2l457+655x4Gfz8B45zwipWJ8rPCQ0g3+p9Pj+AlHxHjnLHAbvPW2+GmLoBN+9/+vNlfGeU2Auokd8Y+VeYk/zk6O2fP9fcO8hGpN/TUbxpiUhJiEorTgy+6hUlU5N1flK+9oIJHiKNCkb5wMyOFw3V9o+zN69o0Exg6ePh4/GKr6s0H72Tc67YsdXbZ5gENNjmigaXbMj0tzEWrZNtqigva5NxjhFP6Wfw1N1pjqpFaZQ7FAY6An6zxTzHs0BGqY/NQSnxSBD6WkDRTf3O0wG2Ztl/7jaQEnGNxZMdy2yET/B2xfGlDagQE1OgRRvL93UOHqhLnesPKqJ4NxLLn2unJgVka/HBpbiIARlHFq1n/cWlMZMne1ZfyD5M/Aa4BiyGSwP4Jl3UAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjAtMDQtMDlUMTQ6MzQ6MTUrMDI6MDDBq8/nAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIwLTA0LTA5VDE0OjM0OjE1KzAyOjAwsPZ3WwAAAABJRU5ErkJggg==)](https://enix.io)
 
-A Prometheus exporter for [Elastic Cloud on Kubernetes (ECK)](https://github.com/elastic/cloud-on-k8s), put together with [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics) and a custom configuration.
+A Prometheus exporter for [Elastic Cloud on Kubernetes (ECK)](https://github.com/elastic/cloud-on-k8s), put together with [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics) and a custom configuration.  
 It exposes metrics on the operator's Custom Resources and their current statuses and reconciliation progress. A configurable set of Prometheus alerts is provided for convenience.
 
 Supported CRDs:
@@ -67,7 +67,7 @@ Install eck-exporter:
 $ helm install eck-exporter enix/eck-exporter
 ```
 
-If installation failed or you can't get new metrics in Prometheus, please review [Chart values](#⚙️-values).
+If installation failed or you can't get new metrics in Prometheus, please review [Chart values](#⚙️-values).  
 With clusters that don't use the Prometheus operator at all — missing the CRDs — disable resource creation and perhaps add Pod
 annotations for scrapping with classic Kubernetes service discovery:
 ```yaml
@@ -94,13 +94,13 @@ With that being said, if not having elasticsearch_exporter installed at all, thi
 
 > Could you add a metric for XYZ, please?
 
-Before submitting a request for a new metric, please be aware of the very limited scope of eck-exporter.
-Firstly there are limitations with the use of kube-state-metrics, which has a declarative model to create metrics and does not permit any processing. This means we basically can only extract data as presented in ECK resources already. And no direct communication is made with the running operator.
+Before submitting a request for a new metric, please be aware of the very limited scope of eck-exporter.  
+Firstly there are limitations with the use of kube-state-metrics, which has a declarative model to create metrics and does not permit any processing. This means we basically can only extract data as presented in ECK resources already. And no direct communication is made with the running operator.  
 Going back to the goal for this project, we also don't want to become too redundant with elasticsearch_exporter and Kubernetes Pod metrics.
 
 > Why make a dedicated chart? I already run [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics) and could use your `--custom-resource-state-config-file`.
 
-We wanted to provide the same experience as installing a full-fledged and well packaged exporter, with all prometheus-operator facilities ready in seconds. It's also better for continuous improvement and testing, as it's a convenient platform to receive contributions on.
+We wanted to provide the same experience as installing a full-fledged and well packaged exporter, with all prometheus-operator facilities ready in seconds. It's also better for continuous improvement and testing, as it's a convenient platform to receive contributions on.  
 Should this project evolve to a dedicated codebase — whatever the reason would be — we'll be able to offer a clear and smooth transition to existing users.
 
 > How do you manage GVR version bumps in ECK's CRDs?
