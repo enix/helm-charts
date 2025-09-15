@@ -5554,6 +5554,36 @@ entries:
       urls:
         - oci://quay.io/enix/charts/topomatik:1.1.1
       version: 1.1.1
+    - annotations:
+        artifacthub.io/changes: ""
+        artifacthub.io/containsSecurityUpdates: "false"
+        artifacthub.io/license: MIT
+        artifacthub.io/links: |
+          - name: Chart Sources
+            url: https://github.com/enix/topomatik/blob/main/helm/topomatik
+          - name: Helm Repository
+            url: https://charts.enix.io
+        artifacthub.io/prerelease: "false"
+      apiVersion: v2
+      appVersion: 1.2.0
+      created: "2025-09-15T15:27:35.969371845Z"
+      description: You don't have to do anything, it's all Topomatik™!
+      digest: dc782b8f46862117691fd604183e0ef8ef71fdf7a3940c336716a161e017e22f
+      home: https://github.com/enix/topomatik
+      maintainers:
+        - email: contact@enix.fr
+          name: Enix
+          url: https://enix.io
+        - email: paul.laffitte@enix.fr
+          name: Paul Laffitte
+          url: https://github.com/paullaffitte
+      name: topomatik
+      sources:
+        - https://github.com/enix/topomatik
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/topomatik:1.2.0
+      version: 1.2.0
   x509-certificate-exporter:
     - annotations:
         artifacthub.io/changes: |-
@@ -9061,4 +9091,4 @@ entries:
       urls:
         - oci://quay.io/enix/charts/zfs-exporter:2.1.1
       version: 2.1.1
-generated: "2025-09-15T15:16:28.970497883Z"
+generated: "2025-09-15T15:27:35.96887651Z"
