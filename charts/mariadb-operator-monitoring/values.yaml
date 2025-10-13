@@ -1,0 +1,108 @@
+kube-state-metrics:
+  prometheus:
+    monitor:
+      enabled: true
+      jobLabel: "app.kubernetes.io/instance"
+  collectors: [ ]
+  extraArgs:
+    - --custom-resource-state-only=true
+  rbac:
+    extraRules:
+      - apiGroups:
+          - k8s.mariadb.com
+        resources:
+          - mariadbs
+          - backups
+          - physicalbackups
+        verbs: [ "list", "watch" ]
+
+  customResourceState:
+    enabled: true
+    config:
+      spec:
+        resources:
+          - groupVersionKind:
+              group: k8s.mariadb.com
+              version: v1alpha1
+              kind: MariaDB
+            metricNamePrefix: mariadb_resource_cluster
+            metrics:
+              - name: info
+                help: Information about MariaDB cluster
+                each:
+                  type: Info
+                  info:
+                    labelsFromPath:
+                      default_version: [status, defaultVersion]
+                      update_stategy: [spec, updateStrategy, type]
+                      primary: [status, currentPrimary]
+              - name: condition
+                help: The condition of a MariaDB cluster
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, conditions]
+                    labelsFromPath:
+                      type: [type]
+                      reason: [reason]
+                    valueFrom: [status]
+              - name: spec_instances
+                help: Number of desired replicas for a MariaDB cluster
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [spec, replicas]
+              - name: status_instances
+                help: Number of replicas per MariaDB cluster
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, replicas]
+            labelsFromPath:
+              name: [metadata, name]
+              namespace: [metadata, namespace]
+              mdb_cluster: [metadata, name]
+
+          - groupVersionKind:
+              group: k8s.mariadb.com
+              version: v1alpha1
+              kind: PhysicalBackup
+            metricNamePrefix: mariadb_resource_physicalbackup
+            metrics:
+              - name: condition
+                help: The condition of a MariaDB PhysicalBackup
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, conditions]
+                    labelsFromPath:
+                      type: [type]
+                      reason: [reason]
+                      message: [message]
+                    valueFrom: [status]
+            labelsFromPath:
+              name: [metadata, name]
+              namespace: [metadata, namespace]
+              mdb_cluster: [spec, mariaDbRef, name]
+
+          - groupVersionKind:
+              group: k8s.mariadb.com
+              version: v1alpha1
+              kind: Backup
+            metricNamePrefix: mariadb_resource_backup
+            metrics:
+              - name: condition
+                help: The condition of a MariaDB Backup
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, conditions]
+                    labelsFromPath:
+                      type: [type]
+                      reason: [reason]
+                      message: [message]
+                    valueFrom: [status]
+            labelsFromPath:
+              name: [metadata, name]
+              namespace: [metadata, namespace]
+              mdb_cluster: [spec, mariaDbRef, name]
