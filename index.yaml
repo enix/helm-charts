@@ -5485,6 +5485,21 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/kube-router-0.0.2/kube-router-0.0.2.tgz
     version: 0.0.2
+  mariadb-operator-monitoring:
+  - apiVersion: v2
+    created: "2025-10-13T14:23:48.276864561Z"
+    dependencies:
+    - name: kube-state-metrics
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 6.3.*
+    description: A kube-state-metrics to generate and expose mariadb-operator resources
+      metrics
+    digest: 4ad280c42de07de5942574ad62d28d573fde6977949183aff157d698cacdb19e
+    name: mariadb-operator-monitoring
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/mariadb-operator-monitoring-0.1.0/mariadb-operator-monitoring-0.1.0.tgz
+    version: 0.1.0
   monitoring-proxy:
   - apiVersion: v2
     created: "2025-01-10T14:07:33.938625232Z"
@@ -9339,4 +9354,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
     version: 1.1.0
-generated: "2025-10-07T16:22:44.436773916Z"
+generated: "2025-10-13T14:23:48.277337154Z"
