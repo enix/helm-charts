@@ -53,7 +53,7 @@ hostNetwork: false
 
 configReloader:
   image:
-    repository: bitnami/kubectl
+    repository: bitnamilegacy/kubectl
     pullPolicy: IfNotPresent
     tag: ""
   resources: {}
