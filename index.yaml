@@ -4908,6 +4908,16 @@ entries:
   kube-packetloss-exporter:
   - apiVersion: v2
     appVersion: v0.7.1
+    created: "2025-10-16T13:36:29.147886744Z"
+    description: A Helm chart for Kubernetes
+    digest: 1b5f95759773f1289d51ea43001153e0e2adf2e9bd1e47cae862c1538aeef2d0
+    name: kube-packetloss-exporter
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/kube-packetloss-exporter-0.2.1/kube-packetloss-exporter-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: v0.7.1
     created: "2025-08-05T13:51:32.684286181Z"
     description: A Helm chart for Kubernetes
     digest: 595a179c8ba938a21b0fa05f410dd03848db1806a5bfd6d51891566cf56d1a0d
@@ -9455,4 +9465,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
     version: 1.1.0
-generated: "2025-10-14T16:08:45.775052391Z"
+generated: "2025-10-16T13:36:29.148334517Z"
