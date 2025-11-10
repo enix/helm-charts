@@ -28,6 +28,16 @@ nameOverride: ""
 # --  String to fully override cnpg-cluster.fullname template with a string
 fullnameOverride: ""
 
+# -- Labels for the cluster
+# This field allows adding extra labels to cluster.
+# Note: The following labels cannot be set through this field, as they are reserved:
+# - helm.sh/chart
+# Attempting to use these labels will be cause a conflict.
+labels:
+  # app.kubernetes.io/name: monkey-cluster
+  # app.kubernetes.io/instance: monkey-moon
+  # env: production
+
 # -- CPU/Memory resource requests/limits
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
