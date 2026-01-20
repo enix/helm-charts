@@ -1,4 +1,4 @@
-version: 1.12.0
+version: 1.12.1
 appVersion: "2.18.0"
 annotations:
   artifacthub.io/prerelease: "false"
@@ -13,8 +13,10 @@ annotations:
   # https://artifacthub.io/docs/topics/annotations/helm/
   artifacthub.io/changes: |
     - kind: changed
-      description: "Bump kube-state-metrics to version 2.18.0"
-  artifacthub.io/containsSecurityUpdates: "true"
+      description: "Update documentation; Helm OCI installation"
+  #  - kind: changed
+  #    description: "Bump kube-state-metrics to version 2.18.0"
+  # artifacthub.io/containsSecurityUpdates: "true"
 
 apiVersion: v2
 name: eck-exporter
