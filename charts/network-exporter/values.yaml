@@ -1,0 +1,109 @@
+# Default values for network-exporter.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# -- Set the number of replicas
+replicaCount: 1
+
+# This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
+image:
+  # -- network_exporter image repository
+  repository: syepes/network_exporter
+  # -- network_exporter image pull policy
+  pullPolicy: IfNotPresent
+  # -- network_exporter image tag (defaults to Chart appVersion)
+  tag: ""
+
+# -- network_exporter image pull secrets
+imagePullSecrets: []
+# -- Chart name override
+nameOverride: ""
+fullnameOverride: ""
+
+# This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  name: ""
+
+# -- Annotations added to pods
+podAnnotations: {}
+# -- Labels added to pods
+podLabels: {}
+
+# -- Pod security context added to pods
+podSecurityContext: {}
+  # fsGroup: 2000
+
+# -- Security context added to pods
+securityContext:
+  capabilities:
+    add:
+     - NET_RAW
+     - NET_ADMIN
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  # -- Type of the service 
+  type: ClusterIP
+  # -- Port of the service
+  port: 9427
+
+resources:
+  limits:
+    # -- Cpu limits for the pod
+    cpu: 500m
+    # -- Memory limits for the pod
+    memory: 256Mi
+  requests:
+    # -- Cpu requests for the pod
+    cpu: 10m
+    # -- Memory requests for the pod
+    memory: 32Mi
+
+# -- Liveness probe definition for the pod
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+# -- Readiness probe definition for the pod
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+# -- Node selector for the pod
+nodeSelector: {}
+
+# -- Tolerations for the pod
+tolerations: []
+
+# -- Affinity for the pod
+affinity: {}
+
+serviceMonitor:
+  # -- Should a ServiceMonitor object be installed to scrape this exporter
+  enabled: true
+
+# -- Network exporter configuration
+networkExporterConfig: |
+  # Default configuration
+  conf:
+    refresh: 15m
+
+  icmp:
+    interval: 5s
+    timeout: 2s
+    count: 6
+
+  targets:
+    - name: google_dns
+      host: 8.8.8.8
+      type: ICMP
