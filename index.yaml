@@ -5744,16 +5744,6 @@ entries:
       version: 0.2.1
     - apiVersion: v2
       appVersion: v0.7.1
-      created: "2025-08-05T13:51:32.684286181Z"
-      description: A Helm chart for Kubernetes
-      digest: 595a179c8ba938a21b0fa05f410dd03848db1806a5bfd6d51891566cf56d1a0d
-      name: kube-packetloss-exporter
-      type: application
-      urls:
-        - https://github.com/enix/helm-charts/releases/download/kube-packetloss-exporter-0.2.0/kube-packetloss-exporter-0.2.0.tgz
-      version: 0.2.0
-    - apiVersion: v2
-      appVersion: v0.7.1
       created: "2023-09-28T15:26:23.404027379Z"
       description: A Helm chart for Kubernetes
       digest: ca7966f8a2e59f383f0fca20fbaa49f114068b84a315687ba4b521270139abe8
