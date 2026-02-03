@@ -92,6 +92,9 @@ serviceMonitor:
   # -- Should a ServiceMonitor object be installed to scrape this exporter
   enabled: true
 
+# -- Enable host discovery and probe all nodes within the cluster. Host definition will be appended to the default configuration below
+enableHostDiscovery: false
+
 # -- Network exporter configuration
 networkExporterConfig: |
   # Default configuration

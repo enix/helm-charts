@@ -31,6 +31,32 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- if .Values.enableHostDiscovery }}
+      initContainers:
+        - name: config-builder
+          image: bitnamilegacy/kubectl:1.33.4
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              set -e
+              echo "Starting config generation..."
+              cat /tmp/template/network_exporter.yml > /app/cfg/network_exporter.yml
+              NODES=$(kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.addresses[?(@.type=="InternalIP")].address}{"\n"}{end}')
+              echo "$NODES" | while read -r name ip; do
+                if [ -n "$name" ] && [ -n "$ip" ]; then
+                  echo "Adding target: $name ($ip)"
+                  echo "  - name: $name" >> /app/cfg/network_exporter.yml
+                  echo "    host: $ip" >> /app/cfg/network_exporter.yml
+                  echo "    type: ICMP+MTR" >> /app/cfg/network_exporter.yml
+                fi
+              done
+              cat /app/cfg/network_exporter.yml
+          volumeMounts:
+            - name: config-template
+              mountPath: /tmp/template
+            - name: config-volume
+              mountPath: /app/cfg
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           {{- with .Values.securityContext }}
@@ -60,9 +86,17 @@ spec:
               mountPath: /app/cfg/network_exporter.yml
               subPath: network_exporter.yml
       volumes:
+        {{- if .Values.enableHostDiscovery }}
+        - name: config-volume
+          emptyDir: {}
+        - name: config-template
+          configMap:
+            name: {{ include "network-exporter.fullname" . }}-config
+        {{- else }}
         - name: config-volume
           configMap:
             name: {{ include "network-exporter.fullname" . }}-config
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
