@@ -5896,6 +5896,39 @@ entries:
       urls:
         - oci://quay.io/enix/charts/kube-image-keeper:2.1.1-beta.3
       version: 2.1.1-beta.3
+    - annotations:
+        artifacthub.io/changes: ""
+        artifacthub.io/containsSecurityUpdates: "false"
+        artifacthub.io/license: MIT
+        artifacthub.io/links: |
+          - name: Chart Sources
+            url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+          - name: Helm Repository
+            url: https://charts.enix.io
+        artifacthub.io/prerelease: "false"
+      apiVersion: v2
+      appVersion: 2.1.1
+      created: "2026-02-23T10:25:47.917877157Z"
+      description: The keeper of your images in your cluster!
+      digest: 2762b15b04759ef02af6e1c18d81de9c582e32b5c613b58758136169221a68ae
+      home: https://github.com/enix/kube-image-keeper
+      maintainers:
+        - email: contact@enix.fr
+          name: Enix
+          url: https://github.com/enixsas
+        - email: paul.laffitte@enix.fr
+          name: Paul Laffitte
+          url: https://github.com/paullaffitte
+        - email: david.donchez@enix.fr
+          name: David Donchez
+          url: https://github.com/donch
+      name: kube-image-keeper
+      sources:
+        - https://github.com/enix/kube-image-keeper
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/kube-image-keeper:2.1.1
+      version: 2.1.1
   kube-packetloss-exporter:
     - apiVersion: v2
       appVersion: v0.7.1
@@ -10387,4 +10420,4 @@ entries:
       urls:
         - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
       version: 1.1.0
-generated: "2026-02-19T17:02:02.423523919Z"
+generated: "2026-02-23T10:25:47.917165668Z"
