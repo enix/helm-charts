@@ -10609,6 +10609,48 @@ entries:
       urls:
         - https://github.com/enix/helm-charts/releases/download/x509-certificate-exporter-1.3.0/x509-certificate-exporter-1.3.0.tgz
       version: 1.3.0
+    - annotations:
+        artifacthub.io/changes: ""
+        artifacthub.io/containsSecurityUpdates: "false"
+        artifacthub.io/license: MIT
+        artifacthub.io/links: |
+          - name: Chart Sources
+            url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter
+          - name: Application Sources
+            url: https://github.com/enix/x509-certificate-exporter
+          - name: Helm Repository
+            url: https://charts.enix.io
+          - name: Grafana Dashboard
+            url: https://grafana.com/grafana/dashboards/13922
+        artifacthub.io/prerelease: "true"
+      apiVersion: v2
+      appVersion: 3.20.0-beta.2
+      created: "2026-03-26T16:20:48.707905186Z"
+      description: A Prometheus exporter for certificates focusing on expiration monitoring
+      digest: 7a983a23cb42dbb4d44e6a94e628508d9c2784bd38626375f78259fcaa5c1c7e
+      home: https://github.com/enix/x509-certificate-exporter
+      icon: https://github.githubassets.com/images/icons/emoji/unicode/1f50f.png
+      keywords:
+        - prometheus
+        - exporter
+        - certificate
+        - expiration
+      maintainers:
+        - email: contact@enix.fr
+          name: Enix
+          url: https://github.com/enixsas
+        - email: root@devcat.org
+          name: Thibault Vincent
+          url: https://github.com/npdgm
+        - email: arthur.chaloin@enix.fr
+          name: Arthur Chaloin
+      name: x509-certificate-exporter
+      sources:
+        - https://github.com/enix/x509-certificate-exporter
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/x509-certificate-exporter:3.20.0-beta.2
+      version: 3.20.0-beta.2
   zfs-exporter:
     - apiVersion: v2
       appVersion: 2.3.6
@@ -10660,4 +10702,4 @@ entries:
       urls:
         - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
       version: 1.1.0
-generated: "2026-03-24T15:24:33.876695527Z"
+generated: "2026-03-26T16:20:48.706185148Z"
