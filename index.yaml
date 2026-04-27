@@ -6259,8 +6259,6 @@ entries:
       urls:
         - oci://quay.io/enix/charts/kube-image-keeper:2.2.2
       version: 2.2.2
-    - urls:
-        - oci://quay.io/enix/charts/kube-image-keeper:2.2.3-beta.1
   kube-packetloss-exporter:
     - apiVersion: v2
       appVersion: v0.7.1
