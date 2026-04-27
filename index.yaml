@@ -6259,6 +6259,8 @@ entries:
       urls:
         - oci://quay.io/enix/charts/kube-image-keeper:2.2.2
       version: 2.2.2
+    - urls:
+        - oci://quay.io/enix/charts/kube-image-keeper:2.2.3-beta.1
   kube-packetloss-exporter:
     - apiVersion: v2
       appVersion: v0.7.1
@@ -11012,4 +11014,4 @@ entries:
       urls:
         - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
       version: 1.1.0
-generated: "2026-04-23T09:44:11.829569082Z"
+generated: "2026-04-27T08:49:54.068825577Z"
