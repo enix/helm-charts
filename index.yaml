@@ -11065,7 +11065,7 @@ entries:
         artifacthub.io/containsSecurityUpdates: 'false'
         artifacthub.io/license: MIT
         artifacthub.io/links: "- name: Chart Sources\n  url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter\n- name: Application Sources\n  url: https://github.com/enix/x509-certificate-exporter\n- name: Helm Repository\n  url: https://charts.enix.io\n- name: Grafana Dashboard\n  url: https://grafana.com/grafana/dashboards/13922\n"
-        artifacthub.io/prerelease: 'false'
+        artifacthub.io/prerelease: 'true'
       apiVersion: v2
       appVersion: 4.0.0-alpha.6
       created: '2026-05-04T17:16:29.857808541Z'
