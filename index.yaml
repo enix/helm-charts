@@ -11156,6 +11156,38 @@ entries:
       urls:
         - oci://quay.io/enix/charts/x509-certificate-exporter:4.0.0-rc.1
       version: 4.0.0-rc.1
+    - annotations:
+        artifacthub.io/changes: ''
+        artifacthub.io/containsSecurityUpdates: 'false'
+        artifacthub.io/license: MIT
+        artifacthub.io/links: "- name: Chart Sources\n  url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter\n- name: Application Sources\n  url: https://github.com/enix/x509-certificate-exporter\n- name: Helm Repository\n  url: https://charts.enix.io\n- name: Grafana Dashboard\n  url: https://grafana.com/grafana/dashboards/13922\n"
+        artifacthub.io/prerelease: 'true'
+      apiVersion: v2
+      appVersion: 4.0.0-rc.2
+      created: '2026-05-05T17:39:06.927604561Z'
+      description: A Prometheus exporter for certificates focusing on expiration monitoring
+      digest: 4cc0b5bc2f1dd1a7191e5d047a6c7d6bede9bf44878b1dd864001f4719f5b502
+      home: https://github.com/enix/x509-certificate-exporter
+      icon: https://raw.githubusercontent.com/enix/x509-certificate-exporter/refs/heads/main/docs/assets/logo-chart.svg
+      keywords:
+        - prometheus
+        - exporter
+        - certificate
+        - expiration
+      maintainers:
+        - email: contact@enix.fr
+          name: Enix
+          url: https://github.com/enix
+        - email: root@devcat.org
+          name: Thibault Vincent
+          url: https://github.com/npdgm
+      name: x509-certificate-exporter
+      sources:
+        - https://github.com/enix/x509-certificate-exporter
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/x509-certificate-exporter:4.0.0-rc.2
+      version: 4.0.0-rc.2
   zfs-exporter:
     - apiVersion: v2
       appVersion: 2.3.6
@@ -11207,4 +11239,4 @@ entries:
       urls:
         - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
       version: 1.1.0
-generated: "2026-05-05T16:57:52.227571463Z"
+generated: "2026-05-05T17:39:06.925029336Z"
