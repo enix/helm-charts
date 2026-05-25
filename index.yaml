@@ -11441,6 +11441,38 @@ entries:
       urls:
         - oci://quay.io/enix/charts/x509-certificate-exporter:4.2.0-beta.3
       version: 4.2.0-beta.3
+    - annotations:
+        artifacthub.io/changes: ''
+        artifacthub.io/containsSecurityUpdates: 'false'
+        artifacthub.io/license: MIT
+        artifacthub.io/links: "- name: Chart Sources\n  url: https://github.com/enix/x509-certificate-exporter/tree/master/deploy/charts/x509-certificate-exporter\n- name: Application Sources\n  url: https://github.com/enix/x509-certificate-exporter\n- name: Helm Repository\n  url: https://charts.enix.io\n- name: Grafana Dashboard\n  url: https://grafana.com/grafana/dashboards/13922\n"
+        artifacthub.io/prerelease: 'true'
+      apiVersion: v2
+      appVersion: 4.2.0-rc.1
+      created: '2026-05-25T20:45:20.67929336Z'
+      description: A Prometheus exporter for certificates focusing on expiration monitoring
+      digest: e78a3c8face07fca338c0fe9999ac6c997f64e44b50a904047f565c51659e1a4
+      home: https://github.com/enix/x509-certificate-exporter
+      icon: https://raw.githubusercontent.com/enix/x509-certificate-exporter/refs/heads/main/docs/assets/logo-chart.svg
+      keywords:
+        - prometheus
+        - exporter
+        - certificate
+        - expiration
+      maintainers:
+        - email: contact@enix.fr
+          name: Enix
+          url: https://github.com/enix
+        - email: root@devcat.org
+          name: Thibault Vincent
+          url: https://github.com/npdgm
+      name: x509-certificate-exporter
+      sources:
+        - https://github.com/enix/x509-certificate-exporter
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/x509-certificate-exporter:4.2.0-rc.1
+      version: 4.2.0-rc.1
   zfs-exporter:
     - apiVersion: v2
       appVersion: 2.3.6
@@ -11502,4 +11534,4 @@ entries:
       urls:
         - oci://quay.io/enix/charts/zfs-exporter:2.2.0
       version: 2.2.0
-generated: "2026-05-21T15:04:23.597445216Z"
+generated: "2026-05-25T20:45:20.675696019Z"
