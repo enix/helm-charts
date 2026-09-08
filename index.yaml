@@ -123,6 +123,19 @@ entries:
     version: 1.0.0
   cnpg-monitoring:
   - apiVersion: v2
+    created: "2026-09-08T11:58:47.467170792Z"
+    dependencies:
+    - name: kube-state-metrics
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 5.26.*
+    description: A kube-state-metrics to generate and expose CNPG resources metrics
+    digest: c61ab3c8cd34ede479a1a68c75001839aa80e1ceb0588f363f0b6a393daa293b
+    name: cnpg-monitoring
+    type: application
+    urls:
+    - https://github.com/enix/helm-charts/releases/download/cnpg-monitoring-0.3.0/cnpg-monitoring-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     created: "2024-10-22T09:56:03.337687428Z"
     dependencies:
     - name: kube-state-metrics
@@ -12089,4 +12102,4 @@ entries:
     urls:
     - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
     version: 1.1.0
-generated: "2026-09-03T08:25:15.028273125Z"
+generated: "2026-09-08T11:58:47.467764382Z"
