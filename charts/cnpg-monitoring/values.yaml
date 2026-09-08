@@ -115,3 +115,40 @@ kube-state-metrics:
               name: [metadata, name]
               namespace: [metadata, namespace]
               cnpg_cluster: [spec, cluster, name]
+          - groupVersionKind:
+              group: postgresql.cnpg.io
+              version: v1
+              kind: ScheduledBackup
+            metricNamePrefix: cnpg_resource_scheduledbackup
+            metrics:
+              - name: info
+                help: Information about CNPG ScheduledBackup
+                each:
+                  type: Info
+                  info:
+                    labelsFromPath:
+                      schedule: [spec, schedule]
+                      method: [spec, method]
+                      target: [spec, target]
+              - name: spec_suspend
+                help: Whether the CNPG ScheduledBackup is suspended
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [spec, suspend]
+              - name: status_last_schedule_time
+                help: Unix timestamp of the last backup scheduled by the CNPG ScheduledBackup
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, lastScheduleTime]
+              - name: status_next_schedule_time
+                help: Unix timestamp of the next backup to be scheduled by the CNPG ScheduledBackup
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, nextScheduleTime]
+            labelsFromPath:
+              name: [metadata, name]
+              namespace: [metadata, namespace]
+              cnpg_cluster: [spec, cluster, name]

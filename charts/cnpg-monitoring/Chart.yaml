@@ -2,7 +2,7 @@ apiVersion: v2
 name: cnpg-monitoring
 description: A kube-state-metrics to generate and expose CNPG resources metrics
 type: application
-version: 0.2.0
+version: 0.3.0
 dependencies:
   - name: kube-state-metrics
     version: "5.26.*"
