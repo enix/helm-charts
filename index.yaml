@@ -6772,6 +6772,50 @@ entries:
       urls:
         - oci://quay.io/enix/charts/kube-image-keeper:3.0.0-alpha.1
       version: 3.0.0-alpha.1
+    - annotations:
+        artifacthub.io/changes: ""
+        artifacthub.io/containsSecurityUpdates: "false"
+        artifacthub.io/license: MIT
+        artifacthub.io/links: |
+          - name: Chart Sources
+            url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+          - name: Helm Repository
+            url: https://charts.enix.io
+        artifacthub.io/prerelease: "true"
+      apiVersion: v2
+      appVersion: 3.0.0-alpha.2
+      created: "2026-09-29T17:06:20.754152803Z"
+      description: The keeper of your images in your cluster!
+      digest: c9b7fcfc6dd7cb95d2b99d18e805200ee74900146d18c5965e41d0645428892b
+      home: https://github.com/enix/kube-image-keeper
+      icon: https://raw.githubusercontent.com/enix/kube-image-keeper/main/docs/assets/logo.svg
+      keywords:
+        - kubernetes
+        - operator
+        - container-images
+        - registry
+        - mirror
+        - webhook
+      maintainers:
+        - email: contact@enix.fr
+          name: Enix
+          url: https://github.com/enixsas
+        - email: paul.laffitte@enix.fr
+          name: Paul Laffitte
+          url: https://github.com/paullaffitte
+        - email: david.donchez@enix.fr
+          name: David Donchez
+          url: https://github.com/donch
+        - email: aurelien.dunand@enix.fr
+          name: Aurélien Dunand
+          url: https://github.com/Tassatux
+      name: kube-image-keeper
+      sources:
+        - https://github.com/enix/kube-image-keeper
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/kube-image-keeper:3.0.0-alpha.2
+      version: 3.0.0-alpha.2
   kube-packetloss-exporter:
     - apiVersion: v2
       appVersion: v0.7.1
@@ -12035,4 +12079,4 @@ entries:
       urls:
         - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
       version: 1.1.0
-generated: "2026-09-22T14:48:15.435702947Z"
+generated: "2026-09-29T17:06:20.75287562Z"
