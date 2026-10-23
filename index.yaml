@@ -12321,4 +12321,44 @@ entries:
       urls:
         - https://github.com/enix/helm-charts/releases/download/zfs-exporter-1.1.0/zfs-exporter-1.1.0.tgz
       version: 1.1.0
-generated: "2026-10-22T15:30:46.702550778Z"
+  tsigoat:
+    - annotations:
+        artifacthub.io/license: MIT
+        artifacthub.io/links: |
+          - name: Chart Sources
+            url: https://github.com/enix/tsigoat/tree/main/chart
+          - name: Application Sources
+            url: https://github.com/enix/tsigoat
+          - name: Documentation
+            url: https://github.com/enix/tsigoat/tree/main/docs
+        artifacthub.io/prerelease: "false"
+      apiVersion: v2
+      appVersion: 0.1.0
+      created: "2026-10-23T17:19:06.428327147Z"
+      description: An RFC 2136 to DNS provider API proxy, authenticated with TSIG
+      digest: 64ebbb41f152a41236d5b908fbf10e770a0b124d2fff758dca51e64db06c13c4
+      home: https://github.com/enix/tsigoat
+      icon: https://raw.githubusercontent.com/enix/tsigoat/main/docs/assets/app-ink.svg
+      keywords:
+        - dns
+        - rfc2136
+        - tsig
+        - acme
+        - cert-manager
+        - powerdns
+      kubeVersion: '>=1.26.0-0'
+      maintainers:
+        - email: contact@enix.fr
+          name: Enix
+          url: https://github.com/enix
+        - email: root@devcat.org
+          name: Thibault Vincent
+          url: https://github.com/npdgm
+      name: tsigoat
+      sources:
+        - https://github.com/enix/tsigoat
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/tsigoat:0.1.0
+      version: 0.1.0
+generated: "2026-10-23T17:19:06.427228907Z"
