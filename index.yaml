@@ -6994,6 +6994,333 @@ entries:
       urls:
         - oci://quay.io/enix/charts/kube-image-keeper:3.0.0-alpha.6
       version: 3.0.0-alpha.6
+    - annotations:
+        artifacthub.io/changes: |-
+          - description: 'From v2: v3 reads none of the v2 resources (`ImageSetMirror`, `ClusterImageSetMirror`,
+              `ReplicatedImageSet`, `ClusterReplicatedImageSet`, `ClusterImageSetAvailability`)
+              nor the v2 chart values. Install v3 on a cluster without v2; a migration guide
+              is planned after 3.0.'
+            kind: changed
+            links:
+            - name: '#670'
+              url: https://github.com/enix/kube-image-keeper/pull/670
+          - description: 'From `3.0.0-alpha.4` or earlier: the chart requires Kubernetes 1.30
+              or later.'
+            kind: changed
+            links:
+            - name: '#752'
+              url: https://github.com/enix/kube-image-keeper/pull/752
+          - description: 'From `3.0.0-alpha.4` or earlier: with `serviceAccount.create: false`,
+              set `secretSyncer.serviceAccount.name` to an existing ServiceAccount other than
+              `default`, or the chart refuses to render.'
+            kind: changed
+            links:
+            - name: '#752'
+              url: https://github.com/enix/kube-image-keeper/pull/752
+          - description: 'From `3.0.0-alpha.5` or earlier: `config.clusterID` is removed, and
+              a release that still sets it fails to render. To keep the tags your mirrors copied,
+              create the ConfigMap `kuik-cluster-id` with the old value before upgrading, then
+              remove `config.clusterID` (with `--reuse-values`, add `--set config.clusterID=null`),
+              see Upgrading from a configured clusterID in the configuration docs.'
+            kind: changed
+            links:
+            - name: '#764'
+              url: https://github.com/enix/kube-image-keeper/pull/764
+            - name: '#727'
+              url: https://github.com/enix/kube-image-keeper/issues/727
+          - description: 'From `3.0.0-alpha.2` or earlier: the processes log JSON instead of
+              console text, with no chart value to switch back.'
+            kind: changed
+            links:
+            - name: '#703'
+              url: https://github.com/enix/kube-image-keeper/pull/703
+          - description: 'From `3.0.0-alpha.2` or earlier: the root `replicas` value defaults
+              to 2.'
+            kind: changed
+            links:
+            - name: '#701'
+              url: https://github.com/enix/kube-image-keeper/pull/701
+          - description: 'Routing: An `ImageAlternative` lists repositories that hold the same
+              images, and the webhook places the first candidate that answers, as a fallback
+              (`rewritePolicy: OnFailure`, the default) or ahead of the original (`Always`).'
+            kind: added
+            links:
+            - name: '#682'
+              url: https://github.com/enix/kube-image-keeper/pull/682
+          - description: 'Routing: Images match on whole path segments, with `repository` for
+              one repository or `repositoryGroup` for every repository under a path, and digest-pinned
+              images are routed too.'
+            kind: added
+            links:
+            - name: '#680'
+              url: https://github.com/enix/kube-image-keeper/pull/680
+            - name: '#682'
+              url: https://github.com/enix/kube-image-keeper/pull/682
+          - description: 'Routing: An entry marked `unavailable: true` declares a source gone,
+              so an image from it is tried last.'
+            kind: added
+            links:
+            - name: '#682'
+              url: https://github.com/enix/kube-image-keeper/pull/682
+          - description: 'Routing: The webhook records each decision on the pod in the `kuik.enix.io/rewrites`,
+              `kuik.enix.io/conceded-rewrites` and `kuik.enix.io/no-alternatives` annotations.'
+            kind: added
+            links:
+            - name: '#682'
+              url: https://github.com/enix/kube-image-keeper/pull/682
+          - description: 'Routing: A candidate the background loops report failing is tried
+              last (`webhook.availabilityCheck.demoteKnownFailures`, on by default).'
+            kind: added
+            links:
+            - name: '#751'
+              url: https://github.com/enix/kube-image-keeper/pull/751
+            - name: '#753'
+              url: https://github.com/enix/kube-image-keeper/pull/753
+          - description: 'Routing: The status of an `ImageAlternative` reports the pods it rewrote,
+              its active fallbacks and the images no candidate could serve.'
+            kind: added
+            links:
+            - name: '#696'
+              url: https://github.com/enix/kube-image-keeper/pull/696
+          - description: 'Pull secrets: A candidate''s `auth.secretRef` is copied as a `kuik-inject-<kind>-<name>`
+              pull Secret into the namespaces that need it, and added to the pod''s `imagePullSecrets`.'
+            kind: added
+            links:
+            - name: '#682'
+              url: https://github.com/enix/kube-image-keeper/pull/682
+            - name: '#701'
+              url: https://github.com/enix/kube-image-keeper/pull/701
+          - description: 'Mirroring: An `ImageMirror` copies the images of the pods it selects
+              to a destination registry, digest unchanged, and routes to the copy unless `rewritePolicy`
+              is `None`.'
+            kind: added
+            links:
+            - name: '#682'
+              url: https://github.com/enix/kube-image-keeper/pull/682
+            - name: '#710'
+              url: https://github.com/enix/kube-image-keeper/pull/710
+          - description: 'Mirroring: Several clusters can share one destination: each copy carries
+              a `_<clusterID>` tag suffix, and each cluster only creates, checks and deletes
+              its own tags.'
+            kind: added
+            links:
+            - name: '#710'
+              url: https://github.com/enix/kube-image-keeper/pull/710
+          - description: 'Mirroring: `excludeImages` keeps images out of a mirror with globs
+              such as `ghcr.io/foo-bar/**` or `**:latest`.'
+            kind: added
+            links:
+            - name: '#682'
+              url: https://github.com/enix/kube-image-keeper/pull/682
+            - name: '#710'
+              url: https://github.com/enix/kube-image-keeper/pull/710
+          - description: 'Mirroring: `driftPolicy` (`Ignore`, `Warn`, `Sync`) decides what happens
+              when an upstream tag moves after its copy.'
+            kind: added
+            links:
+            - name: '#710'
+              url: https://github.com/enix/kube-image-keeper/pull/710
+          - description: 'Mirroring: `cleanup` deletes the destination tags no pod uses any
+              more once `retention` elapsed (168h by default).'
+            kind: added
+            links:
+            - name: '#710'
+              url: https://github.com/enix/kube-image-keeper/pull/710
+          - description: 'Mirroring: A deleted `ImageMirror` waits while pods still run its
+              copies, then deletes its tags.'
+            kind: added
+            links:
+            - name: '#710'
+              url: https://github.com/enix/kube-image-keeper/pull/710
+          - description: 'Monitoring: An `ImageMonitor` checks that the images of the pods it
+              selects are still available upstream, and lists the failing ones in `status.unavailableImages`.'
+            kind: added
+            links:
+            - name: '#717'
+              url: https://github.com/enix/kube-image-keeper/pull/717
+            - name: '#732'
+              url: https://github.com/enix/kube-image-keeper/pull/732
+          - description: 'Monitoring: An image no pod uses any more stays monitored for `unusedImageRetention`
+              (168h by default), so a CronJob''s image stays checked between runs.'
+            kind: added
+            links:
+            - name: '#717'
+              url: https://github.com/enix/kube-image-keeper/pull/717
+          - description: 'Monitoring: With `driftDetection` (on by default), it reports the
+              tags whose upstream digest moved under the pods that run them, and the tags pods
+              run under several digests.'
+            kind: added
+            links:
+            - name: '#739'
+              url: https://github.com/enix/kube-image-keeper/pull/739
+          - description: 'Monitoring: With `monitorAlternatives: true`, it also checks the alternatives
+              `ImageAlternative` resources offer for those images.'
+            kind: added
+            links:
+            - name: '#745'
+              url: https://github.com/enix/kube-image-keeper/pull/745
+          - description: 'Registries: Background checks and copies are paced per host on fixed
+              windows, set by `registries` in the global config.'
+            kind: added
+            links:
+            - name: '#697'
+              url: https://github.com/enix/kube-image-keeper/pull/697
+          - description: 'Registries: Credentials are tried in the kubelet''s order: the resource''s
+              `auth`, the pod''s pull secrets, the most specific `fallbackAuth` entry, then
+              anonymous.'
+            kind: added
+            links:
+            - name: '#680'
+              url: https://github.com/enix/kube-image-keeper/pull/680
+          - description: 'Registries: The `tls` key of the global config trusts a private CA
+              (`caSecretRef`) or a self-signed certificate (`insecureSkipVerify`) per registry
+              host, and `insecure: true` on an entry reaches a registry over plain HTTP.'
+            kind: added
+            links:
+            - name: '#682'
+              url: https://github.com/enix/kube-image-keeper/pull/682
+            - name: '#710'
+              url: https://github.com/enix/kube-image-keeper/pull/710
+            - name: '#767'
+              url: https://github.com/enix/kube-image-keeper/pull/767
+            - name: '#750'
+              url: https://github.com/enix/kube-image-keeper/issues/750
+          - description: 'Configuration: The global config file is validated whole and reloaded
+              without a restart; a reload that does not validate keeps the previous config.'
+            kind: added
+            links:
+            - name: '#680'
+              url: https://github.com/enix/kube-image-keeper/pull/680
+          - description: 'Configuration: kuik generates its cluster ID and keeps it in the ConfigMap
+              `kuik-cluster-id`.'
+            kind: added
+            links:
+            - name: '#764'
+              url: https://github.com/enix/kube-image-keeper/pull/764
+            - name: '#727'
+              url: https://github.com/enix/kube-image-keeper/issues/727
+          - description: 'Observability: Kubernetes events on pods and resources, `kuik_*` Prometheus
+              metrics for routing, copies, checks, anomalies and pacing, JSON logs, and conditions
+              where only `Ready` is `True` when all is well.'
+            kind: added
+            links:
+            - name: '#696'
+              url: https://github.com/enix/kube-image-keeper/pull/696
+            - name: '#703'
+              url: https://github.com/enix/kube-image-keeper/pull/703
+            - name: '#710'
+              url: https://github.com/enix/kube-image-keeper/pull/710
+            - name: '#732'
+              url: https://github.com/enix/kube-image-keeper/pull/732
+          - description: 'Chart: The webhook, the reconciler and the secret syncer run as 3
+              Deployments, with 2 replicas each by default and a standby that takes over the
+              lease.'
+            kind: added
+            links:
+            - name: '#672'
+              url: https://github.com/enix/kube-image-keeper/pull/672
+            - name: '#701'
+              url: https://github.com/enix/kube-image-keeper/pull/701
+            - name: '#548'
+              url: https://github.com/enix/kube-image-keeper/issues/548
+          - description: 'Chart: A ValidatingAdmissionPolicy refuses any Secret write by the
+              secret syncer that is not a pull Secret it owns.'
+            kind: added
+            links:
+            - name: '#752'
+              url: https://github.com/enix/kube-image-keeper/pull/752
+          - description: 'Routing: A new webhook replica reports ready only once its routing
+              index is built, so it never admits a pod unrouted.'
+            kind: fixed
+            links:
+            - name: '#778'
+              url: https://github.com/enix/kube-image-keeper/pull/778
+          - description: 'Pull secrets: The pull Secret of an `OnFailure` resource is provided
+              only in the namespaces its `namespaceSelector` selects.'
+            kind: fixed
+            links:
+            - name: '#777'
+              url: https://github.com/enix/kube-image-keeper/pull/777
+          - description: 'Mirroring: A copy reads the original image first, before the alternatives
+              of an `ImageAlternative` with `rewritePolicy: Always`.'
+            kind: fixed
+            links:
+            - name: '#779'
+              url: https://github.com/enix/kube-image-keeper/pull/779
+          - description: 'Mirroring: A source that answers its check but fails the copy (a 429
+              on a blob, for instance) gives way to the next source instead of being retried
+              at every window.'
+            kind: fixed
+            links:
+            - name: '#779'
+              url: https://github.com/enix/kube-image-keeper/pull/779
+          - description: 'Mirroring: A tag missing from the destination is copied again at the
+              next copy window of its host, ahead of the initial copies.'
+            kind: fixed
+            links:
+            - name: '#779'
+              url: https://github.com/enix/kube-image-keeper/pull/779
+          - description: 'Mirroring: Adding or removing the cleanup finalizer no longer rewrites
+              the spec, so `cleanup.retention` stays as written and GitOps tools see no drift.'
+            kind: fixed
+            links:
+            - name: '#785'
+              url: https://github.com/enix/kube-image-keeper/pull/785
+          - description: 'Registries: A CA bundle with a truncated certificate block is rejected,
+              even when a complete block follows it.'
+            kind: fixed
+            links:
+            - name: '#787'
+              url: https://github.com/enix/kube-image-keeper/pull/787
+          - description: 'Observability: `kuik_registry_requests_total` is exported by the webhook
+              and the reconciler, the processes that read registries.'
+            kind: fixed
+            links:
+            - name: '#786'
+              url: https://github.com/enix/kube-image-keeper/pull/786
+        artifacthub.io/containsSecurityUpdates: "false"
+        artifacthub.io/license: MIT
+        artifacthub.io/links: |
+          - name: Chart Sources
+            url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+          - name: Helm Repository
+            url: https://charts.enix.io
+        artifacthub.io/prerelease: "true"
+      apiVersion: v2
+      appVersion: 3.0.0-beta.1
+      created: "2026-10-27T09:17:26.160692505Z"
+      description: The keeper of your images in your cluster!
+      digest: 754e53f29a7be43ab7810d1c1906ee666d9892ba7ad7a87f0d37a4056fca3aab
+      home: https://github.com/enix/kube-image-keeper
+      icon: https://raw.githubusercontent.com/enix/kube-image-keeper/main/docs/assets/logo.svg
+      keywords:
+        - kubernetes
+        - operator
+        - container-images
+        - registry
+        - mirror
+        - webhook
+      kubeVersion: '>=1.30.0-0'
+      maintainers:
+        - email: contact@enix.fr
+          name: Enix
+          url: https://github.com/enixsas
+        - email: paul.laffitte@enix.fr
+          name: Paul Laffitte
+          url: https://github.com/paullaffitte
+        - email: david.donchez@enix.fr
+          name: David Donchez
+          url: https://github.com/donch
+        - email: aurelien.dunand@enix.fr
+          name: Aurélien Dunand
+          url: https://github.com/Tassatux
+      name: kube-image-keeper
+      sources:
+        - https://github.com/enix/kube-image-keeper
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/kube-image-keeper:3.0.0-beta.1
+      version: 3.0.0-beta.1
   kube-packetloss-exporter:
     - apiVersion: v2
       appVersion: v0.7.1
@@ -12393,4 +12720,4 @@ entries:
       urls:
         - oci://quay.io/enix/charts/tsigoat:0.1.0
       version: 0.1.0
-generated: "2026-10-24T23:19:56.101462146Z"
+generated: "2026-10-27T09:17:26.158837235Z"
