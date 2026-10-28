@@ -12753,4 +12753,43 @@ entries:
       urls:
         - oci://quay.io/enix/charts/tsigoat:0.1.0
       version: 0.1.0
-generated: "2026-10-27T12:41:43.752395309Z"
+    - annotations:
+        artifacthub.io/license: MIT
+        artifacthub.io/links: |
+          - name: Chart Sources
+            url: https://github.com/enix/tsigoat/tree/main/chart
+          - name: Application Sources
+            url: https://github.com/enix/tsigoat
+          - name: Documentation
+            url: https://github.com/enix/tsigoat/tree/main/docs
+        artifacthub.io/prerelease: "true"
+      apiVersion: v2
+      appVersion: 0.1.1-rc.1
+      created: "2026-10-28T13:38:53.441158042Z"
+      description: An RFC 2136 to DNS provider API proxy, authenticated with TSIG
+      digest: 35b3a069488e3f532006cacfc62369dedee0e52dae066abaaa7b300b629da632
+      home: https://github.com/enix/tsigoat
+      icon: https://raw.githubusercontent.com/enix/tsigoat/main/docs/assets/app-ink.svg
+      keywords:
+        - dns
+        - rfc2136
+        - tsig
+        - acme
+        - cert-manager
+        - powerdns
+      kubeVersion: '>=1.26.0-0'
+      maintainers:
+        - email: contact@enix.fr
+          name: Enix
+          url: https://github.com/enix
+        - email: root@devcat.org
+          name: Thibault Vincent
+          url: https://github.com/npdgm
+      name: tsigoat
+      sources:
+        - https://github.com/enix/tsigoat
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/tsigoat:0.1.1-rc.1
+      version: 0.1.1-rc.1
+generated: "2026-10-28T13:38:53.440344525Z"
