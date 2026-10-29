@@ -7354,6 +7354,111 @@ entries:
       urls:
         - oci://quay.io/enix/charts/kube-image-keeper:2.3.2-rc.1
       version: 2.3.2-rc.1
+    - annotations:
+        artifacthub.io/changes: |-
+          - description: 'Routing: A rewrite through a bare `docker.io` group adds the `library`
+              segment, so the candidates no longer hold the same image twice; an `ImageMonitor`
+              keeps the `since` of an alternative an earlier version listed in short form.'
+            kind: fixed
+            links:
+            - name: '#800'
+              url: https://github.com/enix/kube-image-keeper/pull/800
+            - name: '#783'
+              url: https://github.com/enix/kube-image-keeper/issues/783
+          - description: 'Routing: The webhook writes each key once on its admission log lines.'
+            kind: fixed
+            links:
+            - name: '#795'
+              url: https://github.com/enix/kube-image-keeper/pull/795
+            - name: '#782'
+              url: https://github.com/enix/kube-image-keeper/issues/782
+          - description: 'Mirroring: A deleted `ImageMirror` whose destination refuses tag deletion
+              (400, 405) emits `ImageDeletionFailed` and sets `Ready` False with reason `RegistryDeleteUnsupported`,
+              instead of waiting silently.'
+            kind: fixed
+            links:
+            - name: '#796'
+              url: https://github.com/enix/kube-image-keeper/pull/796
+          - description: 'Mirroring: A failing copy no longer rewrites the `ImageMirror` status
+              on every reconcile.'
+            kind: fixed
+            links:
+            - name: '#797'
+              url: https://github.com/enix/kube-image-keeper/pull/797
+            - name: '#730'
+              url: https://github.com/enix/kube-image-keeper/issues/730
+          - description: 'Mirroring: A copy that keeps failing backs off per image, at the next
+              copy window then after 2, 4, 8... copy intervals up to 30 minutes, instead of
+              uploading the whole image at every window; the other images of the host take the
+              windows meanwhile.'
+            kind: fixed
+            links:
+            - name: '#812'
+              url: https://github.com/enix/kube-image-keeper/pull/812
+            - name: '#808'
+              url: https://github.com/enix/kube-image-keeper/issues/808
+          - description: 'Registries: A rate-limited (429) blob is no longer read again during
+              a copy: the copy fails at once with `QuotaExceeded`.'
+            kind: fixed
+            links:
+            - name: '#799'
+              url: https://github.com/enix/kube-image-keeper/pull/799
+            - name: '#781'
+              url: https://github.com/enix/kube-image-keeper/issues/781
+          - description: 'Registries: A copy tries the next destination credential only after
+              a 401 or 403, so a destination refusing a push no longer gets it once per credential.'
+            kind: fixed
+            links:
+            - name: '#812'
+              url: https://github.com/enix/kube-image-keeper/pull/812
+          - description: 'Chart: The install notes say kuik v3 is a beta.'
+            kind: fixed
+            links:
+            - name: '#793'
+              url: https://github.com/enix/kube-image-keeper/pull/793
+        artifacthub.io/containsSecurityUpdates: "false"
+        artifacthub.io/license: MIT
+        artifacthub.io/links: |
+          - name: Chart Sources
+            url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+          - name: Helm Repository
+            url: https://charts.enix.io
+        artifacthub.io/prerelease: "true"
+      apiVersion: v2
+      appVersion: 3.0.0-beta.2
+      created: "2026-10-29T11:55:26.554790363Z"
+      description: The keeper of your images in your cluster!
+      digest: 78ae5e15f0523bcbc977cf68cc5bcdd5c5fcec6b2a27a8da2523b209c1ab067a
+      home: https://github.com/enix/kube-image-keeper
+      icon: https://raw.githubusercontent.com/enix/kube-image-keeper/main/docs/assets/logo.svg
+      keywords:
+        - kubernetes
+        - operator
+        - container-images
+        - registry
+        - mirror
+        - webhook
+      kubeVersion: '>=1.30.0-0'
+      maintainers:
+        - email: contact@enix.fr
+          name: Enix
+          url: https://github.com/enixsas
+        - email: paul.laffitte@enix.fr
+          name: Paul Laffitte
+          url: https://github.com/paullaffitte
+        - email: david.donchez@enix.fr
+          name: David Donchez
+          url: https://github.com/donch
+        - email: aurelien.dunand@enix.fr
+          name: Aurélien Dunand
+          url: https://github.com/Tassatux
+      name: kube-image-keeper
+      sources:
+        - https://github.com/enix/kube-image-keeper
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/kube-image-keeper:3.0.0-beta.2
+      version: 3.0.0-beta.2
   kube-packetloss-exporter:
     - apiVersion: v2
       appVersion: v0.7.1
@@ -12831,4 +12936,4 @@ entries:
       urls:
         - oci://quay.io/enix/charts/tsigoat:0.2.0-rc.1
       version: 0.2.0-rc.1
-generated: "2026-10-28T15:48:20.420484205Z"
+generated: "2026-10-29T11:55:26.553571913Z"
