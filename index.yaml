@@ -7522,6 +7522,70 @@ entries:
       urls:
         - oci://quay.io/enix/charts/kube-image-keeper:3.0.0-beta.3
       version: 3.0.0-beta.3
+    - annotations:
+        artifacthub.io/changes: |-
+          - description: 'Mirroring: A deleted `ImageMirror` no longer stays `Terminating`,
+              with no event or condition saying why, while pods still run its copies, such as
+              pods kuik v2 rewrote under the same destination path; a container with `imagePullPolicy:
+              Always` running one of its copies cannot pull it again until its pod is recreated
+              (broken since 3.0.0-beta.1).'
+            kind: fixed
+            links:
+            - name: '#829'
+              url: https://github.com/enix/kube-image-keeper/pull/829
+          - description: 'Mirroring: An `ImageMirror` whose destination refuses deletion no
+              longer sends the same `DELETE` and a new `ImageDeletionFailed` at every destination
+              scan: it tries one deletion 10 seconds later, then backs off up to 1 hour, and
+              warns once per series of refusals (broken since 3.0.0-beta.1).'
+            kind: fixed
+            links:
+            - name: '#827'
+              url: https://github.com/enix/kube-image-keeper/pull/827
+            - name: '#818'
+              url: https://github.com/enix/kube-image-keeper/issues/818
+        artifacthub.io/containsSecurityUpdates: "false"
+        artifacthub.io/license: MIT
+        artifacthub.io/links: |
+          - name: Chart Sources
+            url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+          - name: Helm Repository
+            url: https://charts.enix.io
+        artifacthub.io/prerelease: "true"
+      apiVersion: v2
+      appVersion: 3.0.0-beta.4
+      created: "2026-11-04T18:25:00.369113038Z"
+      description: The keeper of your images in your cluster!
+      digest: 75bf3e69ca585db4555081f5b32a800f0af6490a38309d1eac6ccf9845c33e57
+      home: https://github.com/enix/kube-image-keeper
+      icon: https://raw.githubusercontent.com/enix/kube-image-keeper/main/docs/assets/logo.svg
+      keywords:
+        - kubernetes
+        - operator
+        - container-images
+        - registry
+        - mirror
+        - webhook
+      kubeVersion: '>=1.30.0-0'
+      maintainers:
+        - email: contact@enix.fr
+          name: Enix
+          url: https://github.com/enixsas
+        - email: paul.laffitte@enix.fr
+          name: Paul Laffitte
+          url: https://github.com/paullaffitte
+        - email: david.donchez@enix.fr
+          name: David Donchez
+          url: https://github.com/donch
+        - email: aurelien.dunand@enix.fr
+          name: Aurélien Dunand
+          url: https://github.com/Tassatux
+      name: kube-image-keeper
+      sources:
+        - https://github.com/enix/kube-image-keeper
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/kube-image-keeper:3.0.0-beta.4
+      version: 3.0.0-beta.4
   kube-packetloss-exporter:
     - apiVersion: v2
       appVersion: v0.7.1
@@ -13031,4 +13095,4 @@ entries:
       urls:
         - oci://quay.io/enix/charts/tsigoat:0.2.0-rc.1
       version: 0.2.0-rc.1
-generated: "2026-11-04T11:24:24.464716226Z"
+generated: "2026-11-04T18:25:00.367465232Z"
