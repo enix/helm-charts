@@ -7459,6 +7459,69 @@ entries:
       urls:
         - oci://quay.io/enix/charts/kube-image-keeper:3.0.0-beta.2
       version: 3.0.0-beta.2
+    - annotations:
+        artifacthub.io/changes: |-
+          - description: 'Mirroring: `ImageMirror` can delete tags by manifest digest with `spec.cleanup.deleteByDigest:
+              true` (default `false`), for destinations that refuse tag deletion such as Harbor;
+              use it only when the `ImageMirror` is the only writer of its destination.'
+            kind: added
+            links:
+            - name: '#824'
+              url: https://github.com/enix/kube-image-keeper/pull/824
+            - name: '#820'
+              url: https://github.com/enix/kube-image-keeper/issues/820
+          - description: 'Routing: The webhook probes each candidate with a single request,
+              never retried, so failing candidates no longer push the admission past its timeout
+              and leave the pod unrouted (broken since 3.0.0-beta.1).'
+            kind: fixed
+            links:
+            - name: '#819'
+              url: https://github.com/enix/kube-image-keeper/pull/819
+            - name: '#814'
+              url: https://github.com/enix/kube-image-keeper/issues/814
+        artifacthub.io/containsSecurityUpdates: "false"
+        artifacthub.io/license: MIT
+        artifacthub.io/links: |
+          - name: Chart Sources
+            url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+          - name: Helm Repository
+            url: https://charts.enix.io
+        artifacthub.io/prerelease: "true"
+      apiVersion: v2
+      appVersion: 3.0.0-beta.3
+      created: "2026-11-04T11:24:24.466211375Z"
+      description: The keeper of your images in your cluster!
+      digest: aa0863d53460e76e932125388fc097278ee012748a2c2a2a0c9206e9afceba8f
+      home: https://github.com/enix/kube-image-keeper
+      icon: https://raw.githubusercontent.com/enix/kube-image-keeper/main/docs/assets/logo.svg
+      keywords:
+        - kubernetes
+        - operator
+        - container-images
+        - registry
+        - mirror
+        - webhook
+      kubeVersion: '>=1.30.0-0'
+      maintainers:
+        - email: contact@enix.fr
+          name: Enix
+          url: https://github.com/enixsas
+        - email: paul.laffitte@enix.fr
+          name: Paul Laffitte
+          url: https://github.com/paullaffitte
+        - email: david.donchez@enix.fr
+          name: David Donchez
+          url: https://github.com/donch
+        - email: aurelien.dunand@enix.fr
+          name: Aurélien Dunand
+          url: https://github.com/Tassatux
+      name: kube-image-keeper
+      sources:
+        - https://github.com/enix/kube-image-keeper
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/kube-image-keeper:3.0.0-beta.3
+      version: 3.0.0-beta.3
   kube-packetloss-exporter:
     - apiVersion: v2
       appVersion: v0.7.1
@@ -12968,4 +13031,4 @@ entries:
       urls:
         - oci://quay.io/enix/charts/tsigoat:0.2.0-rc.1
       version: 0.2.0-rc.1
-generated: "2026-11-02T14:07:13.379351595Z"
+generated: "2026-11-04T11:24:24.464716226Z"
