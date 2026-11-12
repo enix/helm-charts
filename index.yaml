@@ -7619,6 +7619,154 @@ entries:
       urls:
         - oci://quay.io/enix/charts/kube-image-keeper:2.3.2-rc.2
       version: 2.3.2-rc.2
+    - annotations:
+        artifacthub.io/changes: |-
+          - description: '`ImageMonitor` no longer detects drift or skew: Kubernetes exposes
+              no reliable way to know which digest a container runs. Remove `spec.driftDetection`
+              from your `ImageMonitor` manifests (strict validation refuses it), and drop the
+              alerts and dashboards on its `ImagesDrifted` condition, its `ImageTagDrifted`
+              and `ImageClusterSkew` events, `kuik_image_cluster_skew_digests` and its `kuik_image_drifted`
+              series. `ImageMirror` keeps its `driftPolicy`, see the known limits.'
+            kind: changed
+            links:
+            - name: '#846'
+              url: https://github.com/enix/kube-image-keeper/pull/846
+            - name: '#843'
+              url: https://github.com/enix/kube-image-keeper/issues/843
+          - description: 'Registries: `registries.<host>.requestInterval` sets a minimum gap
+              between 2 requests the reconciler sends to a source host, checks and copies alike;
+              a copy from a paced host reads one request at a time.'
+            kind: added
+            links:
+            - name: '#854'
+              url: https://github.com/enix/kube-image-keeper/pull/854
+            - name: '#841'
+              url: https://github.com/enix/kube-image-keeper/issues/841
+          - description: 'Chart: The chart''s default configuration paces `public.ecr.aws` at
+              1 request per second, its anonymous quota.'
+            kind: added
+            links:
+            - name: '#854'
+              url: https://github.com/enix/kube-image-keeper/pull/854
+          - description: 'Routing: The webhook keeps serving for `webhook.shutdownDelaySeconds`
+              (default 10) after its stop signal, so pods created while a webhook pod stops
+              are no longer admitted unrouted (broken since 3.0.0-beta.1).'
+            kind: fixed
+            links:
+            - name: '#844'
+              url: https://github.com/enix/kube-image-keeper/pull/844
+            - name: '#837'
+              url: https://github.com/enix/kube-image-keeper/issues/837
+          - description: 'Routing: An origin matched by an `ImageAlternative` entry with `insecure:
+              true` is probed over HTTP instead of being judged unreachable, so its pod is no
+              longer rewritten while the origin works (broken since 3.0.0-beta.1).'
+            kind: fixed
+            links:
+            - name: '#856'
+              url: https://github.com/enix/kube-image-keeper/pull/856
+          - description: 'Mirroring: A deleted `ImageMirror` waits again while live pods run
+              its copies, so a container restarted in place no longer fails to pull once its
+              injected pull Secret is gone; `DeletionBlocked` gives the reason of every hold
+              (broken since 3.0.0-beta.4).'
+            kind: fixed
+            links:
+            - name: '#849'
+              url: https://github.com/enix/kube-image-keeper/pull/849
+            - name: '#832'
+              url: https://github.com/enix/kube-image-keeper/issues/832
+          - description: 'Mirroring: A copy into a destination unreachable at the mirror''s
+              first pass resumes once the destination answers, instead of waiting up to `mirror.destinationScan.interval`
+              (broken since 3.0.0-beta.1).'
+            kind: fixed
+            links:
+            - name: '#855'
+              url: https://github.com/enix/kube-image-keeper/pull/855
+          - description: 'Mirroring: An interrupted destination pass waits for `mirror.destinationScan.interval`,
+              or a spec change, instead of reading the destination again at every reconcile
+              (broken since 3.0.0-beta.1).'
+            kind: fixed
+            links:
+            - name: '#848'
+              url: https://github.com/enix/kube-image-keeper/pull/848
+            - name: '#810'
+              url: https://github.com/enix/kube-image-keeper/issues/810
+          - description: 'Mirroring: An `ImageMirror` no longer copies an image no selected
+              pod runs any more after its selector is narrowed (broken since 3.0.0-beta.1).'
+            kind: fixed
+            links:
+            - name: '#845'
+              url: https://github.com/enix/kube-image-keeper/pull/845
+            - name: '#828'
+              url: https://github.com/enix/kube-image-keeper/issues/828
+          - description: 'Monitoring: An `ImageMonitor` checks an origin matched by an `ImageAlternative`
+              entry with `insecure: true` over HTTP instead of reporting it unreachable (broken
+              since 3.0.0-beta.1).'
+            kind: fixed
+            links:
+            - name: '#856'
+              url: https://github.com/enix/kube-image-keeper/pull/856
+          - description: 'Configuration: The global config is loaded once per ConfigMap update,
+              so one rejected edit counts once in `kuik_config_reload_errors_total` and its
+              fix not at all (broken since 3.0.0-beta.1).'
+            kind: fixed
+            links:
+            - name: '#840'
+              url: https://github.com/enix/kube-image-keeper/pull/840
+            - name: '#834'
+              url: https://github.com/enix/kube-image-keeper/issues/834
+          - description: 'Observability: A copy refused at its source check counts under `operation="Copy"`
+              of `kuik_registry_requests_total`, `Starting manager` is the first log line of
+              every process, and reconciler lines carry the documented `logger`, `resource`
+              and `registry` keys (broken since 3.0.0-beta.1).'
+            kind: fixed
+            links:
+            - name: '#847'
+              url: https://github.com/enix/kube-image-keeper/pull/847
+            - name: '#833'
+              url: https://github.com/enix/kube-image-keeper/issues/833
+        artifacthub.io/containsSecurityUpdates: "false"
+        artifacthub.io/license: MIT
+        artifacthub.io/links: |
+          - name: Chart Sources
+            url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+          - name: Helm Repository
+            url: https://charts.enix.io
+        artifacthub.io/prerelease: "true"
+      apiVersion: v2
+      appVersion: 3.0.0-beta.5
+      created: "2026-11-12T14:09:59.189432562Z"
+      description: The keeper of your images in your cluster!
+      digest: 6d95b7e389b463bee71ee189928f30df61fbe370dba3cbfc4f36090f5a3c3f19
+      home: https://github.com/enix/kube-image-keeper
+      icon: https://raw.githubusercontent.com/enix/kube-image-keeper/main/docs/assets/logo.svg
+      keywords:
+        - kubernetes
+        - operator
+        - container-images
+        - registry
+        - mirror
+        - webhook
+      kubeVersion: '>=1.30.0-0'
+      maintainers:
+        - email: contact@enix.fr
+          name: Enix
+          url: https://github.com/enixsas
+        - email: paul.laffitte@enix.fr
+          name: Paul Laffitte
+          url: https://github.com/paullaffitte
+        - email: david.donchez@enix.fr
+          name: David Donchez
+          url: https://github.com/donch
+        - email: aurelien.dunand@enix.fr
+          name: Aurélien Dunand
+          url: https://github.com/Tassatux
+      name: kube-image-keeper
+      sources:
+        - https://github.com/enix/kube-image-keeper
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/kube-image-keeper:3.0.0-beta.5
+      version: 3.0.0-beta.5
   kube-packetloss-exporter:
     - apiVersion: v2
       appVersion: v0.7.1
@@ -13167,4 +13315,4 @@ entries:
       urls:
         - oci://quay.io/enix/charts/tsigoat:0.2.0-rc.3
       version: 0.2.0-rc.3
-generated: "2026-11-10T14:50:37.414723644Z"
+generated: "2026-11-12T14:09:59.188309709Z"
