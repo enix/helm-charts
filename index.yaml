@@ -7767,6 +7767,112 @@ entries:
       urls:
         - oci://quay.io/enix/charts/kube-image-keeper:3.0.0-beta.5
       version: 3.0.0-beta.5
+    - annotations:
+        artifacthub.io/changes: |-
+          - description: 'The Pod webhook is named `pods.kuik.enix.io` instead of `mpod-v1.kb.io`,
+              in a MutatingWebhookConfiguration named `<release>-webhook`: move the alerts and
+              dashboards on `apiserver_admission_webhook_*{name="mpod-v1.kb.io"}`. Pods created
+              in the few seconds of the upgrade before cert-manager injects the CA may be admitted
+              unrouted.'
+            kind: changed
+            links:
+            - name: '#880'
+              url: https://github.com/enix/kube-image-keeper/pull/880
+            - name: '#868'
+              url: https://github.com/enix/kube-image-keeper/issues/868
+          - description: 'Observability: The Pod webhook is named `pods.kuik.enix.io`, so the
+              API server''s `apiserver_admission_webhook_*` metrics show the calls that failed
+              and let the pod through unrouted.'
+            kind: added
+            links:
+            - name: '#880'
+              url: https://github.com/enix/kube-image-keeper/pull/880
+            - name: '#868'
+              url: https://github.com/enix/kube-image-keeper/issues/868
+          - description: 'Chart: The default config paces every host to a check every 3 minutes
+              and a copy every 5, Docker Hub to 5 and 15, and `ecr-public.aws.com`, the dual-stack
+              host of ECR Public, to 1 request per second like `public.ecr.aws`.'
+            kind: added
+            links:
+            - name: '#874'
+              url: https://github.com/enix/kube-image-keeper/pull/874
+          - description: 'Chart: `monitoring.serviceMonitor`, `monitoring.alerts` and `monitoring.dashboard`,
+              off by default, ship a ServiceMonitor, a PrometheusRule of ready-made alerts and
+              a Grafana dashboard (Grafana 13 or later).'
+            kind: added
+            links:
+            - name: '#876'
+              url: https://github.com/enix/kube-image-keeper/pull/876
+          - description: 'Mirroring: An image whose copy failed is no longer held in `pendingDeletion`
+              once its last pod goes: it no longer counts as not copied yet for its whole retention,
+              and gets no `DELETE` for a tag kuik never wrote.'
+            kind: fixed
+            links:
+            - name: '#881'
+              url: https://github.com/enix/kube-image-keeper/pull/881
+            - name: '#862'
+              url: https://github.com/enix/kube-image-keeper/issues/862
+          - description: 'Mirroring: A `DELETE` answered 400 with the error code `NAME_UNKNOWN`,
+              as zot answers in a repository it does not know, counts as already gone instead
+              of turning `Ready` `False`.'
+            kind: fixed
+            links:
+            - name: '#881'
+              url: https://github.com/enix/kube-image-keeper/pull/881
+            - name: '#862'
+              url: https://github.com/enix/kube-image-keeper/issues/862
+          - description: 'Observability: `kuik_mirror_copies_total` and `kuik_mirror_tags_deleted_total`
+              export every reason at 0 from the first reconcile, so `increase()` and `rate()`
+              no longer miss the first copy or deletion after a restart.'
+            kind: fixed
+            links:
+            - name: '#884'
+              url: https://github.com/enix/kube-image-keeper/pull/884
+            - name: '#866'
+              url: https://github.com/enix/kube-image-keeper/issues/866
+        artifacthub.io/containsSecurityUpdates: "false"
+        artifacthub.io/license: MIT
+        artifacthub.io/links: |
+          - name: Chart Sources
+            url: https://github.com/enix/kube-image-keeper/tree/main/helm/kube-image-keeper
+          - name: Helm Repository
+            url: https://charts.enix.io
+        artifacthub.io/prerelease: "false"
+      apiVersion: v2
+      appVersion: 3.0.0
+      created: "2026-11-17T18:50:06.97063141Z"
+      description: The keeper of your images in your cluster!
+      digest: 708b7633a81109da52a21ab0cd87aa928de78883755b4b070b98a12cf7d7d006
+      home: https://github.com/enix/kube-image-keeper
+      icon: https://raw.githubusercontent.com/enix/kube-image-keeper/main/docs/assets/logo.svg
+      keywords:
+        - kubernetes
+        - operator
+        - container-images
+        - registry
+        - mirror
+        - webhook
+      kubeVersion: '>=1.30.0-0'
+      maintainers:
+        - email: contact@enix.fr
+          name: Enix
+          url: https://github.com/enixsas
+        - email: paul.laffitte@enix.fr
+          name: Paul Laffitte
+          url: https://github.com/paullaffitte
+        - email: david.donchez@enix.fr
+          name: David Donchez
+          url: https://github.com/donch
+        - email: aurelien.dunand@enix.fr
+          name: Aurélien Dunand
+          url: https://github.com/Tassatux
+      name: kube-image-keeper
+      sources:
+        - https://github.com/enix/kube-image-keeper
+      type: application
+      urls:
+        - oci://quay.io/enix/charts/kube-image-keeper:3.0.0
+      version: 3.0.0
   kube-packetloss-exporter:
     - apiVersion: v2
       appVersion: v0.7.1
@@ -13315,4 +13421,4 @@ entries:
       urls:
         - oci://quay.io/enix/charts/tsigoat:0.2.0-rc.3
       version: 0.2.0-rc.3
-generated: "2026-11-12T14:09:59.188309709Z"
+generated: "2026-11-17T18:50:06.967476252Z"
